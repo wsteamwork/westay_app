@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 // import NavBottom from '../components/NavBottom';
-// import Home from '../screens/Home';
+import Home from '../screens/Home';
 // import SearchResult from '../screens/SearchResult';
 
 
@@ -16,9 +16,9 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 const AppView = createBottomTabNavigator(
   {
-    // Home: {
-    //   screen: Home
-    // },
+    Home: {
+      screen: Home
+    },
     // Search: {
     //   screen: SearchResult
     // },
