@@ -14,11 +14,11 @@ import Search from '../screens/Search';
 
 const AppView = createBottomTabNavigator(
   {
-    Home: {
-      screen: Home
-    },
     Search: {
       screen: Search
+    },
+    Home: {
+      screen: Home
     },
     Trip: {
       screen: Trip

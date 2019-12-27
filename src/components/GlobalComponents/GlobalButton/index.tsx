@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { BUTTON_TYPE, LIGHT, SIZE_TEXT_TITLE_MEDIUM } from '../../../styles/global.style';
-import { wp } from '../../../utils/responsive';
+import { wp, hp } from '../../../utils/responsive';
 // interface IProps extends TouchableWithoutFeedbackProperties {
 interface IProps {
   title: string;
@@ -20,11 +20,11 @@ const GlobalButton: FC<IProps> = (props) => {
 
   const styles = StyleSheet.create({
     buttonContainer: {
-      height: height || '100%',
+      height: height || hp('4.5%'),
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'row',
-      width: width || wp('20%'),
+      width: width || wp('100%'),
       backgroundColor: BUTTON_TYPE[buttonType].background
     },
     buttonTextContainer: {

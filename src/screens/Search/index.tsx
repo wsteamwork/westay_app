@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
+import SearchComponent from '../../components/SearchComponent';
 
 interface IProps {
   initialProps?: any;
@@ -7,10 +8,12 @@ interface IProps {
 
 const Search: FC<IProps> = (props) => {
   const { initialProps } = props;
-
+  const search = (item: any) => {
+    Alert.alert(item)
+  }
   return (
-    <View>
-
+    <View style={{ marginTop: 100 }}>
+      <SearchComponent />
     </View>
   );
 };

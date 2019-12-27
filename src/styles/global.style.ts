@@ -14,6 +14,8 @@ export const COLOR_BACKGROUND_BUTTON = '#C6D8CC';
 
 export const COLOR_BACKGROUND_NAVIGATION = '#8AA989';
 
+export const COLOR_BACKGROUND_INPUT = '#EFEFEFAF';
+
 export const COLOR_SUCCESS = '#53C419';
 
 export const COLOR_INFO = '#2296F3';
