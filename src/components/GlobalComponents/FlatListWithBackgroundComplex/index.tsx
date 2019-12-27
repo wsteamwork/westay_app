@@ -15,12 +15,11 @@ interface IProps {
   bottomText?: string;
   onPressTitleText?: () => any;
   onPressSubtitleTitleText?: () => any;
-  hasFooter?: boolean;
   footerComponent?: React.ComponentType<any> | React.ReactElement | null;
 };
 
 const FlatListWithBackgroundComplex: FC<IProps> = (props) => {
-  const { renderItem, data, horizontalScrollIndicator, horizontal, listContainerAdditionalStyle, titleText, subtitleText, onPressBottomText, bottomText, onPressTitleText, onPressSubtitleTitleText, hasFooter, footerComponent } = props;
+  const { renderItem, data, horizontalScrollIndicator, horizontal, listContainerAdditionalStyle, titleText, subtitleText, onPressBottomText, bottomText, onPressTitleText, onPressSubtitleTitleText, footerComponent } = props;
 
   return (
     // <ImageBackground
@@ -133,7 +132,6 @@ const styles = StyleSheet.create({
   }
 });
 FlatListWithBackgroundComplex.defaultProps = {
-  horizontalScrollIndicator: false,
-  hasFooter: false
+  horizontalScrollIndicator: false
 }
 export default FlatListWithBackgroundComplex;

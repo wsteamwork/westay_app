@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SEMI_BOLD, SIZE_TEXT_TITLE_MEDIUM } from '../../../styles/global.style';
 import { wp } from '../../../utils/responsive';
-import TouchableWithScaleAnimation from '../TouchableWithScaleAnimation';
+import TouchableWithScale from '../TouchableComponent/TouchableWithScale';
 
 interface IProps {
   imageSource?: string;
@@ -106,7 +106,7 @@ const CardImageWithTextOverlay: FC<IProps> = (props) => {
   return (
     <View style={[{ padding: 6 }]}>
       <View style={[styles.container, hasBorder ? styles.hasBorderContainer : null]}>
-        <TouchableWithScaleAnimation
+        <TouchableWithScale
           _onPress={_onPress}
           _onLongPress={_onLongPress}
         >
@@ -133,7 +133,7 @@ const CardImageWithTextOverlay: FC<IProps> = (props) => {
               </View>
             </ImageBackground>
           </View>
-        </TouchableWithScaleAnimation>
+        </TouchableWithScale>
       </View>
     </View>
   );
