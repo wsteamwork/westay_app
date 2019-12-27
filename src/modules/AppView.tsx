@@ -1,12 +1,10 @@
-import React from 'react';
-import { View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 // import NavBottom from '../components/NavBottom';
 import Home from '../screens/Home';
-// import SearchResult from '../screens/SearchResult';
-
-
+import Trip from '../screens/Trip'
+import Profile from '../screens/Profile';
+import Search from '../screens/Search';
 
 // const TabBarComponent = (props: any) => <View style={{
 //   justifyContent: 'center',
@@ -19,9 +17,15 @@ const AppView = createBottomTabNavigator(
     Home: {
       screen: Home
     },
-    // Search: {
-    //   screen: SearchResult
-    // },
+    Search: {
+      screen: Search
+    },
+    Trip: {
+      screen: Trip
+    },
+    Profile: {
+      screen: Profile
+    },
   },
   {
     // resetOnBlur: true,
