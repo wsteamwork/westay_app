@@ -1,18 +1,26 @@
-import React, { FC } from 'react';
-import { View, StyleSheet } from 'react-native';
-import SearchInput from './SearchInput'
+import React, { FC, useEffect } from 'react';
+import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { hp } from '../../utils/responsive';
-interface IProps {
-  initialProps?: any;
-};
+import CardImageWithTextOverlay from '../GlobalComponents/CardImageWithTextOverlay';
+import CardWithSideText from '../GlobalComponents/CardWithSideText';
+import TransitionView from '../GlobalComponents/TransitionView';
+import ListPropertySearch from '../ListSuggestion/ListPropertySearch';
+import SearchSuggestionResult from '../ListSuggestion/SearchSuggestionResult';
+import SearchInput from './SearchInput';
+
+interface IProps { };
 
 const SearchComponent: FC<IProps> = (props) => {
-  const { initialProps } = props;
+
+
+  useEffect(() => {
+
+  }, [])
+
 
   return (
-    <View style={{ height: hp('4.2%') }}>
-      <SearchInput />
-    </View>
+    <SearchInput />
   );
 };
 
