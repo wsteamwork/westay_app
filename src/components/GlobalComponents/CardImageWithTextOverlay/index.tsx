@@ -30,10 +30,11 @@ const CardImageWithTextOverlay: FC<IProps> = (props) => {
       borderColor: '#C0CEB2',
       borderWidth: 1,
       borderStyle: 'dashed',
-      borderRadius: 12,
+      borderRadius: 12
     },
     container: {
-      width: wp('43%'),
+      // justifyContent: 'center',
+      width: wp('45%'),
       height: height,
       backgroundColor: 'white'
     },
@@ -116,7 +117,8 @@ const CardImageWithTextOverlay: FC<IProps> = (props) => {
               resizeMode="cover"
               style={[styles.defaultImageBackground, imageBackgroundAdditionalStyle]}
               imageStyle={[styles.imageStyle, additionalImageStyle]}
-              source={imageSource ? { uri: imageSource } : {}}>
+              source={imageSource ? { uri: imageSource } : {}}
+            >
               <View style={styles.imageOverlay}>
                 {useLinear ? (
                   <LinearGradient colors={['#b5b5b511', '#00000011', '#00000050', '#000000a1']} style={styles.linearGradient}>
@@ -144,7 +146,7 @@ CardImageWithTextOverlay.defaultProps = {
   useLinear: true,
   textPosition: 'BottomLeft',
   textColor: 'white',
-  borderRadius: 12,
+  borderRadius: 6,
   textPadding: 8,
   backgroundBlur: 0,
   height: 85,
