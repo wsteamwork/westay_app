@@ -5,7 +5,7 @@ import { wp } from '../../../utils/responsive';
 import AvatarWithBadge from '../AvatarWithBadge';
 import TouchableWithScaleAnimation from '../TouchableWithScaleAnimation';
 interface IProps {
-  imageSource: string;
+  imageSource?: string;
   imagePosition?: 'Left' | 'Right';
   title: string;
   subtitle?: string;
@@ -14,10 +14,11 @@ interface IProps {
   icon?: ReactChild;
   hasBadge?: boolean;
   badgeColor?: string;
+  onPress?: (item: any) => any;
 };
 
 const CardWithSideText: FC<IProps> = (props) => {
-  const { imageSource, imagePosition, title, subtitle, rounded, hasImage, icon, hasBadge, badgeColor } = props;
+  const { imageSource, imagePosition, title, subtitle, rounded, hasImage, icon, hasBadge, badgeColor, onPress } = props;
 
   const styles = StyleSheet.create({
     outerPadding: {
@@ -79,7 +80,9 @@ const CardWithSideText: FC<IProps> = (props) => {
   });
 
   return (
-    <TouchableWithScaleAnimation>
+    <TouchableWithScaleAnimation
+      _onPress={onPress}
+    >
       <View style={styles.outerPadding}>
         <View style={styles.container}>
           <View style={[styles.imageContainer]}>

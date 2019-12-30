@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import axiosBase from 'axios';
 
-const DOMAIN = 'https://dev.example.com/'; //API URL
+const DOMAIN = 'https://dev.westay.vn/customer-api/'; //API URL
 
 // export const TOKEN = 'token'; // For authorize
 

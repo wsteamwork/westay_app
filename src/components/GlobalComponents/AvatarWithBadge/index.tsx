@@ -5,7 +5,7 @@ import { COLOR_SUCCESS } from '../../../styles/global.style';
 import { wp } from '../../../utils/responsive';
 interface IProps {
   rounded?: boolean;
-  imageSource: string;
+  imageSource?: string;
   hasBadge?: boolean;
   badgeColor?: string;
 };
