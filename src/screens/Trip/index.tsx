@@ -9,7 +9,7 @@ const Trip: FC<IProps> = (props) => {
   const { initialProps } = props;
 
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: 'red' }}>
 
     </View>
   );

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE, LIGHT, NORMAL, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE_FLATLIST } from '../../../styles/global.style';
 import { wp } from '../../../utils/responsive';
 import AvatarWithBadge from '../AvatarWithBadge';
-import TouchableWithScaleAnimation from '../TouchableWithScaleAnimation';
+import TouchableWithScale from '../TouchableComponent/TouchableWithScale';
 interface IProps {
   imageSource?: string;
   imagePosition?: 'Left' | 'Right';
@@ -15,10 +15,11 @@ interface IProps {
   hasBadge?: boolean;
   badgeColor?: string;
   onPress?: (item: any) => any;
+  titleTextStyle?: Object;
 };
 
 const CardWithSideText: FC<IProps> = (props) => {
-  const { imageSource, imagePosition, title, subtitle, rounded, hasImage, icon, hasBadge, badgeColor, onPress } = props;
+  const { imageSource, imagePosition, title, subtitle, rounded, hasImage, icon, hasBadge, badgeColor, onPress, titleTextStyle } = props;
 
   const styles = StyleSheet.create({
     outerPadding: {
@@ -31,7 +32,7 @@ const CardWithSideText: FC<IProps> = (props) => {
     imageContainer: {
       padding: 4,
       flex: 1,
-      flexDirection: hasImage ? imagePosition === 'Left' ? 'row' : 'row-reverse' : 'row',
+      flexDirection: imagePosition === 'Left' ? 'row' : 'row-reverse',
       paddingHorizontal: 20,
     },
     defaultImageContainer: {
@@ -73,14 +74,15 @@ const CardWithSideText: FC<IProps> = (props) => {
       // backgroundColor: 'red',
       height: wp('10%'),
       justifyContent: 'center',
-      alignItems: hasImage ? imagePosition === 'Left' ? 'flex-end' : 'flex-start' : 'flex-end',
+      alignItems: imagePosition === 'Left' ? 'flex-end' : 'flex-start',
       flex: 1,
-      paddingHorizontal: 10
+      paddingHorizontal: imagePosition === 'Left' ? 4 : 0,
+      paddingRight: imagePosition === 'Left' ? 0 : 4,
     }
   });
 
   return (
-    <TouchableWithScaleAnimation
+    <TouchableWithScale
       _onPress={onPress}
     >
       <View style={styles.outerPadding}>
@@ -98,7 +100,7 @@ const CardWithSideText: FC<IProps> = (props) => {
 
             <View style={styles.infoTextContainer}>
               <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>{title}</Text>
+                <Text style={[styles.titleText, titleTextStyle]}>{title}</Text>
               </View>
             </View>
             <View style={styles.iconContainer}>
@@ -107,7 +109,7 @@ const CardWithSideText: FC<IProps> = (props) => {
           </View>
         </View>
       </View>
-    </TouchableWithScaleAnimation>
+    </TouchableWithScale>
   );
 };
 

@@ -8,11 +8,10 @@ import { SearchSuggestData } from 'src/types/Search/SearchResponse';
 import { COLOR_BACKGROUND_INPUT, NORMAL, SIZE_TEXT_SUBTITLE } from '../../styles/global.style';
 import { hp } from '../../utils/responsive';
 import CardWithSideText from '../GlobalComponents/CardWithSideText';
+import ListCategory from '../GlobalComponents/ListCategory';
 import TransitionView from '../GlobalComponents/TransitionView';
-import { getSuggestion } from './SearchInputContext';
-import SearchSuggestionResult from './SearchSuggestionResult';
 import ListPropertySearch from '../ListPropertySearch';
-
+import { getSuggestion } from './SearchInputContext';
 interface IProps extends NavigationInjectedProps {
   returnKeyType?: "none" | "default" | "done" | "go" | "next" | "search" | "send" | "previous" | "google" | "join" | "route" | "yahoo" | "emergency-call" | undefined;
   height?: number | string;
@@ -23,6 +22,7 @@ const GlobalSearchInput: FC<IProps> = (props) => {
   const { returnKeyType, height, returnKeyLabel, navigation } = props;
   const [input, setInput] = useState<string>('');
   const [dataSearchSuggest, setDataSearchSuggest] = useState<Array<SearchSuggestData>>([])
+
   const _renderItemSearchSuggest = (item: any) => {
     return (
       <TransitionView
@@ -112,7 +112,9 @@ const GlobalSearchInput: FC<IProps> = (props) => {
       {
         input && dataSearchSuggest ? (
           <View>
-            <SearchSuggestionResult
+            <ListCategory
+              title={'Search suggestion'}
+              hasDivider
               renderItem={_renderItemSearchSuggest}
               data={dataSearchSuggest}
             />

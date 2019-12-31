@@ -1,16 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import SearchInput from './SearchInput';
 
 interface IProps { };
 
 const SearchComponent: FC<IProps> = (props) => {
-
-
-  useEffect(() => {
-
-  }, [])
-
 
   return (
     <SearchInput />

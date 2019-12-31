@@ -36,7 +36,7 @@ const CardImageWithTextOverlay: FC<IProps> = (props) => {
       // justifyContent: 'center',
       width: wp('45%'),
       height: height,
-      backgroundColor: 'white'
+      backgroundColor: 'transparent'
     },
     imageContainer: {
     },
