@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { SEMI_BOLD, SIZE_TEXT_TITLE_MEDIUM } from '../../../styles/global.style';
-import { wp } from '../../../utils/responsive';
+import { SEMI_BOLD, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
+import { wp } from 'utils/responsive';
 import TouchableWithScale from '../TouchableComponent/TouchableWithScale';
 
 interface IProps {

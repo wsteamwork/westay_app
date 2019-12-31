@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { BUTTON_TYPE, LIGHT, SIZE_TEXT_TITLE_MEDIUM } from '../../../styles/global.style';
-import { wp, hp } from '../../../utils/responsive';
+import { BUTTON_TYPE, LIGHT, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
+import { wp, hp } from 'utils/responsive';
 // interface IProps extends TouchableWithoutFeedbackProperties {
 interface IProps {
   title: string;

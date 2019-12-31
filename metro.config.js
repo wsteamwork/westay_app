@@ -5,16 +5,16 @@
  * @format
  */
 
-module.exports = {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: false,
-      },
-    }),
-  },
-};
+// module.exports = {
+//   transformer: {
+//     getTransformOptions: async () => ({
+//       transform: {
+//         experimentalImportSupport: false,
+//         inlineRequires: false,
+//       },
+//     }),
+//   },
+// };
 
 const { getDefaultConfig } = require('metro-config');
 
@@ -24,6 +24,12 @@ module.exports = (async () => {
   } = await getDefaultConfig();
   return {
     transformer: {
+      getTransformOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineRequires: false,
+        },
+      }),
       babelTransformerPath: require.resolve('react-native-svg-transformer'),
     },
     resolver: {

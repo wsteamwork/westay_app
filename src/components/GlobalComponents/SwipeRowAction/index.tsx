@@ -3,8 +3,8 @@ import { Animated, Dimensions, StyleSheet, TouchableOpacity, View } from 'react-
 import Interactable from 'react-native-interactable';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { COLOR_DANGER, COLOR_INFO } from '../../../styles/global.style';
-import { wp } from '../../../utils/responsive';
+import { COLOR_DANGER, COLOR_INFO } from 'styles/global.style';
+import { wp } from 'utils/responsive';
 interface IProps {
   damping: number;
   tension: number;

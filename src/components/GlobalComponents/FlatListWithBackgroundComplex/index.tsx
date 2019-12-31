@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { FlatList, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE_MEDIUM } from '../../../styles/global.style';
-import { hp, wp } from '../../../utils/responsive';
+import { SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
+import { hp, wp } from 'utils/responsive';
 
 interface IProps {
   renderItem: (item: any) => any;

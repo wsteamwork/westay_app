@@ -1,7 +1,7 @@
+import { hp } from 'utils/responsive';
 import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
-import SearchComponent from '../../components/SearchComponent';
-import { hp } from '../../utils/responsive';
+import SearchComponent from 'components/SearchComponent';
 interface IProps {
 };
 

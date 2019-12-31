@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Badge } from 'react-native-elements';
-import { COLOR_SUCCESS } from '../../../styles/global.style';
-import { wp } from '../../../utils/responsive';
+import { COLOR_SUCCESS } from 'styles/global.style';
+import { wp } from 'utils/responsive';
 interface IProps {
   rounded?: boolean;
   imageSource?: string;

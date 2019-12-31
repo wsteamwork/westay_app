@@ -1,8 +1,9 @@
+import PinLocation from 'assets/icons/pin.svg';
 import React, { FC } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
-import { SvgXml } from 'react-native-svg';
-import PinLocation from '../../assets/icons/pin.svg';
-import { COLOR_URL_TEXT, SEMI_BOLD } from '../../styles/global.style';
+// import { SvgXml } from 'react-native-svg';
+import { COLOR_URL_TEXT, SEMI_BOLD } from 'styles/global.style';
+import { wp } from 'utils/responsive';
 import CardWithSideText from '../GlobalComponents/CardWithSideText';
 interface IProps {
   initialProps?: any;
@@ -18,17 +19,9 @@ const NearbyLocation: FC<IProps> = (props) => {
         titleTextStyle={{ color: COLOR_URL_TEXT, fontWeight: SEMI_BOLD }}
         hasImage={false}
         icon={
-          <View style={{
-            width: 40,
-            height: 40,
-            borderRadius: 360,
-            borderStyle: 'dashed',
-            borderWidth: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderColor: COLOR_URL_TEXT
-          }}>
-            <SvgXml width={24} height={24} xml={PinLocation} fill={COLOR_URL_TEXT} />
+          <View style={styles.iconContainer}>
+            <PinLocation width={24} height={24} />
+            {/* <SvgXml width={wp('6%')} height={wp('6%')} xml={PinLocation} fill={COLOR_URL_TEXT} /> */}
           </View>
         }
         title={'My location'}
@@ -40,7 +33,16 @@ const NearbyLocation: FC<IProps> = (props) => {
 };
 
 const styles = StyleSheet.create({
-
+  iconContainer: {
+    width: wp('9.8%'),
+    height: wp('9.8%'),
+    borderRadius: 360,
+    borderStyle: 'dashed',
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: COLOR_URL_TEXT
+  }
 });
 NearbyLocation.defaultProps = {
 

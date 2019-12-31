@@ -1,7 +1,7 @@
 import React, { FC, ReactChild } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE, LIGHT, NORMAL, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE_FLATLIST } from '../../../styles/global.style';
-import { wp } from '../../../utils/responsive';
+import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE, LIGHT, NORMAL, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE_FLATLIST } from 'styles/global.style';
+import { wp } from 'utils/responsive';
 import AvatarWithBadge from '../AvatarWithBadge';
 import TouchableWithScale from '../TouchableComponent/TouchableWithScale';
 interface IProps {

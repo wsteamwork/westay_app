@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
-import { COLOR_TEXT_TITLE, COLOR_URL_TEXT, SEMI_BOLD, SIZE_TEXT_TITLE_FLATLIST } from '../../../styles/global.style';
-import { wp } from '../../../utils/responsive';
+import { COLOR_TEXT_TITLE, COLOR_URL_TEXT, SEMI_BOLD, SIZE_TEXT_TITLE_FLATLIST } from 'styles/global.style';
+import { wp } from 'utils/responsive';
 interface IProps {
   showScrollIndicator?: boolean;
   data: Array<Object>;
