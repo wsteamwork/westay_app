@@ -1,16 +1,18 @@
+import React from 'react';
+import { View } from 'react-native-animatable';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-// import NavBottom from '../components/NavBottom';
 import Home from '../screens/Home';
-import Trip from '../screens/Trip'
 import Profile from '../screens/Profile';
 import Search from '../screens/Search';
+import Trip from '../screens/Trip';
+import NavBottom from '../components/NavBottom';
 
-// const TabBarComponent = (props: any) => <View style={{
-//   justifyContent: 'center',
-//   alignItems: 'center',
-//   height: 0
-// }}><NavBottom /></View>;
+const TabBarComponent = (props: any) => <View style={{
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: 0
+}}><NavBottom /></View>;
 
 const AppView = createBottomTabNavigator(
   {
@@ -33,12 +35,12 @@ const AppView = createBottomTabNavigator(
 
     },
     backBehavior: "history",
-    // tabBarComponent: () => (
-    //   <TabBarComponent />
-    // ),
-    // tabBarOptions: {
-    //   keyboardHidesTabBar: true,
-    // }
+    tabBarComponent: () => (
+      <TabBarComponent />
+    ),
+    tabBarOptions: {
+      keyboardHidesTabBar: true,
+    }
   }
 );
 

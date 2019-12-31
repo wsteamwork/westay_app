@@ -1,9 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Alert, StyleSheet } from 'react-native';
+import { View } from 'react-native-animatable';
 import CardImageWithTextOverlay from '../GlobalComponents/CardImageWithTextOverlay';
 import TransitionView from '../GlobalComponents/TransitionView';
 import { getRoomType } from './ListPropertyContext';
 import ListPropertySearch from './ListPropertySearch';
+import NearbyLocation from './NearbyLocation';
+import PopularDestination from './PopularDestination';
 interface IProps { };
 
 const ListSuggestion: FC<IProps> = (props) => {
@@ -33,11 +36,21 @@ const ListSuggestion: FC<IProps> = (props) => {
   }, [])
 
   return (
-    <ListPropertySearch
-      title={'Ideas for you'}
-      listData={dataProperty}
-      renderItem={renderItemProperty}
-    />
+    <View>
+      <View>
+        <NearbyLocation />
+      </View>
+      <View style={{ flex: 1 }}>
+        <PopularDestination />
+      </View>
+      <View>
+        <ListPropertySearch
+          title={'Ideas for you'}
+          listData={dataProperty}
+          renderItem={renderItemProperty}
+        />
+      </View>
+    </View>
   );
 };
 

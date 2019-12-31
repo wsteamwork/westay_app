@@ -1,19 +1,19 @@
 import React, { FC } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
-import { COLOR_TEXT_TITLE, COLOR_URL_TEXT, SEMI_BOLD, SIZE_TEXT_TITLE_FLATLIST } from '../../styles/global.style';
-import { wp } from '../../utils/responsive';
+import { COLOR_TEXT_TITLE, COLOR_URL_TEXT, SEMI_BOLD, SIZE_TEXT_TITLE_FLATLIST } from 'styles/global.style';
+import { wp } from 'utils/responsive';
 interface IProps {
   showScrollIndicator?: boolean;
   data: Array<Object>;
   renderItem: (item: any) => any;
   hasDivider?: boolean;
-  title?: string;
-  height?: number; // This props allow you to scroll inside
+  title: string;
+  height?: number;
   hasOverlay?: boolean;
 };
 
-const SearchSuggestionResult: FC<IProps> = (props) => {
+const ListCategory: FC<IProps> = (props) => {
   const { renderItem, showScrollIndicator, data, hasDivider, title, height, hasOverlay } = props;
 
   return (
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   titleTextContainer: {
     paddingHorizontal: wp('5.5%'),
-    // paddingVertical: 10,
+    paddingVertical: 10,
     flex: 1,
   },
   titleText: {
@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
 
   }
 });
-SearchSuggestionResult.defaultProps = {
+ListCategory.defaultProps = {
   showScrollIndicator: false,
   hasDivider: false,
 }
-export default SearchSuggestionResult;
+export default ListCategory;
