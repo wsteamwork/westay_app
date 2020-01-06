@@ -2,41 +2,31 @@ import React, { FC } from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
 import { wp, hp } from 'utils/responsive';
 import RoomTypeCard from 'components/GlobalComponents/Cards/RoomTypeCard';
+import {TypeApartment} from 'types/Rooms/RoomResponses';
 
 interface IProps {
-  // roomsType: TypeApartment[]
+  data: any[]
 }
 
 const ListRoomType: FC<IProps> = (props) => {
-  const {  } = props;
+  const { data } = props;
 
-  const arrayData = [
-    { id: 1, value: "Full House", image: 'https://m.westay.vn/static/images/property/house.jpg' },
-    { id: 2, value: "Apartment", image: "https://m.westay.vn/static/images/property/apartment.jpg" },
-    { id: 3, value: "Villa", image: "https://m.westay.vn/static/images/property/villa.jpg" },
-    { id: 4, value: "Private Room", image: "https://m.westay.vn/static/images/property/room.jpg" },
-    { id: 5, value: "Hotel", image: "https://m.westay.vn/static/images/property/hotels.jpg" },
-    { id: 6, value: "Studio", image: "https://m.westay.vn/static/images/property/studio.jpg" }
-  ];
-
-  // @ts-ignore
-  const _renderItem = ({item, index}) => {
+  const _renderItem = (item: TypeApartment, index: number) => {
     return (
-      <View style={{ paddingHorizontal: wp('2%') }} key={index}>
+      <View style={{ paddingRight: wp('2%') }} key={index}>
         <RoomTypeCard item={item} />
       </View>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <FlatList
-        // style={{ marginLeft: wp('2%') }}
         showsHorizontalScrollIndicator={false}
-        data={arrayData}
+        data={data}
         horizontal
-        renderItem={_renderItem}
-        extraData={arrayData}
+        renderItem={({item, index}) => _renderItem(item, index)}
+        extraData={data}
         keyExtractor={(item, index) => index.toString()}
       />
     </View>
@@ -44,10 +34,7 @@ const ListRoomType: FC<IProps> = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor:'yellow'
 
-  },
 });
 
 export default ListRoomType;
