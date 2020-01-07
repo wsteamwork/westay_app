@@ -46,6 +46,10 @@ export const LIGHT = '300';
 
 export const NORMAL = '400';
 
+export const COLOR_TEXT_DEFAULT = '#484848';
+
+export const COLOR_TITLE_HEADER = '#41C9BC';
+
 // export const COLOR_BUTTON_DEFAULT = '';
 
 // export const COLOR_TITLE_HEADER = '#41C9BC';
