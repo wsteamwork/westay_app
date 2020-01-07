@@ -7,7 +7,6 @@ import Profile from '../screens/Profile';
 import Search from '../screens/Search';
 import Trip from '../screens/Trip';
 import NavBottom from '../components/NavBottom';
-import Register from 'components/Auth/Register';
 
 const TabBarComponent = (props: any) => <View style={{
   justifyContent: 'center',
@@ -18,8 +17,7 @@ const TabBarComponent = (props: any) => <View style={{
 const AppView = createBottomTabNavigator(
   {
     Search: {
-      // screen: Profile
-      screen: Register
+      screen: Profile
     },
     Home: {
       screen: Home
