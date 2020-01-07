@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
-import {StyleSheet, View, Alert, ActivityIndicator, Text} from 'react-native';
-import {wp, hp} from 'utils/responsive';
-import {Image} from 'react-native-elements';
-import {TypeApartment} from 'types/Rooms/RoomResponses';
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import { Rating } from 'react-native-elements';
-import {COLOR_TITLE_HEADER} from 'styles/global.style';
+import React, { FC } from 'react';
+import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
+import { Image, Rating } from 'react-native-elements';
+import { COLOR_TITLE_HEADER, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
+import { TypeApartment } from 'types/Rooms/RoomResponses';
+import { hp, wp } from 'utils/responsive';
 
 interface IProps {
   item: TypeApartment
@@ -15,7 +14,7 @@ const ValuableCard: FC<IProps> = (props) => {
   const { item } = props;
 
   const handleClick = () => {
-    Alert.alert('click','ban da click')
+    Alert.alert('click', 'ban da click')
   };
 
   return (
@@ -32,18 +31,18 @@ const ValuableCard: FC<IProps> = (props) => {
         PlaceholderContent={<ActivityIndicator />}
       />
       <View style={styles.boxInfo}>
-        <View>
+        <View style={{ flex: 1 }}>
           <Text numberOfLines={1} style={styles.txtRoomName}>
             Ten cua ngoi nha co the rat la dai
           </Text>
           <Text numberOfLines={1} style={styles.txtAddress}>
             Hoang Mai district
-            <Text style={{fontWeight: '700' }}> &#8231; </Text>
+            <Text style={{ fontWeight: '700' }}> &#8231; </Text>
             Ha noi
           </Text>
         </View>
         <View style={styles.boxPrice}>
-          <View style={{justifyContent:'flex-end'}}>
+          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: "flex-start" }}>
             <Rating
               ratingCount={5}
               startingValue={4}
@@ -53,9 +52,9 @@ const ValuableCard: FC<IProps> = (props) => {
               ratingBackgroundColor={COLOR_TITLE_HEADER}
             />
           </View>
-          <View style={{flex:1}}>
-            <Text style={{textAlign:'right'}}>$392</Text>
-            <Text style={{textAlign:'right'}}>/month</Text>
+          <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <Text style={{ textAlign: 'right', fontSize: SIZE_TEXT_CONTENT }}>$392</Text>
+            <Text style={{ textAlign: 'right', fontSize: SIZE_TEXT_CONTENT }}>/month</Text>
           </View>
         </View>
       </View>
@@ -75,33 +74,40 @@ const styles = StyleSheet.create({
     elevation: 2,
     backgroundColor: '#fff',
     width: wp('89%'),
-    height: hp('15%'),
+    height: 110,
     marginBottom: hp('4%'),
-    flexDirection:'row',
+    flexDirection: 'row',
     borderRadius: 8,
     overflow: 'hidden'
   },
-  image:{
+  image: {
     width: wp('35%'),
-    height: hp('20%')
+    // height: 'auto'
   },
-  boxInfo:{
+  boxInfo: {
+    flex: 1,
     width: wp('55%'),
-    padding: wp('3%'),
+    paddingVertical: wp('1%'),
+    paddingHorizontal: wp('2%'),
+    // paddingHorizontal: wp('1%'),
     backgroundColor: '#fff',
-    justifyContent:'space-between'
+    justifyContent: 'space-between'
   },
-  txtRoomName:{
-    fontWeight:'700',
-    fontSize: wp('4.5%')
+  txtRoomName: {
+    fontWeight: SEMI_BOLD,
+    fontSize: SIZE_TEXT_TITLE_MEDIUM
   },
-  txtAddress:{
-    fontSize: wp('3%'),
+  txtAddress: {
+    // fontSize: wp('3%'),
+    fontSize: 12,
     paddingTop: hp('0.5%')
   },
-  boxPrice:{
-    flexDirection:'row',
-    justifyContent:'space-between'
+  boxPrice: {
+    // paddingTop: hp('0.5%'),
+    // marginTop: 10,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 });
 

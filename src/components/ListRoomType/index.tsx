@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { wp, hp } from 'utils/responsive';
 import RoomTypeCard from 'components/GlobalComponents/Cards/RoomTypeCard';
-import {TypeApartment} from 'types/Rooms/RoomResponses';
+import { TypeApartment } from 'types/Rooms/RoomResponses';
 
 interface IProps {
   data: any[]
@@ -13,7 +13,7 @@ const ListRoomType: FC<IProps> = (props) => {
 
   const _renderItem = (item: TypeApartment, index: number) => {
     return (
-      <View style={{ paddingRight: wp('2%') }} key={index}>
+      <View style={{ paddingHorizontal: wp('1.2%'), flex: 1 }} key={index}>
         <RoomTypeCard item={item} />
       </View>
     );
@@ -25,7 +25,7 @@ const ListRoomType: FC<IProps> = (props) => {
         showsHorizontalScrollIndicator={false}
         data={data}
         horizontal
-        renderItem={({item, index}) => _renderItem(item, index)}
+        renderItem={({ item, index }) => _renderItem(item, index)}
         extraData={data}
         keyExtractor={(item, index) => index.toString()}
       />

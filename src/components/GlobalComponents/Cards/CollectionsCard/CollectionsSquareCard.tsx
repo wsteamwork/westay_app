@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import {StyleSheet, ActivityIndicator, Text, TouchableOpacity, Alert} from 'react-native';
-import {Image} from 'react-native-elements';
-import {hp, wp} from 'utils/responsive';
-import {TypeApartment} from 'types/Rooms/RoomResponses';
-import {COLOR_TEXT_SUBTITLE} from 'styles/global.style';
+import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image } from 'react-native-elements';
+import { COLOR_TEXT_SUBTITLE, NORMAL, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
+import { TypeApartment } from 'types/Rooms/RoomResponses';
+import { hp, wp } from 'utils/responsive';
 
 interface IProps {
   item: TypeApartment,
@@ -14,7 +14,7 @@ const CollectionsSquareCard: FC<IProps> = (props) => {
   const { item, showNumberRoom } = props;
 
   const handleClick = () => {
-    Alert.alert('click','ban da click')
+    Alert.alert('click', 'ban da click')
   };
 
   return (
@@ -33,7 +33,7 @@ const CollectionsSquareCard: FC<IProps> = (props) => {
       />
       <Text numberOfLines={1} style={styles.txtAddress}>
         Hoang Mai district
-        <Text style={{fontWeight: '700' }}> &#8231; </Text>
+        <Text style={{ fontWeight: '700' }}> &#8231; </Text>
         Ha noi
       </Text>
 
@@ -41,13 +41,13 @@ const CollectionsSquareCard: FC<IProps> = (props) => {
         ten phong kha la dai o day ahihi ahihi hihi haha
       </Text>
 
-      <Text style={styles.txtAreaAndPrice}>
+      <Text style={styles.txtArea}>
         30 m2
-        <Text style={{fontWeight: '700' }}> &#8231; </Text>
+        <Text style={{ fontWeight: '700' }}> &#8231; </Text>
         2 room(s)
       </Text>
 
-      <Text numberOfLines={1} style={styles.txtAreaAndPrice}>
+      <Text numberOfLines={1} style={styles.priceText}>
         $900 /month
       </Text>
 
@@ -63,29 +63,35 @@ const styles = StyleSheet.create({
     width: wp('45%') - 4,
     marginBottom: hp('4%')
   },
-  image:{
-    height: wp('50%')
+  image: {
+    height: wp('40%')
   },
-  txtAddress:{
-    fontSize: wp('3%'),
-    fontWeight: '700',
+  txtAddress: {
+    fontSize: 11.5,
+    fontWeight: NORMAL,
     paddingTop: hp('0.5%')
   },
-  txtRoomName:{
-    fontWeight:'600',
-    fontSize: wp('4.5%'),
-    paddingTop:hp('0.5%')
+  txtRoomName: {
+    fontWeight: SEMI_BOLD,
+    fontSize: SIZE_TEXT_SUBTITLE,
+    paddingTop: hp('0.5%')
   },
-  txtAreaAndPrice:{
-    fontWeight:'700',
-    color:COLOR_TEXT_SUBTITLE,
-    fontSize: wp('4%'),
-    paddingTop:hp('0.5%')
+  txtArea: {
+    fontWeight: SEMI_BOLD,
+    color: COLOR_TEXT_SUBTITLE,
+    fontSize: SIZE_TEXT_CONTENT,
+    paddingTop: hp('0.5%')
   },
-  txtRoomType:{
-    fontWeight:'bold',
-    paddingTop:hp('1%'),
+  txtRoomType: {
+    fontWeight: NORMAL,
+    paddingTop: hp('1%'),
+    fontSize: SIZE_TEXT_SUBTITLE,
     textTransform: 'uppercase',
+  },
+  priceText: {
+    fontWeight: NORMAL,
+    paddingTop: hp('0.5%'),
+    fontSize: SIZE_TEXT_CONTENT
   }
 });
 
