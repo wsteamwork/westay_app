@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {Animated, StyleSheet, TouchableWithoutFeedback, StyleProp, ViewStyle} from 'react-native';
 
 interface IProps {
   _onPress?: (item?: any) => any;
@@ -8,10 +8,11 @@ interface IProps {
   scaleIn?: number;
   friction?: number;
   tension?: number;
+  style?: StyleProp<ViewStyle>
 };
 
 const TouchableWithScale: FC<IProps> = (props) => {
-  const { _onPress, children, _onLongPress, scaleIn, friction, tension } = props;
+  const { _onPress, children, _onLongPress, scaleIn, friction, tension, style } = props;
   const [animatedValue] = useState(new Animated.Value(1));
 
   const handleScalePressIn = () => {
@@ -37,7 +38,7 @@ const TouchableWithScale: FC<IProps> = (props) => {
       onPressIn={handleScalePressIn}
       onPressOut={handleScalePressOut}
     >
-      <Animated.View style={[animatedStyle]}>
+      <Animated.View style={[animatedStyle, style]}>
         {children}
       </Animated.View>
     </TouchableWithoutFeedback>

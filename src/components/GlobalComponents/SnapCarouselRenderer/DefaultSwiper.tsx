@@ -4,7 +4,7 @@ import styles from './styles/index.style';
 import { itemWidth, sliderWidth } from './styles/SliderEntry.style';
 interface IProps {
   dataSwiper: Array<any>;
-  _renderItem: (item?: any) => ReactNode;
+  _renderItem: (item?: any, index?:number) => ReactNode;
   autoplay?: boolean;
   autoplayDelay?: number;
   customStylesContent?: any;
@@ -24,7 +24,7 @@ const DefaultSwiper: FC<IProps> = (props) => {
   return (
     <Carousel
       data={dataSwiper}
-      renderItem={({ item }) => _renderItem(item)}
+      renderItem={({ item, index }) => _renderItem(item, index)}
       sliderWidth={sliderWidth}
       itemWidth={itemWidth}
       hasParallaxImages={isParallax}

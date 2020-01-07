@@ -1,0 +1,25 @@
+export const SET_CHECK_IN = 'SET_CHECK_IN';
+export const SET_CHECK_OUT = 'SET_CHECK_OUT';
+export const SET_CITY_DISTRICT = 'SET_CITY_DISTRICT';
+
+export const SET_BOOKING_TYPE = 'SET_BOOKING_TYPE';
+export const SET_DATE = 'SET_DATE';
+
+export const SET_TIME_IN = 'SET_TIME_IN';
+export const SET_TIME_OUT = 'SET_TIME_OUT';
+export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
+export const GET_CITY = 'GET_CITY';
+
+export const SET_NUMBER_GUEST = 'SET_NUMBER_GUEST';
+export const SET_NUMBER_ROOM = 'SET_NUMBER_ROOM';
+export const SET_TOOGLE_CHOOSE_PEOPLE = 'SET_TOOGLE_CHOOSE_PEOPLE';
+export const SET_AMENITIES = 'SET_AMENITIES';
+export const SET_ROOM_TYPE = 'SET_ROOM_TYPE';
+
+export const SET_RENT_TYPE = 'SET_RENT_TYPE';
+export const SET_INSTANT_BOOK = 'SET_INSTANT_BOOK';
+export const SET_PRICE_DAY_FROM = 'SET_PRICE_DAY_FROM';
+export const SET_PRICE_DAY_TO = 'SET_PRICE_DAY_TO';
+
+export const ARRAY_RENT_TYPE = 'ARRAY_RENT_TYPE';
+export const ARRAY_AMENITIES = 'ARRAY_AMENITIES';
