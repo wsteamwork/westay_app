@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import {StyleSheet, ActivityIndicator, Text, TouchableOpacity, Alert} from 'react-native';
-import {Image} from 'react-native-elements';
-import {hp, wp} from 'utils/responsive';
-import {TypeApartment} from 'types/Rooms/RoomResponses';
+import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image } from 'react-native-elements';
+import { LIGHT, NORMAL, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
+import { TypeApartment } from 'types/Rooms/RoomResponses';
+import { hp, wp } from 'utils/responsive';
 
 interface IProps {
   item: TypeApartment,
@@ -13,7 +14,7 @@ const CollectionsRectangleCard: FC<IProps> = (props) => {
   const { item, showNumberRoom } = props;
 
   const handleClick = () => {
-    Alert.alert('click','ban da click')
+    Alert.alert('click', 'ban da click')
   };
 
   return (
@@ -29,26 +30,26 @@ const CollectionsRectangleCard: FC<IProps> = (props) => {
         resizeMode="cover"
         PlaceholderContent={<ActivityIndicator />}
       />
-      <Text numberOfLines={1} style={{fontWeight:'bold',paddingTop:hp('0.5%')}}>
+      <Text numberOfLines={1} style={styles.titleText}>
         ten phong kha la dai o day ahihi ahihi hihi haha
       </Text>
-      <Text numberOfLines={1} style={{ paddingTop:hp('0.5%')}}>
+      <Text numberOfLines={1} style={styles.subtitleText}>
         Apartment
-        <Text style={{fontWeight: '700' }}> &#8231; </Text>
+        <Text style={{ fontWeight: '700' }}> &#8231; </Text>
         Ha noi
       </Text>
 
       {showNumberRoom && (
-        <Text style={{ paddingTop:hp('0.5%')}}>
+        <Text style={styles.contentText}>
           30 m2
-          <Text style={{fontWeight: '700' }}> &#8231; </Text>
+          <Text style={{ fontWeight: '700' }}> &#8231; </Text>
           1 bathroom(s)
-          <Text style={{fontWeight: '700' }}> &#8231; </Text>
+          <Text style={{ fontWeight: '700' }}> &#8231; </Text>
           2 room(s)
         </Text>
       )}
 
-      <Text numberOfLines={1} style={{fontWeight:'bold', paddingTop:hp('0.5%')}}>
+      <Text numberOfLines={1} style={styles.priceText}>
         $900 /month
       </Text>
     </TouchableOpacity>
@@ -60,8 +61,28 @@ const styles = StyleSheet.create({
     width: wp('42%'),
     marginRight: 4
   },
-  image:{
-    height: wp('60%')
+  image: {
+    height: wp('48%')
+  },
+  titleText: {
+    fontWeight: SEMI_BOLD,
+    paddingTop: hp('0.5%'),
+    fontSize: SIZE_TEXT_SUBTITLE
+  },
+  contentText: {
+    paddingTop: hp('0.5%'),
+    fontSize: SIZE_TEXT_CONTENT,
+    fontWeight: LIGHT
+  },
+  subtitleText: {
+    paddingTop: hp('0.5%'),
+    fontSize: SIZE_TEXT_CONTENT,
+    fontWeight: LIGHT
+  },
+  priceText: {
+    fontWeight: NORMAL,
+    paddingTop: hp('0.5%'),
+    fontSize: SIZE_TEXT_CONTENT
   }
 });
 

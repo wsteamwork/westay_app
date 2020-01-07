@@ -1,8 +1,9 @@
-import React, {FC} from 'react';
-import {StyleSheet, TouchableOpacity, Alert, Text, ActivityIndicator} from 'react-native';
-import {Avatar} from 'react-native-elements';
-import {TypeApartment} from 'types/Rooms/RoomResponses';
-import {wp, hp} from 'utils/responsive';
+import React, { FC } from 'react';
+import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Avatar } from 'react-native-elements';
+import { TypeApartment } from 'types/Rooms/RoomResponses';
+import { hp, wp } from 'utils/responsive';
+import { SIZE_TEXT_CONTENT } from 'styles/global.style';
 
 interface IProps {
   item: TypeApartment
@@ -12,7 +13,7 @@ const RoomTypeCard: FC<IProps> = (props) => {
   const { item } = props;
 
   const handleClick = () => {
-    Alert.alert('click','ban da click')
+    Alert.alert('click', 'ban da click')
   };
   return (
     <TouchableOpacity
@@ -22,12 +23,12 @@ const RoomTypeCard: FC<IProps> = (props) => {
     >
       <Avatar
         size={60}
-        source={{uri: item.image}}
+        source={{ uri: item.image }}
         rounded
-        renderPlaceholderContent={<ActivityIndicator/>}
-        containerStyle={{marginBottom: 8}}
+        renderPlaceholderContent={<ActivityIndicator />}
+        containerStyle={{ marginBottom: 8 }}
       />
-      <Text style={{textAlign:'center'}}>
+      <Text style={{ textAlign: 'center', fontSize: SIZE_TEXT_CONTENT }} numberOfLines={1}>
         {item.value}
       </Text>
     </TouchableOpacity>
@@ -36,9 +37,12 @@ const RoomTypeCard: FC<IProps> = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('15%'),
+    // backgroundColor: 'red',
+    // height: hp('15%'),
     alignItems: 'center',
-    width: wp('20%')
+    // flex: 1,
+    // justifyContent: 'flex-end',
+    width: wp('21%')
   },
 });
 
