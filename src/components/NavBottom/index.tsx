@@ -9,6 +9,7 @@ import Search from 'static/search.svg';
 // import { hp, wp } from '../utils/responsive';
 import { COLOR_BACKGROUND_BUTTON } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
+import Profile from 'screens/Profile';
 interface IProps extends NavigationInjectedProps {
 
 };
@@ -35,7 +36,7 @@ const NavBottom: FC<IProps> = (props) => {
         </TouchableOpacity>
       </View>
       <View style={styles.buttonActionContainer} >
-        <TouchableOpacity onPress={() => { setActive(3) }}>
+        <TouchableOpacity onPress={() => { setScreenBottomNav(3, 'Profile') }}>
           <Notification width={24} height={24} />
           {/* <SvgXml width="24" height="24" xml={Notification} fill={active == 3 ? '#49654E' : '#7676766f'} /> */}
         </TouchableOpacity>

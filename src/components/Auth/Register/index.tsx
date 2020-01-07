@@ -1,22 +1,18 @@
 import React, { FC } from 'react';
-import { StyleSheet, View, Image, Alert, Text } from 'react-native';
+import { StyleSheet, View, Alert, Text } from 'react-native';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { hp, wp } from 'utils/responsive';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
 interface IProps {
   initialProps?: any;
 }
 
-const Profile: FC<IProps> = (props) => {
+const Register: FC<IProps> = (props) => {
   const { initialProps } = props;
-
   return (
     <View style={styles.textContainerMiddle}>
-      <Image
-        style={styles.image}
-        source={require('../../../src/static/images/pngkey.com-traveling-png-1965681.png')}
-      />
-      <Text style={styles.titleText}>Plan your trips</Text>
+      <Icon name="home" size={24} color="#555555" />
       <Text style={styles.titleSubText}>Book one of our unique hotel to escape the ordinary</Text>
       <ButtonOriginal
         title="Log in"
@@ -64,5 +60,5 @@ const styles = StyleSheet.create({
     color: '#8A8A8F',
   },
 });
-Profile.defaultProps = {};
-export default Profile;
+Register.defaultProps = {};
+export default Register;
