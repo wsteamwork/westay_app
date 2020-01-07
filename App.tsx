@@ -1,7 +1,7 @@
 // import { useNetInfo } from "@react-native-community/netinfo";
 import React from 'react';
 import { I18nextProvider } from 'react-i18next';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View, StatusBar } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
 import AppView from './src/modules/AppView';
 import i18n from './src/translations';
@@ -25,6 +25,7 @@ export default class App extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <View style={styles.container}>
+          <StatusBar barStyle="dark-content" />
           <I18nextProvider i18n={i18n}>
             <AppView />
           </I18nextProvider>
