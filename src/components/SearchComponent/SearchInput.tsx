@@ -106,6 +106,9 @@ const GlobalSearchInput: FC<IProps> = (props) => {
               fontSize: SIZE_TEXT_SUBTITLE,
               fontWeight: NORMAL,
             }}
+            searchIcon={
+              <Ionicons name="ios-person" size={30} color="#4F8EF7" />
+            }
           />
         </View>
       </View>
