@@ -6,6 +6,19 @@ export const wp = (width: any) => Math.round(widthPercentageToDP(width));
 
 export const hp = (hight: any) => Math.round(heightPercentageToDP(hight));
 
+export const COLOR_BUTTON_DEFAULT = '#41C9BC';
+
+export const COLOR_BACKGROUND_DEFAULT = '#F7F9FF';
+
+export const COLOR_PRICE_DEFAUTL = '#FF9F1C';
+
+export const COLOR_TITLE_HEADER = '#41C9BC';
+
+export const COLOR_BACKGROUND_WHITEBLUE = '#F7F9FF';
+
+export const COLOR_ICON_DEFAULT = '#08C299';
+
+export const COLOR_LINEAR_DEFAULT = ['#08C299', '#41C9BC'];
 export const dividerGrey = {
   backgroundColor: '#F0F0F0',
   width: wp('90%'),

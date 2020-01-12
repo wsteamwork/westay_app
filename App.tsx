@@ -1,10 +1,11 @@
 // import { useNetInfo } from "@react-native-community/netinfo";
-import React from 'react';
+import React, { useReducer } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { Platform, StyleSheet, View, StatusBar } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
 import AppView from './src/modules/AppView';
 import i18n from './src/translations';
+import { AuthReducer, AuthStateInit, AuthContext } from 'store/Context/Auth';
 
 const customTextProps = {
   style: {
@@ -17,24 +18,23 @@ const theme = {
       ...customTextProps.style,
     },
   },
-}
+};
 
-export default class App extends React.Component {
-
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <View style={styles.container}>
-          <StatusBar barStyle="dark-content" />
-          <I18nextProvider i18n={i18n}>
-            <AppView />
-          </I18nextProvider>
-
-        </View>
-      </ThemeProvider>
-    );
-  }
-}
+const App = () => {
+  const [state, dispatch] = useReducer(AuthReducer, AuthStateInit);
+  return (
+    <ThemeProvider theme={theme}>
+      <View style={styles.container}>
+        <StatusBar barStyle="dark-content" />
+        <AuthContext.Provider value={{ state, dispatch }}>
+        <I18nextProvider i18n={i18n}>
+          <AppView />
+        </I18nextProvider>
+        </AuthContext.Provider>
+      </View>
+    </ThemeProvider>
+  )
+};
 const styles = StyleSheet.create({
   container: {
     marginTop: 0,
@@ -42,3 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
+export default App;

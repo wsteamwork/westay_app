@@ -1,4 +1,14 @@
-import React, { FC, useContext, useState, useRef } from 'react';
+import React, {
+  FC,
+  useRef,
+  createRef,
+  useEffect,
+  MutableRefObject,
+  Ref,
+  RefObject,
+  useContext,
+  useState,
+} from 'react';
 import {
   StyleSheet,
   View,
@@ -19,25 +29,20 @@ import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { axios, TOKEN } from 'utils/api';
 import { AuthContext } from 'store/Context/Auth';
 import storage from 'utils/storage';
-import Toast from 'react-native-easy-toast';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
-interface RegisterValues {
+interface LoginValues {
   email: string;
   password: string;
-  passwordConfirm: string;
 }
 
-const Register: FC<IProps> = (props) => {
+const Login: FC<IProps> = (props) => {
   const emailRef = React.createRef();
   let passwordRef = React.createRef();
-  const rePasswordRef = React.createRef();
-  const toastRef = useRef(null);
-  const { navigation } = props;
-  const { dispatch, state } = useContext(AuthContext);
-  const { languageStatus } = state;
   const [loading, setLoading] = useState(false);
+  const { dispatch, state } = useContext(AuthContext);
+  const { navigation } = props;
   const FormValidationSchema = Yup.object().shape({
     email: Yup.string()
       .required('Vui lòng nhập email')
@@ -48,30 +53,16 @@ const Register: FC<IProps> = (props) => {
       .required('Vui lòng nhập mật khẩu')
       .min(6, 'Tối thiếu 6 ký tự')
       .max(255, 'Tối đa 255 ký tự'),
-    passwordConfirm: Yup.string()
-      .required('Nhập lại mật khẩu')
-      .min(6, 'Tối thiếu 6 ký tự')
-      .max(255, 'Tối đa 255 ký tự')
-      .oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
   });
-  const handleClickSubmit = async (
-    values: RegisterValues,
-    actions: FormikHelpers<RegisterValues>,
-  ) => {
+  const handleClickSubmit = async (values: LoginValues, actions: FormikHelpers<LoginValues>) => {
     Keyboard.dismiss();
     const body = {
-      email: values.email,
+      username: values.email,
       password: values.password,
-      password_confirmation: values.passwordConfirm,
-      type: 0,
     };
     setLoading(true);
-
-    await axios
-      .post('register', body, {
-        headers: { 'Accept-Language': languageStatus },
-      })
-      .then(async (res) => {
+    try {
+      axios.post('login', body).then(async (res) => {
         const data = res.data;
         setLoading(false);
         storage.save({
@@ -80,21 +71,18 @@ const Register: FC<IProps> = (props) => {
           expires: data.expires_in,
         });
         dispatch({ type: 'SET_TOKEN', payload: `Bearer ${data.access_token}` });
-        navigation.navigate('Login');
-      })
-      .catch((err) => {
-        setLoading(false);
-        if (err.response.data.data.errors.email) {
-          // toastRef.current.show(err.response.data.data.errors.email[0], 1500);
-        }
       });
+      navigation.goBack();
+    } catch (error) {
+      setLoading(false);
+      // toastRef.current.show(error.response.data.data.errors[0], 1500);
+    }
   };
   return (
     <Formik
       initialValues={{
         email: '',
         password: '',
-        passwordConfirm: '',
       }}
       onSubmit={handleClickSubmit}
       validationSchema={FormValidationSchema}
@@ -104,10 +92,9 @@ const Register: FC<IProps> = (props) => {
           <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
               <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
-                <Toast ref={toastRef} />
                 <View style={styles.container} collapsable={false}>
                   <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-                  <Text style={styles.titleText}>Sign up</Text>
+                  <Text style={styles.titleText}>Log in</Text>
                   <InputFormGlobal
                     placeholder="Your Email"
                     keyboardType="email-address"
@@ -124,7 +111,7 @@ const Register: FC<IProps> = (props) => {
                     placeholder="Password"
                     keyboardType="default"
                     secureTextEntry={true}
-                    returnKeyType="next"
+                    returnKeyType="done"
                     ref={passwordRef}
                     value={values.password}
                     onChangeText={handleChange('password')}
@@ -132,32 +119,19 @@ const Register: FC<IProps> = (props) => {
                     // onSubmitEditing={() => (rePasswordRef as any).current.focus()}
                     errorMessage={errors.password}
                   />
-                  <InputFormGlobal
-                    placeholder="Confirm Password"
-                    keyboardType="default"
-                    onChangeText={handleChange('passwordConfirm')}
-                    secureTextEntry={true}
-                    returnKeyType="done"
-                    value={values.passwordConfirm}
-                    ref={rePasswordRef}
-                    onBlur={handleBlur('passwordConfirm')}
-                    errorMessage={errors.passwordConfirm}
-                  />
-                  <ButtonOriginal title="Sign up" handlePress={handleSubmit} loading={loading} />
-                  <View style={styles.policy}>
-                    <Text style={styles.text}>By signing up, you agreed with our</Text>
+                  <View style={styles.forgotPassword}>
                     <Text
-                      style={{ fontSize: wp('4%'), color: '#0BBCF2', textAlign: 'center' }}
-                      onPress={() => navigation.navigate('TermsAndConditions')}>
-                      Terms and Conditions
-                      <Text style={styles.text}> for Westay.</Text>
+                      style={{ fontSize: wp('4%'), color: '#8A8A8F' }}
+                      onPress={() => navigation.navigate('ForgetPassword')}>
+                      Forgot Password
                     </Text>
                   </View>
+                  <ButtonOriginal title="Log in" handlePress={handleSubmit} loading={loading} />
                   <View style={styles.action}>
                     <Text style={styles.titleSubText}>
-                      <Text>Already have account? </Text>
-                      <Text onPress={() => navigation.navigate('Login')} style={styles.textSwitch}>
-                        Log in
+                      <Text>Don’t have an account? </Text>
+                      <Text onPress={() => navigation.navigate('Signin')} style={styles.textSwitch}>
+                        Sign up
                       </Text>{' '}
                     </Text>
                   </View>
@@ -196,7 +170,7 @@ const styles = StyleSheet.create({
   },
   action: {
     position: 'absolute',
-    bottom: 70,
+    bottom: 100,
   },
   textSwitch: {
     fontSize: wp('4%'),
@@ -204,15 +178,11 @@ const styles = StyleSheet.create({
     paddingLeft: wp('14%'),
     fontWeight: 'bold',
   },
-  policy: {
-    marginTop: hp('4%'),
-  },
-  text: {
-    fontSize: wp('4%'),
-    width: wp('100%'),
-    textAlign: 'center',
-    color: '#8A8A8F',
+  forgotPassword: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: hp('3%'),
   },
 });
-Register.defaultProps = {};
-export default withNavigation(Register);
+Login.defaultProps = {};
+export default Login;

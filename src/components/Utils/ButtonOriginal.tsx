@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     borderRadius: 25,
     backgroundColor: 'transparent',
-    height: hp('6%'),
+    height: hp('7%'),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   titleStyle: {
-    fontSize: wp('4%'),
     color: 'white',
     fontWeight: '500',
   },
