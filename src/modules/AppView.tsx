@@ -7,6 +7,9 @@ import Profile from '../screens/Profile';
 import Search from '../screens/Search';
 import Trip from '../screens/Trip';
 import NavBottom from '../components/NavBottom';
+import Register from 'components/Auth/Register';
+import Login from 'components/Auth/Login';
+import ForgotPassword from 'components/Auth/ForgotPassword';
 
 const TabBarComponent = (props: any) => <View style={{
   justifyContent: 'center',
@@ -17,7 +20,10 @@ const TabBarComponent = (props: any) => <View style={{
 const AppView = createBottomTabNavigator(
   {
     Search: {
-      screen: Search
+      // screen: Profile
+      // screen: Register
+      screen: Login
+      // screen: ForgotPassword
     },
     Home: {
       screen: Home
@@ -26,11 +32,10 @@ const AppView = createBottomTabNavigator(
       screen: Trip
     },
     Profile: {
-      screen: Profile
+      screen: Search
     },
   },
   {
-    // resetOnBlur: true,
     defaultNavigationOptions: {
 
     },
@@ -43,19 +48,5 @@ const AppView = createBottomTabNavigator(
     }
   }
 );
-
-// const AppView = createStackNavigator(
-//   {
-//     Home: {
-//       screen: Home
-//     },
-//     Search: {
-//       screen: SearchResult
-//     },
-//   },
-//   {
-//     headerMode: 'none'
-//   }
-// );
 
 export default createAppContainer(AppView);
