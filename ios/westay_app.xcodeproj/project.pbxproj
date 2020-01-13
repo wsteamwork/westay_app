@@ -19,6 +19,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* westay_appTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* westay_appTests.m */; };
 		3CB17DAB0888395E419A7D3F /* libPods-westay_app-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1A12BC9B77661E25DCC331 /* libPods-westay_app-tvOSTests.a */; };
+		83290BB023CC7143005D498F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83290BAF23CC7143005D498F /* File.swift */; };
 		DFCD8153D50D5B411AA9698A /* libPods-westay_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20595A579C65F60F6FE1E17C /* libPods-westay_appTests.a */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,8 @@
 		55537338FDB588D2236A803D /* Pods-westay_app-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-westay_app-tvOS.release.xcconfig"; path = "Target Support Files/Pods-westay_app-tvOS/Pods-westay_app-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		66295E600084B4ACB67C8486 /* Pods-westay_app-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-westay_app-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-westay_app-tvOSTests/Pods-westay_app-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		74B877AF889AD9B452C2B3C6 /* Pods-westay_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-westay_appTests.release.xcconfig"; path = "Target Support Files/Pods-westay_appTests/Pods-westay_appTests.release.xcconfig"; sourceTree = "<group>"; };
+		83290BAE23CC7143005D498F /* westay_app-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "westay_app-Bridging-Header.h"; sourceTree = "<group>"; };
+		83290BAF23CC7143005D498F /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		9B687E39511213B87B0EC3E3 /* Pods-westay_app-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-westay_app-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-westay_app-tvOS/Pods-westay_app-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9B6DB70F7BC9CFD86B8D4D5E /* Pods-westay_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-westay_app.release.xcconfig"; path = "Target Support Files/Pods-westay_app/Pods-westay_app.release.xcconfig"; sourceTree = "<group>"; };
 		A2103D03D560EE733476AE15 /* libPods-westay_app-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-westay_app-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +162,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				83290BAF23CC7143005D498F /* File.swift */,
 				13B07FAE1A68108700A75B9A /* westay_app */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* westay_appTests */,
@@ -166,6 +170,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				8B2168DE469C397F74370A3A /* Pods */,
 				D20C3F1DC7C5439B80F6A623 /* Resources */,
+				83290BAE23CC7143005D498F /* westay_app-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -199,12 +204,11 @@
 			sourceTree = "<group>";
 		};
 		D20C3F1DC7C5439B80F6A623 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -300,6 +304,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1130;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -586,6 +593,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				83290BB023CC7143005D498F /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -639,6 +647,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2FDFC488B3F5708C08873E7F /* Pods-westay_appTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -662,6 +671,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 74B877AF889AD9B452C2B3C6 /* Pods-westay_appTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = westay_appTests/Info.plist;
@@ -683,6 +693,7 @@
 			baseConfigurationReference = C8622AE46E46B589DD8478A2 /* Pods-westay_app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = westay_app/Info.plist;
@@ -695,6 +706,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = westay_app;
+				SWIFT_OBJC_BRIDGING_HEADER = "westay_app-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -704,6 +718,7 @@
 			baseConfigurationReference = 9B6DB70F7BC9CFD86B8D4D5E /* Pods-westay_app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = westay_app/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -715,6 +730,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = westay_app;
+				SWIFT_OBJC_BRIDGING_HEADER = "westay_app-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -832,6 +849,7 @@
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -886,6 +904,7 @@
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

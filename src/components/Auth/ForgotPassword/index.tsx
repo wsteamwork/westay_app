@@ -1,34 +1,17 @@
-import React, {
-  FC,
-  useRef,
-  createRef,
-  useEffect,
-  MutableRefObject,
-  Ref,
-  RefObject,
-  useContext,
-  useState,
-} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
-import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import { hp, wp, COLOR_BUTTON_DEFAULT } from 'utils/responsive';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import InputFormGlobal from 'components/Utils/InputFormGlobal';
-import * as Yup from 'yup';
 import { Formik, FormikHelpers } from 'formik';
-import { axios } from 'utils/api';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import React, { FC, useContext, useRef, useState } from 'react';
+import { Keyboard, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Toast from 'react-native-easy-toast';
-import {AuthContext} from 'store/context/auth';
+import { NavigationInjectedProps } from 'react-navigation';
+import { AuthContext } from 'store/context/auth';
+// import { AuthContext } from 'store/context/auth';
+import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { axios } from 'utils/api';
+import { COLOR_BUTTON_DEFAULT, hp, wp } from 'utils/responsive';
+import * as Yup from 'yup';
 
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
@@ -88,27 +71,27 @@ const ForgotPassword: FC<IProps> = (props) => {
           <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
               {/* <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}> */}
-                <Toast ref={toastRef} />
-                <View style={styles.container} collapsable={false}>
-                  <HeaderWithBackTitle />
-                  <Text style={styles.titleText}>Forgot Password</Text>
-                  <Text style={styles.titleSubText}>
-                    Enter the email address registered with your account and we will send you a
-                    password change link.
+              <Toast ref={toastRef} />
+              <View style={styles.container} collapsable={false}>
+                <HeaderWithBackTitle />
+                <Text style={styles.titleText}>Forgot Password</Text>
+                <Text style={styles.titleSubText}>
+                  Enter the email address registered with your account and we will send you a
+                  password change link.
                   </Text>
-                  <InputFormGlobal
-                    placeholder="Your Email"
-                    keyboardType="email-address"
-                    returnKeyType="done"
-                    autoFocus={true}
-                    ref={emailRef}
-                    value={values.email}
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    errorMessage={errors.email}
-                  />
-                  <ButtonOriginal title="Send" handlePress={handleSubmit} loading={loading} />
-                </View>
+                <InputFormGlobal
+                  placeholder="Your Email"
+                  keyboardType="email-address"
+                  returnKeyType="done"
+                  autoFocus={true}
+                  ref={emailRef}
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  errorMessage={errors.email}
+                />
+                <ButtonOriginal title="Send" handlePress={handleSubmit} loading={loading} />
+              </View>
               {/* </TouchableWithoutFeedback> */}
             </KeyboardAvoidingView>
           </SafeAreaView>
