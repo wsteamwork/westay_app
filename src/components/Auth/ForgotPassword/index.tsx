@@ -86,7 +86,7 @@ const ForgotPassword: FC<IProps> = (props) => {
         return (
           <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
-              <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
+              {/* <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}> */}
                 <Toast ref={toastRef} />
                 <View style={styles.container} collapsable={false}>
                   <HeaderWithBackTitle />
@@ -108,7 +108,7 @@ const ForgotPassword: FC<IProps> = (props) => {
                   />
                   <ButtonOriginal title="Send" handlePress={handleSubmit} loading={loading} />
                 </View>
-              </TouchableWithoutFeedback>
+              {/* </TouchableWithoutFeedback> */}
             </KeyboardAvoidingView>
           </SafeAreaView>
         );

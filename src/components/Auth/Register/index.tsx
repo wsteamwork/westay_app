@@ -104,7 +104,7 @@ const Register: FC<IProps> = (props) => {
           <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
               <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
-                <Toast ref={toastRef} />
+                {/* <Toast ref={toastRef} /> */}
                 <View style={styles.container} collapsable={false}>
                   <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
                   <Text style={styles.titleText}>Sign up</Text>
