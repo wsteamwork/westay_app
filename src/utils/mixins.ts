@@ -1,4 +1,6 @@
-import { Platform, Animated, Easing } from 'react-native';
+import {Platform, Animated} from 'react-native';
+import {useState} from 'react';
+import {axios} from './api';
 
 export const cleanAccents = (str: string): string => {
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
@@ -32,6 +34,17 @@ export const __currentPlatform = () => {
   return Platform.OS === 'android';
 };
 
+export const elevationShadowStyle = (elevation1to24: number) => {
+  return {
+    elevation: elevation1to24,
+    shadowColor: 'rgba(0, 0, 0, 1)',
+    shadowOffset: { width: 0, height: 0.5 * elevation1to24 },
+    shadowOpacity: 0.3,
+    shadowRadius: 0.8 * elevation1to24
+  };
+};
+
+
 export const IMAGE_PLACEHOLDER =
   'https://cdn5.vectorstock.com/i/1000x1000/53/74/christmas-seamless-pattern-vector-27655374.jpg';
 
@@ -52,4 +65,113 @@ export const animatedStyle = (animatedValue: any) => {
   return {
     transform: [{ scale: animatedValue }],
   };
+};
+
+export const useCheckbox = () => {
+  const [typeRoom, setTypeRoom] = useState<any>([]);
+  const [typeAmenities, setTypeAmenities] = useState<any>([]);
+
+  // @ts-ignore
+  const addDataRoomType = ({ label, checked }, id) => {
+    let list = [...typeRoom];
+
+    // @ts-ignore
+    if (list.some(i => i.name === label)) {
+      // @ts-ignore
+      list = list.filter(item => item.name !== label);
+    } else {
+      // @ts-ignore
+      list = [...list, { name: label, checked, id }];
+    }
+
+    setTypeRoom(list);
+  };
+
+  // @ts-ignore
+  const addDataAmenities = ({ label, checked }, id) => {
+    let list = [...typeAmenities];
+
+    // @ts-ignore
+    if (list.some(i => i.name === label)) {
+      // @ts-ignore
+      list = list.filter(item => item.name !== label);
+    } else {
+      // @ts-ignore
+      list = [...list, { name: label, checked, id }];
+    }
+
+    setTypeAmenities(list);
+  };
+
+  return [
+    addDataRoomType,
+    typeRoom,
+    setTypeRoom,
+    addDataAmenities,
+    typeAmenities,
+    setTypeAmenities,
+  ];
+};
+
+export const getDataFilter = async (languageStatus: string) => {
+  const data = await Promise.all([
+    axios.get('rooms/type', { headers: { 'Accept-Language': languageStatus } }),
+    axios.get('comforts?include=details', {
+      headers: { 'Accept-Language': languageStatus },
+    }),
+  ]);
+
+  const dataType1 = data[0].data
+    ? data[0].data.map((item:any) => ({
+      id: item.id,
+      name: item.value,
+      type: 1,
+    }))
+    : [];
+
+  const dataType2 = data[1].data
+    ? data[1].data.data.map((item:any) => ({
+      id: item.id,
+      name: item.details.data[0].name,
+      type: 2,
+    }))
+    : [];
+
+  return [
+    {title: 'Loại phòng', data: dataType1},
+    {title: 'Tiện nghi', data: dataType2},
+  ];
+};
+
+export const formatMoney = (
+  amount: any,
+  decimalCount: number = 0,
+  decimal: string = '.',
+  thousands: string = ','
+): string | void => {
+  try {
+    decimalCount = Math.abs(decimalCount);
+    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+    const negativeSign = amount < 0 ? '-' : '';
+
+    let i: any = parseInt(
+      (amount = Math.abs(Number(amount) || 0).toFixed(decimalCount))
+    ).toString();
+    let j: number = i.length > 3 ? i.length % 3 : 0;
+
+    return (
+      negativeSign +
+      (j ? i.substr(0, j) + thousands : '') +
+      i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousands) +
+      (decimalCount
+        ? decimal +
+      Math.abs(amount - i)
+        .toFixed(decimalCount)
+        .slice(2)
+        : '')
+    );
+  } catch (e) {
+    console.error(e);
+  }
 };

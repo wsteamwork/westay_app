@@ -17,9 +17,7 @@ const Search: FC<IProps> = (props) => {
 
 const styles = StyleSheet.create({
   searchScreenContainer: {
-    marginTop: 45,
     flex: 1,
-    height: hp('100%')
   }
 });
 Search.defaultProps = {

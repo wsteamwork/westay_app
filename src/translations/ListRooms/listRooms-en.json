@@ -1,0 +1,9 @@
+{
+    "day": "Day",
+    "guest": "guest",
+    "guestUpper": "Guest",
+    "room": "Room",
+    "bedRoom": "Bedroom",
+    "filter": "Filter",
+    "noResult": "No result is found!"
+}

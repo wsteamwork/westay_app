@@ -50,7 +50,9 @@ export const COLOR_TEXT_DEFAULT = '#484848';
 
 export const COLOR_TITLE_HEADER = '#41C9BC';
 
-// export const COLOR_BUTTON_DEFAULT = '';
+export const COLOR_LINEAR_DEFAULT = ['#08C299', '#41C9BC'];
+
+export const COLOR_BUTTON_DEFAULT = '#41C9BC';
 
 // export const COLOR_TITLE_HEADER = '#41C9BC';
 

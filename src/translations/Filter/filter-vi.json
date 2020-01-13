@@ -1,0 +1,13 @@
+{
+    "filterActions": {
+        "search": "Tìm kiếm"
+    },
+    "filterByDateAndFastBook": {
+        "byDate": "Theo Ngày",
+        "fastBooking": "Đặt phòng nhanh"
+    },
+    "filterByPrice": {
+        "priceRange": "Khoảng giá"
+    },
+    "name": "Bộ lọc"
+}

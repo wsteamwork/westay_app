@@ -1,0 +1,22 @@
+{
+    "cardBooking": {
+        "detail": "Chi tiết"
+    },
+    "cardRoom": {
+        "bedroom": "phòng ngủ",
+        "night": "đêm",
+        "hours": "giờ"
+    },
+    "searchResults": "Kết quả tìm kiếm",
+    "signInandUp": "Đăng nhập/Đăng ký",
+    "startBooking": "Bắt đầu đặt phòng",
+    "seeMore": "Xem thêm",
+    "collapse": "Thu gọn",
+    "noInternet": "Không có kết nối Internet",
+    "descNoInternet": "Vui lòng kiểm tra lại kết nối mạng của bạn và thử lại",
+    "retry": "Thử lại",
+    "signin": "Đăng nhập",
+    "signup": "Đăng ký",
+    "messages": "Tin nhắn",
+    "startChatWith": "Hãy gửi tin nhắn đến"
+}

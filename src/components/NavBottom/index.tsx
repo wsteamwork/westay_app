@@ -23,7 +23,7 @@ const NavBottom: FC<IProps> = (props) => {
   return (
     <View style={styles.navBottomContainer}>
       <View style={styles.buttonActionContainer}>
-        <TouchableOpacity onPress={() => { setScreenBottomNav(1, 'Home') }}>
+        <TouchableOpacity onPress={() => { setScreenBottomNav(1, 'Trip') }}>
           <Etsy width={24} height={24} />
           {/* <SvgXml width="24" height="24" xml={Etsy} fill={active == 1 ? '#49654E' : '#7676766f'} /> */}
         </TouchableOpacity>

@@ -1,0 +1,50 @@
+{
+    "actionButton": {
+        "call": "Call",
+        "message": "Message"
+    },
+    "roomsCity": {
+        "accommodation": "Accommodation"
+    },
+    "chooseDate": {
+        "check_in": "Check-in",
+        "day": "Day",
+        "check_out": "Check-out",
+        "dateCheckin": "Check-in date",
+        "dateCheckout": "Check-out date",
+        "reset": "Reset",
+        "chooseCheckinDate": "Choose a check-in date",
+        "chooseCheckoutDate": "Choose a check-out date",
+        "nightSelected": "night selected",
+        "submit": "Save"
+    },
+    "choosePeople": {
+        "guest": "Guest",
+        "guestLower": "guest",
+        "search": "Search",
+        "numberGuest": "Number guest",
+        "numberRoom": "Number room",
+        "submit": "Confirm",
+        "reset": "Reset",
+        "room": "room"
+    },
+    "searchInput": {
+        "city": "City",
+        "district": "District",
+        "accommodation": "Accommodation",
+        "descInput": "Where do you want to go?",
+        "noResult": "No result is found!"
+    },
+    "searchHomeAnimated": {
+        "descInput": "Where do you want to go?"
+    },
+    "searchNotFound": {
+        "notLocation": "Check your location service again.",
+        "findAround": "Find around here",
+        "recently": "Recently"
+    },
+    "search": "Search",
+    "newHouse": "New house",
+    "topDestination": "Top Destination",
+    "featuredRoom": "Featured room"
+}

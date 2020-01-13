@@ -1,0 +1,67 @@
+{
+    "emptyToken": "Bạn cần đăng nhập để xem thông tin đặt phòng",
+    "listBookings": "Danh sách đặt phòng",
+    "waitConf": "Chờ xác nhận",
+    "forthcoming": "Sắp tới",
+    "finish": "Đã hoàn thành",
+    "cancelled": "Đã hủy",
+    "bookingDetail": {
+        "roomRate": "Giá phòng",
+        "service_fee": "Phí dịch vụ",
+        "surcharge": "Phụ thu",
+        "sale": "Giảm giá",
+        "returnInvoice": "Gửi lại hóa đơn",
+        "roomInfo": "Thông tin phòng",
+        "haveReview": "Đã đánh giá",
+        "notReview": "Chưa đánh giá",
+        "reviewRoom": "Xem lại phòng",
+        "otherInfo": "Thông tin khác",
+        "bookingCode": "Mã đặt phòng",
+        "descOtherInfo": "Để có thể hỗ trợ bạn tốt hơn, vui lòng liên hệ với chúng tôi và cung cấp mã đặt phòng của bạn",
+        "contact": "Liên hệ",
+        "reBooking": "Đặt lại",
+        "cancelBooking": "Hủy đặt phòng",
+        "created": "Ngày tạo",
+        "priceDetail": "Chi tiết giá"
+    },
+    "bookingReview": {
+        "success": "Đánh giá thành công. Xin cảm ơn.",
+        "title": "Hãy cùng đánh giá trải nghiệm của bạn tại",
+        "descTitle:": "Hãy giúp chúng tôi cải thiện chất lượng dịch vụ để có thể phục vụ bạn tốt hơn trong những lần tiếp theo",
+        "clean": "Sạch sẽ",
+        "descClean": "Căn hộ có sạch sẽ khi bạn nhận phòng không?",
+        "quality": "Chất lượng",
+        "descQuality": "Chất lượng căn hộ có như mô tả và kỳ vọng của bạn không?",
+        "service": "Dịch vụ",
+        "descService": "Dịch vụ tại nơi ở có đúng như bạn mong đợi không?",
+        "review": "Đánh giá",
+        "descReview": "Căn hộ có xứng đáng với số tiền mà bạn đã bỏ ra không?",
+        "summary": "Tổng kết",
+        "descSummary": "Trên thang điểm 5, bạn đánh giá căn hộ này được mấy điểm?",
+        "desShare": "Bạn sẽ giới thiệu với bạn bè đặt căn hộ này chứ?",
+        "yes": "Có",
+        "no": "Không",
+        "back": "Quay lại",
+        "submit": "Gửi đánh giá"
+    },
+    "cancelBooking": {
+        "success": "Hủy thành công",
+        "name": "Hủy đặt phòng",
+        "otherReasons": "Lý do khác",
+        "placeholder": "Nếu có thể hãy cho chúng tôi biết thêm thông tin về lý do khiến bạn hủy đặt phòng này",
+        "back": "Quay lại"
+    },
+    "filterBooking": {
+        "name": "Bộ lọc ",
+        "bookingTime": "Bộ lọc thời gian đặt phòng",
+        "confirm": "Xác nhận",
+        "close": "Đóng",
+        "finish": "Hủy",
+        "apply": "Áp dụng"
+    },
+    "flatListBooking": {
+        "dayAgo": "ngày qua",
+        "noBooking": "Không tìm thấy booking nào ở mục này!"
+    }
+
+}

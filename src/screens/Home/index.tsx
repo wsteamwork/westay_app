@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     paddingLeft: wp('5%'),
     // marginTop: hp('3%')
     marginBottom: hp('1.5%'),
-    marginTop: __currentPlatform() ? StatusBar.currentHeight : 38
+    marginTop: __currentPlatform ? StatusBar.currentHeight : 38
   },
   mrTop: {
     marginVertical: hp('1.5%')

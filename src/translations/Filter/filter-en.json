@@ -1,0 +1,13 @@
+{
+    "filterActions": {
+        "search": "Search"
+    },
+    "filterByDateAndFastBook": {
+        "byDate": "By date",
+        "fastBooking": "Fast booking"
+    },
+    "filterByPrice": {
+        "priceRange": "Price range"
+    },
+    "name": "Filter"
+}

@@ -1,0 +1,97 @@
+{
+    "settings": {
+        "name": "Settings",
+        "password": "Password",
+        "currency": "Currency",
+        "standForCurrency": "USD",
+        "language": "Language",
+        "vietnamese": "Vietnamese",
+        "english": "English",
+        "notification": "Notification",
+        "signout": "Signout",
+        "privatePolicy": "Private Policy",
+        "termsAndConditions": "Terms And Conditions"
+    },
+    "support": "Support",
+    "shared": {
+        "name": "Invite friends",
+        "titleShare": "Westay - Homestay for Vietnamese people",
+        "messageShare": "Let's book with Westay.",
+        "invite": "Invite",
+        "descInvite": "Send invitations to friends to invite them to join the Westay community. You will receive rewards for each new registrant",
+        "placeholder": "Enter E-Mail invitees",
+        "descInput": "If you want to invite multiple people, E-Mail should be separated by \",\" (comma).",
+        "sendInvitation": "Send invitation",
+        "shareLink": "Share link"
+    },
+    "optionImagePicker": {
+        "title": "Choose your best portrait photo.",
+        "cancelButtonTitle": "Cancel",
+        "takePhotoButtonTitle": "Take portraits ...",
+        "chooseFromLibraryButtonTitle": "Choose photos from your library ..."
+    },
+    "emptyTokenAccount": {
+        "signin": "Sign in",
+        "signup": "Sign up"
+    },
+    "InfoMerchant": {
+        "age": "Age",
+        "review": "Reviews",
+        "information": "Personal information",
+        "description": "No information.",
+        "language": "Language",
+        "listRooms": "List of rooms",
+        "noComment": "No comments yet",
+        "nameLess": "Nameless"
+    },
+    "profile": {
+        "name": "Profile",
+        "emptyNameEdit": "The last and last name fields must not be blank",
+        "emptyEmailEdit": "Email field cannot be blank",
+        "emptyPhoneEdit": "Phone number field cannot be blank",
+        "updateSuccess": "Update successful",
+        "updateError": "Opps has errors. Retry.",
+        "information": "Personal information",
+        "fullName": "Full name",
+        "descriptionInfo": "Complete profile details make the booking faster and more convenient",
+        "descriptionEmail": "Email will be used to login, receive notifications and reset your password",
+        "phone": "Phone number",
+        "descriptionPhone": "This is the phone number for the guest (landlord) and Westay will use it to contact you",
+        "autobiography": "Autobiographic",
+        "descriptionAutobiography": "A little description of yourself helps people know more about you",
+        "additionalInfo": "Additional information",
+        "descriptionAdditionalInfo": "Some information helps homeowners or we may know your needs",
+        "job": "Job",
+        "descriptionJob": "A little description of yourself helps people know more about you",
+        "emergencyCommunication": "Emergency communication",
+        "descriptionEmergency": "Phone number to contact if anything happens if we cannot contact you",
+        "save": "Save",
+        "mr": "Mr",
+        "mrs": "Mrs",
+        "unknown": "Unknown",
+        "other": "Other"
+    },
+    "changePassword": {
+        "name": "Change Password",
+        "success": "Change password successfully",
+        "oldPassword": "Old password",
+        "newPassword": "New password",
+        "newPasswordConf": "Confirm new password",
+        "oldPasswordRequired": "Old passwords cannot be left blank",
+        "min6Character": "At least 6 characters",
+        "max255Character": "Up to 255 characters",
+        "newPasswordRequired": "New password cannot be blank",
+        "newPasswordConfRequired": "Returning the password cannot be left blank",
+        "passwordNotMatch": "Password does not match"
+    },
+    "currency": {
+        "name": "Currency"
+    },
+    "notification": {
+        "name": "Notification",
+        "notiBooking": "Booking Notice",
+        "descNotiBooking": "Receive reminder notifications on the app every time there is an update on your booking",
+        "notiSale": "Sale Notice",
+        "descNotiSale": "Get information about Westay promotions through the app"
+    }
+}

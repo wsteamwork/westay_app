@@ -1,0 +1,49 @@
+{
+    "forgetPassword": {
+        "emailRequired": "Please enter email",
+        "invalidEmail": "Email address is not valid",
+        "min6Character": "At least 6 characters",
+        "max255Character": "Up to 255 characters",
+        "sucess": "An email has been sent to your e-mail address",
+        "name": "Forgot password",
+        "desc": "Enter the email address registered with your account and we will send you a password change link.",
+        "submit": "Send a password change path"
+    },
+    "login": {
+        "emailRequired": "Please enter email",
+        "invalidEmail": "Email address is not valid",
+        "min6Character": "At least 6 characters",
+        "max255Character": "Up to 255 characters",
+        "passwordRequired": "Please enter a password",
+        "labelEmail": "Enter your email address",
+        "password": "Password",
+        "submit": "Signin",
+        "forget": "Forgot password",
+        "notAccount": "Do not have an account?",
+        "regiter": "Signup"
+    },
+    "register": {
+        "emailRequired": "Please enter email",
+        "invalidEmail": "Email address is not valid",
+        "min6Character": "At least 6 characters",
+        "max255Character": "Up to 255 characters",
+        "passwordRequired": "Please enter a password",
+        "invalidPassConf": "Password does not match",
+        "phoneRequired": "Please enter the phone number",
+        "lastNameRequired": "Please enter a name",
+        "firstNameRequired": "Please enter First and Middle First",
+        "lastName": "Last name",
+        "firstName": "First name",
+        "phone": "Phone number",
+        "search": "Search",
+        "password": "Password",
+        "passworfConf": "Enter the password",
+        "agree": "I agree with",
+        "termsAndConditions": "terms of use",
+        "privacyPolicy": "Privacy policy",
+        "forWestay": "of Westay",
+        "haveAccount": "Are you a Westay member?",
+        "signin": "Sign in",
+        "name": "Sign up"
+    }
+}

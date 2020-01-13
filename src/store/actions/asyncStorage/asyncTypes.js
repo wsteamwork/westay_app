@@ -1,0 +1,1 @@
+export const SET_HISTORY_SEARCH = 'SET_HISTORY_SEARCH';

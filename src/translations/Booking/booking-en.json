@@ -1,0 +1,67 @@
+{
+    "emptyToken": "You need to login to view booking information",
+    "listBookings": "My booking",
+    "waitConf": "Wait confirm",
+    "forthcoming": "Up coming",
+    "finish": "Completed",
+    "cancelled": "Cancelled",
+    "bookingDetail": {
+        "roomRate": "Room fee",
+        "service_fee": "Service fee",
+        "surcharge": "Surcharge",
+        "sale": "Sale",
+        "returnInvoice": "Return the invoice",
+        "roomInfo": "Room information",
+        "haveReview": "Have evaluated",
+        "notReview": "Not yet rated",
+        "reviewRoom": "Review the room",
+        "otherInfo": "Other information",
+        "bookingCode": "Booking code",
+        "descOtherInfo": "In order to better assist you, please contact us and provide your booking code",
+        "contact": "Contact",
+        "reBooking": "Reset",
+        "cancelBooking": "Cancel booking",
+        "created": "Date created",
+        "priceDetail": "Price details"
+    },
+    "bookingReview": {
+        "success": "Evaluation of success. Thank you.",
+        "title": "Let's evaluate your experience at",
+        "descTitle:": "Help us improve the quality of service to better serve you in the next time",
+        "clean": "Clean",
+        "descClean": "Is the apartment clean when you check in?",
+        "quality": "Quality",
+        "descQuality": "Is the quality of the apartment as your description and expectations?",
+        "service": "Service",
+        "descService": "Is the service at the residence exactly what you expected?",
+        "review": "Evaluate",
+        "descReview": "Is the apartment worth the money you spent?",
+        "summary": "Summary",
+        "descSummary": "On a 5-point scale, how much do you rate this apartment?",
+        "desShare": "Will you introduce your friends to this apartment?",
+        "yes": "Yes",
+        "no": "No",
+        "back": "Back",
+        "submit": "Submit review"
+    },
+    "cancelBooking": {
+        "success": "Cancel successfully",
+        "name": "Cancel reservation",
+        "otherReasons": "Other reasons",
+        "placeholder": "If possible, please tell us more information about why you canceled this reservation",
+        "back": "Back"
+    },
+    "filterBooking": {
+        "name": "Filter",
+        "bookingTime": "Booking time filter",
+        "confirm": "Confirm",
+        "close": "Closed",
+        "finish": "Back",
+        "apply": "Apply"
+    },
+    "flatListBooking": {
+        "dayAgo": "day ago",
+        "noBooking": "No booking found in this category!"
+    }
+
+}

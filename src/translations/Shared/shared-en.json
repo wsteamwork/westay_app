@@ -1,0 +1,22 @@
+{
+    "cardBooking": {
+        "detail": "Detail"
+    },
+    "cardRoom": {
+        "bedroom": "Bedroom",
+        "night": "night",
+        "hours": "hours"
+    },
+    "searchResults": "Search results",
+    "signInandUp": "Signin/Signup",
+    "startBooking": "Start booking",
+    "seeMore": "See more",
+    "collapse": "Collapse",
+    "noInternet": "No Internet connection",
+    "descNoInternet": "Please check your network connection and try again",
+    "retry": "Retry",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "messages": "Messages",
+    "startChatWith": "Start chatting with"
+}

@@ -26,4 +26,5 @@ export const stylesGlobal = StyleSheet.create({
     width: wp('90%'),
     height: 1,
   },
+
 });

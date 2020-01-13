@@ -1,0 +1,97 @@
+{
+    "settings": {
+        "name": "Cài đặt",
+        "password": "Đổi mật khẩu",
+        "currency": "Tiền tệ",
+        "standForCurrency": "VND",
+        "language": "Ngôn ngữ",
+        "vietnamese": "Tiếng việt",
+        "english": "Tiếng anh",
+        "notification": "Thông báo",
+        "signout": "Đăng xuất",
+        "privatePolicy": "Chính sách bảo mật",
+        "termsAndConditions": "Điều khoản sử dụng"
+    },
+    "support": "Trợ giúp",
+    "shared": {
+        "name": "Mời bạn bè",
+        "titleShare": "Westay - Homestay cho người việt",
+        "messageShare": "Cùng đặt phòng với Westay nhé.",
+        "invite": "Mời",
+        "descInvite": "Gửi lời mời cho bạn bè để mời họ cùng tham gia vào cộng đồng Westay. Bạn sẽ nhận được phần thưởng cho mỗi người đăng ký mới",
+        "placeholder": "Nhập E-Mail người được mời",
+        "descInput": "Nếu bạn muốn mời nhiều người, các E-Mail cần được phân cách với nhau bởi dấu \",\" (phẩy) .",
+        "sendInvitation": "Gửi lời mời",
+        "shareLink": "Chia sẻ liên kết"
+    },
+    "optionImagePicker": {
+        "title": "Chọn bức ảnh chân dung đẹp nhất của bạn nhé.",
+        "cancelButtonTitle": "Đóng",
+        "takePhotoButtonTitle": "Chụp ảnh chân dung...",
+        "chooseFromLibraryButtonTitle": "Chọn ảnh từ thư viện của bạn..."
+    },
+    "emptyTokenAccount": {
+        "signin": "Đăng nhập",
+        "signup": "Đăng ký"
+    },
+    "InfoMerchant": {
+        "age": "Tuổi",
+        "review": "Đánh giá",
+        "information": "Thông tin cá nhân",
+        "description": "Chưa có thông tin.",
+        "language": "Ngôn ngữ",
+        "listRooms": "Danh sách phòng",
+        "noComment": "Chưa có nhận xét",
+        "nameLess": "Vô danh"
+    },
+    "profile": {
+        "name": "Trang cá nhân",
+        "emptyNameEdit": "Trường họ và tên không được để trống",
+        "emptyEmailEdit": "Trường email không được để trống",
+        "emptyPhoneEdit": "Trường số điện thoại không được để trống",
+        "updateSuccess": "Cập nhật thành công",
+        "updateError": "Opps có lỗi. Thử lại.",
+        "information": "Thông tin cá nhân",
+        "fullName": "Full name",
+        "descriptionInfo": "Hoàn thành chi tiết hồ sơ khiến cho việc booking được nhanh và thuận tiện hơn",
+        "descriptionEmail": "Email sẽ được dùng để đăng nhập, nhận thông báo và đặt lại mật khẩu",
+        "phone": "Số điện thoại",
+        "descriptionPhone": "Đây là số điện thoại để khách ( chủ nhà ) và Westay sẽ dung để liên hệ với bạn",
+        "autobiography": "Tự sự",
+        "descriptionAutobiography": "Một chút miêu tả ngắn về bản thân giúp mọi người có thể biết thêm về bạn",
+        "additionalInfo": "Thông tin bổ sung",
+        "descriptionAdditionalInfo": "Một số thông tin giúp chủ nhà hoặc chúng tôi có thể biết nhu cầu của bạn",
+        "job": "Nghề nghiệp",
+        "descriptionJob": "Một chút miêu tả ngắn về bản thân giúp mọi người có thể biết thêm về bạn",
+        "emergencyCommunication": "Liên lạc khẩn cấp",
+        "descriptionEmergency": "Số điện thoại dùng để liên lạc nếu có bất kỳ điều gì xảy ra nếu chúng tôi không thể liên hệ được với bạn",
+        "save": "Lưu lại",
+        "mr": "Ông",
+        "mrs": "Bà",
+        "unknown": "Không xác định",
+        "other": "Khác"
+    },
+    "changePassword": {
+        "name": "Đổi mật khẩu",
+        "success": "Đổi mật khẩu thành công",
+        "oldPassword": "Mật khẩu cũ",
+        "newPassword": "Mật khẩu mới",
+        "newPasswordConf": "Xác nhận lại mật khẩu",
+        "oldPasswordRequired": "Mật khẩu cũ không được để trống",
+        "min6Character": "Tối thiểu 6 ký tự",
+        "max255Character": "Tối đa 255 ký tự",
+        "newPasswordRequired": "Mật khẩu mới không được để trống",
+        "newPasswordConfRequired": "Xác nhân lại mật khẩu không được để trống",
+        "passwordNotMatch": "Mật khẩu không trùng khớp"
+    },
+    "currency": {
+        "name": "Tiền tệ"
+    },
+    "notification": {
+        "name": "Thông báo",
+        "notiBooking": "Thông báo đặt phòng",
+        "descNotiBooking": "Nhận thông báo nhắc nhở trên ứng dụng mỗi khi có cập nhật về đặt phòng của bạn",
+        "notiSale": "Thông tin khuyến mãi",
+        "descNotiSale": "Nhận thông tin về các chương trình khuyến mãi của Westay thông qua ứng dụng"
+    }
+}

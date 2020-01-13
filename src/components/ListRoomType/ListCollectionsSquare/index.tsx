@@ -1,10 +1,10 @@
 // import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
-import CollectionsSquareCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsSquareCard';
 import React, { FC, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 import { COLOR_INFO, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
 import { hp, stylesGlobal, wp } from 'utils/responsive';
+import CollectionsSquareCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsSquareCard';
 
 interface IProps {
   typeData: string,

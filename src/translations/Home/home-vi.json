@@ -1,0 +1,50 @@
+{
+    "actionButton": {
+        "call": "Gọi điện thoại",
+        "message": "Nhắn tin"
+    },
+    "roomsCity": {
+        "accommodation": "Chỗ ở"
+    },
+    "chooseDate": {
+        "check_in": "Ngày đến",
+        "day": "Ngày",
+        "check_out": "Ngày đi",
+        "dateCheckin": "Ngày nhận phòng",
+        "dateCheckout": "Ngày trả phòng",
+        "reset": "Xóa",
+        "chooseCheckinDate": "Chọn ngày nhận phòng",
+        "chooseCheckoutDate": "Chọn ngày trả phòng",
+        "nightSelected": "đêm được chọn",
+        "submit": "Lưu lại"
+    },
+    "choosePeople": {
+        "guest": "Khách",
+        "guestLower": "khách",
+        "search": "Tìm kiếm",
+        "numberGuest": "Số khách",
+        "numberRoom": "Số phòng",
+        "submit": "Xác nhận",
+        "reset": "Xóa",
+        "room": "Phòng"
+    },
+    "searchInput": {
+        "city": "Thành phố",
+        "district": "Huyện",
+        "accommodation": "Chỗ ở",
+        "descInput": "Bạn muốn tới đâu?",
+        "noResult": "Không tìm thấy kết quả nào!"
+    },
+    "searchHomeAnimated": {
+        "descInput": "Bạn muốn tới đâu?"
+    },
+    "searchNotFound": {
+        "notLocation": "Kiểm tra lại dịch vụ định vị của bạn.",
+        "findAround": "Tìm quanh đây",
+        "recently": "Gần đây"
+    },
+    "search": "Tìm kiếm",
+    "newHouse": "Nhà mới",
+    "topDestination": "Điểm đến nổi bật",
+    "featuredRoom": "Phòng nổi bật"
+}

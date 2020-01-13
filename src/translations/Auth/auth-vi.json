@@ -1,0 +1,49 @@
+{
+    "forgetPassword": {
+        "emailRequired": "Vui lòng nhập email",
+        "invalidEmail": "Địa chỉ email không hợp lệ",
+        "min6Character": "Tối thiểu 6 ký tự",
+        "max255Character": "Tối đa 255 ký tự",
+        "sucess": "Một e-mail đã được được gửi đến địa chỉ e-mail của bạn",
+        "name": "Quên mật khẩu",
+        "desc": "Nhập địa chỉ email đã được đăng ký với tài khoản của bạn và chúng tối sẽ gửi cho bạn đường dẫn đổi mật khẩu.",
+        "submit": "Gửi đường dẫn đổi mật khẩu"
+    },
+    "login": {
+        "emailRequired": "Vui lòng nhập email",
+        "invalidEmail": "Địa chỉ email không hợp lệ",
+        "min6Character": "Tối thiểu 6 ký tự",
+        "max255Character": "Tối đa 255 ký tự",
+        "passwordRequired": "Vui lòng nhập mật khẩu",
+        "labelEmail": "Nhập địa chỉ Email",
+        "password": "Mật khẩu",
+        "submit": "Đăng nhập",
+        "forget": "Quên mật khẩu",
+        "notAccount": "Bạn chưa có tài khoản?",
+        "regiter": "Đăng ký"
+    },
+    "register": {
+        "emailRequired": "Vui lòng nhập email",
+        "invalidEmail": "Địa chỉ email không hợp lệ",
+        "min6Character": "Tối thiểu 6 ký tự",
+        "max255Character": "Tối đa 255 ký tự",
+        "passwordRequired": "Vui lòng nhập mật khẩu",
+        "invalidPassConf": "Mật khẩu không trùng khớp",
+        "phoneRequired": "Vui lòng nhập số điện thoại",
+        "lastNameRequired": "Vui lòng nhập tên",
+        "firstNameRequired": "Vui lòng nhập Họ và Tên đệm",
+        "lastName": "Tên",
+        "firstName": "Họ và đệm",
+        "phone": "Số điện thoại",
+        "search": "Tìm kiếm",
+        "password": "Mật khẩu",
+        "passworfConf": "Nhập lại mật khẩu",
+        "agree": "Tôi đồng ý với",
+        "termsAndConditions": "điều khoản sử dụng",
+        "privacyPolicy": "Chính sách quyền riêng tư",
+        "forWestay": "của Westay",
+        "haveAccount": "Bạn đã là thành viên Westay?",
+        "signin": "Đăng nhập",
+        "name": "Đăng ký"
+    }
+} 
