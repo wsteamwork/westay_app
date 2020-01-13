@@ -152,12 +152,12 @@ const Filter: FC<IProps> = (props) => {
           [value],
         )}
 
-        {/*{useMemo(*/}
-        {/*  () => (*/}
-        {/*    <LoadingScreen loading={loading} />*/}
-        {/*  ),*/}
-        {/*  [loading],*/}
-        {/*)}*/}
+        {useMemo(
+          () => (
+            <LoadingScreen loading={loading} />
+          ),
+          [loading],
+        )}
 
         {useMemo(
           () => (
