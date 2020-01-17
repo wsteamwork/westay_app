@@ -12,6 +12,7 @@ import java.util.List;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.bluroverly.SajjadBlurOverlayPackage;
 import com.cmcewen.blurview.BlurViewPackage;
+// import com.airbnb.android.react.maps.MapsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
           packages.add(new LottiePackage());
           packages.add(new SajjadBlurOverlayPackage());
           packages.add(new BlurViewPackage());
+          // packages.add(new MapsPackage());
           return packages;
         }
 
