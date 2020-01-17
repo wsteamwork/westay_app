@@ -1,37 +1,18 @@
-import React, {
-  FC,
-  useRef,
-  createRef,
-  useEffect,
-  MutableRefObject,
-  Ref,
-  RefObject,
-  useContext,
-  useState,
-} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
-import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import { hp, wp, COLOR_BUTTON_DEFAULT } from 'utils/responsive';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import InputFormGlobal from 'components/Utils/InputFormGlobal';
-import * as Yup from 'yup';
+import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { Formik, FormikHelpers } from 'formik';
-import { axios } from 'utils/api';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import React, { FC, useContext, useRef, useState } from 'react';
+import { Keyboard, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 import Toast from 'react-native-easy-toast';
 import {AuthContext} from 'store/context/auth';
 import { Input } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { inputContainerStyleGlobal } from 'utils/mixins';
+import { NavigationInjectedProps } from 'react-navigation';
+import { axios } from 'utils/api';
+import { COLOR_BUTTON_DEFAULT, hp, wp } from 'utils/responsive';
+import * as Yup from 'yup';
+import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
 
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;

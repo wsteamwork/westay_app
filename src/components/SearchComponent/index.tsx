@@ -1,24 +1,24 @@
-import React, {FC, useState, useEffect} from 'react';
-import {StyleSheet, View, Text, ScrollView, Alert} from 'react-native';
+import React, {FC, useState, useEffect, Fragment} from 'react';
+import {StyleSheet, View, Text, ScrollView, StatusBar} from 'react-native';
 import SearchInput from './SearchInput';
 import {wp, hp} from 'utils/responsive';
 import {COLOR_TEXT_SUBTITLE, SIZE_TEXT_TITLE_MEDIUM, SIZE_TEXT_CONTENT, COLOR_TITLE_HEADER} from 'styles/global.style';
-import {elevationShadowStyle} from 'utils/mixins';
-import RoomCard from 'components/GlobalComponents/Cards/RoomCard';
 import Feather from 'react-native-vector-icons/Feather';
-import ListCategory from 'components/GlobalComponents/ListCategory';
-import ListPropertySearch from 'components/ListPropertySearch';
-import TransitionView from 'components/GlobalComponents/TransitionView';
-import CardWithSideText from 'components/GlobalComponents/CardWithSideText';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SearchSuggestData} from 'types/Search/SearchResponse';
 import {getSuggestion} from 'components/SearchComponent/SearchInputContext';
+import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
+import ModalChooseGuest from 'components/SearchComponent/ChooseGuest/ModalChooseGuest';
 
-interface IProps { };
+interface IProps {
+  showInfoGuestAndDates: boolean
+}
 
 const SearchComponent: FC<IProps> = (props) => {
+  const {showInfoGuestAndDates} = props;
   const [dataSearchSuggest, setDataSearchSuggest] = useState<Array<SearchSuggestData>>([]);
   const [input, setInput] = useState<string>('');
+  const [modalGuest, setModalGuest] = useState<boolean>(false);
+  const [modalDate, setModalDate] = useState<boolean>(false);
 
   useEffect(() => {
     getSuggestion('Ha Noi').then((res) => {
@@ -39,21 +39,7 @@ const SearchComponent: FC<IProps> = (props) => {
     setInput(dataSearchSuggest[0].name);
   };
 
-  const _renderItemSearchSuggest = (item: any) => {
-    return (
-      <TransitionView
-        index={dataSearchSuggest.indexOf(item)}
-      >
-        <CardWithSideText
-          hasImage={false}
-          icon={<Ionicons name={'ios-search'} size={18} />}
-          title={item.name}
-          onPress={() => Alert.alert(item.name)}
-          rounded
-        />
-      </TransitionView>
-    );
-  }
+
 
   return (
     <ScrollView stickyHeaderIndices={[0]}>
@@ -61,55 +47,21 @@ const SearchComponent: FC<IProps> = (props) => {
 
           <SearchInput value={input} _onChangeText={(value => _onChangeText(value))} _onKeyPress={()=>_onKeyPress()}/>
 
-          <View style={styles.boxInfo}>
-            <View style={styles.boxDate}>
-              <Text style={{color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT}}>Choose Date</Text>
-              <Text style={styles.txtDate}>12 Dec - 22 Dec</Text>
+        {showInfoGuestAndDates && (
+            <View style={styles.boxInfo}>
+              <TouchableWithScale style={styles.boxDate} _onPress={()=>setModalDate(!modalDate)}>
+                  <Text style={{color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT}}>Choose Date</Text>
+                  <Text style={styles.txtDate}>12 Dec - 22 Dec</Text>
+              </TouchableWithScale>
+              <View style={styles.lineVertical}/>
+              <TouchableWithScale style={styles.boxDate} _onPress={()=>setModalGuest(!modalGuest)}>
+                  <Text style={{color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT}}>Number of Rooms</Text>
+                  <Text style={styles.txtDate}>1 Room - 2 Adults</Text>
+              </TouchableWithScale>
             </View>
+        )}
 
-            <View style={styles.lineVertical}/>
-
-            <View style={styles.boxDate}>
-              <Text style={{color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT}}>Number of Rooms</Text>
-              <Text style={styles.txtDate}>1 Room - 2 Adults</Text>
-            </View>
-          </View>
-
-          <View>
-            <RoomCard />
-          </View>
-
-          <View style={styles.boxFilter}>
-            <Text>
-              299 rooms found
-            </Text>
-            <View style={{flexDirection:'row', alignItems:'center'}}>
-              <Text>Filter</Text>
-              <Feather
-                name={'filter'}
-                size={wp('3.5%')}
-                style={{marginLeft: wp('2%')}}
-                color={COLOR_TITLE_HEADER}
-              />
-            </View>
-          </View>
-
-        {
-          input && dataSearchSuggest ? (
-            <View>
-              <ListCategory
-                title={'Search suggestion'}
-                hasDivider
-                renderItem={_renderItemSearchSuggest}
-                data={dataSearchSuggest}
-              />
-            </View>
-          ) : (
-            <View>
-              <ListPropertySearch />
-            </View>
-          )
-        }
+        <ModalChooseGuest open={modalGuest} setClose={setModalGuest}/>
       </View>
     </ScrollView>
   );
@@ -120,7 +72,8 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems: 'center',
     paddingHorizontal: wp('5%'),
-    paddingVertical: wp('2%')
+    paddingVertical: wp('2%'),
+    marginTop: StatusBar.currentHeight
   },
   boxInfo:{
     flexDirection: 'row',
@@ -142,14 +95,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: SIZE_TEXT_TITLE_MEDIUM
   },
-  boxFilter:{
-    flexDirection:'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: wp('2%')
-  }
 });
 SearchComponent.defaultProps = {
-
-}
+  showInfoGuestAndDates: true
+};
 export default SearchComponent;

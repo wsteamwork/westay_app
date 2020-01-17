@@ -4,6 +4,7 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import thunkMiddleware from 'redux-thunk';
 import reducers from './redux/reducers';
+import rootReducer from './redux/reducers';
 
 const enhancers = [applyMiddleware(thunkMiddleware)];
 
@@ -23,6 +24,6 @@ const persistConfig = {
   blacklist: ['rooms', 'roomHome', 'cityDistrict', 'searchField'],
 };
 
-const persistedReducer = persistReducer(persistConfig, reducers);
-export const store = createStore(persistedReducer, {}, enhancer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+export const store: any = createStore(persistedReducer, {}, enhancer);
 export const persistor = persistStore(store);

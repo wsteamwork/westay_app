@@ -22,7 +22,7 @@ import {
 } from 'types/Search/searchTypes';
 
 
-export const setNumberGuest = (payload: any) => (dispatch: (arg0: { type: string; payload: any; }) => void) => {
+export const setNumberGuest = (payload: number) => (dispatch: (arg0: { type: string; payload: number; }) => void) => {
   dispatch({
     type: SET_NUMBER_GUEST,
     payload,
@@ -106,7 +106,7 @@ export const getCity = (payload: any) => (dispatch: (arg0: { type: string; paylo
   });
 };
 
-export const setNumberRoom = (payload: any) => (dispatch: (arg0: { type: string; payload: any; }) => any) =>
+export const setNumberRoom = (payload: number) => (dispatch: (arg0: { type: string; payload: number; }) => any) =>
   dispatch({ type: SET_NUMBER_ROOM, payload });
 
 export const setToggleChoosePeople = (payload: any) => (dispatch: (arg0: { type: string; payload: any; }) => any) =>

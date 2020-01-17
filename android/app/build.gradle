@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-// apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 import com.android.build.OutputFile
 
@@ -135,6 +135,9 @@ android {
         versionCode 1
         versionName "1.0"
         missingDimensionStrategy 'react-native-camera', 'general'
+        multiDexEnabled true
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
     }
     splits {
         abi {
@@ -184,6 +187,15 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':lottie-react-native')
+    implementation project(':react-native-maps')
+    implementation project(':react-native-vector-icons')
+    implementation "com.google.android.gms:play-services-base:16.1.0"
+    implementation(project(':react-native-maps')){
+            exclude group: 'com.google.android.gms', module: 'play-services-base'
+            exclude group: 'com.google.android.gms', module: 'play-services-maps'
+        }
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation project(':react-native-blur-overlay')
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
