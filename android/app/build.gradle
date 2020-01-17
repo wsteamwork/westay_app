@@ -136,7 +136,6 @@ android {
         versionName "1.0"
         missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
-        renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
     }
     splits {
@@ -195,7 +194,6 @@ dependencies {
             exclude group: 'com.google.android.gms', module: 'play-services-maps'
         }
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
-    implementation project(':react-native-blur-overlay')
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
