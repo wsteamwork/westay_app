@@ -42,13 +42,13 @@ const Home: FC<IProps> = (props) => {
     );
   };
 
-  const _renderValuableRoom = (item: TypeApartment, index: number) => {
-    return (
-      <View key={index}>
-        <ValuableCard item={item} />
-      </View>
-    );
-  };
+  // const _renderValuableRoom = (item: TypeApartment, index: number) => {
+  //   return (
+  //     <View key={index}>
+  //       <ValuableCard item={item} />
+  //     </View>
+  //   );
+  // };
 
   const dataDemo = [
     { id: 1, value: "Full House", image: 'https://m.westay.vn/static/images/property/house.jpg' },
@@ -81,9 +81,9 @@ const Home: FC<IProps> = (props) => {
         <ListCollectionsSquare title='Studio For Rent' typeData='studio_for_rent' />
       </View>
 
-      <View style={styles.mrTop}>
-        <ListDestinations data={dataDemo} title='Valuable Room' _renderItem={_renderValuableRoom} />
-      </View>
+      {/*<View style={styles.mrTop}>*/}
+      {/*  <ListDestinations data={dataDemo} title='Valuable Room' _renderItem={_renderValuableRoom} />*/}
+      {/*</View>*/}
       <View style={styles.boxEmpty} />
     </ScrollView>
   );

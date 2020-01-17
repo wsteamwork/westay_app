@@ -1,6 +1,23 @@
 import {Platform, Animated} from 'react-native';
 import {useState} from 'react';
 import {axios} from './api';
+import {SearchFilterState} from 'store/redux/reducers/search/searchField';
+import {CityType} from 'types/Cities/CityResponse';
+import qs from 'query-string';
+
+export const convertString = (query: object)  => {
+  return {
+    ...query,
+    include: 'media,prices,details,city,district',
+  };
+};
+
+export const updateObject = <T>(oldObject: T, newObject: Partial<T>): T => {
+  return {
+    ...oldObject,
+    ...newObject
+  };
+};
 
 export const cleanAccents = (str: string): string => {
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
@@ -65,6 +82,39 @@ export const animatedStyle = (animatedValue: any) => {
   return {
     transform: [{ scale: animatedValue }],
   };
+};
+
+export const formatMoney = (
+  amount: any,
+  decimalCount: number = 0,
+  decimal: string = '.',
+  thousands: string = ','
+): string | void => {
+  try {
+    decimalCount = Math.abs(decimalCount);
+    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+    const negativeSign = amount < 0 ? '-' : '';
+
+    let i: any = parseInt(
+      (amount = Math.abs(Number(amount) || 0).toFixed(decimalCount))
+    ).toString();
+    let j: number = i.length > 3 ? i.length % 3 : 0;
+
+    return (
+      negativeSign +
+      (j ? i.substr(0, j) + thousands : '') +
+      i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousands) +
+      (decimalCount
+        ? decimal +
+      Math.abs(amount - i)
+        .toFixed(decimalCount)
+        .slice(2)
+        : '')
+    );
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 export const useCheckbox = () => {
@@ -143,35 +193,68 @@ export const getDataFilter = async (languageStatus: string) => {
   ];
 };
 
-export const formatMoney = (
-  amount: any,
-  decimalCount: number = 0,
-  decimal: string = '.',
-  thousands: string = ','
-): string | void => {
-  try {
-    decimalCount = Math.abs(decimalCount);
-    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+export const getDataListRooms = async (
+  searchField:SearchFilterState,
+  currCity:CityType | null,
+  uri = '',
+  findAround:boolean,
+  languageStatus:string,
+) => {
+  let query:SearchFilterState = {
+    searchText: searchField.searchText,
+    number_guest: searchField.number_guest,
+    number_room: searchField.number_room,
+  };
 
-    const negativeSign = amount < 0 ? '-' : '';
-
-    let i: any = parseInt(
-      (amount = Math.abs(Number(amount) || 0).toFixed(decimalCount))
-    ).toString();
-    let j: number = i.length > 3 ? i.length % 3 : 0;
-
-    return (
-      negativeSign +
-      (j ? i.substr(0, j) + thousands : '') +
-      i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousands) +
-      (decimalCount
-        ? decimal +
-      Math.abs(amount - i)
-        .toFixed(decimalCount)
-        .slice(2)
-        : '')
-    );
-  } catch (e) {
-    console.error(e);
+  if (currCity && currCity.type === 1) {
+    query = { ...query, city_id: currCity.id };
   }
+
+  if (currCity && currCity.type === 2) {
+    query = { ...query, district_id: currCity.id };
+  }
+
+  if (searchField.check_in) {
+    query = { ...query, check_in: searchField.check_in };
+  }
+
+  if (searchField.check_out) {
+    query = { ...query, check_out: searchField.check_out };
+  }
+
+  if (searchField.amenities) {
+    query = { ...query, amenities: searchField.amenities };
+  }
+
+  if (searchField.room_type) {
+    query = { ...query, room_type: searchField.room_type };
+  }
+
+  if (searchField.rent_type) {
+    query = { ...query, rent_type: searchField.rent_type };
+  }
+
+  if (searchField.instant_book) {
+    query = { ...query, instant_book: searchField.instant_book };
+  }
+
+  if (searchField.price_day_from) {
+    query = { ...query, price_day_from: searchField.price_day_from };
+  }
+
+  if (searchField.price_day_to) {
+    query = { ...query, price_day_to: searchField.price_day_to };
+  }
+
+  let url = `rooms?${qs.stringify(convertString(query))}&${uri}`;
+
+  if (findAround) {
+    url = `rooms/room-lat-long?${qs.stringify(convertString(query))}&${uri}`;
+  }
+
+  return axios
+    .get(url, { headers: { 'Accept-Language': languageStatus } })
+    .then(res => res.data.data)
+    .catch(err => console.log(err));
 };
+

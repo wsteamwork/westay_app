@@ -3,11 +3,12 @@ import React, { FC } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
 import { Image, Rating } from 'react-native-elements';
 import { COLOR_TITLE_HEADER, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
-import { TypeApartment } from 'types/Rooms/RoomResponses';
+import {TypeApartment, RoomIndexRes} from 'types/Rooms/RoomResponses';
 import { hp, wp } from 'utils/responsive';
+import {IMAGE_STORAGE_XS} from 'types/globalTypes';
 
 interface IProps {
-  item: TypeApartment
+  item: RoomIndexRes
 }
 
 const ValuableCard: FC<IProps> = (props) => {
@@ -24,7 +25,7 @@ const ValuableCard: FC<IProps> = (props) => {
     >
       <Image
         borderRadius={8}
-        source={{ uri: item.image }}
+        source={{ uri: `${IMAGE_STORAGE_XS + item.avatar_image}` }}
         style={styles.image}
         resizeMode="cover"
         progressiveRenderingEnabled

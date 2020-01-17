@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import { StyleSheet, View } from 'react-native';
 import Filter from 'components/Filter';
+import MyMapView from 'modules/MapView';
 
 interface IProps {
   initialProps?: any;
@@ -11,7 +12,7 @@ const Trip: FC<IProps> = (props) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <Filter/>
+      <MyMapView/>
     </View>
   );
 };

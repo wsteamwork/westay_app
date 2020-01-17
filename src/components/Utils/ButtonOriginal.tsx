@@ -6,13 +6,14 @@ import { COLOR_LINEAR_DEFAULT } from './responsive.style';
 import { wp, hp } from 'utils/responsive';
 interface IProps {
   handlePress?: any;
-  width?: any;
+  width?: number | string;
+  height?: number | string;
   title?: string;
   loading?: boolean;
   customStyle?: any;
 }
 const ButtonOriginal: FC<IProps> = (props) => {
-  const { handlePress, width, title, loading, customStyle } = props;
+  const { handlePress, width, title, loading, customStyle, height } = props;
   return (
     <Button
       loading={loading}
@@ -24,7 +25,7 @@ const ButtonOriginal: FC<IProps> = (props) => {
         start: { x: 0.5, y: 1 },
         end: { x: 1, y: 1 },
       }}
-      buttonStyle={[styles.buttonStyle, { width }, customStyle]}
+      buttonStyle={[styles.buttonStyle, { width, height }, customStyle]}
       titleStyle={styles.titleStyle}
       {...props}
     />
@@ -35,13 +36,13 @@ ButtonOriginal.defaultProps = {
   title: '',
   width: wp('90%'),
   loading: false,
+  height: hp('6%'),
 };
 
 const styles = StyleSheet.create({
   buttonStyle: {
     borderRadius: 25,
     backgroundColor: 'transparent',
-    height: hp('7%'),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
