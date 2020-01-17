@@ -1,3 +1,4 @@
+import { hp } from './responsive';
 import {Platform, Animated} from 'react-native';
 import {useState} from 'react';
 import {axios} from './api';
@@ -174,4 +175,21 @@ export const formatMoney = (
   } catch (e) {
     console.error(e);
   }
+};
+
+export const inputContainerStyleGlobal =  {
+    height: hp('7%'),
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderRadius: 25,
+    paddingLeft: 16,
+    elevation: 10,
+    borderColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
 };

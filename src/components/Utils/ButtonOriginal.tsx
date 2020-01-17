@@ -10,9 +10,21 @@ interface IProps {
   title?: string;
   loading?: boolean;
   customStyle?: any;
+  icon?: any;
+  iconRight?: boolean;
+  useViewComponent?: boolean;
 }
 const ButtonOriginal: FC<IProps> = (props) => {
-  const { handlePress, width, title, loading, customStyle } = props;
+  const {
+    handlePress,
+    width,
+    title,
+    loading,
+    customStyle,
+    icon,
+    iconRight,
+    useViewComponent,
+  } = props;
   return (
     <Button
       loading={loading}
@@ -26,6 +38,8 @@ const ButtonOriginal: FC<IProps> = (props) => {
       }}
       buttonStyle={[styles.buttonStyle, { width }, customStyle]}
       titleStyle={styles.titleStyle}
+      iconRight={iconRight}
+      icon={icon}
       {...props}
     />
   );
@@ -54,6 +68,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     color: 'white',
     fontWeight: '500',
+    marginRight: 3,
   },
 });
 

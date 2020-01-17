@@ -19,7 +19,10 @@ import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { axios, TOKEN } from 'utils/api';
 import Toast from 'react-native-easy-toast';
 import storage from 'utils/storage';
-import {AuthContext} from 'store/context/auth';
+import { AuthContext } from 'store/context/auth';
+import { Input } from 'react-native-elements';
+import { inputContainerStyleGlobal } from 'utils/mixins';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
@@ -30,9 +33,9 @@ interface RegisterValues {
 }
 
 const Register: FC<IProps> = (props) => {
-  const emailRef = React.createRef();
-  let passwordRef = React.createRef();
-  const rePasswordRef = React.createRef();
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const rePasswordRef = useRef(null);
   const toastRef = useRef(null);
   const { navigation } = props;
   const { dispatch, state } = useContext(AuthContext);
@@ -102,52 +105,65 @@ const Register: FC<IProps> = (props) => {
       {({ handleChange, values, handleBlur, handleSubmit, errors }) => {
         return (
           <SafeAreaView style={styles.container}>
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
+            <KeyboardAwareScrollView
+              style={styles.scrollView}
+              enableOnAndroid
+              extraHeight={50}
+              showsVerticalScrollIndicator={false}>
               <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
                 {/* <Toast ref={toastRef} /> */}
                 <View style={styles.container} collapsable={false}>
                   <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
                   <Text style={styles.titleText}>Sign up</Text>
-                  <InputFormGlobal
+                  <Input
+                    ref={emailRef}
                     placeholder="Your Email"
                     keyboardType="email-address"
                     returnKeyType="next"
-                    autoFocus={true}
-                    ref={emailRef}
                     value={values.email}
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     errorMessage={errors.email}
-                    // onSubmitEditing={() => (passwordRef as any).current.focus()}
+                    onSubmitEditing={() => (passwordRef as any).current.focus()}
+                    autoCorrect={false}
+                    inputContainerStyle={styles.inputContainerStyle}
+                    containerStyle={styles.containerStyle}
+                    errorStyle={{ color: 'red' }}
                   />
-                  <InputFormGlobal
+                  <Input
+                    ref={passwordRef}
                     placeholder="Password"
                     keyboardType="default"
-                    secureTextEntry={true}
                     returnKeyType="next"
-                    ref={passwordRef}
+                    secureTextEntry={true}
                     value={values.password}
                     onChangeText={handleChange('password')}
                     onBlur={handleBlur('password')}
-                    // onSubmitEditing={() => (rePasswordRef as any).current.focus()}
                     errorMessage={errors.password}
+                    onSubmitEditing={() => (rePasswordRef as any).current.focus()}
+                    errorStyle={{ color: 'red' }}
+                    inputContainerStyle={styles.inputContainerStyle}
+                    containerStyle={styles.containerStyle}
                   />
-                  <InputFormGlobal
+                  <Input
+                    ref={rePasswordRef}
                     placeholder="Confirm Password"
                     keyboardType="default"
-                    onChangeText={handleChange('passwordConfirm')}
-                    secureTextEntry={true}
                     returnKeyType="done"
+                    secureTextEntry={true}
                     value={values.passwordConfirm}
-                    ref={rePasswordRef}
+                    onChangeText={handleChange('passwordConfirm')}
                     onBlur={handleBlur('passwordConfirm')}
                     errorMessage={errors.passwordConfirm}
+                    errorStyle={{ color: 'red' }}
+                    inputContainerStyle={styles.inputContainerStyle}
+                    containerStyle={styles.containerStyle}
                   />
-                  <ButtonOriginal title="Sign up" handlePress={handleSubmit} loading={loading} />
+                  <ButtonOriginal title="Sign up" customStyle={styles.signup} handlePress={handleSubmit} loading={loading} />
                   <View style={styles.policy}>
                     <Text style={styles.text}>By signing up, you agreed with our</Text>
                     <Text
-                      style={{ fontSize: wp('4%'), color: '#0BBCF2', textAlign: 'center' }}
+                      style={styles.termConditions}
                       onPress={() => navigation.navigate('TermsAndConditions')}>
                       Terms and Conditions
                       <Text style={styles.text}> for Westay.</Text>
@@ -163,7 +179,7 @@ const Register: FC<IProps> = (props) => {
                   </View>
                 </View>
               </TouchableWithoutFeedback>
-            </KeyboardAvoidingView>
+            </KeyboardAwareScrollView>
           </SafeAreaView>
         );
       }}
@@ -177,6 +193,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingHorizontal: wp('3%'),
+    width: wp('100%'),
+  },
+  scrollView: {
     width: wp('100%'),
   },
   titleText: {
@@ -195,8 +214,8 @@ const styles = StyleSheet.create({
     color: '#8A8A8F',
   },
   action: {
-    position: 'absolute',
-    bottom: 70,
+    position: 'relative',
+    bottom: 0,
   },
   textSwitch: {
     fontSize: wp('4%'),
@@ -206,12 +225,25 @@ const styles = StyleSheet.create({
   },
   policy: {
     marginTop: hp('4%'),
+    marginBottom: hp('7%'),
+  },
+  termConditions: {
+    fontSize: wp('4%'),
+    color: '#0BBCF2',
+    textAlign: 'center',
   },
   text: {
     fontSize: wp('4%'),
     width: wp('100%'),
     textAlign: 'center',
     color: '#8A8A8F',
+  },
+  signup: {
+    marginTop: hp('3%'),
+  },
+  inputContainerStyle: inputContainerStyleGlobal,
+  containerStyle: {
+    marginBottom: hp('3%'),
   },
 });
 Register.defaultProps = {};

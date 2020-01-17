@@ -10,6 +10,8 @@ import NavBottom from '../components/NavBottom';
 import Register from 'components/Auth/Register';
 import Login from 'components/Auth/Login';
 import ForgotPassword from 'components/Auth/ForgotPassword';
+import BoxImageLT from 'components/LTRoom/BoxDetailRoom/BoxImageLT';
+import BoxDetailRoom from 'components/LTRoom/BoxDetailRoom';
 
 const TabBarComponent = (props: any) => <View style={{
   justifyContent: 'center',
@@ -22,7 +24,9 @@ const AppView = createBottomTabNavigator(
     Search: {
       // screen: Profile
       // screen: Register
-      screen: Login
+      // screen: BoxImageLT
+      screen: BoxDetailRoom
+      // screen: Login
       // screen: ForgotPassword
     },
     Home: {
@@ -40,9 +44,9 @@ const AppView = createBottomTabNavigator(
 
     },
     backBehavior: "history",
-    tabBarComponent: () => (
-      <TabBarComponent />
-    ),
+    // tabBarComponent: () => (
+    //   <TabBarComponent />
+    // ),
     tabBarOptions: {
       keyboardHidesTabBar: true,
     }

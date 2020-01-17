@@ -29,6 +29,9 @@ import { axios } from 'utils/api';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import Toast from 'react-native-easy-toast';
 import {AuthContext} from 'store/context/auth';
+import { Input } from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { inputContainerStyleGlobal } from 'utils/mixins';
 
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
@@ -86,9 +89,13 @@ const ForgotPassword: FC<IProps> = (props) => {
       {({ handleChange, values, handleBlur, handleSubmit, errors }) => {
         return (
           <SafeAreaView style={styles.container}>
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
-              {/* <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}> */}
-                <Toast ref={toastRef} />
+            <KeyboardAwareScrollView
+              style={styles.scrollView}
+              enableOnAndroid
+              extraHeight={50}
+              showsVerticalScrollIndicator={false}>
+              <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
+                {/* <Toast ref={toastRef} /> */}
                 <View style={styles.container} collapsable={false}>
                   <HeaderWithBackTitle />
                   <Text style={styles.titleText}>Forgot Password</Text>
@@ -96,21 +103,24 @@ const ForgotPassword: FC<IProps> = (props) => {
                     Enter the email address registered with your account and we will send you a
                     password change link.
                   </Text>
-                  <InputFormGlobal
+                  <Input
+                    ref={emailRef}
                     placeholder="Your Email"
                     keyboardType="email-address"
                     returnKeyType="done"
-                    autoFocus={true}
-                    ref={emailRef}
                     value={values.email}
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     errorMessage={errors.email}
+                    autoCorrect={false}
+                    inputContainerStyle={styles.inputContainerStyle}
+                    containerStyle={styles.containerStyle}
+                    errorStyle={{ color: 'red' }}
                   />
-                  <ButtonOriginal title="Send" handlePress={handleSubmit} loading={loading} />
+                  <ButtonOriginal title="Send" handlePress={handleSubmit} loading={loading} customStyle={styles.send}/>
                 </View>
-              {/* </TouchableWithoutFeedback> */}
-            </KeyboardAvoidingView>
+              </TouchableWithoutFeedback>
+              </KeyboardAwareScrollView>
           </SafeAreaView>
         );
       }}
@@ -124,6 +134,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingHorizontal: wp('3%'),
+    width: wp('100%'),
+  },
+  scrollView: {
     width: wp('100%'),
   },
   titleText: {
@@ -149,6 +162,13 @@ const styles = StyleSheet.create({
     color: COLOR_BUTTON_DEFAULT,
     paddingLeft: wp('14%'),
     fontWeight: 'bold',
+  },
+  send: {
+    marginTop: hp('3%'),
+  },
+  inputContainerStyle: inputContainerStyleGlobal,
+  containerStyle: {
+    marginBottom: hp('3%'),
   },
 });
 ForgotPassword.defaultProps = {};

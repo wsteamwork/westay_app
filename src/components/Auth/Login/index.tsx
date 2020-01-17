@@ -28,7 +28,10 @@ import { Formik, FormikHelpers } from 'formik';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { axios, TOKEN } from 'utils/api';
 import storage from 'utils/storage';
-import {AuthContext} from 'store/context/auth';
+import { AuthContext } from 'store/context/auth';
+import { Input } from 'react-native-elements';
+import { inputContainerStyleGlobal } from 'utils/mixins';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
@@ -38,8 +41,8 @@ interface LoginValues {
 }
 
 const Login: FC<IProps> = (props) => {
-  const emailRef = React.createRef();
-  let passwordRef = React.createRef();
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const { dispatch, state } = useContext(AuthContext);
   const { navigation } = props;
@@ -90,34 +93,43 @@ const Login: FC<IProps> = (props) => {
       {({ handleChange, values, handleBlur, handleSubmit, errors }) => {
         return (
           <SafeAreaView style={styles.container}>
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
+            <KeyboardAwareScrollView
+              style={styles.scrollView}
+              enableOnAndroid
+              extraHeight={50}
+              showsVerticalScrollIndicator={false}>
               <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
                 <View style={styles.container} collapsable={false}>
                   <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
                   <Text style={styles.titleText}>Log in</Text>
-                  <InputFormGlobal
+                  <Input
+                    ref={emailRef}
                     placeholder="Your Email"
                     keyboardType="email-address"
                     returnKeyType="next"
-                    autoFocus={true}
-                    ref={emailRef}
                     value={values.email}
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     errorMessage={errors.email}
-                    // onSubmitEditing={() => (passwordRef as any).current.focus()}
+                    onSubmitEditing={() => (passwordRef as any).current.focus()}
+                    autoCorrect={false}
+                    inputContainerStyle={styles.inputContainerStyle}
+                    containerStyle={styles.containerStyle}
+                    errorStyle={{ color: 'red' }}
                   />
-                  <InputFormGlobal
+                  <Input
+                    ref={passwordRef}
                     placeholder="Password"
                     keyboardType="default"
-                    secureTextEntry={true}
                     returnKeyType="done"
-                    ref={passwordRef}
+                    secureTextEntry={true}
                     value={values.password}
                     onChangeText={handleChange('password')}
                     onBlur={handleBlur('password')}
-                    // onSubmitEditing={() => (rePasswordRef as any).current.focus()}
                     errorMessage={errors.password}
+                    errorStyle={{ color: 'red' }}
+                    inputContainerStyle={styles.inputContainerStyle}
+                    containerStyle={styles.containerStyle}
                   />
                   <View style={styles.forgotPassword}>
                     <Text
@@ -137,7 +149,7 @@ const Login: FC<IProps> = (props) => {
                   </View>
                 </View>
               </TouchableWithoutFeedback>
-            </KeyboardAvoidingView>
+            </KeyboardAwareScrollView>
           </SafeAreaView>
         );
       }}
@@ -151,6 +163,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingHorizontal: wp('3%'),
+    width: wp('100%'),
+  },
+  scrollView: {
     width: wp('100%'),
   },
   titleText: {
@@ -169,8 +184,8 @@ const styles = StyleSheet.create({
     color: '#8A8A8F',
   },
   action: {
-    position: 'absolute',
-    bottom: 100,
+    position: 'relative',
+    bottom: 0,
   },
   textSwitch: {
     fontSize: wp('4%'),
@@ -181,6 +196,10 @@ const styles = StyleSheet.create({
   forgotPassword: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: hp('3%'),
+  },
+  inputContainerStyle: inputContainerStyleGlobal,
+  containerStyle: {
     marginBottom: hp('3%'),
   },
 });
