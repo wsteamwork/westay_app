@@ -12,45 +12,61 @@ import Login from 'components/Auth/Login';
 import ForgotPassword from 'components/Auth/ForgotPassword';
 import BoxImageLT from 'components/LTRoom/BoxDetailRoom/BoxImageLT';
 import BoxDetailRoom from 'components/LTRoom/BoxDetailRoom';
+import { createStackNavigator } from 'react-navigation-stack';
+import RootNavigation from 'navigation/RootNavigation';
 
-const TabBarComponent = (props: any) => <View style={{
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: 0
-}}><NavBottom /></View>;
+const TabBarComponent = (props: any) => (
+  <View
+    style={{
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 0,
+    }}>
+    <NavBottom />
+  </View>
+);
+
+const TestStack = createStackNavigator(
+  {
+    Register: {
+      screen: Register
+    },
+    Login: {
+      screen: Login
+    }
+  }
+)
 
 const AppView = createBottomTabNavigator(
   {
     Search: {
       // screen: Profile
-      // screen: Register
+      screen: RootNavigation,
       // screen: BoxImageLT
-      screen: BoxDetailRoom
-      // screen: Login
+      // screen: BoxDetailRoom
+      // screen: Register
       // screen: ForgotPassword
     },
     Home: {
-      screen: Home
+      screen: Home,
     },
     Trip: {
-      screen: Trip
+      screen: Trip,
     },
     Profile: {
-      screen: Search
+      screen: Search,
     },
   },
   {
-    defaultNavigationOptions: {
-
-    },
-    backBehavior: "history",
+    defaultNavigationOptions: {},
+    backBehavior: 'history',
     // tabBarComponent: () => (
     //   <TabBarComponent />
     // ),
     tabBarOptions: {
       keyboardHidesTabBar: true,
-    }
-  }
+    },
+  },
 );
 
 export default createAppContainer(AppView);

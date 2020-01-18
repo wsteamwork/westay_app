@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, TouchableNativeFeedback } from 'react-native';
 import { Button } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { COLOR_LINEAR_DEFAULT } from './responsive.style';
 import { wp, hp } from 'utils/responsive';
+import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
 interface IProps {
   handlePress?: any;
   width?: number | string;
@@ -25,25 +26,25 @@ const ButtonOriginal: FC<IProps> = (props) => {
     icon,
     iconRight,
     useViewComponent,
-    height
+    height,
   } = props;
   return (
-    <Button
-      loading={loading}
-      onPress={handlePress}
-      title={title}
-      ViewComponent={LinearGradient}
-      linearGradientProps={{
-        colors: COLOR_LINEAR_DEFAULT,
-        start: { x: 0.5, y: 1 },
-        end: { x: 1, y: 1 },
-      }}
-      buttonStyle={[styles.buttonStyle, { width, height }, customStyle]}
-      titleStyle={styles.titleStyle}
-      iconRight={iconRight}
-      icon={icon}
-      {...props}
-    />
+      <Button
+        loading={loading}
+        onPress={handlePress}
+        title={title}
+        ViewComponent={LinearGradient}
+        linearGradientProps={{
+          colors: COLOR_LINEAR_DEFAULT,
+          start: { x: 0.5, y: 1 },
+          end: { x: 1, y: 1 },
+        }}
+        buttonStyle={[styles.buttonStyle, { width, height }, customStyle]}
+        titleStyle={styles.titleStyle}
+        iconRight={iconRight}
+        icon={icon}
+        {...props}
+      />
   );
 };
 

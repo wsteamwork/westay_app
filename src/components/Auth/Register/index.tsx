@@ -4,7 +4,6 @@ import {
   View,
   Text,
   SafeAreaView,
-  KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
@@ -12,7 +11,6 @@ import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { hp, wp, COLOR_BUTTON_DEFAULT } from 'utils/responsive';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import InputFormGlobal from 'components/Utils/InputFormGlobal';
 import * as Yup from 'yup';
 import { Formik, FormikHelpers } from 'formik';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
@@ -38,6 +36,7 @@ const Register: FC<IProps> = (props) => {
   const rePasswordRef = useRef(null);
   const toastRef = useRef(null);
   const { navigation } = props;
+  console.log(navigation);
   const { dispatch, state } = useContext(AuthContext);
   const { languageStatus } = state;
   const [loading, setLoading] = useState(false);
@@ -225,7 +224,7 @@ const styles = StyleSheet.create({
   },
   policy: {
     marginTop: hp('4%'),
-    marginBottom: hp('7%'),
+    marginBottom: hp('5%'),
   },
   termConditions: {
     fontSize: wp('4%'),

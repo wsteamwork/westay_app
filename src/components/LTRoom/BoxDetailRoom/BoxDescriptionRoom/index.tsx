@@ -20,22 +20,6 @@ const BoxDescriptionRoom: FC<IProps> = (props) => {
         thuận tiện cho giải trí mua sắm,siêu thị BigC, rạp chiếu phim CGV, các nhà hàng ăn uống. Có
         hầm gửi xe.
       </Text>
-      <Text style={styles.txtDescription}>
-        Artemis Luxury Apartment - Căn hộ chung cư cao cấp tại số 3 Lê Trọng Tấn, quận Thanh
-        Xuân.Căn hộ cao cấp Artemis - tọa lạc tại vị trí được ví như "trái tim của thủ đô" giao thoa
-        giữa 2 quận Đống Đa, Thanh Xuân.Artemis là một khu phức hợp với đầy đủ những tiện ích khép
-        kín, hứa hẹn mang tới cho cư dân cuộc sống hoàn hảo thực sự đẳng cấp Có trung tâm thương mại
-        thuận tiện cho giải trí mua sắm,siêu thị BigC, rạp chiếu phim CGV, các nhà hàng ăn uống. Có
-        hầm gửi xe.
-      </Text>
-      <Text style={styles.txtDescription}>
-        Artemis Luxury Apartment - Căn hộ chung cư cao cấp tại số 3 Lê Trọng Tấn, quận Thanh
-        Xuân.Căn hộ cao cấp Artemis - tọa lạc tại vị trí được ví như "trái tim của thủ đô" giao thoa
-        giữa 2 quận Đống Đa, Thanh Xuân.Artemis là một khu phức hợp với đầy đủ những tiện ích khép
-        kín, hứa hẹn mang tới cho cư dân cuộc sống hoàn hảo thực sự đẳng cấp Có trung tâm thương mại
-        thuận tiện cho giải trí mua sắm,siêu thị BigC, rạp chiếu phim CGV, các nhà hàng ăn uống. Có
-        hầm gửi xe.
-      </Text>
     </View>
   );
 };

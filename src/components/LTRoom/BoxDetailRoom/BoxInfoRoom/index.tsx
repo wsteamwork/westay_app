@@ -11,7 +11,6 @@ interface IProps {
 const BoxInfoRoom: FC<IProps> = (props) => {
   return (
     <View style={styles.container}>
-      {/* <Text>NHÀ RIÊNG</Text> */}
       <Text style={styles.roomName}>Indochina Color Room near Ben Thanh Market *BT402</Text>
       <Text style={styles.roomNo}>Mã chỗ ở: 3762</Text>
       <Text style={styles.boxLocation}>

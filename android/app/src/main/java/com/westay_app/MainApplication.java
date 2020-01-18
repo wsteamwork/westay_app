@@ -9,10 +9,11 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import com.airbnb.android.react.lottie.LottiePackage;
-import com.bluroverly.SajjadBlurOverlayPackage;
 import com.cmcewen.blurview.BlurViewPackage;
-// import com.airbnb.android.react.maps.MapsPackage;
+import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.ReactRootView;
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+// import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -29,10 +30,10 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-          packages.add(new LottiePackage());
-          packages.add(new SajjadBlurOverlayPackage());
-          packages.add(new BlurViewPackage());
-          // packages.add(new MapsPackage());
+          // packages.add(new LottiePackage());
+          // packages.add(new SajjadBlurOverlayPackage());
+          // packages.add(new BlurViewPackage());
+          // packages.add(new SafeAreaContextPackage());
           return packages;
         }
 

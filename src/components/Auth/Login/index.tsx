@@ -14,7 +14,6 @@ import {
   View,
   Text,
   SafeAreaView,
-  KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
@@ -22,7 +21,6 @@ import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { hp, wp, COLOR_BUTTON_DEFAULT } from 'utils/responsive';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import InputFormGlobal from 'components/Utils/InputFormGlobal';
 import * as Yup from 'yup';
 import { Formik, FormikHelpers } from 'formik';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
@@ -46,6 +44,7 @@ const Login: FC<IProps> = (props) => {
   const [loading, setLoading] = useState(false);
   const { dispatch, state } = useContext(AuthContext);
   const { navigation } = props;
+  console.log(navigation);
   const FormValidationSchema = Yup.object().shape({
     email: Yup.string()
       .required('Vui lòng nhập email')
@@ -204,4 +203,4 @@ const styles = StyleSheet.create({
   },
 });
 Login.defaultProps = {};
-export default Login;
+export default withNavigation(Login);

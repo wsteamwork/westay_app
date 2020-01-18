@@ -8,8 +8,8 @@ import PrivacyPolicy from 'components/Auth/Rules/PrivacyPolicy';
 import TermsAndConditions from 'components/Auth/Rules/TermsAndConditions';
 
 const stackNavigator = createStackNavigator({
-  Login: { screen: Login },
   Register: { screen: Register },
+  Login: { screen: Login },
   ForgetPassword: { screen: ForgotPassword },
   TermsAndConditions: { screen: TermsAndConditions },
   PrivacyPolicy: { screen: PrivacyPolicy },
