@@ -25,18 +25,19 @@ import {wp, hp} from 'utils/responsive';
 import {elevationShadowStyle} from 'utils/mixins';
 // @ts-ignore
 import {compose} from 'recompose';
+import {RoomIndexRes} from 'types/Rooms/RoomResponses';
 
 const checkISO = Platform.OS === 'ios';
 
 interface IProps extends  NavigationInjectedProps{
   customStyle?: ViewStyle,
-  item?:any,
+  room?: RoomIndexRes,
   imageStyle?: ImageStyle
 }
 
 const RoomCard: FC<IProps> = (props) => {
   const { t } = useTranslation();
-  const { item, customStyle, imageStyle, navigation } = props;
+  const { room, customStyle, imageStyle, navigation } = props;
   // const { stateSaved } = useContext(SavedContext);
   // const { wishList } = stateSaved;
 
@@ -72,7 +73,7 @@ const RoomCard: FC<IProps> = (props) => {
             PlaceholderContent={<ActivityIndicator />}
           />
         ),
-        [item],
+        [room],
       )}
 
       {useMemo(
@@ -85,7 +86,7 @@ const RoomCard: FC<IProps> = (props) => {
                                 </View>
                               </View>
                             ),
-        [item],
+        [room],
       )}
 
       {useMemo(
@@ -133,7 +134,7 @@ const RoomCard: FC<IProps> = (props) => {
 
           </View>
         ),
-        [item],
+        [room],
       )}
     </TouchableOpacity>
   );

@@ -1,11 +1,11 @@
-import { TransformerInclude } from 'types/ResponseTemplate';
-import { DistrictRes } from 'types/Districts/DistrictResponse';
-import { CityRes } from 'types/Cities/CityResponse';
-import { Merchant } from './../../Rooms/RoomResponses';
-import { AmenitiesIndexRes } from '../Amenities/AmenitiesResponses';
-import { IPriceShortTerm } from '../CreateListing/Step3/PriceTerm';
-import { typeService } from '../CreateListing/Step3/ServicesFee';
-import { ImagesRes } from '../Images/ImageResponses';
+import {ImagesRes} from 'types/LTR/Images/ImageResponses';
+import {AmenitiesIndexRes} from 'types/LTR/Amenities/AmenitiesResponses';
+import {TransformerInclude} from 'types/ResponseTemplate';
+import {CityRes} from 'types/Cities/CityResponse';
+import {DistrictRes} from 'types/Districts/DistrictResponse';
+import {Merchant} from 'types/Rooms/RoomResponses';
+import {typeService} from 'types/LTR/ServicesFee/ServicesFee';
+import {IPriceShortTerm} from 'types/LTR/PriceTerm/PriceTerm';
 
 export interface LTRoomIndexRes {
   id: number;

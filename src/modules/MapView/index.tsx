@@ -130,7 +130,7 @@ const MyMapView: FC<IProps> = (props) => {
   const handleChangeSwiper = (index:number) => {
     setIsIndex(index);
 
-    data.forEach((item:RoomIndexRes, i:number) => {
+    data.forEach((item:any, i:number) => {
       if (index === i) {
         mapRef.current.animateToRegion(
           {

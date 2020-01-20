@@ -52,21 +52,6 @@ const SuggestCityDistrict: FC<IProps> = (props) => {
           </View>
         )
       }
-
-      <View style={styles.boxFilter}>
-        <Text>
-          299 rooms found
-        </Text>
-        <View style={{flexDirection:'row', alignItems:'center'}}>
-          <Text>Filter</Text>
-          <Feather
-            name={'filter'}
-            size={wp('3.5%')}
-            style={{marginLeft: wp('2%')}}
-            color={COLOR_TITLE_HEADER}
-          />
-        </View>
-      </View>
     </View>
   );
 };
@@ -77,12 +62,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  boxFilter:{
-    flexDirection:'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: wp('2%')
-  }
 });
 
 export default SuggestCityDistrict;

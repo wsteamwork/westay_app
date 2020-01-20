@@ -1,10 +1,11 @@
 // import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
-import React, { FC, Fragment, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { StyleSheet, Text, View } from 'react-native';
-import { COLOR_INFO, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
-import { hp, stylesGlobal, wp } from 'utils/responsive';
+import React, {FC, Fragment, useState, useEffect} from 'react';
+import {useTranslation} from 'react-i18next';
+import {StyleSheet, Text, View} from 'react-native';
+import {COLOR_INFO, SIZE_TEXT_SUBTITLE} from 'styles/global.style';
+import {hp, stylesGlobal, wp} from 'utils/responsive';
 import CollectionsSquareCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsSquareCard';
+import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
 
 interface IProps {
   typeData: string,
@@ -16,16 +17,9 @@ const ListCollectionsSquare: FC<IProps> = (props) => {
   const [dataRooms, setDataRooms] = useState<any[]>([]);
   const { t } = useTranslation();
 
-  const fakeData = [
-    { id: 1, value: "Full House", image: 'https://m.westay.vn/static/images/property/house.jpg' },
-    { id: 2, value: "Apartment", image: "https://m.westay.vn/static/images/property/apartment.jpg" },
-    { id: 3, value: "Villa", image: "https://m.westay.vn/static/images/property/villa.jpg" },
-    { id: 4, value: "Private Room", image: "https://m.westay.vn/static/images/property/room.jpg" }
-  ];
-
-  // useEffect(() => {
-  //   getHomePageCollection(typeData, 4).then((res) => setDataRooms(res));
-  // }, []);
+  useEffect(() => {
+    getHomePageCollection(typeData, 4).then((res) => setDataRooms(res));
+  }, []);
 
   return (
     <View>
@@ -35,9 +29,9 @@ const ListCollectionsSquare: FC<IProps> = (props) => {
 
       {/*{dataRooms.length ? (*/}
       <View style={styles.container}>
-        {fakeData.map((room, i) => (
+        {dataRooms.map((room, i) => (
           <Fragment key={i} >
-            <CollectionsSquareCard item={room} />
+            <CollectionsSquareCard room={room} />
           </Fragment>
         ))}
       </View>

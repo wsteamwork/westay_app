@@ -4,7 +4,7 @@ import { COLOR_TEXT_DEFAULT, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style'
 
 export const wp = (width: any) => Math.round(widthPercentageToDP(width));
 
-export const hp = (hight: any) => Math.round(heightPercentageToDP(hight));
+export const hp = (height: any) => Math.round(heightPercentageToDP(height));
 
 export const COLOR_BUTTON_DEFAULT = '#41C9BC';
 
@@ -31,8 +31,7 @@ export const stylesGlobal = StyleSheet.create({
     // fontSize: wp('6%'),
     fontSize: SIZE_TEXT_TITLE_MEDIUM,
     fontWeight: '600',
-    color: COLOR_TEXT_DEFAULT,
-    // backgroundColor: 'red',
+    color: COLOR_TEXT_DEFAULT
   },
   dividerGrey: {
     backgroundColor: '#F0F0F0',

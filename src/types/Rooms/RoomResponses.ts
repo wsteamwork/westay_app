@@ -69,7 +69,6 @@ export interface RoomIndexRes {
   prices: TransformerInclude<PriceSpecialDays[]>;
   room_name: string;
   avatar_image: string;
-  coordinate: Coordinate
 }
 
 export interface RoomDetails {

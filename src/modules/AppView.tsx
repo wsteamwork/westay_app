@@ -24,8 +24,8 @@ const TabBarComponent = (props: any) => (
 const AppView = createBottomTabNavigator(
   {
     Search: {
-      screen: RoomNavigation,
-      // screen: RootNavigation,
+      // screen: RoomNavigation,
+      screen: RootNavigation,
       // screen: BoxImageLT
     },
     Home: {
