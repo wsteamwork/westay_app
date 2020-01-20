@@ -2,12 +2,15 @@ import React, { FC } from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { wp, hp } from 'utils/responsive';
 import { Text, Image, Avatar } from 'react-native-elements';
+import { useSelector } from 'react-redux';
+import { ReducersList } from 'store/redux/reducers';
 
 interface IProps {
   initialProps?: any;
 }
 
 const BoxInfoHost: FC<IProps> = (props) => {
+  const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'space-between' }}>
@@ -17,12 +20,14 @@ const BoxInfoHost: FC<IProps> = (props) => {
             justifyContent: 'space-evenly',
             alignItems: 'flex-start',
           }}>
-          <Text style={styles.txtNameUser}>Chủ nhà</Text>
-          <Text style={styles.txtNameHost}>Phạm Đức Nhất</Text>
+          <Text style={styles.txtNameUser}>Host</Text>
+          <Text style={styles.txtNameHost}>{listing.merchant.data.name}</Text>
         </View>
         <Avatar
           rounded
-          source={require('../../../../static/images/property/avatar.jpg')}
+          source={{
+            uri: listing.merchant.data.avatar_url,
+          }}
           size="medium"
         />
       </View>
@@ -39,7 +44,8 @@ const styles = StyleSheet.create({
   },
   txtNameHost: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '700',
+    color: '#484848',
   },
 });
 BoxInfoHost.defaultProps = {};

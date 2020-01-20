@@ -1,12 +1,5 @@
 import React, { FC, useContext, useState, useRef } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, Keyboard } from 'react-native';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { hp, wp, COLOR_BUTTON_DEFAULT } from 'utils/responsive';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
@@ -15,7 +8,7 @@ import * as Yup from 'yup';
 import { Formik, FormikHelpers } from 'formik';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { axios, TOKEN } from 'utils/api';
-import Toast from 'react-native-easy-toast';
+import Toast from 'react-native-root-toast';
 import storage from 'utils/storage';
 import { AuthContext } from 'store/context/auth';
 import { Input } from 'react-native-elements';
@@ -31,12 +24,10 @@ interface RegisterValues {
 }
 
 const Register: FC<IProps> = (props) => {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const rePasswordRef = useRef(null);
-  const toastRef = useRef(null);
+  const emailRef = useRef<any>(null);
+  const passwordRef = useRef<any>(null);
+  const rePasswordRef = useRef<any>(null);
   const { navigation } = props;
-  console.log(navigation);
   const { dispatch, state } = useContext(AuthContext);
   const { languageStatus } = state;
   const [loading, setLoading] = useState(false);
@@ -81,13 +72,28 @@ const Register: FC<IProps> = (props) => {
           data: data.access_token,
           expires: data.expires_in,
         });
+        Toast.show('Đăng ký thành công !', {
+          duration: Toast.durations.LONG,
+          position: -60,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          delay: 0,
+        });
         dispatch({ type: 'SET_TOKEN', payload: `Bearer ${data.access_token}` });
-        navigation.navigate('Login');
+        navigation.navigate('Home');
       })
       .catch((err) => {
         setLoading(false);
         if (err.response.data.data.errors.email) {
-          // toastRef.current.show(err.response.data.data.errors.email[0], 1500);
+          Toast.show(err.response.data.data.errors.email[0], {
+            duration: Toast.durations.LONG,
+            position: -60,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 0,
+          });
         }
       });
   };
@@ -109,75 +115,77 @@ const Register: FC<IProps> = (props) => {
               enableOnAndroid
               extraHeight={50}
               showsVerticalScrollIndicator={false}>
-              <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
-                {/* <Toast ref={toastRef} /> */}
-                <View style={styles.container} collapsable={false}>
-                  <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-                  <Text style={styles.titleText}>Sign up</Text>
-                  <Input
-                    ref={emailRef}
-                    placeholder="Your Email"
-                    keyboardType="email-address"
-                    returnKeyType="next"
-                    value={values.email}
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    errorMessage={errors.email}
-                    onSubmitEditing={() => (passwordRef as any).current.focus()}
-                    autoCorrect={false}
-                    inputContainerStyle={styles.inputContainerStyle}
-                    containerStyle={styles.containerStyle}
-                    errorStyle={{ color: 'red' }}
-                  />
-                  <Input
-                    ref={passwordRef}
-                    placeholder="Password"
-                    keyboardType="default"
-                    returnKeyType="next"
-                    secureTextEntry={true}
-                    value={values.password}
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    errorMessage={errors.password}
-                    onSubmitEditing={() => (rePasswordRef as any).current.focus()}
-                    errorStyle={{ color: 'red' }}
-                    inputContainerStyle={styles.inputContainerStyle}
-                    containerStyle={styles.containerStyle}
-                  />
-                  <Input
-                    ref={rePasswordRef}
-                    placeholder="Confirm Password"
-                    keyboardType="default"
-                    returnKeyType="done"
-                    secureTextEntry={true}
-                    value={values.passwordConfirm}
-                    onChangeText={handleChange('passwordConfirm')}
-                    onBlur={handleBlur('passwordConfirm')}
-                    errorMessage={errors.passwordConfirm}
-                    errorStyle={{ color: 'red' }}
-                    inputContainerStyle={styles.inputContainerStyle}
-                    containerStyle={styles.containerStyle}
-                  />
-                  <ButtonOriginal title="Sign up" customStyle={styles.signup} handlePress={handleSubmit} loading={loading} />
-                  <View style={styles.policy}>
-                    <Text style={styles.text}>By signing up, you agreed with our</Text>
-                    <Text
-                      style={styles.termConditions}
-                      onPress={() => navigation.navigate('TermsAndConditions')}>
-                      Terms and Conditions
-                      <Text style={styles.text}> for Westay.</Text>
-                    </Text>
-                  </View>
-                  <View style={styles.action}>
-                    <Text style={styles.titleSubText}>
-                      <Text>Already have account? </Text>
-                      <Text onPress={() => navigation.navigate('Login')} style={styles.textSwitch}>
-                        Log in
-                      </Text>{' '}
-                    </Text>
-                  </View>
+              <View style={styles.container} collapsable={false}>
+                <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
+                <Text style={styles.titleText}>Sign up</Text>
+                <Input
+                  ref={emailRef}
+                  placeholder="Your Email"
+                  keyboardType="email-address"
+                  returnKeyType="next"
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  errorMessage={errors.email}
+                  onSubmitEditing={() => passwordRef.current.focus()}
+                  autoCorrect={false}
+                  inputContainerStyle={styles.inputContainerStyle}
+                  containerStyle={styles.containerStyle}
+                  errorStyle={{ color: 'red' }}
+                />
+                <Input
+                  ref={passwordRef}
+                  placeholder="Password"
+                  keyboardType="default"
+                  returnKeyType="next"
+                  secureTextEntry={true}
+                  value={values.password}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  errorMessage={errors.password}
+                  onSubmitEditing={() => rePasswordRef.current.focus()}
+                  errorStyle={{ color: 'red' }}
+                  inputContainerStyle={styles.inputContainerStyle}
+                  containerStyle={styles.containerStyle}
+                />
+                <Input
+                  ref={rePasswordRef}
+                  placeholder="Confirm Password"
+                  keyboardType="default"
+                  returnKeyType="done"
+                  secureTextEntry={true}
+                  value={values.passwordConfirm}
+                  onChangeText={handleChange('passwordConfirm')}
+                  onBlur={handleBlur('passwordConfirm')}
+                  errorMessage={errors.passwordConfirm}
+                  errorStyle={{ color: 'red' }}
+                  inputContainerStyle={styles.inputContainerStyle}
+                  containerStyle={styles.containerStyle}
+                />
+                <ButtonOriginal
+                  title="Sign up"
+                  customStyle={styles.signup}
+                  handlePress={handleSubmit}
+                  loading={loading}
+                />
+                <View style={styles.policy}>
+                  <Text style={styles.text}>By signing up, you agreed with our</Text>
+                  <Text
+                    style={styles.termConditions}
+                    onPress={() => navigation.navigate('TermsAndConditions')}>
+                    Terms and Conditions
+                    <Text style={styles.text}> for Westay.</Text>
+                  </Text>
                 </View>
-              </TouchableWithoutFeedback>
+                <View style={styles.action}>
+                  <Text style={styles.titleSubText} onPress={() => navigation.navigate('Login')}>
+                    <Text>Already have account? </Text>
+                    <Text style={styles.textSwitch} >
+                      Log in
+                    </Text>{' '}
+                  </Text>
+                </View>
+              </View>
             </KeyboardAwareScrollView>
           </SafeAreaView>
         );

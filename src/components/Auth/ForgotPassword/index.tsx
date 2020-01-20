@@ -2,17 +2,17 @@ import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBac
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { Formik, FormikHelpers } from 'formik';
 import React, { FC, useContext, useRef, useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
-import Toast from 'react-native-easy-toast';
-import {AuthContext} from 'store/context/auth';
+import { Keyboard, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { AuthContext } from 'store/context/auth';
 import { Input } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { inputContainerStyleGlobal } from 'utils/mixins';
-import { NavigationInjectedProps } from 'react-navigation';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { axios } from 'utils/api';
 import { COLOR_BUTTON_DEFAULT, hp, wp } from 'utils/responsive';
 import * as Yup from 'yup';
-import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
+import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import Toast from 'react-native-root-toast';
 
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
@@ -23,7 +23,6 @@ interface LoginValues {
 
 const ForgotPassword: FC<IProps> = (props) => {
   const emailRef = useRef(null);
-  const toastRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const { navigation } = props;
   const { state } = useContext(AuthContext);
@@ -48,15 +47,29 @@ const ForgotPassword: FC<IProps> = (props) => {
       })
       .then((res) => {
         const data = res.data;
-
-        // toastRef.current.show("An email has been sent to your e-mail address"), 1500, () => {
-        //   setLoading(false);
-        //   navigation.goBack();
-        // }
+        if (data) {
+          Toast.show('An email has been sent to your e-mail address', {
+            duration: Toast.durations.LONG,
+            position: -60,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 0,
+          });
+          setLoading(false);
+          navigation.goBack();
+        }
       })
       .catch((err) => {
         setLoading(false);
-        // toastRef.current.show(err.response.data.data.error, 1500);
+        Toast.show(err.response.data.data.error, {
+          duration: Toast.durations.LONG,
+          position: -60,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          delay: 0,
+        });
       });
   };
   return (
@@ -75,33 +88,35 @@ const ForgotPassword: FC<IProps> = (props) => {
               enableOnAndroid
               extraHeight={50}
               showsVerticalScrollIndicator={false}>
-              <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
-                {/* <Toast ref={toastRef} /> */}
-                <View style={styles.container} collapsable={false}>
-                  <HeaderWithBackTitle />
-                  <Text style={styles.titleText}>Forgot Password</Text>
-                  <Text style={styles.titleSubText}>
-                    Enter the email address registered with your account and we will send you a
-                    password change link.
-                  </Text>
-                  <Input
-                    ref={emailRef}
-                    placeholder="Your Email"
-                    keyboardType="email-address"
-                    returnKeyType="done"
-                    value={values.email}
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    errorMessage={errors.email}
-                    autoCorrect={false}
-                    inputContainerStyle={styles.inputContainerStyle}
-                    containerStyle={styles.containerStyle}
-                    errorStyle={{ color: 'red' }}
-                  />
-                  <ButtonOriginal title="Send" handlePress={handleSubmit} loading={loading} customStyle={styles.send}/>
-                </View>
-              </TouchableWithoutFeedback>
-              </KeyboardAwareScrollView>
+              <View style={styles.container} collapsable={false}>
+                <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
+                <Text style={styles.titleText}>Forgot Password</Text>
+                <Text style={styles.titleSubText}>
+                  Enter the email address registered with your account and we will send you a
+                  password change link.
+                </Text>
+                <Input
+                  ref={emailRef}
+                  placeholder="Your Email"
+                  keyboardType="email-address"
+                  returnKeyType="done"
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  errorMessage={errors.email}
+                  autoCorrect={false}
+                  inputContainerStyle={styles.inputContainerStyle}
+                  containerStyle={styles.containerStyle}
+                  errorStyle={{ color: 'red' }}
+                />
+                <ButtonOriginal
+                  title="Send"
+                  handlePress={handleSubmit}
+                  loading={loading}
+                  customStyle={styles.send}
+                />
+              </View>
+            </KeyboardAwareScrollView>
           </SafeAreaView>
         );
       }}
@@ -153,4 +168,4 @@ const styles = StyleSheet.create({
   },
 });
 ForgotPassword.defaultProps = {};
-export default ForgotPassword;
+export default withNavigation(ForgotPassword);

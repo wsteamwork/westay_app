@@ -1,11 +1,6 @@
 import React, {
   FC,
   useRef,
-  createRef,
-  useEffect,
-  MutableRefObject,
-  Ref,
-  RefObject,
   useContext,
   useState,
 } from 'react';
@@ -30,6 +25,7 @@ import { AuthContext } from 'store/context/auth';
 import { Input } from 'react-native-elements';
 import { inputContainerStyleGlobal } from 'utils/mixins';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Toast from 'react-native-root-toast';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
@@ -39,8 +35,8 @@ interface LoginValues {
 }
 
 const Login: FC<IProps> = (props) => {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const emailRef = useRef<any>(null);
+  const passwordRef = useRef<any>(null);
   const [loading, setLoading] = useState(false);
   const { dispatch, state } = useContext(AuthContext);
   const { navigation } = props;
@@ -64,7 +60,7 @@ const Login: FC<IProps> = (props) => {
     };
     setLoading(true);
     try {
-      axios.post('login', body).then(async (res) => {
+      axios.post('login', body).then(res => {
         const data = res.data;
         setLoading(false);
         storage.save({
@@ -73,11 +69,20 @@ const Login: FC<IProps> = (props) => {
           expires: data.expires_in,
         });
         dispatch({ type: 'SET_TOKEN', payload: `Bearer ${data.access_token}` });
+        navigation.navigate('Home');
       });
-      navigation.goBack();
-    } catch (error) {
+    } catch (err) {
       setLoading(false);
-      // toastRef.current.show(error.response.data.data.errors[0], 1500);
+      if (err.response.data.data.errors.email) {
+        Toast.show(err.response.data.data.errors.email[0], {
+          duration: Toast.durations.LONG,
+          position: -60,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          delay: 0,
+        });
+      }
     }
   };
   return (
@@ -97,7 +102,6 @@ const Login: FC<IProps> = (props) => {
               enableOnAndroid
               extraHeight={50}
               showsVerticalScrollIndicator={false}>
-              <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
                 <View style={styles.container} collapsable={false}>
                   <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
                   <Text style={styles.titleText}>Log in</Text>
@@ -110,7 +114,7 @@ const Login: FC<IProps> = (props) => {
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     errorMessage={errors.email}
-                    onSubmitEditing={() => (passwordRef as any).current.focus()}
+                    onSubmitEditing={() => passwordRef.current.focus()}
                     autoCorrect={false}
                     inputContainerStyle={styles.inputContainerStyle}
                     containerStyle={styles.containerStyle}
@@ -133,7 +137,7 @@ const Login: FC<IProps> = (props) => {
                   <View style={styles.forgotPassword}>
                     <Text
                       style={{ fontSize: wp('4%'), color: '#8A8A8F' }}
-                      onPress={() => navigation.navigate('ForgetPassword')}>
+                      onPress={() => navigation.navigate('ForgotPassword')}>
                       Forgot Password
                     </Text>
                   </View>
@@ -141,13 +145,12 @@ const Login: FC<IProps> = (props) => {
                   <View style={styles.action}>
                     <Text style={styles.titleSubText}>
                       <Text>Don’t have an account? </Text>
-                      <Text onPress={() => navigation.navigate('Signin')} style={styles.textSwitch}>
+                      <Text onPress={() => navigation.navigate('Register')} style={styles.textSwitch}>
                         Sign up
                       </Text>{' '}
                     </Text>
                   </View>
                 </View>
-              </TouchableWithoutFeedback>
             </KeyboardAwareScrollView>
           </SafeAreaView>
         );
@@ -193,8 +196,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   forgotPassword: {
-    justifyContent: 'center',
-    alignItems: 'center',
     marginBottom: hp('3%'),
   },
   inputContainerStyle: inputContainerStyleGlobal,

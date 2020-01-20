@@ -7,13 +7,13 @@ interface IProps extends NavigationInjectedProps{
   initialProps?: any;
 }
 
-const Profile: FC<IProps> = (props) => {
+const IntroApp: FC<IProps> = (props) => {
   const { navigation } = props;
   return (
     <View style={styles.textContainerMiddle}>
       <Image
         style={styles.image}
-        source={require('../../../src/static/images/pngkey.com-traveling-png-1965681.png')}
+        source={require('../../../../src/static/images/pngkey.com-traveling-png-1965681.png')}
       />
       <Text style={styles.titleText}>Welcome to Westay</Text>
       <Text style={styles.titleSubText}>Book one of our unique hotel to escape the ordinary</Text>
@@ -22,7 +22,7 @@ const Profile: FC<IProps> = (props) => {
         handlePress={() => navigation.navigate('Login')}
         customStyle={styles.marginBottom}
       />
-      <ButtonOriginal title="Create Acount" handlePress={() => navigation.navigate('Signin')} />
+      <ButtonOriginal title="Create Acount" handlePress={() => navigation.navigate('Register')} />
     </View>
   );
 };
@@ -63,5 +63,5 @@ const styles = StyleSheet.create({
     color: '#8A8A8F',
   },
 });
-Profile.defaultProps = {};
-export default withNavigation(Profile);
+IntroApp.defaultProps = {};
+export default withNavigation(IntroApp);

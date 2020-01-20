@@ -2,11 +2,14 @@ import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { wp, hp } from 'utils/responsive';
 import MapView, { Circle } from 'react-native-maps';
+import { ReducersList } from 'store/redux/reducers';
+import { useSelector } from 'react-redux';
 interface IProps {
   initialProps?: any;
 }
 
 const BoxCircleMapRoom: FC<IProps> = (props) => {
+  const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   return (
     <View style={styles.boxMap}>
       <View
@@ -24,8 +27,8 @@ const BoxCircleMapRoom: FC<IProps> = (props) => {
           showsPointsOfInterest={true}
           scrollEnabled={false}
           initialRegion={{
-            latitude: 21.028935,
-            longitude: 105.85215,
+            latitude: parseFloat(listing.latitude),
+            longitude: parseFloat(listing.longitude),
             latitudeDelta: 0.019,
             longitudeDelta: 0.019,
           }}
@@ -33,13 +36,13 @@ const BoxCircleMapRoom: FC<IProps> = (props) => {
           moveOnMarkerPress={false}>
           <Circle
             center={{
-              latitude: 21.028935,
-              longitude: 105.85215,
+              latitude: parseFloat(listing.latitude),
+              longitude: parseFloat(listing.longitude),
             }}
             radius={300}
             zIndex={9}
             strokeColor="#ff6633"
-            fillColor="rgba(8, 194, 153,0.1)"
+            fillColor="rgba(255, 0, 0, 0.2)"
             lineJoin="round"
             strokeWidth={3}
           />

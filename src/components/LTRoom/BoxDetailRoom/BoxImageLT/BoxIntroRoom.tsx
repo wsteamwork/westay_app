@@ -1,31 +1,38 @@
 import React, { FC } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { wp, hp } from 'utils/responsive';
 import { PricingCard } from 'react-native-elements';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import Icon from 'react-native-vector-icons/Feather';
-interface IProps {
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { useSelector } from 'react-redux';
+import { ReducersList } from 'store/redux/reducers';
+
+interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
 
 const BoxIntroRoom: FC<IProps> = (props) => {
+  const { navigation } = props;
+  const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   return (
     <View style={styles.container}>
       <PricingCard
         color="rgb(84, 211, 194)"
-        title="Spring Truc Bach Homestay"
-        price="35.000.000đ"
-        info={['1 Tháng', 'Quận Ba Đình, Hà Nội']}
-        button={{ title: 'Kiểm tra lịch', icon: '', buttonStyle: styles.buttonStyle }}
+        title={listing.about_room.name}
+        price={`$${listing.price_display}`}
+        info={['1 Month', `${listing.district.data.name}, ${listing.city.data.name}`]}
+        button={{ title: 'Check Availability', icon: '', buttonStyle: styles.buttonStyle }}
         containerStyle={styles.containerStyle}
         titleStyle={styles.titleStyle}
         pricingStyle={styles.pricingStyle}
       />
       <ButtonOriginal
-        title="Xem chi tiết"
+        title="More details"
         iconRight={true}
         icon={<Icon name="chevrons-down" size={19} color="white" />}
         useViewComponent={false}
+        handlePress={() => navigation.navigate('BoxDetailRoom')}
       />
     </View>
   );
@@ -38,8 +45,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: wp('100%'),
-    position:'absolute',
-    bottom: 30
+    position: 'absolute',
+    bottom: 30,
   },
   containerStyle: {
     borderRadius: 25,
@@ -57,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 BoxIntroRoom.defaultProps = {};
-export default BoxIntroRoom;
+export default withNavigation(BoxIntroRoom);

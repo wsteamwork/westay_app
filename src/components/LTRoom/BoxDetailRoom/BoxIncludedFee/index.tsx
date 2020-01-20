@@ -12,39 +12,56 @@ interface IProps {
   initialProps?: any;
 }
 
-const BoxPriceLTRoom: FC<IProps> = (props) => {
+const BoxIncludedFee: FC<IProps> = (props) => {
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
-  const [collapsedPrice, setCollapsedPrice] = useState(false);
+  const [collapsedServices, setCollapsedServices] = useState(false);
+  console.log(listing);
   return (
     <View>
-      <TouchableNativeFeedback style={styles.touchable} onPress={() => setCollapsedPrice(true)}>
+      <TouchableNativeFeedback style={styles.touchable} onPress={() => setCollapsedServices(true)}>
         <View style={styles.container}>
-          <Text style={styles.title}>Price by lease term</Text>
+          <Text style={styles.title}>Service fees</Text>
           <Entypo name="chevron-right" size={25} color="#adadad" />
         </View>
       </TouchableNativeFeedback>
       <Modal
         animationType="slide"
         transparent={false}
-        onRequestClose={() => setCollapsedPrice(false)}
-        visible={collapsedPrice}>
+        onRequestClose={() => setCollapsedServices(false)}
+        visible={collapsedServices}>
         <HeaderWithBackTitle
-          handlePress={() => setCollapsedPrice(false)}
+          handlePress={() => setCollapsedServices(false)}
           containerStyle={{ paddingTop: hp('3%') }}
         />
         <ScrollView>
-          <Text style={styles.textHeader}>Price by lease term</Text>
-          {listing.prices && listing.prices.prices.length
-            ? listing.prices.prices.map((o: any, i: number) => (
-                <View style={styles.boxContainer}>
+          <Text style={styles.textHeader}>Service fees</Text>
+          {listing.prices.included_fee && listing.prices.included_fee.length ? (
+            listing.prices.included_fee.map((o: any, i: number) =>
+              o.included == 1 ? (
+                <View style={styles.boxContainer} key={i}>
                   <View key={i} style={styles.boxPrice}>
-                    <Text style={styles.txtTerm}>{o.term}</Text>
-                    <Text style={styles.price}> ${o.price}</Text>
+                    <Text style={styles.txtTerm}>{o.name}</Text>
+                    <Text style={styles.price}>Fee included in rent price</Text>
                   </View>
                   <Divider style={styles.divider} />
                 </View>
-              ))
-            : ''}
+              ) : (
+                <View style={styles.boxContainer} key={i}>
+                  <View key={i} style={styles.boxPrice}>
+                    <Text style={styles.txtTerm}>{o.name}</Text>
+                    <Text style={styles.price}>
+                      {o.calculate_function == 3 || o.calculate_function == 6
+                        ? `${o.calculate_function_txt}`
+                        : `$${o.value} ${o.calculate_function_txt}`}
+                    </Text>
+                  </View>
+                  <Divider style={styles.divider} />
+                </View>
+              ),
+            )
+          ) : (
+            <Text></Text>
+          )}
         </ScrollView>
       </Modal>
     </View>
@@ -77,15 +94,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     marginBottom: hp('2%'),
-  },
-  txtTerm: {
+},
+txtTerm: {
     fontSize: 16,
-    width: wp('70%'),
+    width: wp('50%'),
     color: '#484848',
+    marginBottom: hp('1%'),
   },
   price: {
     alignItems: 'flex-start',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '600',
   },
   title: {
@@ -93,10 +111,10 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   divider: {
-    backgroundColor: '#bcbcbc', 
+    backgroundColor: '#bcbcbc',
     paddingHorizontal: wp('4%'),
-    marginVertical: hp('1%')
-  }
+    marginVertical: hp('1%'),
+  },
 });
-BoxPriceLTRoom.defaultProps = {};
-export default BoxPriceLTRoom;
+BoxIncludedFee.defaultProps = {};
+export default BoxIncludedFee;

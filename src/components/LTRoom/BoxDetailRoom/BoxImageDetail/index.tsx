@@ -1,32 +1,23 @@
 import React, { FC, useState, useMemo, useEffect } from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  Modal,
-} from 'react-native';
-import { hp, wp } from 'utils/responsive';
+import { StyleSheet, View, Modal, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Feather';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { Text } from 'react-native-elements';
 // @ts-ignore
 import ImageViewer from 'react-native-image-zoom-viewer';
 import _ from 'lodash';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { hp, wp } from 'utils/responsive';
+import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import LeftSpacePaddingHorizontalScroll from 'components/GlobalComponents/LeftSpacePaddingHorizontalScroll';
+import { IMAGE_STORAGE_LG } from 'types/globalTypes';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-import { IMAGE_STORAGE_LG } from 'types/globalTypes';
-interface IProps extends NavigationInjectedProps {
+interface IProps {
   initialProps?: any;
 }
 
-const BoxImageRoom: FC<IProps> = (props) => {
-  const { navigation } = props;
+const BoxImageDetail: FC<IProps> = (props) => {
   const [isImageViewVisible, setIsImageViewVisible] = useState(false);
   const [indexImage, setIndexImage] = useState<number>(0);
   const [mediaToTal, setMediaToTal] = useState<any>([]);
@@ -74,8 +65,28 @@ const BoxImageRoom: FC<IProps> = (props) => {
           };
         })
       : [];
-      setMediaToTal(images);
+    setMediaToTal(images);
   }, []);
+  const _renderItem = (item: any, index: number) => {
+    return (
+      <View style={{ paddingHorizontal: wp('1.2%') }} key={index}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => {
+            setIsImageViewVisible(true);
+            setIndexImage(index);
+          }}>
+          <Image
+            borderRadius={8}
+            style={styles.image}
+            source={{ uri: item.url }}
+            resizeMode="cover"
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   const footer = () => {
     return (
       <View
@@ -95,52 +106,23 @@ const BoxImageRoom: FC<IProps> = (props) => {
   };
   return (
     <View style={styles.boxImage}>
-      {useMemo(
-        () => (
-          <Swiper autoplay showsPagination={false}>
-            {mediaToTal.map((o: any, i: number) => (
-              <TouchableWithoutFeedback
-                key={i}
-                onPress={() => {
-                  setIsImageViewVisible(true);
-                  setIndexImage(i);
-                }}>
-                <View style={styles.slider}>
-                  <Image
-                    source={{
-                      uri: `${mediaToTal[i].url}`,
-                    }}
-                    style={styles.imgAvatar}
-                    resizeMode="cover"
-                  />
-                </View>
-              </TouchableWithoutFeedback>
-            ))}
-          </Swiper>
-        ),
-        [mediaToTal],
-      )}
-      <View style={styles.featureImage}>
-        <View style={styles.btnBack}>
-          <TouchableOpacity style={styles.bgIcon} onPress={() => navigation.goBack()}>
-            <AntDesign name="arrowleft" size={24} color="#fff" />
-          </TouchableOpacity>
-        </View>
+      <View style={styles.boxTitle}>
+        <Text style={styles.txtTitle}>Take a tour</Text>
+        <Text style={styles.explore} onPress={() => setIsImageViewVisible(true)}>
+           +{mediaToTal.length -5} Photos
+        </Text>
       </View>
-      {useMemo(
-        () => (
-          <View style={styles.boxBtn}>
-            <Button
-              buttonStyle={styles.btnMore}
-              title=""
-              icon={<Icon name="maximize" size={15} color={COLOR_TEXT_DEFAULT} />}
-              titleStyle={styles.textBtnMore}
-              onPress={() => setIsImageViewVisible(true)}
-            />
-          </View>
-        ),
-        [],
-      )}
+      <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          data={mediaToTal.slice(0, 5)}
+          ListHeaderComponent={<LeftSpacePaddingHorizontalScroll width={wp('5%')} />}
+          horizontal
+          renderItem={({ item, index }) => _renderItem(item, index)}
+          extraData={mediaToTal.slice(0, 5)}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </View>
       {useMemo(
         () => (
           <Modal visible={isImageViewVisible} transparent={true}>
@@ -154,7 +136,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
             />
           </Modal>
         ),
-        [indexImage, isImageViewVisible, mediaToTal],
+        [indexImage, isImageViewVisible],
       )}
     </View>
   );
@@ -162,8 +144,12 @@ const BoxImageRoom: FC<IProps> = (props) => {
 
 const styles = StyleSheet.create({
   boxImage: {
-    height: hp('35%'),
     backgroundColor: 'transparent',
+  },
+  boxTitle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   slider: {
     flex: 1,
@@ -224,6 +210,25 @@ const styles = StyleSheet.create({
     color: COLOR_TEXT_DEFAULT,
     fontSize: 12,
   },
+  txtTitle: {
+    fontSize: 24,
+    marginBottom: hp('2%'),
+    fontWeight: '700',
+    color: '#484848'
+  },
+  pdLeft: {
+    marginTop: 38,
+  },
+  image: {
+    height: hp('15%'),
+    width: wp('40%'),
+    borderRadius: 5,
+  },
+  explore: {
+    fontSize: 14,
+    color: 'rgb(84, 211, 194)',
+    fontWeight: '700',
+  },
 });
-BoxImageRoom.defaultProps = {};
-export default withNavigation(BoxImageRoom);
+BoxImageDetail.defaultProps = {};
+export default BoxImageDetail;
