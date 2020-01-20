@@ -1,8 +1,8 @@
-import { AxiosRes } from './../../../../types/ResponseTemplate';
 import { axios } from 'utils/api';
 import { updateObject } from 'utils/mixins';
 import { Dispatch, Reducer } from 'redux';
 import { LTRoomIndexRes } from 'types/LTR/LTRoom/LTRoom';
+import { AxiosRes } from 'types/ResponseTemplate';
 
 export type LTRoomReducerState = {
   readonly room: LTRoomIndexRes | null;
@@ -33,31 +33,28 @@ export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
 };
 
 export const getLTRoom = async (
-  idRoom: any,
+  idRoom: number,
   initLanguage: string = 'en'
-): Promise<LTRoomIndexRes> => {
+): Promise<any> => {
   const res: AxiosRes<LTRoomIndexRes> = await axios.get(
     `long-term-rooms/${idRoom}?include=city,district,merchant`,
     { headers: { 'Accept-Language': initLanguage } }
-  );
-
-  return res.data.data;
-};
-
-export const getDataLTRoom = async (
-  id: number,
-  dispatch: Dispatch<LTRoomReducerAction>,
-  initLanguage: string = 'en'
-): Promise<any> => {
-  try {
-    const res = await Promise.all([
-      getLTRoom(id, initLanguage),
-    ]);
-    const [room] = res;
-    dispatch({ type: 'setLTRoom', payload: room });
-    dispatch({ type: 'setErrorSSRLTRoompage', payload: false });
+    );
+    return res.data.data;
+  };
+  
+  export const getDataLTRoom = async (
+    id: number,
+    dispatch: Dispatch<LTRoomReducerAction>,
+    initLanguage: string = 'en'
+    ): Promise<any> => {
+      try {
+      const res: AxiosRes<LTRoomIndexRes> = await getLTRoom(id, initLanguage)
+      const room = res.data.data;
+      dispatch({ type: 'setLTRoom', payload: room });
     return { room };
   } catch (error) {
+    console.log(error)
     dispatch({ type: 'setErrorSSRLTRoompage', payload: true });
   }
 };

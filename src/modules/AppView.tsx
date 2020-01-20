@@ -6,7 +6,6 @@ import Home from '../screens/Home';
 import Search from '../screens/Search';
 import Trip from '../screens/Trip';
 import NavBottom from '../components/NavBottom';
-import BoxImageLT from 'components/LTRoom/BoxDetailRoom/BoxImageLT';
 import RootNavigation from 'navigation/RootNavigation';
 import RoomNavigation from 'navigation/RoomNavigation';
 
@@ -26,7 +25,6 @@ const AppView = createBottomTabNavigator(
     Search: {
       screen: RoomNavigation,
       // screen: RootNavigation,
-      // screen: BoxImageLT
     },
     Home: {
       screen: Home,
