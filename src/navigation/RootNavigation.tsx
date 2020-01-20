@@ -6,6 +6,7 @@ import Register from 'components/Auth/Register';
 import ForgotPassword from 'components/Auth/ForgotPassword';
 import PrivacyPolicy from 'components/Auth/Rules/PrivacyPolicy';
 import TermsAndConditions from 'components/Auth/Rules/TermsAndConditions';
+import SearchSuggest from 'components/SearchComponent';
 
 const stackNavigator = createStackNavigator({
   Login: { screen: Login },
@@ -13,6 +14,7 @@ const stackNavigator = createStackNavigator({
   ForgetPassword: { screen: ForgotPassword },
   TermsAndConditions: { screen: TermsAndConditions },
   PrivacyPolicy: { screen: PrivacyPolicy },
+  SearchSuggest: { screen: SearchSuggest },
 });
 
 export default createAppContainer(stackNavigator);

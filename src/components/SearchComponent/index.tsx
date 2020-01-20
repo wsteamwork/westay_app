@@ -1,5 +1,5 @@
-import React, {FC, useState, useEffect, Fragment} from 'react';
-import {StyleSheet, View, Text, ScrollView, StatusBar} from 'react-native';
+import React, {FC, useState, useEffect, Fragment, useReducer} from 'react';
+import {StyleSheet, View, Text, ScrollView, StatusBar, Alert} from 'react-native';
 import SearchInput from './SearchInput';
 import {wp, hp} from 'utils/responsive';
 import {COLOR_TEXT_SUBTITLE, SIZE_TEXT_TITLE_MEDIUM, SIZE_TEXT_CONTENT, COLOR_TITLE_HEADER} from 'styles/global.style';
@@ -8,6 +8,13 @@ import {SearchSuggestData} from 'types/Search/SearchResponse';
 import {getSuggestion} from 'components/SearchComponent/SearchInputContext';
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
 import ModalChooseGuest from 'components/SearchComponent/ChooseGuest/ModalChooseGuest';
+import ModalChooseDate from 'components/SearchComponent/ChooseDate/ModalChooseDate';
+import {RoomDetailContext, roomReducer, initStateRoom} from 'store/context/room/RoomDetailContext';
+import ListCategory from 'components/GlobalComponents/ListCategory';
+import ListPropertySearch from 'components/ListPropertySearch';
+import TransitionView from 'components/GlobalComponents/TransitionView';
+import CardWithSideText from 'components/GlobalComponents/CardWithSideText';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 interface IProps {
   showInfoGuestAndDates: boolean
@@ -27,7 +34,7 @@ const SearchComponent: FC<IProps> = (props) => {
   }, [input]);
 
 
-  const _onChangeText = (value: any) => {
+  const _onChangeText = (value: string) => {
     getSuggestion(value).then((res) => {
       setDataSearchSuggest(res);
     });
@@ -39,9 +46,31 @@ const SearchComponent: FC<IProps> = (props) => {
     setInput(dataSearchSuggest[0].name);
   };
 
+  const [stateRoom, dispatchRoomDetail] = useReducer(
+    roomReducer,
+    initStateRoom,
+  );
 
+  const _renderItemSearchSuggest = (item: any) => {
+    return (
+      <TransitionView
+        index={dataSearchSuggest.indexOf(item)}
+      >
+        <CardWithSideText
+          hasImage={false}
+          icon={<Ionicons name={'ios-search'} size={18} />}
+          title={item.name}
+          onPress={() => Alert.alert(item.name)}
+          rounded
+        />
+      </TransitionView>
+    );
+  };
 
   return (
+    <RoomDetailContext.Provider
+      value = {{stateRoom, dispatchRoomDetail}}
+    >
     <ScrollView stickyHeaderIndices={[0]}>
       <View style={styles.container}>
 
@@ -61,9 +90,29 @@ const SearchComponent: FC<IProps> = (props) => {
             </View>
         )}
 
-        <ModalChooseGuest open={modalGuest} setClose={setModalGuest}/>
+        {
+          input && dataSearchSuggest ? (
+            <View>
+              <ListCategory
+                title={'Search suggestion'}
+                hasDivider
+                renderItem={_renderItemSearchSuggest}
+                data={dataSearchSuggest}
+              />
+            </View>
+          ) : (
+            <View>
+              <ListPropertySearch />
+            </View>
+          )
+        }
+
+
       </View>
     </ScrollView>
+      <ModalChooseGuest open={modalGuest} setClose={setModalGuest}/>
+      <ModalChooseDate open={modalDate} setClose={setModalDate}/>
+    </RoomDetailContext.Provider>
   );
 };
 

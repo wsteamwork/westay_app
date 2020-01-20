@@ -4,16 +4,20 @@ import { Avatar } from 'react-native-elements';
 import { TypeApartment } from 'types/Rooms/RoomResponses';
 import { hp, wp } from 'utils/responsive';
 import { SIZE_TEXT_CONTENT } from 'styles/global.style';
+import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 
-interface IProps {
+interface IProps extends NavigationInjectedProps{
   item: TypeApartment
 }
 
 const RoomTypeCard: FC<IProps> = (props) => {
-  const { item } = props;
+  const { item, navigation } = props;
 
   const handleClick = () => {
-    Alert.alert('click', 'ban da click')
+    // navigation.navigate('');
+
+    Alert.alert('click', 'ban da click');
+
   };
   return (
     <TouchableOpacity
@@ -46,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RoomTypeCard;
+export default withNavigation(RoomTypeCard);

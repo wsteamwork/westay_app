@@ -1,10 +1,11 @@
 import { hp } from './responsive';
 import {Platform, Animated} from 'react-native';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import {axios} from './api';
 import {SearchFilterState} from 'store/redux/reducers/search/searchField';
 import {CityType} from 'types/Cities/CityResponse';
 import qs from 'query-string';
+import {AuthContext} from 'store/context/auth';
 
 export const convertString = (query: object)  => {
   return {
@@ -118,6 +119,23 @@ export const formatMoney = (
   }
 };
 
+// @ts-ignore
+export const formatPrice = (price: number): string | number => {
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
+
+  const lang = languageStatus;
+  try {
+    let format = '';
+    if (price >= 1000000) {
+      format = (price / 1000000).toFixed(1) + 'tr';
+    }
+    return lang && lang === 'vi' ? format : `$${price}`;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 export const useCheckbox = () => {
   const [typeRoom, setTypeRoom] = useState<any>([]);
   const [typeAmenities, setTypeAmenities] = useState<any>([]);
@@ -205,6 +223,8 @@ export const getDataListRooms = async (
     searchText: searchField.searchText,
     number_guest: searchField.number_guest,
     number_room: searchField.number_room,
+    check_in: searchField.check_in,
+    check_out: searchField.check_out,
   };
 
   if (currCity && currCity.type === 1) {

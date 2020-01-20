@@ -1,18 +1,22 @@
-import React, { FC } from 'react';
+import React, {FC, useContext} from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Image } from 'react-native-elements';
 import { LIGHT, NORMAL, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
 import { TypeApartment } from 'types/Rooms/RoomResponses';
 import { hp, wp } from 'utils/responsive';
+import {IMAGE_STORAGE_XS} from 'types/globalTypes';
+import {AuthContext} from 'store/context/auth';
+import {cleanAccents, formatPrice} from 'utils/mixins';
 
 interface IProps {
-  item: TypeApartment,
+  room: any,
   showNumberRoom?: boolean
 }
 
 const CollectionsRectangleCard: FC<IProps> = (props) => {
-  const { item, showNumberRoom } = props;
-
+  const { room, showNumberRoom } = props;
+  const { state} = useContext(AuthContext);
+  const { languageStatus } = state;
   const handleClick = () => {
     Alert.alert('click', 'ban da click')
   };
@@ -25,32 +29,34 @@ const CollectionsRectangleCard: FC<IProps> = (props) => {
     >
       <Image
         borderRadius={8}
-        source={{ uri: item.image }}
+        source={{ uri: IMAGE_STORAGE_XS + room.avatar.images[0].name }}
         style={styles.image}
         resizeMode="cover"
         PlaceholderContent={<ActivityIndicator />}
       />
       <Text numberOfLines={1} style={styles.titleText}>
-        ten phong kha la dai o day ahihi ahihi hihi haha
+        {room.about_room.name}
       </Text>
       <Text numberOfLines={1} style={styles.subtitleText}>
-        Apartment
+        {room.accommodation_type_txt}
         <Text style={{ fontWeight: '700' }}> &#8231; </Text>
-        Ha noi
+        {languageStatus === 'en'
+          ? cleanAccents(room.city)
+          : room.city}
       </Text>
 
       {showNumberRoom && (
         <Text style={styles.contentText}>
-          30 m2
+          {room.total_area ? room.total_area : '?'} m2
           <Text style={{ fontWeight: '700' }}> &#8231; </Text>
-          1 bathroom(s)
+          {room.bathrooms.number_bathroom} bathroom(s)
           <Text style={{ fontWeight: '700' }}> &#8231; </Text>
-          2 room(s)
+          {room.bedrooms.number_bedroom} room(s)
         </Text>
       )}
 
       <Text numberOfLines={1} style={styles.priceText}>
-        $900 /month
+        {formatPrice(room.price_display)} /month
       </Text>
     </TouchableOpacity>
   );

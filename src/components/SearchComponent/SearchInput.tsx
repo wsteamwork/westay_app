@@ -54,6 +54,7 @@ const GlobalSearchInput: FC<IProps> = (props) => {
             color = {COLOR_TEXT_DEFAULT}
             size = {wp('5%')}
             style = {{paddingLeft: wp('3%')}}
+            onPress={()=>navigation.navigate('Login')}
           />
         }
       />

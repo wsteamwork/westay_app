@@ -1,23 +1,33 @@
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import React, { FC } from 'react';
+import React, {FC, memo} from 'react';
 import { Alert, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
 import LinearGradient from "react-native-linear-gradient";
 import { SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
-import { TypeApartment } from 'types/Rooms/RoomResponses';
+import { NumberRoomCity} from 'types/Rooms/RoomResponses';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
+import { formatPrice} from 'utils/mixins';
+import {useDispatch} from 'react-redux';
+import {setSearchText, getCity} from 'store/actions/search/searchActions';
+import {NavigationInjectedProps, withNavigation} from 'react-navigation';
+// @ts-ignore
+import { compose } from 'recompose';
 
-interface IProps {
-  item: TypeApartment,
+interface IProps extends NavigationInjectedProps{
+  item: NumberRoomCity,
 }
 
 const DestinationCard: FC<IProps> = (props) => {
-  const { item } = props;
+  const { item, navigation } = props;
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    Alert.alert('OK', 'clicked')
+    dispatch(getCity({ id: item.city_id, type: 1 }));
+    dispatch(setSearchText(item.name_city));
+    navigation.navigate('ListRooms');
   };
-  // console.log(item);
   return (
     <TouchableWithScale
       _onPress={handleClick}
@@ -35,9 +45,9 @@ const DestinationCard: FC<IProps> = (props) => {
           style={styles.linear}
         >
           <View style={styles.boxInfo}>
-            <Text style={styles.name}>{item.value}</Text>
+            <Text style={styles.name}>{item.name_city}</Text>
             <Divider style={styles.divider} />
-            <Text style={styles.price}>17$ /night</Text>
+            <Text style={styles.price}>{formatPrice(parseInt(item.average_price))} /{t('home:night')}</Text>
           </View>
         </LinearGradient>
       </ImageBackground>
@@ -89,4 +99,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DestinationCard;
+export default compose(
+  memo,
+  withNavigation,
+)(DestinationCard);

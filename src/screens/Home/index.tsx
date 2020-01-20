@@ -5,36 +5,57 @@ import ListRoomType from 'components/ListRoomType';
 import ListCollections from 'components/ListRoomType/ListCollections';
 import ListCollectionsSquare from 'components/ListRoomType/ListCollectionsSquare';
 import ListDestinations from 'components/ListRoomType/ListDestinations_Valuable';
-import React, { FC } from 'react';
+import React, {FC, useContext, useEffect, Dispatch, useState} from 'react';
 import { ScrollView, StatusBar, StyleSheet, View } from 'react-native';
-import { TypeApartment } from 'types/Rooms/RoomResponses';
+import {TypeApartment, NumberRoomCity, RoomIndexRes} from 'types/Rooms/RoomResponses';
 import { __currentPlatform } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
+import {useSelector, useDispatch} from 'react-redux';
+import {ReducersList, ReducersActions} from 'store/redux/reducers';
+import {AuthContext} from 'store/context/auth';
+import {getRoomsHomepage, RoomHomepageAction} from 'store/redux/reducers/Home/roomHomepage';
+import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
+import {IMAGE_STORAGE_SM} from 'types/globalTypes';
 
 interface IProps {
-  initialProps?: any;
 };
 
 const Home: FC<IProps> = (props) => {
-  const { initialProps } = props;
+  const { state, dispatch } = useContext(AuthContext);
+  const { token, languageStatus } = state;
+  const dispatchHome = useDispatch<Dispatch<ReducersActions>>();
+  const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
+    (state) => state.roomHomepage.roomsCity
+  );
+  const [editorChoice, setEditorChoice] = useState<any[]>([]);
+  const [forFamily, setForFamily] = useState<any[]>([]);
+  const [goodPrice, setGoodPrice] = useState<any[]>([]);
 
-  const _renderEditorChoice = (item: TypeApartment, index: number) => {
+  useEffect(() => {
+    getRoomsHomepage(dispatchHome, languageStatus);
+    getHomePageCollection('editor_choice').then((res) => setEditorChoice(res));
+    getHomePageCollection('for_family').then((res) => setForFamily(res));
+    getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res));
+
+  }, [languageStatus]);
+
+  const _renderEditorChoice = (item: any, index: number) => {
     return (
       <View style={{ paddingRight: wp('2%') }} key={index}>
-        <CollectionsRectangleCard item={item} />
+        <CollectionsRectangleCard room={item} />
       </View>
     );
   };
 
-  const _renderForFamily = (item: TypeApartment, index: number) => {
+  const _renderForFamily = (item: any, index: number) => {
     return (
       <View style={{ paddingRight: wp('2%') }} key={index}>
-        <CollectionsRectangleCard item={item} showNumberRoom />
+        <CollectionsRectangleCard room={item} showNumberRoom />
       </View>
     );
   };
 
-  const _renderDestination = (item: TypeApartment, index: number) => {
+  const _renderDestination = (item: NumberRoomCity, index: number) => {
     return (
       <View key={index}>
         <DestinationCard item={item} />
@@ -42,15 +63,25 @@ const Home: FC<IProps> = (props) => {
     );
   };
 
-  // const _renderValuableRoom = (item: TypeApartment, index: number) => {
-  //   return (
-  //     <View key={index}>
-  //       <ValuableCard item={item} />
-  //     </View>
-  //   );
-  // };
+  const _renderValuableRoom = (room: any, index: number) => {
+    const imgRoomSM = room.avatar.images && room.avatar.images.length
+              ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}`
+              : 'https://via.placeholder.com/320x320.png?text=Westay.vn';
+    return (
+      <View key={index}>
+        <ValuableCard city={room.city}
+                      district={room.district}
+                      priceDisplay={room.price_display}
+                      roomID={room.id}
+                      roomName={room.about_room.name}
+                      roomType={room.accommodation_type_txt}
+                      roomImage={imgRoomSM}
+                      avg_rating={room.avg_rating}/>
+      </View>
+    );
+  };
 
-  const dataDemo = [
+  const dataTypeHouse = [
     { id: 1, value: "Full House", image: 'https://m.westay.vn/static/images/property/house.jpg' },
     { id: 2, value: "Apartment", image: "https://m.westay.vn/static/images/property/apartment.jpg" },
     { id: 3, value: "Villa", image: "https://m.westay.vn/static/images/property/villa.jpg" },
@@ -62,28 +93,28 @@ const Home: FC<IProps> = (props) => {
   return (
     <ScrollView style={styles.container}>
       <View style={[styles.pdLeft, { marginLeft: -wp('5%') }]}>
-        <ListRoomType data={dataDemo} />
+        <ListRoomType data={dataTypeHouse} />
       </View>
 
       <View style={styles.mrTop}>
-        <ListDestinations data={dataDemo} title='Top Destinations' _renderItem={_renderDestination} />
+        <ListDestinations data={roomsCity} title='Top Destinations' _renderItem={_renderDestination} />
       </View>
 
       <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
-        <ListCollections data={dataDemo} title='Editor Choice' _renderItem={_renderEditorChoice} />
+        <ListCollections data={editorChoice} title='Editor Choice' _renderItem={_renderEditorChoice} />
       </View>
 
       <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
-        <ListCollections data={dataDemo} title='For Family' _renderItem={_renderForFamily} />
+        <ListCollections data={forFamily} title='For Family' _renderItem={_renderForFamily} />
       </View>
 
       <View style={[styles.pdLeft, { marginTop: hp('1%') }]}>
         <ListCollectionsSquare title='Studio For Rent' typeData='studio_for_rent' />
       </View>
 
-      {/*<View style={styles.mrTop}>*/}
-      {/*  <ListDestinations data={dataDemo} title='Valuable Room' _renderItem={_renderValuableRoom} />*/}
-      {/*</View>*/}
+      <View style={styles.mrTop}>
+        <ListDestinations data={goodPrice} title='Valuable Room' _renderItem={_renderValuableRoom} />
+      </View>
       <View style={styles.boxEmpty} />
     </ScrollView>
   );
@@ -103,7 +134,7 @@ const styles = StyleSheet.create({
     marginVertical: hp('1.5%')
   },
   boxEmpty: {
-    height: hp('8%')
+    height: hp('5%')
   }
 });
 

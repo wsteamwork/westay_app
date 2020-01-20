@@ -23,8 +23,8 @@ export type SearchFilterState = {
   readonly searchText?: string;
   readonly number_room: number;
   readonly bookingType?: number;
-  readonly check_in?: string | null;
-  readonly check_out?: string | null;
+  readonly check_in: string ;
+  readonly check_out: string ;
   readonly amenities?: number[] | null;
   readonly room_type?: number;
   readonly rent_type?: number;
