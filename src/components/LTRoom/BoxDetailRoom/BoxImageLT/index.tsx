@@ -6,10 +6,10 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
+import { IMAGE_STORAGE_LG } from 'types/globalTypes';
 import { Dispatch } from 'redux';
 import { LTRoomReducerAction, getDataLTRoom } from 'store/redux/reducers/LTRoom/RoomDetails';
-import { IMAGE_STORAGE_LG } from 'types/globalTypes';
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
 
@@ -17,10 +17,12 @@ const BoxImageLT: FC<IProps> = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch<Dispatch<LTRoomReducerAction>>();
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
+
+
   useEffect(() => {
-    getDataLTRoom(3457, dispatch);
+    getDataLTRoom(3457,dispatch);
   }, []);
-  console.log(listing);
+
   return (
     <View style={styles.container} collapsable={false}>
       <View style={styles.featureImage}>
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     top: hp('2%'),
     width: wp('100%'),
     height: hp('8%'),
-    zIndex: 1
+    zIndex: 1,
   },
   btnBack: {
     flex: 1,
