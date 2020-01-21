@@ -15,58 +15,13 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 interface IProps {
   initialProps?: any;
+  arrImages?: any;
 }
 
 const BoxImageDetail: FC<IProps> = (props) => {
+  const { arrImages } = props;
   const [isImageViewVisible, setIsImageViewVisible] = useState(false);
   const [indexImage, setIndexImage] = useState<number>(0);
-  const [mediaToTal, setMediaToTal] = useState<any>([]);
-  const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
-  useEffect(() => {
-    let arrayImg: any = [];
-    if (listing.avatar.images.length) {
-      arrayImg.push(...listing.avatar.images);
-    }
-    if (listing.cover_photo.images.length) {
-      arrayImg.push(...listing.cover_photo.images);
-    }
-    if (listing.bedrooms.number_bedroom) {
-      {
-        _.times(listing.bedrooms.number_bedroom, (i) =>
-          arrayImg.push(...listing.bedrooms[`bedroom_${i + 1}`].images),
-        );
-      }
-    }
-    if (listing.bathrooms.total_image) {
-      {
-        _.times(listing.bathrooms.number_bathroom, (i) =>
-          arrayImg.push(...listing.bathrooms[`bathroom_${i + 1}`].images),
-        );
-      }
-    }
-    if (listing.outdoors.images.length) {
-      arrayImg.push(...listing.outdoors.images);
-    }
-    if (listing.furnitures.images.length) {
-      arrayImg.push(...listing.furnitures.images);
-    }
-    if (listing.kitchens.images.length) {
-      arrayImg.push(...listing.kitchens.images);
-    }
-    if (listing.livingrooms.images.length) {
-      arrayImg.push(...listing.livingrooms.images);
-    }
-    let images = arrayImg
-      ? _.map(arrayImg, (o, i) => {
-          return {
-            url: `${IMAGE_STORAGE_LG + arrayImg[i].name}`,
-            width: wp('100%'),
-            height: hp('50%'),
-          };
-        })
-      : [];
-    setMediaToTal(images);
-  }, []);
   const _renderItem = (item: any, index: number) => {
     return (
       <View style={{ paddingHorizontal: wp('1.2%') }} key={index}>
@@ -109,17 +64,17 @@ const BoxImageDetail: FC<IProps> = (props) => {
       <View style={styles.boxTitle}>
         <Text style={styles.txtTitle}>Take a tour</Text>
         <Text style={styles.explore} onPress={() => setIsImageViewVisible(true)}>
-           +{mediaToTal.length -5} Photos
+           +{arrImages.length -5} Photos
         </Text>
       </View>
       <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
         <FlatList
           showsHorizontalScrollIndicator={false}
-          data={mediaToTal.slice(0, 5)}
+          data={arrImages.slice(0, 5)}
           ListHeaderComponent={<LeftSpacePaddingHorizontalScroll width={wp('5%')} />}
           horizontal
           renderItem={({ item, index }) => _renderItem(item, index)}
-          extraData={mediaToTal.slice(0, 5)}
+          extraData={arrImages.slice(0, 5)}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
@@ -127,7 +82,7 @@ const BoxImageDetail: FC<IProps> = (props) => {
         () => (
           <Modal visible={isImageViewVisible} transparent={true}>
             <ImageViewer
-              imageUrls={mediaToTal}
+              imageUrls={arrImages}
               index={indexImage}
               enableSwipeDown={true}
               onSwipeDown={closeModal}

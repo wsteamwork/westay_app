@@ -23,59 +23,13 @@ import { ReducersList } from 'store/redux/reducers';
 import { IMAGE_STORAGE_LG } from 'types/globalTypes';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
+  arrImages?: any;
 }
 
 const BoxImageRoom: FC<IProps> = (props) => {
-  const { navigation } = props;
+  const { navigation, arrImages } = props;
   const [isImageViewVisible, setIsImageViewVisible] = useState(false);
   const [indexImage, setIndexImage] = useState<number>(0);
-  const [mediaToTal, setMediaToTal] = useState<any>([]);
-  const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
-  useEffect(() => {
-    let arrayImg: any = [];
-    if (listing.avatar.images.length) {
-      arrayImg.push(...listing.avatar.images);
-    }
-    if (listing.cover_photo.images.length) {
-      arrayImg.push(...listing.cover_photo.images);
-    }
-    if (listing.bedrooms.number_bedroom) {
-      {
-        _.times(listing.bedrooms.number_bedroom, (i) =>
-          arrayImg.push(...listing.bedrooms[`bedroom_${i + 1}`].images),
-        );
-      }
-    }
-    if (listing.bathrooms.total_image) {
-      {
-        _.times(listing.bathrooms.number_bathroom, (i) =>
-          arrayImg.push(...listing.bathrooms[`bathroom_${i + 1}`].images),
-        );
-      }
-    }
-    if (listing.outdoors.images.length) {
-      arrayImg.push(...listing.outdoors.images);
-    }
-    if (listing.furnitures.images.length) {
-      arrayImg.push(...listing.furnitures.images);
-    }
-    if (listing.kitchens.images.length) {
-      arrayImg.push(...listing.kitchens.images);
-    }
-    if (listing.livingrooms.images.length) {
-      arrayImg.push(...listing.livingrooms.images);
-    }
-    let images = arrayImg
-      ? _.map(arrayImg, (o, i) => {
-          return {
-            url: `${IMAGE_STORAGE_LG + arrayImg[i].name}`,
-            width: wp('100%'),
-            height: hp('50%'),
-          };
-        })
-      : [];
-      setMediaToTal(images);
-  }, []);
   const footer = () => {
     return (
       <View
@@ -98,7 +52,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
       {useMemo(
         () => (
           <Swiper autoplay showsPagination={false}>
-            {mediaToTal.map((o: any, i: number) => (
+            {arrImages.map((o: any, i: number) => (
               <TouchableWithoutFeedback
                 key={i}
                 onPress={() => {
@@ -108,7 +62,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
                 <View style={styles.slider}>
                   <Image
                     source={{
-                      uri: `${mediaToTal[i].url}`,
+                      uri: `${arrImages[i].url}`,
                     }}
                     style={styles.imgAvatar}
                     resizeMode="cover"
@@ -118,7 +72,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
             ))}
           </Swiper>
         ),
-        [mediaToTal],
+        [arrImages],
       )}
       <View style={styles.featureImage}>
         <View style={styles.btnBack}>
@@ -145,7 +99,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
         () => (
           <Modal visible={isImageViewVisible} transparent={true}>
             <ImageViewer
-              imageUrls={mediaToTal}
+              imageUrls={arrImages}
               index={indexImage}
               enableSwipeDown={true}
               onSwipeDown={closeModal}
@@ -154,7 +108,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
             />
           </Modal>
         ),
-        [indexImage, isImageViewVisible, mediaToTal],
+        [indexImage, isImageViewVisible, arrImages],
       )}
     </View>
   );

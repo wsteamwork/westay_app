@@ -19,10 +19,8 @@ const stackNavigator = createStackNavigator({
   ForgotPassword: { screen: ForgotPassword },
   TermsAndConditions: { screen: TermsAndConditions },
   PrivacyPolicy: { screen: PrivacyPolicy },
-  SearchSuggest: { screen: SearchSuggest },
   BoxImageLT: { screen: BoxImageLT },
   BoxDetailRoom: { screen: BoxDetailRoom },
-  ListRooms: { screen: ListRooms},
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({

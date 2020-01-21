@@ -5,6 +5,7 @@ import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
+import Foundation from 'react-native-vector-icons/Foundation';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import _ from 'lodash';
@@ -46,7 +47,7 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             alignItems: 'center',
             width: wp('30%'),
           }}>
-          <FontAwesomeIcon name="bed" size={24} color="#666666" />
+          <Foundation name="annotate" size={24} color="#666666" />
           <Text style={styles.txtNameHost}>{listing.total_area} m2</Text>
         </View>
       </View>
