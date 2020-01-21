@@ -8,6 +8,7 @@ import Trip from '../screens/Trip';
 import NavBottom from '../components/NavBottom';
 import RootNavigation from 'navigation/RootNavigation';
 import RoomNavigation from 'navigation/RoomNavigation';
+import Settings from 'components/Settings';
 
 const TabBarComponent = (props: any) => (
   <View
@@ -23,7 +24,8 @@ const TabBarComponent = (props: any) => (
 const AppView = createBottomTabNavigator(
   {
     Search: {
-      screen: RoomNavigation,
+      // screen: RoomNavigation,
+      screen: Settings,
       // screen: RootNavigation,
     },
     Home: {

@@ -16,7 +16,7 @@ const BoxBookingRoom: FC<IProps> = (props) => {
     <View style={styles.boxPrice}>
       <View
         style={{
-          width: wp('40%'),
+          width: wp('50%'),
           justifyContent: 'flex-start',
           flexDirection: 'row',
         }}>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: wp('100%'),
-    height: hp('10%'),
+    height: hp('8%'),
     backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.39,
     shadowRadius: 8.3,
-    elevation: 13,
+    elevation: 10,
   },
   txtPrice: {
     lineHeight: 30,
