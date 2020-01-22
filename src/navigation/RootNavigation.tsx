@@ -11,6 +11,7 @@ import IntroApp from 'components/Auth/IntroApp';
 import BoxImageLT from 'components/LTRoom/BoxDetailRoom/BoxImageLT';
 import BoxDetailRoom from 'components/LTRoom/BoxDetailRoom';
 import ListRooms from 'components/ListRooms';
+import Settings from 'components/Settings';
 
 const stackNavigator = createStackNavigator({
   IntroApp: { screen: IntroApp },
@@ -19,7 +20,8 @@ const stackNavigator = createStackNavigator({
   ForgotPassword: { screen: ForgotPassword },
   TermsAndConditions: { screen: TermsAndConditions },
   PrivacyPolicy: { screen: PrivacyPolicy },
-  BoxImageLT: { screen: BoxImageLT },
+  Settings: { screen: Settings },
+  DetailScreen: { screen: BoxImageLT },
   BoxDetailRoom: { screen: BoxDetailRoom },
 },
 {
