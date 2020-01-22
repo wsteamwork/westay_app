@@ -9,6 +9,7 @@ import NavBottom from '../components/NavBottom';
 import RootNavigation from 'navigation/RootNavigation';
 import RoomNavigation from 'navigation/RoomNavigation';
 import Settings from 'components/Settings';
+import EditProfile from 'components/EditProfile';
 
 const TabBarComponent = (props: any) => (
   <View
@@ -25,7 +26,8 @@ const AppView = createBottomTabNavigator(
   {
     Search: {
       // screen: RoomNavigation,
-      screen: Settings,
+      // screen: Settings,
+      screen: EditProfile,
       // screen: RootNavigation,
     },
     Home: {
