@@ -5,7 +5,7 @@ import { ThemeProvider } from 'react-native-elements';
 import AppView from './src/modules/AppView';
 import i18n from './src/translations';
 import { COLOR_TITLE_HEADER, COLOR_BUTTON_DEFAULT } from 'styles/global.style';
-import { isConnected } from '@react-native-community/netinfo';
+import { useNetInfo} from '@react-native-community/netinfo';
 import { AuthContext, authReducer, authInit } from 'store/context/auth';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -26,7 +26,7 @@ const theme = {
 
 const App: FC = () => {
   const [authState, authDispatch] = useReducer(authReducer, authInit);
-
+  const { isConnected } = useNetInfo();
   return (
     <Suspense
       fallback={

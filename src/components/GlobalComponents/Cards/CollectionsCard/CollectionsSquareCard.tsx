@@ -7,18 +7,19 @@ import { hp, wp } from 'utils/responsive';
 import {IMAGE_STORAGE_XS} from 'types/globalTypes';
 import {AuthContext} from 'store/context/auth';
 import {cleanAccents, formatPrice} from 'utils/mixins';
+import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 
-interface IProps {
+interface IProps extends NavigationInjectedProps{
   room: any,
   showNumberRoom?: boolean
 }
 
 const CollectionsSquareCard: FC<IProps> = (props) => {
-  const { room, showNumberRoom } = props;
+  const { room, showNumberRoom, navigation } = props;
   const { state : {languageStatus}} = useContext(AuthContext);
 
   const handleClick = () => {
-    Alert.alert('click', 'ban da click')
+    navigation.navigate('DetailScreen', { idRoom: room.id });
   };
 
   return (
@@ -99,4 +100,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CollectionsSquareCard;
+export default withNavigation(CollectionsSquareCard);

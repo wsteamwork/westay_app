@@ -6,7 +6,7 @@ import ListCollections from 'components/ListRoomType/ListCollections';
 import ListCollectionsSquare from 'components/ListRoomType/ListCollectionsSquare';
 import ListDestinations from 'components/ListRoomType/ListDestinations_Valuable';
 import React, {FC, useContext, useEffect, Dispatch, useState} from 'react';
-import { ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import {ScrollView, StatusBar, StyleSheet, View, TouchableOpacity, Text, Alert} from 'react-native';
 import {TypeApartment, NumberRoomCity, RoomIndexRes} from 'types/Rooms/RoomResponses';
 import { __currentPlatform } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
@@ -17,6 +17,9 @@ import {getRoomsHomepage, RoomHomepageAction} from 'store/redux/reducers/Home/ro
 import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
 import {IMAGE_STORAGE_SM} from 'types/globalTypes';
 import SearchComponent from 'components/SearchComponent';
+import SectionListInput from 'components/SearchComponent/SectionListInput';
+import IconSimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import InputSearchFake from 'components/SearchComponent/InputSearchFake';
 
 interface IProps {
 };
@@ -93,8 +96,9 @@ const Home: FC<IProps> = (props) => {
 
   return (
     <ScrollView style={styles.container} stickyHeaderIndices={[0]}>
-
-      <SearchComponent />
+      <View style={styles.searchComponent}>
+        <InputSearchFake />
+      </View>
 
       <View style={[styles.pdLeft, { marginLeft: -wp('5%') }]}>
         <ListRoomType data={dataTypeHouse} />
@@ -139,6 +143,12 @@ const styles = StyleSheet.create({
   },
   boxEmpty: {
     height: hp('5%')
+  },
+  searchComponent: {
+    paddingTop:StatusBar.currentHeight,
+    paddingBottom: hp('1%'),
+    paddingHorizontal: wp('5%'),
+    backgroundColor: '#fff'
   }
 });
 

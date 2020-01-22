@@ -26,23 +26,24 @@ import FilterByDateAndFastBook from 'components/Filter/FilterByDateAndFastBook';
 import {wp} from 'utils/responsive';
 import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
 import IonIcons from 'react-native-vector-icons/Ionicons';
+import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
+import {ReducersList} from 'store/redux/reducers';
 
 interface IProps extends NavigationInjectedProps {
 }
 
 const Filter: FC<IProps> = (props) => {
   const { navigation } = props;
-
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { state: authState, dispatch:authDispatch } = useContext<IAuthGlobal>(AuthContext);
-  const { languageStatus } = authState;
-  const rent_type = useSelector((state:any) => state.searchField.rent_type);
-  const instant_book = useSelector((state:any) => state.searchField.instant_book);
-  const price_day_from = useSelector((state:any) => state.searchField.price_day_from);
-  const price_day_to = useSelector((state:any) => state.searchField.price_day_to);
-  const arrayRentType = useSelector((state:any) => state.cityDistrict.arrayRentType);
-  const arrayAmenities = useSelector(
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
+  const rent_type = useSelector<ReducersList, number | undefined>((state) => state.searchField.rent_type);
+  const instant_book = useSelector<ReducersList, number | undefined>((state) => state.searchField.instant_book);
+  const price_day_from = useSelector<ReducersList, number | undefined>((state) => state.searchField.price_day_from);
+  const price_day_to = useSelector<ReducersList, number | undefined>((state) => state.searchField.price_day_to);
+  const arrayRentType = useSelector<ReducersList, number[]>((state) => state.cityDistrict.arrayRentType);
+  const arrayAmenities = useSelector<ReducersList, number[]>(
     (state:any) => state.cityDistrict.arrayAmenities,
   );
   const [sortByDay, setSortByDay] = useState(rent_type === 2);
@@ -81,8 +82,8 @@ const Filter: FC<IProps> = (props) => {
   };
 
   useEffect(() => {
-    arrayAmenities.length && setTypeAmenities(arrayAmenities);
-    arrayRentType.length && setTypeRoom(arrayRentType);
+    arrayAmenities!.length && setTypeAmenities(arrayAmenities);
+    arrayRentType!.length && setTypeRoom(arrayRentType);
 
     getDate();
   }, [languageStatus]);
@@ -93,12 +94,10 @@ const Filter: FC<IProps> = (props) => {
     setLoading(false);
     setSections(response);
   };
-
   const handleSubmit = () => {
     typeRoom.length
       ? dispatch(setRoomType(typeRoom.map((item:any) => item.id).join(',')))
       : dispatch(setRoomType(null));
-
     typeAmenities.length
       ? dispatch(setAmenities(typeAmenities.map((item:any) => item.id).join(',')))
       : dispatch(setAmenities(null));
@@ -119,20 +118,20 @@ const Filter: FC<IProps> = (props) => {
 
   return (
     <View style={{ flex: 1 }}>
-      {/*<HeaderWithBackTitle*/}
-      {/*  title={t('filter:name')}*/}
-      {/*  rightComponent={*/}
-      {/*    <IonIcons*/}
-      {/*      name={__currentPlatform ? 'md-refresh' : 'ios-refresh'}*/}
-      {/*      size={wp('6%')}*/}
-      {/*      color={COLOR_TEXT_DEFAULT}*/}
-      {/*      onPress={handleReset}*/}
-      {/*    />*/}
-      {/*  }*/}
-      {/*  textHeaderStyle={{ color: COLOR_TEXT_DEFAULT }}*/}
-      {/*/>*/}
+      <HeaderWithBackTitle
+        title={t('filter:name')}
+        rightComponent={
+          <IonIcons
+            name={__currentPlatform ? 'md-refresh' : 'ios-refresh'}
+            size={wp('6%')}
+            color={COLOR_TEXT_DEFAULT}
+            onPress={handleReset}
+          />
+        }
+        textHeaderStyle={{ color: COLOR_TEXT_DEFAULT }}
+      />
 
-      <View style={{ flex: 1, paddingHorizontal: wp('4%') }}>
+      <View style={{ flex: 1, paddingHorizontal: wp('4%'), backgroundColor:'#fff' }}>
         {useMemo(
           () => (
             <FilterByDateAndFastBook

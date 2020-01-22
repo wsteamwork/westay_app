@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 import {AuthContext} from 'store/context/auth';
 import {NavigationInjectedProps, withNavigation} from 'react-navigation';
-import {COLOR_BUTTON_DEFAULT} from 'utils/responsive';
+import {COLOR_BUTTON_DEFAULT, hp} from 'utils/responsive';
 import moment from 'moment';
 import Loadable from 'react-loadable';
 import {ReducersList} from 'store/redux/reducers';
@@ -35,7 +35,7 @@ const ModalChooseDate: FC<IProps> = (props) => {
   const [days, setDays]           = useState('');
   const [startDate, setStartDate] = useState<string>(check_in);
   const [untilDate, setUntilDate] = useState<string>(check_out);
-  console.log(stateRoom);
+
   const handleConfirm = (startDate:any, untilDate:any) => {
     if (startDate) {
       setStartDate(startDate.format('YYYYMMDD'));
@@ -88,12 +88,12 @@ const ModalChooseDate: FC<IProps> = (props) => {
       animationIn="fadeInUp"
       animationOut="fadeOutDown"
       coverScreen={true}
-      style={{ margin:0 }}
+      style={{ margin:0, paddingTop: hp('9%')}}
     >
       <View style = {{flex: 1, alignItems: 'center', justifyContent:'center'}}>
       <StatusBar
         translucent
-        backgroundColor = 'transparent'
+        backgroundColor = '#fff'
         animated = {true}
         barStyle = 'dark-content'
       />

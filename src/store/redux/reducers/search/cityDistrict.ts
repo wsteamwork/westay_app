@@ -7,9 +7,10 @@ import {
 } from 'types/Search/searchTypes';
 import {Reducer} from 'redux';
 import {CityType} from 'types/Cities/CityResponse';
+import {SearchSuggestRes} from 'types/Search/SearchResponse';
 
 export type CityDistrictState = {
-  city_district: number | null,
+  city_district: SearchSuggestRes | null,
   currCity: CityType | null,
   openChoosePeople: boolean,
   arrayRentType: number[],
@@ -18,7 +19,7 @@ export type CityDistrictState = {
 
 export type CityDistrictAction =
   |  {type: 'GET_CITY'; payload: CityType }
-  |  {type: 'SET_CITY_DISTRICT'; payload: number }
+  |  {type: 'SET_CITY_DISTRICT'; payload:  SearchSuggestRes}
   |  {type: 'SET_TOGGLE_CHOOSE_PEOPLE'; payload: boolean }
   |  {type: 'ARRAY_RENT_TYPE'; payload: number[] }
   |  {type: 'ARRAY_AMENITIES'; payload: number[] }
