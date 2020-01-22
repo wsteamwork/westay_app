@@ -39,7 +39,7 @@ export interface IRoomDetailContext {
 export type RoomDetailsState = {
   readonly room: RoomIndexRes | null;
   readonly roomRecommend: RoomIndexRes[];
-  readonly roomSchedule: string[];
+  readonly roomSchedule: string[] | null;
   readonly priceByDay: PriceByDayRes[];
   readonly error: boolean;
 };
@@ -54,7 +54,7 @@ export type RoomReducerAction =
 export const initStateRoom:RoomDetailsState = {
   room: null,
   roomRecommend: [],
-  roomSchedule: [],
+  roomSchedule: null,
   priceByDay: [],
   error: false
 };

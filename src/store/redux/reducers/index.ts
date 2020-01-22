@@ -3,12 +3,14 @@ import searchFieldReducer, {SearchFilterState, SearchFilterAction} from 'store/r
 import cityDistrictReducer, {CityDistrictState, CityDistrictAction} from 'store/redux/reducers/search/cityDistrict';
 import { LTRoomReducerState, LTRoomReducerAction, ltroomReducer } from './LTRoom/RoomDetails';
 import {RoomHomepageAction, RoomHomepageState, roomHomepageReducer} from 'store/redux/reducers/Home/roomHomepage';
+import asyncStorageReducer, {AsyncStorageState, AsyncStorageAction} from 'store/redux/reducers/asyncStorage';
 
 export type ReducersType = {
   searchField: Reducer<SearchFilterState, SearchFilterAction>;
   cityDistrict: Reducer<CityDistrictState, CityDistrictAction>;
   ltRoomDetails: Reducer<LTRoomReducerState, LTRoomReducerAction>;
   roomHomepage: Reducer<RoomHomepageState, RoomHomepageAction>;
+  asyncData: Reducer<AsyncStorageState, AsyncStorageAction>;
 }
 
 export type ReducersList = {
@@ -16,6 +18,7 @@ export type ReducersList = {
   cityDistrict: CityDistrictState;
   ltRoomDetails: LTRoomReducerState;
   roomHomepage: RoomHomepageState;
+  asyncData: AsyncStorageState;
 };
 
 export type ReducersActions =
@@ -23,12 +26,14 @@ export type ReducersActions =
   | CityDistrictAction
   | LTRoomReducerAction
   | RoomHomepageAction
+  | AsyncStorageAction
 
 const reducers: ReducersType = {
   searchField: searchFieldReducer,
   cityDistrict: cityDistrictReducer,
   ltRoomDetails: ltroomReducer,
   roomHomepage: roomHomepageReducer,
+  asyncData: asyncStorageReducer,
 };
 
 const rootReducer = combineReducers(reducers);

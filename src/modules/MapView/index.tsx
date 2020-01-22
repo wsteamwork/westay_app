@@ -54,7 +54,7 @@ const MyMapView: FC<IProps> = (props) => {
   const [isIndex, setIsIndex] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
   const [findAroundHere, setFindAroundHere] = useState<boolean>(false);
-  const [latLngMinMax, setLatLngMinMax] = useState<MapCoords>({lat_max: 0, lat_min: 0, long_max: 0, long_min: 0});
+  const [latLngMinMax, setLatLngMinMax] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [openLottie, setOpenLottie] = useState<boolean>(false);
   const [region, setRegion] = useState({
@@ -91,6 +91,8 @@ const MyMapView: FC<IProps> = (props) => {
       600,
     );
   };
+
+  // console.log(data);
 
   const getDataFindAround = () => {
     const MAP_AAA = {
@@ -129,7 +131,6 @@ const MyMapView: FC<IProps> = (props) => {
 
   const handleChangeSwiper = (index:number) => {
     setIsIndex(index);
-
     data.forEach((item:any, i:number) => {
       if (index === i) {
         mapRef.current.animateToRegion(
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: hp('4%'),
     width: wp('100%'),
-    paddingHorizontal: wp('3%'),
+    paddingHorizontal: wp('5%'),
   },
 });
 

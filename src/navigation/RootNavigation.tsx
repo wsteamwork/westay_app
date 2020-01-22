@@ -12,6 +12,8 @@ import BoxImageLT from 'components/LTRoom/BoxDetailRoom/BoxImageLT';
 import BoxDetailRoom from 'components/LTRoom/BoxDetailRoom';
 import ListRooms from 'components/ListRooms';
 import Settings from 'components/Settings';
+import Filter from 'components/Filter';
+import MyMapView from 'modules/MapView';
 
 const stackNavigator = createStackNavigator({
   IntroApp: { screen: IntroApp },
@@ -23,6 +25,10 @@ const stackNavigator = createStackNavigator({
   Settings: { screen: Settings },
   DetailScreen: { screen: BoxImageLT },
   BoxDetailRoom: { screen: BoxDetailRoom },
+  ListRooms: { screen: ListRooms},
+    SearchSuggest: { screen: SearchSuggest },
+  Filter: { screen: Filter},
+  MapFilter: { screen: MyMapView},
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({

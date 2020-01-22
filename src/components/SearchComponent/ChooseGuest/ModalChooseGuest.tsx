@@ -29,6 +29,7 @@ const ModalChooseGuest: FC<IProps> = (props) => {
   const handleSubmit = () => {
     dispatch(setNumberGuest(people));
     dispatch(setNumberRoom(room));
+    setClose(false);
     // dispatch(setToggleChoosePeople(false));
   };
 

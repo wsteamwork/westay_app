@@ -58,11 +58,11 @@ HeaderWithBackTitle.defaultProps = {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: hp('2%'),
-    marginTop: StatusBar.currentHeight,
+    paddingVertical: StatusBar.currentHeight,
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: wp('4%'),
+    backgroundColor: '#fff'
   },
   textHeader: {
     flex: 1,
