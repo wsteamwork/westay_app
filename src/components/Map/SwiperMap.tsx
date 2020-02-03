@@ -6,6 +6,7 @@ import Collapsible from 'react-native-collapsible';
 import Swiper from 'react-native-swiper';
 import {wp, hp} from 'utils/responsive';
 import ValuableCard from 'components/GlobalComponents/Cards/ValuableCard';
+import {IMAGE_STORAGE_SM} from 'types/globalTypes';
 
 interface IProps {
   data: [],
@@ -19,6 +20,8 @@ const SwiperMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const { data, handleChangeSwiper, open, isIndex, openLottie } = props;
 
+  // console.log(data);
+
   return openLottie ? (
     <View style={{ flex: 1, height: hp('20%') }}>
       <LottieView
@@ -27,7 +30,7 @@ const SwiperMap: FC<IProps> = (props) => {
       />
     </View>
   ) : (
-    <Collapsible style={{ flex: 1, height: 150 }} collapsed={open}>
+    <Collapsible style={{ flex: 1, height: 120 }} collapsed={open}>
       {!data.length ? (
         <View
           style={{
@@ -47,15 +50,29 @@ const SwiperMap: FC<IProps> = (props) => {
           onMomentumScrollEnd={(e, state, context) =>
             handleChangeSwiper(state.index)
           }
-          loop
-          style={{ flex: 1 }}
+          // loop
+          style={{ alignItems:'center', flexWrap: 'wrap' }}
           loadMinimal={true}
           showsPagination={false}
           index={isIndex}
         >
-          {data.map((item, index) => (
-            <ValuableCard key={index} item={item} />
-          ))}
+          {data.map((room:any, index:number) => {
+            const imgRoomSM = room.image
+              ? `${IMAGE_STORAGE_SM + room.image}`
+              : 'https://via.placeholder.com/320x320.png?text=Westay.vn';
+
+            return (
+              <ValuableCard key = {index}
+                            city = {room.city_name}
+                            district = {room.district_name}
+                            priceDisplay = {room.price_day}
+                            roomID = {room.id}
+                            roomName = {room.name}
+                            roomType = {room.room_type}
+                            roomImage = {imgRoomSM}
+                            avg_rating = {room.avg_rating} />
+            )
+          })}
         </Swiper>
       )}
     </Collapsible>

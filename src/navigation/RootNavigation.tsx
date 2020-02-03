@@ -9,8 +9,11 @@ import IntroApp from 'components/Auth/IntroApp';
 import BoxImageLT from 'components/LTRoom/BoxDetailRoom/BoxImageLT';
 import BoxDetailRoom from 'components/LTRoom/BoxDetailRoom';
 import Settings from 'components/Settings';
-import EditProfile from 'components/EditProfile';
+import Filter from 'components/Filter';
+import MyMapView from 'modules/MapView';
 import BottomNavigation from './BottomNavigation';
+import EditProfile from 'components/EditProfile';
+import ListRooms from 'components/ListRooms';
 
 const stackNavigator = createStackNavigator({
   Main: {
@@ -27,6 +30,10 @@ const stackNavigator = createStackNavigator({
   DetailScreen: { screen: BoxImageLT },
   BoxImageLT: { screen: BoxImageLT },
   BoxDetailRoom: { screen: BoxDetailRoom },
+  ListRooms: { screen: ListRooms},
+    SearchSuggest: { screen: SearchSuggest },
+  Filter: { screen: Filter},
+  MapFilter: { screen: MyMapView},
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({

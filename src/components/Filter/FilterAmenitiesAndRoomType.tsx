@@ -82,7 +82,7 @@ const FilterAmenitiesAndRoomType: FC<IProps> = (props) => {
       <SectionList
         sections={sections}
         renderItem={({item,index}) =>_renderItem(item,index)}
-        renderSectionHeader={_renderSectionHeader}
+        renderSectionHeader={({section})=>_renderSectionHeader(section)}
         keyExtractor={(item, index) => index.toString()}
         stickySectionHeadersEnabled={true}
         showsVerticalScrollIndicator={false}

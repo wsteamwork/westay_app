@@ -1,5 +1,5 @@
 import React, {FC, useContext, useState, Fragment, memo, useEffect} from 'react';
-import {StyleSheet, View, Animated, Text, Platform} from 'react-native';
+import {StyleSheet, View, Animated, Text, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 import {AuthContext} from 'store/context/auth';
@@ -7,20 +7,19 @@ import {ReducersList} from 'store/redux/reducers';
 import {SearchFilterState} from 'store/redux/reducers/search/searchField';
 import {CityType} from 'types/Cities/CityResponse';
 import {NavigationInjectedProps, withNavigation} from 'react-navigation';
-import LottieView from "lottie-react-native";
-import {COLOR_BACKGROUND_WHITEBLUE, wp, COLOR_BUTTON_DEFAULT, hp} from 'utils/responsive';
-import IconIons from 'react-native-vector-icons/Ionicons';
+import LottieView from 'lottie-react-native';
+import {wp, COLOR_BUTTON_DEFAULT, hp} from 'utils/responsive';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 // @ts-ignore
-import { compose } from 'recompose';
-import {getDataListRooms} from 'utils/mixins';
+import {compose} from 'recompose';
+import {getDataListRooms, elevationShadowStyle} from 'utils/mixins';
 import RoomCard from 'components/GlobalComponents/Cards/RoomCard';
 import qs from 'query-string';
 import {changeDataMap} from 'components/Map/handleMap';
-import {RoomIndexRes} from 'types/Rooms/RoomResponses';
 import SearchComponent from 'components/SearchComponent';
 import Feather from 'react-native-vector-icons/Feather';
 import {COLOR_TITLE_HEADER} from 'styles/global.style';
-import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
+import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
 
 interface IProps extends NavigationInjectedProps{
   paddingHeight: string,
@@ -37,11 +36,11 @@ const ListRooms: FC<IProps> = (props) => {
   const { languageStatus } = state;
   const coords = navigation.getParam('coords');
 
-  const [data, setData] = useState<RoomIndexRes[]>([]);
+  const [data, setData] = useState<any>([]);
   const [page, setPage] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
 
-  const getData = async (value:boolean, page = 1, url = '', findAround = false) => {
+  const getData = async (value:boolean, page = 1, url = '', findAround:boolean = false) => {
     const resData = value
       ? await getDataListRooms(
         searchField,
@@ -88,9 +87,9 @@ const ListRooms: FC<IProps> = (props) => {
 
   const _renderItem = (item:any, index:number)=> {
     return (
-      <View style={{ marginVertical: hp('1.5%'), paddingHorizontal: wp('5%') }}>
+      <View key={index} style={{ marginVertical: hp('1.5%'), paddingHorizontal: wp('5%') }}>
         <RoomCard
-          room={item}
+          room={item.item}
         />
       </View>
     );
@@ -98,10 +97,10 @@ const ListRooms: FC<IProps> = (props) => {
 
   const handleClickMap = () => {
     coords
-      ? navigation.navigate('Map', { coords })
-      : navigation.navigate('Map');
+      ? navigation.navigate('MapFilter', { coords })
+      : navigation.navigate('MapFilter');
   };
-
+  console.log(data);
   return (
     <Fragment>
       {refreshing ? (
@@ -112,23 +111,23 @@ const ListRooms: FC<IProps> = (props) => {
       ) : (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
 
-          <HeaderWithBackTitle title={'Search'} showBack />
+          <SearchComponent showListSuggest={false} showInputFake={true} styleContainer={styles.containerSearch}/>
 
-          <SearchComponent showBtnFilter/>
-
-          <View style = {styles.boxFilter}>
+          <View style = {[styles.boxFilter, elevationShadowStyle(6)]}>
             <Text>
               299 rooms found
             </Text>
-            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-              <Text>Filter</Text>
-              <Feather
-                name = {'filter'}
-                size = {wp('3.5%')}
-                style = {{marginLeft: wp('2%')}}
-                color = {COLOR_TITLE_HEADER}
-              />
-            </View>
+            <TouchableOpacity activeOpacity={1} onPress={()=>navigation.navigate('Filter')}>
+              <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                <Text>Filter</Text>
+                <Feather
+                  name = {'filter'}
+                  size = {wp('3.5%')}
+                  style = {{marginLeft: wp('2%')}}
+                  color = {COLOR_TITLE_HEADER}
+                />
+              </View>
+            </TouchableOpacity>
           </View>
 
           <Animated.FlatList
@@ -152,15 +151,15 @@ const ListRooms: FC<IProps> = (props) => {
             }
           />
 
-          <View style={styles.viewIconMap}>
-            <IconIons
-              name={Platform.OS === 'ios' ? 'ios-pin' : 'md-pin'}
-              size={wp('6%')}
-              color={COLOR_BUTTON_DEFAULT}
-              style={styles.iconMap}
-              onPress={handleClickMap}
-            />
-          </View>
+            <TouchableWithScale _onPress={handleClickMap} style={styles.viewIconMap}
+            >
+              <Fontisto
+                name={'map'}
+                size={wp('5%')}
+                color={COLOR_BUTTON_DEFAULT}
+                style={styles.iconMap}
+              />
+            </TouchableWithScale>
         </View>
       )}
     </Fragment>
@@ -201,6 +200,10 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: wp('5%')
   },
+  containerSearch:{
+    flex: 0,
+    paddingTop: 0
+  }
 });
 
 export default compose(

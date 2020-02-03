@@ -1,4 +1,4 @@
-import React, {useContext, useMemo, FC, } from 'react';
+import React, {useContext, useMemo, FC, Fragment, useEffect} from 'react';
 import {
   View,
   Text,
@@ -19,19 +19,18 @@ import {
 } from 'react-navigation';
 import { useTranslation } from 'react-i18next';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {IMAGE_STORAGE_LG} from 'types/globalTypes';
+import {IMAGE_STORAGE_LG, IMAGE_STORAGE_SM} from 'types/globalTypes';
 import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
 import {wp, hp} from 'utils/responsive';
-import {elevationShadowStyle} from 'utils/mixins';
+import {elevationShadowStyle, formatPrice} from 'utils/mixins';
 // @ts-ignore
 import {compose} from 'recompose';
-import {RoomIndexRes} from 'types/Rooms/RoomResponses';
 
 const checkISO = Platform.OS === 'ios';
 
 interface IProps extends  NavigationInjectedProps{
   customStyle?: ViewStyle,
-  room?: RoomIndexRes,
+  room: any,
   imageStyle?: ImageStyle
 }
 
@@ -41,14 +40,22 @@ const RoomCard: FC<IProps> = (props) => {
   // const { stateSaved } = useContext(SavedContext);
   // const { wishList } = stateSaved;
 
-  // const handleClick = () => {
-  //   navigation.navigate('DetailScreen', { idRoom: item.id });
-  // };
+  // useEffect(() => {
+  // }, [room]);
+
+
+  const handleClick = () => {
+    navigation.navigate('DetailScreen', { idRoom: room.id });
+  };
+
+  const imgRoomSM = room.image
+    ? `${IMAGE_STORAGE_SM + room.image}`
+    : 'https://via.placeholder.com/320x320.png?text=Westay.vn';
 
   return (
     <TouchableOpacity
       activeOpacity={1}
-      // onPress={handleClick}
+      onPress={handleClick}
       style={[styles.container, customStyle, elevationShadowStyle(3)]}
     >
       {/*{useMemo(*/}
@@ -60,13 +67,11 @@ const RoomCard: FC<IProps> = (props) => {
       {/*    ),*/}
       {/*  [wishList],*/}
       {/*)}*/}
-
       {useMemo(
         () => (
           <Image
             source={{
-              // uri: `${IMAGE_STORAGE_LG + item.image}`,
-              uri: 'https://m.westay.vn/static/images/property/house.jpg',
+              uri: imgRoomSM,
             }}
             style={[styles.image, imageStyle]}
             resizeMode="cover"
@@ -76,38 +81,33 @@ const RoomCard: FC<IProps> = (props) => {
         [room],
       )}
 
-      {useMemo(
-        () =>
-          // item.instant_book === 1 && (
-          1 === 1 && (
+         { room.instant_book === 1 && (
                               <View style={{ position: 'absolute', top: 5, left: 5 }}>
                                 <View style={styles.instant_book}>
                                   <FontAwesome name={'bolt'} color="#fff" size={wp('3.5%')} />
                                 </View>
                               </View>
-                            ),
-        [room],
-      )}
+          )}
 
-      {useMemo(
-        () => (
+
           <View style={styles.description}>
             <View style={{width: '70%'}}>
               <View style={styles.item}>
-                <Text style={styles.text_room_type}>can ho chung cu</Text>
+                <Text style={styles.text_room_type}>{room.room_type}</Text>
 
-                {(
-                  <IconEntypo name = "dot-single" size = {wp('2%')} />
-                )}
-                {(
-                  <Text style = {styles.text_room_type}>
-                    3 {t('shared:cardRoom:bedroom')}
-                  </Text>
+                {room.number_room !== 0 && (
+                  <Fragment>
+                    <IconEntypo name = "dot-single" size = {wp('2%')} />
+
+                    <Text style = {styles.text_room_type}>
+                      {room.number_room} {t('shared:cardRoom:bedroom')}
+                    </Text>
+                  </Fragment>
                 )}
               </View>
 
               <Text numberOfLines={1} style={styles.name}>
-                ten rat la dai o day mamk am ams
+                {room.name}
               </Text>
 
               <View style={styles.item}>
@@ -116,15 +116,14 @@ const RoomCard: FC<IProps> = (props) => {
                   size={wp('3.5%')}
                 />
                 <Text numberOfLines={1} style={styles.address}>
-                  {/*{item.district_name}, {item.city_name}*/}
-                  Ha noi, dong ada
+                  {room.district_name}, {room.city_name}
                 </Text>
               </View>
             </View>
 
               <View style={styles.boxPrice}>
                 <Text style={ styles.price_day} >
-                  $320
+                  {formatPrice(room.price_day)}
                 </Text>
 
                 <Text>
@@ -133,9 +132,6 @@ const RoomCard: FC<IProps> = (props) => {
               </View>
 
           </View>
-        ),
-        [room],
-      )}
     </TouchableOpacity>
   );
 };

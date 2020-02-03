@@ -1,6 +1,6 @@
 import {RoomIndexRes} from 'types/Rooms/RoomResponses';
 
-export const changeDataMap = (data:RoomIndexRes[]) =>
+export const changeDataMap = (data:[]) =>
   data.map((item:RoomIndexRes) => ({
     image: item.avatar_image,
     name: item.room_name,

@@ -410,7 +410,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     position:'absolute',
-    top: hp('90%'),
+    bottom: hp('10%'),
     width: wp('100%'),
     height: hp('10%'),
     zIndex: 9999
