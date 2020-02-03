@@ -58,6 +58,7 @@ export const getProfile = (token:string, dispatch:Dispatch<AuthAction>, language
     })
     .then(res => res.data.data)
     .then(data => {
+      console.log('profile', data);
       dispatch({ type: SET_PROFILE, payload: data });
     })
     .catch(() => dispatch({ type: SET_PROFILE, payload: null }));

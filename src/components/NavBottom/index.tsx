@@ -9,7 +9,6 @@ import Search from 'static/search.svg';
 // import { hp, wp } from '../utils/responsive';
 import { COLOR_BACKGROUND_BUTTON } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
-import Profile from 'screens/Profile';
 interface IProps extends NavigationInjectedProps {
 
 };

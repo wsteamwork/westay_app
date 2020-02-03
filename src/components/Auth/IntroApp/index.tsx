@@ -3,7 +3,9 @@ import { StyleSheet, View, Image, Alert, Text } from 'react-native';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { hp, wp } from 'utils/responsive';
-interface IProps extends NavigationInjectedProps{
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
+
+interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
 
@@ -22,7 +24,20 @@ const IntroApp: FC<IProps> = (props) => {
         handlePress={() => navigation.navigate('Login')}
         customStyle={styles.marginBottom}
       />
-      <ButtonOriginal title="Create Acount" handlePress={() => navigation.navigate('Register')} />
+      <ButtonOriginal
+        title="Create Acount"
+        handlePress={() => navigation.navigate('Register')}
+        customStyle={styles.marginBottom}
+      />
+        
+      <Text style={styles.settingsText} onPress={() => navigation.navigate('Settings')}>
+        <IconAntDesign
+          name="setting"
+          size={wp('5%')}
+          color='#484848'
+        />{' '}
+        Cài đặt
+      </Text>
     </View>
   );
 };
@@ -61,6 +76,11 @@ const styles = StyleSheet.create({
     width: wp('60%'),
     textAlign: 'center',
     color: '#8A8A8F',
+  },
+  settingsText: {
+    fontWeight: '700',
+    fontSize: 18,
+    color: '#484848',
   },
 });
 IntroApp.defaultProps = {};

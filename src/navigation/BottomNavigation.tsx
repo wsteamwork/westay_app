@@ -3,13 +3,9 @@ import { View } from 'react-native-animatable';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from '../screens/Home';
-import Search from '../screens/Search';
 import Trip from '../screens/Trip';
 import NavBottom from '../components/NavBottom';
-import RootNavigation from 'navigation/RootNavigation';
-import RoomNavigation from 'navigation/RoomNavigation';
-import Settings from 'components/Settings';
-import EditProfile from 'components/EditProfile';
+import Account from 'components/Account';
 
 const TabBarComponent = (props: any) => (
   <View
@@ -22,14 +18,8 @@ const TabBarComponent = (props: any) => (
   </View>
 );
 
-const AppView = createBottomTabNavigator(
+const BottomNavigation = createBottomTabNavigator(
   {
-    Search: {
-      // screen: RoomNavigation,
-      // screen: Settings,
-      screen: EditProfile,
-      // screen: RootNavigation,
-    },
     Home: {
       screen: Home,
     },
@@ -37,7 +27,7 @@ const AppView = createBottomTabNavigator(
       screen: Trip,
     },
     Profile: {
-      screen: Search,
+      screen: Account,
     },
   },
   {
@@ -52,4 +42,4 @@ const AppView = createBottomTabNavigator(
   },
 );
 
-export default createAppContainer(AppView);
+export default createAppContainer(BottomNavigation);

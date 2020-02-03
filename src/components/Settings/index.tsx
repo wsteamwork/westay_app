@@ -123,7 +123,7 @@ const Settings: FC<IProps> = (props) => {
         <Divider style={{ backgroundColor: '#bcbcbc' }} />
         {token && (
           <View>
-            <TouchableNativeFeedback onPress={() => navigation.navigate('Login')}>
+            <TouchableNativeFeedback onPress={() => navigation.navigate('ForgotPassword')}>
               <View style={styles.viewItem1}>
                 <Text style={styles.textTitleItem}>{t('account:settings:password')}</Text>
               </View>
