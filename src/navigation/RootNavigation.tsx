@@ -14,6 +14,7 @@ import MyMapView from 'modules/MapView';
 import BottomNavigation from './BottomNavigation';
 import EditProfile from 'components/EditProfile';
 import ListRooms from 'components/ListRooms';
+import SearchSuggest from 'components/SearchComponent';
 
 const stackNavigator = createStackNavigator({
   Main: {
@@ -31,7 +32,7 @@ const stackNavigator = createStackNavigator({
   BoxImageLT: { screen: BoxImageLT },
   BoxDetailRoom: { screen: BoxDetailRoom },
   ListRooms: { screen: ListRooms},
-    SearchSuggest: { screen: SearchSuggest },
+  SearchSuggest: { screen: SearchSuggest },
   Filter: { screen: Filter},
   MapFilter: { screen: MyMapView},
 },
