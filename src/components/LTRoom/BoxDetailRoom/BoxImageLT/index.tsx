@@ -20,7 +20,7 @@ const BoxImageLT: FC<IProps> = (props) => {
   const idRoom = navigation.getParam('idRoom', 0);
   useEffect(() => {
     getDataLTRoom(idRoom,dispatch);
-  }, []);
+  }, [idRoom]);
 
   return (
     <View style={styles.container} collapsable={false}>
@@ -33,7 +33,9 @@ const BoxImageLT: FC<IProps> = (props) => {
       </View>
       <ImageBackground
         source={{
-          uri: `${IMAGE_STORAGE_LG + listing.avatar.images[0].name}`,
+          uri: listing.avatar.images.length
+            ? `${IMAGE_STORAGE_LG + listing.avatar.images[0].name}`
+            : '../../../../static/images/westay-avatar.jpg',
         }}
         style={{ width: '100%', height: '100%' }}>
         <BoxIntroRoom />

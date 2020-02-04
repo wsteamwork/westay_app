@@ -44,7 +44,7 @@ export const getDataLTRoom = async (
   id: number,
   dispatch: Dispatch<LTRoomReducerAction>,
   initLanguage: string = 'en',
-): Promise<any> => {
+  ): Promise<any> => {
   try {
     const res: AxiosRes<LTRoomIndexRes> = await getLTRoom(id, initLanguage);
     const room = res.data.data;

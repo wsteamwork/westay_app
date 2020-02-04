@@ -1,4 +1,4 @@
-import React, { FC, useState, useMemo, useEffect } from 'react';
+import React, { FC, useState, useMemo } from 'react';
 import {
   StyleSheet,
   View,
@@ -11,16 +11,13 @@ import { hp, wp } from 'utils/responsive';
 import Swiper from 'react-native-swiper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { Button } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 // @ts-ignore
 import ImageViewer from 'react-native-image-zoom-viewer';
 import _ from 'lodash';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { useSelector } from 'react-redux';
-import { ReducersList } from 'store/redux/reducers';
-import { IMAGE_STORAGE_LG } from 'types/globalTypes';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
   arrImages?: any;
@@ -39,6 +36,13 @@ const BoxImageRoom: FC<IProps> = (props) => {
           marginBottom: hp('5%'),
           alignItems: 'center',
         }}>
+        <Text
+          style={{
+            color: '#ffffff',
+            marginBottom: hp('5%'),
+          }}>
+          Ảnh phòng tắm
+        </Text>
         <EvilIcons onPress={closeModal} name="close-o" color="#ffffff" size={40} />
       </View>
     );
@@ -95,8 +99,8 @@ const BoxImageRoom: FC<IProps> = (props) => {
         ),
         [],
       )}
-      {useMemo(
-        () => (
+      {/* {useMemo(
+        () => ( */}
           <Modal visible={isImageViewVisible} transparent={true}>
             <ImageViewer
               imageUrls={arrImages}
@@ -107,9 +111,9 @@ const BoxImageRoom: FC<IProps> = (props) => {
               renderFooter={footer}
             />
           </Modal>
-        ),
+        {/* ),
         [indexImage, isImageViewVisible, arrImages],
-      )}
+      )} */}
     </View>
   );
 };
