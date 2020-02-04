@@ -18,7 +18,6 @@ const BoxImageLT: FC<IProps> = (props) => {
   const dispatch = useDispatch<Dispatch<LTRoomReducerAction>>();
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   const idRoom = navigation.getParam('idRoom', 0);
-
   useEffect(() => {
     getDataLTRoom(idRoom,dispatch);
   }, []);
