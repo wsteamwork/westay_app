@@ -17,20 +17,19 @@ import {Reducer} from 'redux';
 import {updateObject} from 'utils/mixins';
 
 export type SearchFilterState = {
+  readonly name?: string;
   readonly city_id?: number | null;
   readonly district_id?: number | null;
+  readonly bedrooms: number;
   readonly number_guest: number;
-  readonly searchText?: string;
-  readonly number_room: number;
-  readonly bookingType?: number;
+  readonly accommodation_type?: number;
+  readonly comfort_lists?: number[] | null;
+  readonly min_price?: number;
+  readonly max_price?: number;
+  readonly instant_book?: number;
+  readonly discount?: number;
   readonly check_in: string ;
   readonly check_out: string ;
-  readonly amenities?: number[] | null;
-  readonly room_type?: number;
-  readonly rent_type?: number;
-  readonly instant_book?: number;
-  readonly price_day_from?: number;
-  readonly price_day_to?: number;
   readonly leaseTypeGlobal?: 0 | 1; // 0 short term | 1 : long-term
   readonly leaseTypePathName?: string; // /rooms :short term | /long-term-rooms : long-term
 };
@@ -57,19 +56,17 @@ const SearchFieldInit:SearchFilterState = {
   city_id: null,
   district_id: null,
   number_guest: 1,
-  number_room: 1,
+  bedrooms: 1,
   check_in: '',
   check_out: '',
-  bookingType: 1,
-  searchText: '',
-  amenities: null,
-  room_type: 0,
-  rent_type: 2,
-  instant_book: 0,
-  price_day_from: 200000,
-  price_day_to: 50000000,
-  leaseTypeGlobal: 0,
-  leaseTypePathName: '/rooms'
+  name: '',
+  comfort_lists: null,
+  accommodation_type: undefined,
+  instant_book: undefined,
+  min_price: 200000,
+  max_price: 50000000,
+  leaseTypeGlobal: 1,
+  leaseTypePathName: '/long-term-rooms'
 };
 
 const searchFieldReducer : Reducer<SearchFilterState, SearchFilterAction> =  (
@@ -83,24 +80,20 @@ const searchFieldReducer : Reducer<SearchFilterState, SearchFilterAction> =  (
       return { ...state, check_in: action.payload };
     case SET_CHECK_OUT:
       return { ...state, check_out: action.payload };
-    case SET_BOOKING_TYPE:
-      return { ...state, bookingType: action.payload };
     case SET_SEARCH_TEXT:
-      return { ...state, searchText: action.payload };
+      return { ...state, name: action.payload };
     case SET_NUMBER_ROOM:
-      return { ...state, number_room: action.payload };
+      return { ...state, bedrooms: action.payload };
     case SET_AMENITIES:
-      return { ...state, amenities: action.payload };
+      return { ...state, comfort_lists: action.payload };
     case SET_ROOM_TYPE:
-      return { ...state, room_type: action.payload };
-    case SET_RENT_TYPE:
-      return { ...state, rent_type: action.payload };
+      return { ...state, accommodation_type: action.payload };
     case SET_INSTANT_BOOK:
       return { ...state, instant_book: action.payload };
     case SET_PRICE_DAY_FROM:
-      return { ...state, price_day_from: action.payload };
+      return { ...state, min_price: action.payload };
     case SET_PRICE_DAY_TO:
-      return { ...state, price_day_to: action.payload };
+      return { ...state, max_price: action.payload };
     case 'setLeaseTypeGlobal':
       return updateObject(state, {
         leaseTypeGlobal: action.leaseTypeGlobal,

@@ -16,6 +16,8 @@ import {changeDataMap} from 'components/Map/handleMap';
 import {RoomIndexRes, MapCoords} from 'types/Rooms/RoomResponses';
 import Loadable from 'react-loadable';
 import {CityType} from 'types/Cities/CityResponse';
+import {BaseResponse} from 'types/ResponseTemplate';
+import {LTRoomIndexRes} from 'types/LTR/LTRoom/LTRoom';
 
 interface IProps extends NavigationInjectedProps{
 
@@ -67,7 +69,8 @@ const MyMapView: FC<IProps> = (props) => {
   const getData = async (uri = '', findAround = false) => {
     setOpenLottie(true);
 
-    const data = await getDataListRooms(
+    // @ts-ignore
+    const data:BaseResponse<any> = await getDataListRooms(
       searchField,
       currCity,
       uri,
@@ -78,7 +81,7 @@ const MyMapView: FC<IProps> = (props) => {
     setFindAroundHere(false);
     setOpenLottie(false);
 
-    const resData = changeDataMap(data);
+    const resData = changeDataMap(data.data.data);
 
     setData(resData);
 
@@ -168,7 +171,7 @@ const MyMapView: FC<IProps> = (props) => {
         ref={mapRef}
         onPanDrag={({ nativeEvent }) => handleChangeMap(nativeEvent)}
       >
-        {data.map((item:RoomIndexRes, index:number) => (
+        {data.map((item:LTRoomIndexRes, index:number) => (
           <MapMarkerFilter
             key={index}
             item={item}
@@ -186,7 +189,7 @@ const MyMapView: FC<IProps> = (props) => {
       <View style={styles.description}>
         {useMemo(
           () => (
-            <ActionsMap setOpen={setOpen} open={open} />
+            <ActionsMap />
           ),
           [open],
         )}

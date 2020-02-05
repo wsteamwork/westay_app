@@ -1,25 +1,21 @@
-import React, {useContext, useMemo, FC, Fragment, useEffect} from 'react';
+import React, {useMemo, FC, Fragment} from 'react';
 import {
   View,
   Text,
   Platform,
   ActivityIndicator,
   StyleSheet,
-  TouchableOpacity, StyleProp, TouchableOpacityProps, ImageStyle, ImageProps, ViewStyle, TextInputProps,
+  TouchableOpacity,
+  ImageStyle,
+  ViewStyle,
 } from 'react-native';
-import { Image, Tooltip } from 'react-native-elements';
+import {Image} from 'react-native-elements';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IonIcons from 'react-native-vector-icons/Ionicons';
-import {
-  withNavigation,
-  NavigationInjectedProps,
-  NavigationScreenProp,
-  NavigationRoute,
-  NavigationParams,
-} from 'react-navigation';
-import { useTranslation } from 'react-i18next';
+import {withNavigation, NavigationInjectedProps} from 'react-navigation';
+import {useTranslation} from 'react-i18next';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {IMAGE_STORAGE_LG, IMAGE_STORAGE_SM} from 'types/globalTypes';
+import {IMAGE_STORAGE_SM, IMAGE_NOT_FOUND} from 'types/globalTypes';
 import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
 import {wp, hp} from 'utils/responsive';
 import {elevationShadowStyle, formatPrice} from 'utils/mixins';
@@ -48,10 +44,6 @@ const RoomCard: FC<IProps> = (props) => {
     navigation.navigate('DetailScreen', { idRoom: room.id });
   };
 
-  const imgRoomSM = room.image
-    ? `${IMAGE_STORAGE_SM + room.image}`
-    : 'https://via.placeholder.com/320x320.png?text=Westay.vn';
-
   return (
     <TouchableOpacity
       activeOpacity={1}
@@ -71,7 +63,7 @@ const RoomCard: FC<IProps> = (props) => {
         () => (
           <Image
             source={{
-              uri: imgRoomSM,
+              uri: room.image,
             }}
             style={[styles.image, imageStyle]}
             resizeMode="cover"
@@ -123,11 +115,11 @@ const RoomCard: FC<IProps> = (props) => {
 
               <View style={styles.boxPrice}>
                 <Text style={ styles.price_day} >
-                  {formatPrice(room.price_day)}
+                  {formatPrice(room.price_display)}
                 </Text>
 
                 <Text>
-                  /{t('shared:cardRoom:night')}
+                  /{t('shared:cardRoom:month')}
                 </Text>
               </View>
 

@@ -20,6 +20,8 @@ import SearchComponent from 'components/SearchComponent';
 import Feather from 'react-native-vector-icons/Feather';
 import {COLOR_TITLE_HEADER} from 'styles/global.style';
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
+import {AxiosResponse} from 'axios';
+import {AxiosRes, BaseResponse} from 'types/ResponseTemplate';
 
 interface IProps extends NavigationInjectedProps{
   paddingHeight: string,
@@ -38,10 +40,12 @@ const ListRooms: FC<IProps> = (props) => {
 
   const [data, setData] = useState<any>([]);
   const [page, setPage] = useState(1);
+  const [totalResult, setTotalResult] = useState<number>(0);
   const [refreshing, setRefreshing] = useState(false);
 
   const getData = async (value:boolean, page = 1, url = '', findAround:boolean = false) => {
-    const resData = value
+    // @ts-ignore
+    const resData:BaseResponse<any> = value
       ? await getDataListRooms(
         searchField,
         currCity,
@@ -55,7 +59,8 @@ const ListRooms: FC<IProps> = (props) => {
         findAround,
         languageStatus,
       );
-    const changeResData:any = changeDataMap(resData);
+    setTotalResult(resData.data.meta.pagination.total);
+    const changeResData:any = changeDataMap(resData.data.data);
 
     value ? setData([...data, ...changeResData]) : setData([...changeResData]);
     setRefreshing(false);
@@ -100,7 +105,6 @@ const ListRooms: FC<IProps> = (props) => {
       ? navigation.navigate('MapFilter', { coords })
       : navigation.navigate('MapFilter');
   };
-  console.log(data);
   return (
     <Fragment>
       {refreshing ? (
@@ -115,7 +119,7 @@ const ListRooms: FC<IProps> = (props) => {
 
           <View style = {[styles.boxFilter, elevationShadowStyle(6)]}>
             <Text>
-              299 rooms found
+              {totalResult} rooms found
             </Text>
             <TouchableOpacity activeOpacity={1} onPress={()=>navigation.navigate('Filter')}>
               <View style = {{flexDirection: 'row', alignItems: 'center'}}>
@@ -132,19 +136,19 @@ const ListRooms: FC<IProps> = (props) => {
 
           <Animated.FlatList
             // showsVerticalScrollIndicator={false}
-            style={{ flex: 1 }}
+            style={{flex: 1 }}
             renderItem={_renderItem}
             data={data}
             keyExtractor={(item:any, index:number) => index.toString()}
             onEndReached={handleLoadMore}
             onEndReachedThreshold={20}
-            contentContainerStyle={{ paddingTop: paddingHeight }}
+            contentContainerStyle={{ paddingTop: paddingHeight, justifyContent:'center', alignItems: 'center', minHeight: '60%'  }}
             scrollIndicatorInsets={{ top: paddingHeight }}
             onScroll={onScroll}
             _mustAddThis={animatedY}
             ListEmptyComponent={
               <View style={styles.viewNotFound}>
-                <Text style={{ fontSize: wp('5%'), fontWeight: '700' }}>
+                <Text style={{fontSize: wp('5%'), fontWeight: '700' }}>
                   {t('listRooms:noResult')}
                 </Text>
               </View>
@@ -173,9 +177,7 @@ const styles = StyleSheet.create({
     height: wp('11%'),
     borderRadius: wp('11%') / 2,
     lineHeight: wp('11%'),
-
     backgroundColor: 'white',
-
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -186,7 +188,7 @@ const styles = StyleSheet.create({
 
     elevation: 10,
   },
-  viewNotFound: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  viewNotFound: { justifyContent: 'center', alignItems: 'center' },
   viewIconMap: {
     position: 'absolute',
     bottom: wp('6%'),

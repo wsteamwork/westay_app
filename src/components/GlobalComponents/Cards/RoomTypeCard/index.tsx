@@ -5,6 +5,8 @@ import { TypeApartment } from 'types/Rooms/RoomResponses';
 import { hp, wp } from 'utils/responsive';
 import { SIZE_TEXT_CONTENT } from 'styles/global.style';
 import {NavigationInjectedProps, withNavigation} from 'react-navigation';
+import {useDispatch} from 'react-redux';
+import {setAccommodationType, setArrayRentType} from 'store/actions/search/searchActions';
 
 interface IProps extends NavigationInjectedProps{
   item: TypeApartment
@@ -12,12 +14,12 @@ interface IProps extends NavigationInjectedProps{
 
 const RoomTypeCard: FC<IProps> = (props) => {
   const { item, navigation } = props;
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    // navigation.navigate('');
-
-    Alert.alert('click', 'ban da click');
-
+    dispatch(setAccommodationType(item.id));
+    dispatch(setArrayRentType([{name: item.value, checked:true, id: item.id}]));
+    navigation.navigate('ListRooms');
   };
   return (
     <TouchableOpacity

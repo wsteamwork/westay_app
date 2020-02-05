@@ -6,6 +6,8 @@ import {SearchFilterState} from 'store/redux/reducers/search/searchField';
 import {CityType} from 'types/Cities/CityResponse';
 import qs from 'query-string';
 import {AuthContext} from 'store/context/auth';
+import {useSelector} from 'react-redux';
+import {ReducersList} from 'store/redux/reducers';
 
 export const convertString = (query: object)  => {
   return {
@@ -190,7 +192,7 @@ export const getDataFilter = async (languageStatus: string) => {
     }),
   ]);
 
-  const dataType1 = data[0].data
+  const dataRoomType = data[0].data
     ? data[0].data.map((item:any) => ({
       id: item.id,
       name: item.value,
@@ -198,7 +200,7 @@ export const getDataFilter = async (languageStatus: string) => {
     }))
     : [];
 
-  const dataType2 = data[1].data
+  const dataComfortsType = data[1].data
     ? data[1].data.data.map((item:any) => ({
       id: item.id,
       name: item.details.data[0].name,
@@ -207,8 +209,8 @@ export const getDataFilter = async (languageStatus: string) => {
     : [];
 
   return [
-    {title: 'Loại phòng', data: dataType1},
-    {title: 'Tiện nghi', data: dataType2},
+    {title: 'Loại phòng', data: dataRoomType},
+    {title: 'Tiện nghi', data: dataComfortsType},
   ];
 };
 
@@ -220,9 +222,9 @@ export const getDataListRooms = async (
   languageStatus:string,
 ) => {
   let query:SearchFilterState = {
-    searchText: searchField.searchText,
+    name: searchField.name,
     number_guest: searchField.number_guest,
-    number_room: searchField.number_room,
+    bedrooms: searchField.bedrooms,
     check_in: searchField.check_in,
     check_out: searchField.check_out,
   };
@@ -243,39 +245,37 @@ export const getDataListRooms = async (
     query = { ...query, check_out: searchField.check_out };
   }
 
-  if (searchField.amenities) {
-    query = { ...query, amenities: searchField.amenities };
+  if (searchField.comfort_lists) {
+    query = { ...query, comfort_lists: searchField.comfort_lists };
   }
 
-  if (searchField.room_type) {
-    query = { ...query, room_type: searchField.room_type };
-  }
-
-  if (searchField.rent_type) {
-    query = { ...query, rent_type: searchField.rent_type };
+  if (searchField.accommodation_type) {
+    query = { ...query, accommodation_type: searchField.accommodation_type };
   }
 
   if (searchField.instant_book) {
     query = { ...query, instant_book: searchField.instant_book };
   }
 
-  if (searchField.price_day_from) {
-    query = { ...query, price_day_from: searchField.price_day_from };
+  if (searchField.min_price) {
+    query = { ...query, min_price: searchField.min_price };
   }
 
-  if (searchField.price_day_to) {
-    query = { ...query, price_day_to: searchField.price_day_to };
+  if (searchField.max_price) {
+    query = { ...query, max_price: searchField.max_price };
   }
 
-  let url = `rooms?${qs.stringify(convertString(query))}&${uri}`;
+  let url = `long-term-rooms?${qs.stringify(convertString(query))}&${uri}`;
 
   if (findAround) {
-    url = `rooms/room-lat-long?${qs.stringify(convertString(query))}&${uri}`;
+    url = `long-term-rooms?${qs.stringify(convertString(query))}&${uri}`;
   }
 
   return axios
     .get(url, { headers: { 'Accept-Language': languageStatus } })
-    .then(res => res.data.data)
+    .then(res => {
+      return res
+    })
     .catch(err => console.log(err));
 };
 

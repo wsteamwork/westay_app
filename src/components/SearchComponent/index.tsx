@@ -42,7 +42,7 @@ const SearchComponent: FC<IProps> = (props) => {
   const [modalGuest, setModalGuest]               = useState<boolean>(false);
   const [modalDate, setModalDate]                 = useState<boolean>(false);
   const [animation]                               = useState(new Animated.Value(0));
-  const searchText = useSelector<ReducersList, string | undefined>(state => state.searchField.searchText);
+  const searchText = useSelector<ReducersList, string | undefined>(state => state.searchField.name);
   const [searchTxt, setSearchTxt]               = useState<string | undefined>(searchText);
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const SearchComponent: FC<IProps> = (props) => {
   const check_out = useSelector<ReducersList, string>(state => state.searchField.check_out);
   const city_district = useSelector<ReducersList, SearchSuggestRes | null>(state => state.cityDistrict.city_district);
   const historySearch = useSelector<ReducersList, []>(state => state.asyncData.historySearch);
-  const number_room = useSelector<ReducersList, number>(state => state.searchField.number_room);
+  const number_room = useSelector<ReducersList, number>(state => state.searchField.bedrooms);
   const number_guest = useSelector<ReducersList, number>(state => state.searchField.number_guest);
 
   const sections = city_district && [
@@ -86,8 +86,13 @@ const SearchComponent: FC<IProps> = (props) => {
     setSearchTxt(value);
   };
 
+  const handleClear = () => {
+    setSearchTxt('');
+    dispatch(setSearchText(''));
+  };
+
   const onEndEditing = (e: any) => {
-    if (e.nativeEvent.key === 'Enter') {
+    if (e.nativeEvent.text !== '') {
       Keyboard.dismiss();
 
       if (searchTxt) {
@@ -116,7 +121,7 @@ const SearchComponent: FC<IProps> = (props) => {
                 {showInputFake ? (
                   <InputSearchFake/>
                 ) : (
-                  <SearchInput value = {searchTxt} _onChangeText = {(value => handleChange(value))}
+                  <SearchInput value = {searchTxt} _onChangeText = {(value => handleChange(value))} _onClear={handleClear}
                                _onKeyPress = {(e) => onEndEditing(e)} />
                 )}
               </View>
@@ -142,9 +147,10 @@ const SearchComponent: FC<IProps> = (props) => {
               <TouchableWithScale style = {styles.boxDate} _onPress = {() => setModalGuest(!modalGuest)}>
                 <Text style = {{color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT}}>Number of Rooms</Text>
                 <Text style = {styles.txtDate}>
-                  {number_room + ' ' + t('home:choosePeople:room')}
-                  &nbsp;-&nbsp;
                   {number_guest+ ' ' + t('home:choosePeople:guest')}
+                  &nbsp;-&nbsp;
+                  {number_room + ' ' + t('home:choosePeople:room')}
+
                 </Text>
               </TouchableWithScale>
             </View>

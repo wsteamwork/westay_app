@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
-import {StyleSheet, View, TouchableOpacity, Animated, Text, StatusBar} from 'react-native';
+import React, {FC} from 'react';
+import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 import {wp, hp} from 'utils/responsive';
 import {useTranslation} from 'react-i18next';
 import {useSelector} from 'react-redux';
 import {ReducersList} from 'store/redux/reducers';
 import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
-import IconSimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {elevationShadowStyle} from 'utils/mixins';
@@ -16,13 +15,13 @@ interface IProps extends NavigationInjectedProps{
 
 const InputSearchFake: FC<IProps> = (props) => {
   const { t } = useTranslation();
-  const searchText = useSelector<ReducersList, string | undefined>(state => state.searchField.searchText);
+  const searchText = useSelector<ReducersList, string | undefined>(state => state.searchField.name);
   const { animation, navigation } = props;
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={[styles.containerStyleInput, elevationShadowStyle(10)]}
+        style={[styles.containerStyleInput, elevationShadowStyle(4)]}
         activeOpacity={1}
         onPress={()=> navigation.navigate('SearchSuggest')}
       >
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: '5%',
   },
   containerStyleInput: {
-    marginTop: hp('2%'),
+    marginTop: hp('3%'),
     borderRadius: 50,
     flexDirection: 'row',
     alignItems: 'center',

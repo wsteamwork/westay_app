@@ -44,18 +44,18 @@ const CollapHeader = (props:IProps) => {
   const dispatch = useDispatch();
   const check_in = useSelector<ReducersList, string>(state => state.searchField.check_in);
   const check_out = useSelector<ReducersList, string>(state => state.searchField.check_out);
-  const number_room = useSelector<ReducersList, number>(state => state.searchField.number_room);
+  const number_room = useSelector<ReducersList, number>(state => state.searchField.bedrooms);
   const number_guest = useSelector<ReducersList, number>(state => state.searchField.number_guest);
-  const rent_type = useSelector<ReducersList, number | undefined>(state => state.searchField.rent_type);
+  // const rent_type = useSelector<ReducersList, number | undefined>(state => state.searchField.accommodation_type);
   const instant_book = useSelector<ReducersList,  number | undefined>(state => state.searchField.instant_book);
-  const amenities = useSelector<ReducersList, number[] | null | undefined>(state => state.searchField.amenities);
-  const room_type = useSelector<ReducersList, number | undefined>(state => state.searchField.room_type);
+  const amenities = useSelector<ReducersList, number[] | null | undefined>(state => state.searchField.comfort_lists);
+  const room_type = useSelector<ReducersList, number | undefined>(state => state.searchField.accommodation_type);
 
   const {
     navigation: { navigate },
   } = props;
 
-  const checkFilter = rent_type || instant_book || amenities || room_type;
+  const checkFilter = instant_book || amenities || room_type;
 
   const checkDate = () => {
     if (!check_in && !check_out) {

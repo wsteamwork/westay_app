@@ -7,13 +7,12 @@ import IonIcons from 'react-native-vector-icons/Ionicons';
 import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 
 interface IProps extends NavigationInjectedProps{
-  setOpen: Dispatch<boolean>,
-  open:boolean,
+
 }
 
 const ActionsMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
-  const { setOpen, open, navigation } = props;
+  const { navigation } = props;
 
   return (
     <View style={styles.container}>
@@ -36,10 +35,10 @@ const ActionsMap: FC<IProps> = (props) => {
       </TouchableOpacity>
       <View style={styles.actionsOpen}>
         <IonIcons
-          name={!open ? 'md-close' : 'md-pin'}
+          name={'md-close'}
           size={wp('5%')}
           style={styles.iconOpen}
-          onPress={() => setOpen(!open)}
+          onPress={() => navigation.goBack()}
         />
       </View>
     </View>

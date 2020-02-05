@@ -19,7 +19,7 @@ const ModalChooseGuest: FC<IProps> = (props) => {
   const { open, setClose } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const number_room = useSelector<ReducersList, number>((state) => state.searchField.number_room);
+  const number_room = useSelector<ReducersList, number>((state) => state.searchField.bedrooms);
   const number_guest = useSelector<ReducersList, number>((state) => state.searchField.number_guest);
 
   const [people, setPeople] = useState(number_room);

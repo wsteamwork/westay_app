@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {StyleSheet, View, NativeSyntheticEvent, TextInputSubmitEditingEventData} from 'react-native';
 import {SearchBar} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 import {NORMAL, SIZE_TEXT_SUBTITLE, COLOR_TEXT_DEFAULT} from 'styles/global.style';
 import {wp} from 'utils/responsive';
@@ -14,25 +14,26 @@ interface IProps extends NavigationInjectedProps {
   returnKeyLabel?: string;
   value: string | undefined;
   _onChangeText:(value:string)=>void;
+  _onClear?: ()=>void;
   _onKeyPress:(e:NativeSyntheticEvent<TextInputSubmitEditingEventData>)=>void;
   autoFocus?: boolean;
 }
 
 const GlobalSearchInput: FC<IProps> = (props) => {
-  const { returnKeyType, height, returnKeyLabel, value, _onChangeText, _onKeyPress, autoFocus, navigation } = props;
+  const { returnKeyType, height, returnKeyLabel, value, _onChangeText, _onKeyPress, autoFocus, navigation, _onClear } = props;
 
   return (
     <View style = {[styles.viewInput, elevationShadowStyle(10)]}>
       <SearchBar
         value={value}
         onChangeText={(value)=>_onChangeText(value)}
+        // onClear={()=>_onClear}
         onSubmitEditing={(e) => _onKeyPress(e)}
         underlineColorAndroid="transparent"
         placeholderTextColor={'#7676769d'}
         placeholder={'Search anything'}
         clearButtonMode={'always'}
         showCancel
-        clearIcon={<Icon name="keyboard-o" color={'#7676769d'} />}
         cancelButtonTitle={'Cancel'}
         keyboardType={'default'}
         containerStyle={styles.textInput}
@@ -57,6 +58,15 @@ const GlobalSearchInput: FC<IProps> = (props) => {
             size = {wp('5%')}
             style = {{paddingLeft: wp('3%')}}
           />
+        }
+        clearIcon={
+          value ? <Icon
+            onPress={_onClear}
+            name="window-close"
+            color = {COLOR_TEXT_DEFAULT}
+            size = {wp('5%')}
+            style = {{paddingRight: wp('3%')}}
+          /> : false
         }
       />
     </View>

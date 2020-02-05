@@ -1,5 +1,5 @@
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import React, {FC, useContext} from 'react';
+import React, {FC, useContext, Fragment} from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
 import { Image, Rating } from 'react-native-elements';
 import { COLOR_TITLE_HEADER, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
@@ -7,6 +7,8 @@ import { hp, wp } from 'utils/responsive';
 import {cleanAccents, formatPrice} from 'utils/mixins';
 import {AuthContext} from 'store/context/auth';
 import {NavigationInjectedProps, withNavigation} from 'react-navigation';
+import {useTranslation} from 'react-i18next';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 
 interface IProps extends  NavigationInjectedProps{
   city: string;
@@ -17,11 +19,13 @@ interface IProps extends  NavigationInjectedProps{
   roomType: string;
   avg_rating?: number;
   priceDisplay: number;
+  numberRoom?: number;
 }
 
 const ValuableCard: FC<IProps> = (props) => {
-  const { roomID, roomName, city, district, roomImage, roomType, avg_rating, priceDisplay, navigation } = props;
+  const { roomID, roomName, city, district, roomImage, roomType, avg_rating, priceDisplay, numberRoom, navigation } = props;
   const { state : {languageStatus}} = useContext(AuthContext);
+  const { t } = useTranslation();
 
   const handleClick = () => {
     navigation.navigate('DetailScreen', { idRoom: roomID });
@@ -53,18 +57,25 @@ const ValuableCard: FC<IProps> = (props) => {
         </View>
         <View style={styles.boxPrice}>
           <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: "flex-start" }}>
-            <Rating
-              ratingCount={5}
-              startingValue={avg_rating}
-              imageSize={wp('3.5%')}
-              readonly
-              ratingColor='#41C9BC'
-              ratingBackgroundColor={COLOR_TITLE_HEADER}
-            />
+            {/*<Rating*/}
+            {/*  ratingCount={5}*/}
+            {/*  startingValue={avg_rating}*/}
+            {/*  imageSize={wp('3.5%')}*/}
+            {/*  readonly*/}
+            {/*  ratingColor='#41C9BC'*/}
+            {/*  ratingBackgroundColor={COLOR_TITLE_HEADER}*/}
+            {/*/>*/}
+            <Text style={{ textAlign: 'right', fontSize: SIZE_TEXT_CONTENT }}>
+              {roomType}
+              <Text style={{ fontWeight: '700' }}> &#8231; </Text>
+            </Text>
+            <Text style={{ textAlign: 'right', fontSize: SIZE_TEXT_CONTENT }}>
+              {numberRoom} {t('shared:cardRoom:bedroom')}
+            </Text>
           </View>
           <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={{ textAlign: 'right', fontSize: SIZE_TEXT_CONTENT }}>{formatPrice(priceDisplay)}</Text>
-            <Text style={{ textAlign: 'right', fontSize: SIZE_TEXT_CONTENT }}>/đêm</Text>
+            <Text style={{ textAlign: 'right', fontSize: SIZE_TEXT_TITLE_MEDIUM }}>{formatPrice(priceDisplay)}</Text>
+            <Text style={{ textAlign: 'right', fontSize: SIZE_TEXT_CONTENT }}>/{t('home:night')}</Text>
           </View>
         </View>
       </View>

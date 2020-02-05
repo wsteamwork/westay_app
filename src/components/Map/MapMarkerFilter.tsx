@@ -34,7 +34,7 @@ const MapMarkerFilter: FC<IProps> = (props) => {
             },
           ]}
         >
-          {formatMoney(item.price_day)}₫
+          {formatMoney(item.price_display)}₫
         </Text>
         {isIndex === index && (
           <IconMaterialIcons

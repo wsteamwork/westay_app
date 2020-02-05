@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
     paddingVertical: StatusBar.currentHeight,
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: wp('4%'),
+    paddingHorizontal: wp('5%'),
+    height: hp('8%'),
     backgroundColor: '#fff'
   },
   textHeader: {

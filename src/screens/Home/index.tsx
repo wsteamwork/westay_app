@@ -8,18 +8,19 @@ import ListDestinations from 'components/ListRoomType/ListDestinations_Valuable'
 import React, {FC, useContext, useEffect, Dispatch, useState} from 'react';
 import {ScrollView, StatusBar, StyleSheet, View, TouchableOpacity, Text, Alert} from 'react-native';
 import {TypeApartment, NumberRoomCity, RoomIndexRes} from 'types/Rooms/RoomResponses';
-import { __currentPlatform } from 'utils/mixins';
+import {__currentPlatform, getDataFilter} from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
 import {useSelector, useDispatch} from 'react-redux';
 import {ReducersList, ReducersActions} from 'store/redux/reducers';
 import {AuthContext} from 'store/context/auth';
 import {getRoomsHomepage, RoomHomepageAction} from 'store/redux/reducers/Home/roomHomepage';
 import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
-import {IMAGE_STORAGE_SM} from 'types/globalTypes';
+import {IMAGE_STORAGE_SM, IMAGE_NOT_FOUND} from 'types/globalTypes';
 import SearchComponent from 'components/SearchComponent';
 import SectionListInput from 'components/SearchComponent/SectionListInput';
 import IconSimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import InputSearchFake from 'components/SearchComponent/InputSearchFake';
+import {axios} from 'utils/api';
 
 interface IProps {
 };
@@ -34,13 +35,19 @@ const Home: FC<IProps> = (props) => {
   const [editorChoice, setEditorChoice] = useState<any[]>([]);
   const [forFamily, setForFamily] = useState<any[]>([]);
   const [goodPrice, setGoodPrice] = useState<any[]>([]);
+  const [dataTypeHouse, setDataTypeHouse] = useState<any[]>([]);
+
+  const getDataTypeHouse = async () => {
+    const response = await axios.get('rooms/room-type-homepage', { headers: { 'Accept-Language': languageStatus } });
+    setDataTypeHouse(response.data.data);
+  };
 
   useEffect(() => {
     getRoomsHomepage(dispatchHome, languageStatus);
     getHomePageCollection('editor_choice').then((res) => setEditorChoice(res));
     getHomePageCollection('for_family').then((res) => setForFamily(res));
     getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res));
-
+    getDataTypeHouse();
   }, [languageStatus]);
 
   const _renderEditorChoice = (item: any, index: number) => {
@@ -70,7 +77,7 @@ const Home: FC<IProps> = (props) => {
   const _renderValuableRoom = (room: any, index: number) => {
     const imgRoomSM = room.avatar.images && room.avatar.images.length
               ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}`
-              : 'https://via.placeholder.com/320x320.png?text=Westay.vn';
+              : IMAGE_NOT_FOUND;
     return (
       <View key={index}>
         <ValuableCard city={room.city}
@@ -85,22 +92,13 @@ const Home: FC<IProps> = (props) => {
     );
   };
 
-  const dataTypeHouse = [
-    { id: 1, value: "Full House", image: 'https://m.westay.vn/static/images/property/house.jpg' },
-    { id: 2, value: "Apartment", image: "https://m.westay.vn/static/images/property/apartment.jpg" },
-    { id: 3, value: "Villa", image: "https://m.westay.vn/static/images/property/villa.jpg" },
-    { id: 4, value: "Private Room", image: "https://m.westay.vn/static/images/property/room.jpg" },
-    { id: 5, value: "Hotel", image: "https://m.westay.vn/static/images/property/hotels.jpg" },
-    { id: 6, value: "Studio", image: "https://m.westay.vn/static/images/property/studio.jpg" }
-  ];
-
   return (
     <ScrollView style={styles.container} stickyHeaderIndices={[0]}>
       <View style={styles.searchComponent}>
         <InputSearchFake />
       </View>
 
-      <View style={[styles.pdLeft, { marginLeft: -wp('5%') }]}>
+      <View style={[styles.pdLeft,{ paddingLeft: wp('0%')}]}>
         <ListRoomType data={dataTypeHouse} />
       </View>
 
@@ -145,10 +143,10 @@ const styles = StyleSheet.create({
     height: hp('5%')
   },
   searchComponent: {
-    paddingTop:StatusBar.currentHeight,
+    // paddingTop:StatusBar.currentHeight,
     paddingBottom: hp('1%'),
     paddingHorizontal: wp('5%'),
-    backgroundColor: '#fff'
+    // backgroundColor: '#fff'
   }
 });
 

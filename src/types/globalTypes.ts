@@ -68,3 +68,4 @@ export const IMAGE_STORAGE_LG = IMAGE_URL + 'lg/';
 export const IMAGE_STORAGE_SM = IMAGE_URL + 'sm/';
 export const IMAGE_STORAGE_MD = IMAGE_URL + 'md/';
 export const IMAGE_STORAGE_XS = IMAGE_URL + 'xs/';
+export const IMAGE_NOT_FOUND = 'https://via.placeholder.com/320x320.png?text=Westay.vn';

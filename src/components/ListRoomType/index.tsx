@@ -28,6 +28,7 @@ const ListRoomType: FC<IProps> = (props) => {
         renderItem={({ item, index }) => _renderItem(item, index)}
         extraData={data}
         keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={{paddingHorizontal: wp('2%')}}
       />
     </View>
   );

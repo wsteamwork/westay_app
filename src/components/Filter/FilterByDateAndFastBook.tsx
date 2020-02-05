@@ -5,28 +5,28 @@ import {useTranslation} from 'react-i18next';
 import {COLOR_BUTTON_DEFAULT} from 'styles/global.style';
 
 interface IProps {
-  sortByDay: boolean,
+  // sortByDay: boolean,
+  // setSortByDay: (value: boolean)=> void,
   sortByFastBook: boolean,
-  setSortByDay: (value: boolean)=> void,
   setSortFastBook: (value: boolean)=>void ,
 }
 
 const FilterByDateAndFastBook: FC<IProps> = (props) => {
-  const { sortByDay, sortByFastBook, setSortByDay, setSortFastBook } = props;
+  const { sortByFastBook, setSortFastBook } = props;
   const { t } = useTranslation();
 
   return (
     <View style={{ marginTop: hp('2%') }}>
-      <View style={styles.item}>
-        <Text style={styles.text}>
-          {t('filter:filterByDateAndFastBook:byDate')}
-        </Text>
-        <Switch
-          value={sortByDay}
-          onValueChange={value => setSortByDay(value)}
-          trackColor={{ false: '#ddd', true: COLOR_BUTTON_DEFAULT }}
-        />
-      </View>
+      {/*<View style={styles.item}>*/}
+      {/*  <Text style={styles.text}>*/}
+      {/*    {t('filter:filterByDateAndFastBook:byDate')}*/}
+      {/*  </Text>*/}
+      {/*  <Switch*/}
+      {/*    value={sortByDay}*/}
+      {/*    onValueChange={value => setSortByDay(value)}*/}
+      {/*    trackColor={{ false: '#ddd', true: COLOR_BUTTON_DEFAULT }}*/}
+      {/*  />*/}
+      {/*</View>*/}
 
       <View style={styles.item}>
         <Text style={styles.text}>

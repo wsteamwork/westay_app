@@ -6,7 +6,7 @@ import Collapsible from 'react-native-collapsible';
 import Swiper from 'react-native-swiper';
 import {wp, hp} from 'utils/responsive';
 import ValuableCard from 'components/GlobalComponents/Cards/ValuableCard';
-import {IMAGE_STORAGE_SM} from 'types/globalTypes';
+import {IMAGE_STORAGE_SM, IMAGE_NOT_FOUND} from 'types/globalTypes';
 
 interface IProps {
   data: [],
@@ -20,8 +20,6 @@ const SwiperMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const { data, handleChangeSwiper, open, isIndex, openLottie } = props;
 
-  // console.log(data);
-
   return openLottie ? (
     <View style={{ flex: 1, height: hp('20%') }}>
       <LottieView
@@ -30,7 +28,7 @@ const SwiperMap: FC<IProps> = (props) => {
       />
     </View>
   ) : (
-    <Collapsible style={{ flex: 1, height: 120 }} collapsed={open}>
+    <View style={{ flex: 1, height: 120 }}>
       {!data.length ? (
         <View
           style={{
@@ -57,25 +55,23 @@ const SwiperMap: FC<IProps> = (props) => {
           index={isIndex}
         >
           {data.map((room:any, index:number) => {
-            const imgRoomSM = room.image
-              ? `${IMAGE_STORAGE_SM + room.image}`
-              : 'https://via.placeholder.com/320x320.png?text=Westay.vn';
-
             return (
               <ValuableCard key = {index}
                             city = {room.city_name}
                             district = {room.district_name}
-                            priceDisplay = {room.price_day}
+                            priceDisplay = {room.price_display}
                             roomID = {room.id}
                             roomName = {room.name}
                             roomType = {room.room_type}
-                            roomImage = {imgRoomSM}
-                            avg_rating = {room.avg_rating} />
+                            roomImage = {room.image}
+                            numberRoom={room.number_room}
+                            // avg_rating = {room.avg_rating}
+              />
             )
           })}
         </Swiper>
       )}
-    </Collapsible>
+    </View>
   );
 };
 
