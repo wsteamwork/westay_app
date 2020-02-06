@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Platform } from 'react-native';
 import { wp, hp } from 'utils/responsive';
 import BoxInfoRoom from './BoxInfoRoom';
 import { Divider } from 'react-native-elements';

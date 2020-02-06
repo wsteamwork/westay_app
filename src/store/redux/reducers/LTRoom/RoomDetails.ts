@@ -11,7 +11,7 @@ export type LTRoomReducerState = {
 
 export type LTRoomReducerAction =
   | { type: 'setLTRoom'; payload: LTRoomIndexRes }
-  | { type: 'setErrorSSRLTRoompage'; payload: boolean }
+  | { type: 'setErrorSSRLTRoompage'; payload: boolean };
 
 export const init: LTRoomReducerState = {
   room: null,
@@ -20,7 +20,7 @@ export const init: LTRoomReducerState = {
 
 export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
   state: LTRoomReducerState = init,
-  action: LTRoomReducerAction
+  action: LTRoomReducerAction,
 ): LTRoomReducerState => {
   switch (action.type) {
     case 'setLTRoom':
@@ -32,29 +32,26 @@ export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
   }
 };
 
-export const getLTRoom = async (
-  idRoom: number,
-  initLanguage: string = 'en'
-): Promise<any> => {
+export const getLTRoom = async (idRoom: number, initLanguage: string = 'en'): Promise<any> => {
   const res: AxiosRes<LTRoomIndexRes> = await axios.get(
     `long-term-rooms/${idRoom}?include=city,district,merchant`,
-    { headers: { 'Accept-Language': initLanguage } }
-    );
-    return res.data.data;
-  };
-  
-  export const getDataLTRoom = async (
-    id: number,
-    dispatch: Dispatch<LTRoomReducerAction>,
-    initLanguage: string = 'en'
-    ): Promise<any> => {
-      try {
-      const res: AxiosRes<LTRoomIndexRes> = await getLTRoom(id, initLanguage)
-      const room = res.data.data;
-      dispatch({ type: 'setLTRoom', payload: room });
+    { headers: { 'Accept-Language': initLanguage } },
+  );
+  return res;
+};
+
+export const getDataLTRoom = async (
+  id: number,
+  dispatch: Dispatch<LTRoomReducerAction>,
+  initLanguage: string = 'en',
+  ): Promise<any> => {
+  try {
+    const res: AxiosRes<LTRoomIndexRes> = await getLTRoom(id, initLanguage);
+    const room = res.data.data;
+    dispatch({ type: 'setLTRoom', payload: room });
     return { room };
   } catch (error) {
-    console.log(error)
+    console.log(error);
     dispatch({ type: 'setErrorSSRLTRoompage', payload: true });
   }
 };

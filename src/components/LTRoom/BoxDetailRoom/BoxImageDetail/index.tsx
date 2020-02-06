@@ -1,6 +1,5 @@
-import React, { FC, useState, useMemo, useEffect } from 'react';
+import React, { FC, useState, useMemo } from 'react';
 import { StyleSheet, View, Modal, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { Text } from 'react-native-elements';
 // @ts-ignore
@@ -10,9 +9,6 @@ import { hp, wp } from 'utils/responsive';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import LeftSpacePaddingHorizontalScroll from 'components/GlobalComponents/LeftSpacePaddingHorizontalScroll';
-import { IMAGE_STORAGE_LG } from 'types/globalTypes';
-import { useSelector } from 'react-redux';
-import { ReducersList } from 'store/redux/reducers';
 interface IProps {
   initialProps?: any;
   arrImages?: any;
@@ -20,6 +16,7 @@ interface IProps {
 
 const BoxImageDetail: FC<IProps> = (props) => {
   const { arrImages } = props;
+  console.log(arrImages);
   const [isImageViewVisible, setIsImageViewVisible] = useState(false);
   const [indexImage, setIndexImage] = useState<number>(0);
   const _renderItem = (item: any, index: number) => {
@@ -51,6 +48,13 @@ const BoxImageDetail: FC<IProps> = (props) => {
           marginBottom: hp('5%'),
           alignItems: 'center',
         }}>
+        <Text
+          style={{
+            color: '#ffffff',
+            marginBottom: hp('5%')
+          }}>
+          Ảnh phòng tắm
+        </Text>
         <EvilIcons onPress={closeModal} name="close-o" color="#ffffff" size={40} />
       </View>
     );
@@ -64,7 +68,7 @@ const BoxImageDetail: FC<IProps> = (props) => {
       <View style={styles.boxTitle}>
         <Text style={styles.txtTitle}>Take a tour</Text>
         <Text style={styles.explore} onPress={() => setIsImageViewVisible(true)}>
-           +{arrImages.length -5} Photos
+          +{arrImages.length - 5} Photos
         </Text>
       </View>
       <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
@@ -91,7 +95,7 @@ const BoxImageDetail: FC<IProps> = (props) => {
             />
           </Modal>
         ),
-        [indexImage, isImageViewVisible],
+        [indexImage, isImageViewVisible, arrImages],
       )}
     </View>
   );
@@ -169,7 +173,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: hp('2%'),
     fontWeight: '700',
-    color: '#484848'
+    color: '#484848',
   },
   pdLeft: {
     marginTop: 38,
