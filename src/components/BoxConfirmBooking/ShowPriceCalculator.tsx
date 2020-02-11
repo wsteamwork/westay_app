@@ -1,11 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, Dispatch } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { wp } from 'utils/responsive';
 import { Text } from 'react-native-elements';
 import { hp } from 'components/Utils/responsive.style';
 import { ReducersList } from 'store/redux/reducers';
 import { useSelector, useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
 import {
   LTBookingAction,
   getLTCalculatedBookingPrice,
