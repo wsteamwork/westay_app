@@ -100,7 +100,6 @@ const ListRooms: FC<IProps> = (props) => {
       ? navigation.navigate('MapFilter', { coords })
       : navigation.navigate('MapFilter');
   };
-  console.log(data);
   return (
     <Fragment>
       {refreshing ? (

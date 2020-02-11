@@ -20,8 +20,6 @@ const SwiperMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const { data, handleChangeSwiper, open, isIndex, openLottie } = props;
 
-  // console.log(data);
-
   return openLottie ? (
     <View style={{ flex: 1, height: hp('20%') }}>
       <LottieView

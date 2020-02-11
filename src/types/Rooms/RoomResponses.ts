@@ -84,7 +84,7 @@ export type RoomScheduleRes = {
 };
 
 export type LTRoomAvailableRes = {
-  move_in: LTAvailableDate[];
+  move_in: string[];
   move_out: any[];
 };
 

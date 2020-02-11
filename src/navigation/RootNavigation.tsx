@@ -15,31 +15,43 @@ import BottomNavigation from './BottomNavigation';
 import EditProfile from 'components/EditProfile';
 import ListRooms from 'components/ListRooms';
 import SearchSuggest from 'components/SearchComponent';
+import ChooseDayBookingLT from 'components/ChooseDayBookingLT';
+import BoxCustomerInformation from 'components/BoxCustomerInformation';
+import BoxConfirmBooking from 'components/BoxConfirmBooking';
+import ShowCheckinCheckout from 'components/BoxConfirmBooking/ShowCheckinCheckout';
+import BoxBookingRoom from 'components/LTRoom/BoxDetailRoom/BoxBookingRoom';
 
-const stackNavigator = createStackNavigator({
-  Main: {
-    screen: BottomNavigation,
+const stackNavigator = createStackNavigator(
+  {
+    Main: {
+      screen: BottomNavigation,
+    },
+    IntroApp: { screen: IntroApp },
+    Register: { screen: Register },
+    Login: { screen: Login },
+    Settings: { screen: Settings },
+    EditProfile: { screen: EditProfile },
+    TermsAndConditions: { screen: TermsAndConditions },
+    ForgotPassword: { screen: ForgotPassword },
+    PrivacyPolicy: { screen: PrivacyPolicy },
+    DetailScreen: { screen: BoxImageLT },
+    BoxImageLT: { screen: BoxImageLT },
+    BoxDetailRoom: { screen: BoxDetailRoom },
+    ListRooms: { screen: ListRooms },
+    SearchSuggest: { screen: SearchSuggest },
+    Filter: { screen: Filter },
+    MapFilter: { screen: MyMapView },
+    ChooseDayBookingLT: { screen: ChooseDayBookingLT },
+    BoxBookingRoom: { screen: BoxBookingRoom },
+    ShowCheckinCheckout: { screen: ShowCheckinCheckout },
+    BoxConfirmBooking: { screen: BoxConfirmBooking },
+    BoxCustomerInformation: { screen: BoxCustomerInformation },
   },
-  IntroApp: { screen: IntroApp },
-  Register: { screen: Register },
-  Login: { screen: Login },
-  Settings: { screen: Settings },
-  EditProfile: {screen: EditProfile },
-  TermsAndConditions: { screen: TermsAndConditions },
-  ForgotPassword: { screen: ForgotPassword },
-  PrivacyPolicy: { screen: PrivacyPolicy },
-  DetailScreen: { screen: BoxImageLT },
-  BoxImageLT: { screen: BoxImageLT },
-  BoxDetailRoom: { screen: BoxDetailRoom },
-  ListRooms: { screen: ListRooms},
-  SearchSuggest: { screen: SearchSuggest },
-  Filter: { screen: Filter},
-  MapFilter: { screen: MyMapView},
-},
-{
-  defaultNavigationOptions: ({ navigation }) => ({
-    header: () => null,
-  }),
-});
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      header: () => null,
+    }),
+  },
+);
 
 export default createAppContainer(stackNavigator);

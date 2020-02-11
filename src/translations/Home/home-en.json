@@ -16,7 +16,8 @@
         "chooseCheckinDate": "Choose a check-in date",
         "chooseCheckoutDate": "Choose a check-out date",
         "nightSelected": "night selected",
-        "submit": "Save"
+        "submit": "Save",
+        "next": "Next"
     },
     "choosePeople": {
         "guest": "Guest",

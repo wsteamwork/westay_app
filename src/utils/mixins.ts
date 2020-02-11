@@ -6,7 +6,7 @@ import {SearchFilterState} from 'store/redux/reducers/search/searchField';
 import {CityType} from 'types/Cities/CityResponse';
 import qs from 'query-string';
 import {AuthContext} from 'store/context/auth';
-
+import moment from 'moment';
 export const convertString = (query: object)  => {
   return {
     ...query,
@@ -295,3 +295,7 @@ export const inputContainerStyleGlobal =  {
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
 };
+
+export const formatDateBooking = (date: string, lang: string) => {
+  return lang === 'vi' ? moment(date).format('DD/MM') : moment(date).format('ll').split(",")[0]; 
+}

@@ -36,8 +36,8 @@ const BoxPriceLTRoom: FC<IProps> = (props) => {
           <Text style={styles.textHeader}>Price by lease term</Text>
           {listing.prices && listing.prices.prices.length
             ? listing.prices.prices.map((o: any, i: number) => (
-                <View style={styles.boxContainer}>
-                  <View key={i} style={styles.boxPrice}>
+                <View key={i} style={styles.boxContainer}>
+                  <View style={styles.boxPrice}>
                     <Text style={styles.txtTerm}>{o.term}</Text>
                     <Text style={styles.price}> ${o.price}</Text>
                   </View>
@@ -93,10 +93,10 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   divider: {
-    backgroundColor: '#bcbcbc', 
+    backgroundColor: '#bcbcbc',
     paddingHorizontal: wp('4%'),
-    marginVertical: hp('1%')
-  }
+    marginVertical: hp('1%'),
+  },
 });
 BoxPriceLTRoom.defaultProps = {};
 export default BoxPriceLTRoom;
