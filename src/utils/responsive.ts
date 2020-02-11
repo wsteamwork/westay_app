@@ -27,10 +27,11 @@ export const dividerGrey = {
 
 export const stylesGlobal = StyleSheet.create({
   titleGlobal: {
-    paddingVertical: hp('1.5%'),
+    paddingTop: hp('2.5%'),
+    paddingBottom: hp('2%'),
     // fontSize: wp('6%'),
     fontSize: SIZE_TEXT_TITLE_MEDIUM,
-    fontWeight: '600',
+    fontWeight: '700',
     color: COLOR_TEXT_DEFAULT
   },
   dividerGrey: {

@@ -15,6 +15,7 @@ import BottomNavigation from './BottomNavigation';
 import EditProfile from 'components/EditProfile';
 import ListRooms from 'components/ListRooms';
 import SearchSuggest from 'components/SearchComponent';
+import CollectionScreen from 'components/Collections/CollectionScreen';
 
 const stackNavigator = createStackNavigator({
   Main: {
@@ -35,6 +36,7 @@ const stackNavigator = createStackNavigator({
   SearchSuggest: { screen: SearchSuggest },
   Filter: { screen: Filter},
   MapFilter: { screen: MyMapView},
+  CollectionScreen: { screen: CollectionScreen},
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({

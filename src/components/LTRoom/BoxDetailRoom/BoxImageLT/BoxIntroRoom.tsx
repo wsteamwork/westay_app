@@ -19,7 +19,7 @@ const BoxIntroRoom: FC<IProps> = (props) => {
     <View style={styles.container}>
       <PricingCard
         color="rgb(84, 211, 194)"
-        title={listing.about_room.name}
+        title={listing.about_room.name.length > 45 ? `${listing.about_room.name.substr(0, 45)}...` : listing.about_room.name}
         price={`$${listing.price_display}`}
         info={['1 Month', `${listing.district.data.name}, ${listing.city.data.name}`]}
         button={{ title: 'Check Availability', icon: '', buttonStyle: styles.buttonStyle }}

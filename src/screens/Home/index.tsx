@@ -6,36 +6,33 @@ import ListCollections from 'components/ListRoomType/ListCollections';
 import ListCollectionsSquare from 'components/ListRoomType/ListCollectionsSquare';
 import ListDestinations from 'components/ListRoomType/ListDestinations_Valuable';
 import React, {FC, useContext, useEffect, Dispatch, useState} from 'react';
-import {ScrollView, StatusBar, StyleSheet, View, TouchableOpacity, Text, Alert} from 'react-native';
-import {TypeApartment, NumberRoomCity, RoomIndexRes} from 'types/Rooms/RoomResponses';
-import {__currentPlatform, getDataFilter} from 'utils/mixins';
-import { hp, wp } from 'utils/responsive';
+import {ScrollView, StatusBar, StyleSheet, View} from 'react-native';
+import {NumberRoomCity} from 'types/Rooms/RoomResponses';
+import {__currentPlatform} from 'utils/mixins';
+import {hp, wp} from 'utils/responsive';
 import {useSelector, useDispatch} from 'react-redux';
 import {ReducersList, ReducersActions} from 'store/redux/reducers';
 import {AuthContext} from 'store/context/auth';
-import {getRoomsHomepage, RoomHomepageAction} from 'store/redux/reducers/Home/roomHomepage';
+import {getRoomsHomepage} from 'store/redux/reducers/Home/roomHomepage';
 import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
 import {IMAGE_STORAGE_SM, IMAGE_NOT_FOUND} from 'types/globalTypes';
-import SearchComponent from 'components/SearchComponent';
-import SectionListInput from 'components/SearchComponent/SectionListInput';
-import IconSimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import InputSearchFake from 'components/SearchComponent/InputSearchFake';
 import {axios} from 'utils/api';
+import * as Animatable from 'react-native-animatable';
+import ContactButton from 'components/ContactButton';
+import {IDataCollections} from 'types/Rooms/RoomRequests';
 
-interface IProps {
-};
-
-const Home: FC<IProps> = (props) => {
+const Home: FC = (props) => {
   const { state, dispatch } = useContext(AuthContext);
   const { token, languageStatus } = state;
   const dispatchHome = useDispatch<Dispatch<ReducersActions>>();
   const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
   );
-  const [editorChoice, setEditorChoice] = useState<any[]>([]);
-  const [forFamily, setForFamily] = useState<any[]>([]);
-  const [goodPrice, setGoodPrice] = useState<any[]>([]);
-  const [dataTypeHouse, setDataTypeHouse] = useState<any[]>([]);
+  const [editorChoice, setEditorChoice] = useState<IDataCollections>({data: [], meta: 0});
+  const [forFamily, setForFamily] = useState<IDataCollections>({data: [], meta: 0});
+  const [goodPrice, setGoodPrice] = useState<[]>([]);
+  const [dataTypeHouse, setDataTypeHouse] = useState<[]>([]);
 
   const getDataTypeHouse = async () => {
     const response = await axios.get('rooms/room-type-homepage', { headers: { 'Accept-Language': languageStatus } });
@@ -44,11 +41,20 @@ const Home: FC<IProps> = (props) => {
 
   useEffect(() => {
     getRoomsHomepage(dispatchHome, languageStatus);
-    getHomePageCollection('editor_choice').then((res) => setEditorChoice(res));
-    getHomePageCollection('for_family').then((res) => setForFamily(res));
-    getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res));
+    getHomePageCollection('editor_choice').then((res) => {
+      setEditorChoice({
+        data: res.data.data,
+        meta: res.data.data.length})
+    });
+    getHomePageCollection('for_family').then((res) => {
+      setForFamily({
+        data: res.data.data,
+        meta: res.data.data.length})
+    });
+    getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res.data.data));
     getDataTypeHouse();
   }, [languageStatus]);
+
 
   const _renderEditorChoice = (item: any, index: number) => {
     return (
@@ -93,42 +99,53 @@ const Home: FC<IProps> = (props) => {
   };
 
   return (
-    <ScrollView style={styles.container} stickyHeaderIndices={[0]}>
-      <View style={styles.searchComponent}>
-        <InputSearchFake />
-      </View>
+    <Animatable.View animation="fadeInUp" style={{ flex: 1 }} useNativeDriver>
+      <StatusBar
+        translucent={true}
+        barStyle={'dark-content'}
+        backgroundColor="transparent"
+        animated={true}
+      />
+      <ScrollView style={styles.container} stickyHeaderIndices={[0]}>
+        <View style={styles.searchComponent}>
+          <InputSearchFake />
+        </View>
 
-      <View style={[styles.pdLeft,{ paddingLeft: wp('0%')}]}>
-        <ListRoomType data={dataTypeHouse} />
-      </View>
+        <View style={[styles.pdLeft,{ paddingLeft: wp('0%')}]}>
+          <ListRoomType data={dataTypeHouse} />
+        </View>
 
-      <View style={styles.mrTop}>
-        <ListDestinations data={roomsCity} title='Top Destinations' _renderItem={_renderDestination} />
-      </View>
+        <View style={styles.mrTop}>
+          <ListDestinations data={roomsCity} title='Top Destinations' _renderItem={_renderDestination} />
+        </View>
 
-      <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
-        <ListCollections data={editorChoice} title='Editor Choice' _renderItem={_renderEditorChoice} />
-      </View>
+        <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
+          <ListCollections data={editorChoice.data} total={editorChoice.meta} title='Editor Choice' _renderItem={_renderEditorChoice} />
+        </View>
 
-      <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
-        <ListCollections data={forFamily} title='For Family' _renderItem={_renderForFamily} />
-      </View>
+        <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
+          <ListCollections data={forFamily.data} total={forFamily.meta} title='For Family' _renderItem={_renderForFamily} />
+        </View>
 
-      <View style={[styles.pdLeft, { marginTop: hp('1%') }]}>
-        <ListCollectionsSquare title='Studio For Rent' typeData='studio_for_rent' />
-      </View>
+        <View style={[styles.pdLeft, { marginTop: hp('1%') }]}>
+          <ListCollectionsSquare title='Studio For Rent' typeData='studio_for_rent' />
+        </View>
 
-      <View style={styles.mrTop}>
-        <ListDestinations data={goodPrice} title='Valuable Room' _renderItem={_renderValuableRoom} />
-      </View>
-      <View style={styles.boxEmpty} />
-    </ScrollView>
+        <View style={styles.mrTop}>
+          <ListDestinations data={goodPrice} title='Valuable Room' _renderItem={_renderValuableRoom} />
+        </View>
+        <View style={styles.boxEmpty} />
+      </ScrollView>
+
+      <ContactButton/>
+    </Animatable.View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingTop:StatusBar.currentHeight,
   },
   pdLeft: {
     paddingLeft: wp('5%'),
@@ -143,7 +160,7 @@ const styles = StyleSheet.create({
     height: hp('5%')
   },
   searchComponent: {
-    // paddingTop:StatusBar.currentHeight,
+    // marginTop:StatusBar.currentHeight,
     paddingBottom: hp('1%'),
     paddingHorizontal: wp('5%'),
     // backgroundColor: '#fff'

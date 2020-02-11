@@ -6,8 +6,8 @@ import {SearchFilterState} from 'store/redux/reducers/search/searchField';
 import {CityType} from 'types/Cities/CityResponse';
 import qs from 'query-string';
 import {AuthContext} from 'store/context/auth';
-import {useSelector} from 'react-redux';
-import {ReducersList} from 'store/redux/reducers';
+// @ts-ignore
+import Share from 'react-native-share';
 
 export const convertString = (query: object)  => {
   return {
@@ -277,6 +277,22 @@ export const getDataListRooms = async (
       return res
     })
     .catch(err => console.log(err));
+};
+
+export const handleShareSocial = (status:string, link:string, t:any) =>{
+
+  Share.shareSingle({
+    title: t('account:shared:titleShare'),
+    url: link,
+    failOnCancel: false,
+    message: t('account:shared:messageShare'),
+    social:
+      status === 'fb'
+        ? Share.Social.FACEBOOK
+        : status === 'ins'
+        ? Share.Social.INSTAGRAM
+        : Share.Social.GOOGLEPLUS,
+  });
 };
 
 export const inputContainerStyleGlobal =  {

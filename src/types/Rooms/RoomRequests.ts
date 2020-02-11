@@ -102,3 +102,8 @@ export interface LTRoomUrlParams {
   discount?: number;
   page?: number;
 }
+
+export interface IDataCollections {
+  data: [],
+  meta: number
+}

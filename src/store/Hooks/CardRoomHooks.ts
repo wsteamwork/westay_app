@@ -1,11 +1,12 @@
 import { axios } from 'utils/api';
+import {AxiosRes} from 'types/ResponseTemplate';
 
 // @ts-ignore
-export const getHomePageCollection = async (type: string, limit: number = -1): Promise<any[]> => {
+export const getHomePageCollection = async (type: string, limit: number = -1): Promise<AxiosRes<any>> => {
   try {
-    const res = await axios.get(`long-term-rooms/home-page-collection/${type}?limit=${limit}`);
+    const res:AxiosRes<any> = await axios.get(`long-term-rooms/home-page-collection/${type}?limit=${limit}`);
 
-    return res.data.data;
+    return res;
   } catch (e) {
     if (e) {
       console.error(e);

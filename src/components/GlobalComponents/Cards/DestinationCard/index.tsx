@@ -34,7 +34,7 @@ const DestinationCard: FC<IProps> = (props) => {
     >
       <ImageBackground
         style={styles.image}
-        imageStyle={{ borderRadius: 5 }}
+        imageStyle={{ borderRadius: 16 }}
         resizeMode="cover"
         source={{ uri: item.image }}
       >
@@ -65,10 +65,10 @@ const styles = StyleSheet.create({
   },
   image: {
     position: 'relative',
-    height: hp('26%'),
-    width: wp('88%'),
+    height: wp('65%'),
+    width: wp('85%'),
     overflow: 'hidden',
-    borderRadius: 6
+    borderRadius: 16
   },
   name: {
     // fontSize: wp('6%'),

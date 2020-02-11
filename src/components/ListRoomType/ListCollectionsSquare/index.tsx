@@ -6,6 +6,7 @@ import {COLOR_INFO, SIZE_TEXT_SUBTITLE} from 'styles/global.style';
 import {hp, stylesGlobal, wp} from 'utils/responsive';
 import CollectionsSquareCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsSquareCard';
 import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
+import {IDataCollections} from 'types/Rooms/RoomRequests';
 
 interface IProps {
   typeData: string,
@@ -14,11 +15,11 @@ interface IProps {
 
 const ListCollectionsSquare: FC<IProps> = (props) => {
   const { typeData, title } = props;
-  const [dataRooms, setDataRooms] = useState<any[]>([]);
+  const [dataRooms, setDataRooms] = useState<IDataCollections>({data: [], meta: 0});
   const { t } = useTranslation();
 
   useEffect(() => {
-    getHomePageCollection(typeData, 4).then((res) => setDataRooms(res));
+    getHomePageCollection(typeData).then((res) => setDataRooms({data: res.data.data, meta: res.data.data.length}));
   }, []);
 
   return (
@@ -29,16 +30,18 @@ const ListCollectionsSquare: FC<IProps> = (props) => {
 
       {/*{dataRooms.length ? (*/}
       <View style={styles.container}>
-        {dataRooms.map((room, i) => (
-          <Fragment key={i} >
-            <CollectionsSquareCard room={room} />
-          </Fragment>
+        {dataRooms.data.map((room, i) => (
+          i < 4 ? (
+            <Fragment key={i} >
+              <CollectionsSquareCard room={room} />
+            </Fragment>
+          ) : null
         ))}
       </View>
       {/*) : ''}*/}
 
       <Text style={styles.txtAll}>
-        Show all (99+) &#10095;
+        Show all {`(${dataRooms.meta}+)`} &#10095;
       </Text>
     </View>
   );
