@@ -16,6 +16,11 @@ import EditProfile from 'components/EditProfile';
 import ListRooms from 'components/ListRooms';
 import SearchSuggest from 'components/SearchComponent';
 import CollectionScreen from 'components/Collections/CollectionScreen';
+import ChooseDayBookingLT from 'components/ChooseDayBookingLT';
+import BoxCustomerInformation from 'components/BoxCustomerInformation';
+import BoxConfirmBooking from 'components/BoxConfirmBooking';
+import ShowCheckinCheckout from 'components/BoxConfirmBooking/ShowCheckinCheckout';
+import BoxBookingRoom from 'components/LTRoom/BoxDetailRoom/BoxBookingRoom';
 
 const stackNavigator = createStackNavigator({
   Main: {
@@ -37,6 +42,11 @@ const stackNavigator = createStackNavigator({
   Filter: { screen: Filter},
   MapFilter: { screen: MyMapView},
   CollectionScreen: { screen: CollectionScreen},
+    ChooseDayBookingLT: { screen: ChooseDayBookingLT },
+    BoxBookingRoom: { screen: BoxBookingRoom },
+    ShowCheckinCheckout: { screen: ShowCheckinCheckout },
+    BoxConfirmBooking: { screen: BoxConfirmBooking },
+    BoxCustomerInformation: { screen: BoxCustomerInformation },
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({

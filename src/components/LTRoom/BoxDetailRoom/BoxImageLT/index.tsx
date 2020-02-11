@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useContext } from 'react';
 import {StyleSheet, View, ImageBackground, TouchableOpacity, StatusBar} from 'react-native';
 import { wp, hp } from 'utils/responsive';
 import BoxIntroRoom from './BoxIntroRoom';
@@ -8,24 +8,32 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { IMAGE_STORAGE_LG } from 'types/globalTypes';
 import { Dispatch } from 'redux';
-import { LTRoomReducerAction, getDataLTRoom } from 'store/redux/reducers/LTRoom/RoomDetails';
 import {handleShareSocial} from 'utils/mixins';
 import {useTranslation} from 'react-i18next';
 
 
+import {
+  LTRoomReducerAction,
+  getDataLTRoom,
+  getRoomAvailableDate,
+} from 'store/redux/reducers/LTRoom/RoomDetails';
+import { AuthContext } from 'store/context/auth';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
 
 const BoxImageLT: FC<IProps> = (props) => {
   const { navigation } = props;
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
   const dispatch = useDispatch<Dispatch<LTRoomReducerAction>>();
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   const idRoom = navigation.getParam('idRoom', 0);
   const { t } = useTranslation();
 
+
   useEffect(() => {
-    getDataLTRoom(idRoom,dispatch);
+    getDataLTRoom(idRoom, dispatch);
   }, [idRoom]);
 
   return (

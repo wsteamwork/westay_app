@@ -15,7 +15,6 @@ interface IProps {
 const BoxIncludedFee: FC<IProps> = (props) => {
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   const [collapsedServices, setCollapsedServices] = useState(false);
-  console.log(listing);
   return (
     <View>
       <TouchableNativeFeedback style={styles.touchable} onPress={() => setCollapsedServices(true)}>

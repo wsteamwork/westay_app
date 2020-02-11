@@ -95,8 +95,6 @@ const MyMapView: FC<IProps> = (props) => {
     );
   };
 
-  // console.log(data);
-
   const getDataFindAround = () => {
     const MAP_AAA = {
       lat_min: coords.latitude - 0.09 / 2,

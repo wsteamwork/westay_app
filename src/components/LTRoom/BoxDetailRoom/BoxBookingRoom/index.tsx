@@ -1,18 +1,19 @@
-import React, { FC } from 'react';
-import { StyleSheet, View, ActivityIndicator, Alert } from 'react-native';
+import React, { FC, useState } from 'react';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { wp, hp } from 'utils/responsive';
-import { Text, Image, Avatar } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
-interface IProps {
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import ChooseDayBookingLT from 'components/ChooseDayBookingLT';
+interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
 
 const BoxBookingRoom: FC<IProps> = (props) => {
+  const { navigation } = props;
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
+  const [chooseDate, setChooseDate] = useState<boolean>(false);
   return (
     <View style={styles.boxPrice}>
       <View
@@ -26,9 +27,12 @@ const BoxBookingRoom: FC<IProps> = (props) => {
           <Text style={{ lineHeight: 37, fontSize: 10 }}> /month</Text>
         </Text>
       </View>
-      <TouchableOpacity style={styles.buttonStyle} onPress={() => Alert.alert('book room')}>
+      <TouchableOpacity
+        style={styles.buttonStyle}
+        onPress={() => setChooseDate(!chooseDate)}>
         <Text style={styles.titleStyle}>Book Now</Text>
       </TouchableOpacity>
+      <ChooseDayBookingLT open={chooseDate} setClose={setChooseDate} />
     </View>
   );
 };
@@ -81,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 BoxBookingRoom.defaultProps = {};
-export default BoxBookingRoom;
+export default withNavigation(BoxBookingRoom);

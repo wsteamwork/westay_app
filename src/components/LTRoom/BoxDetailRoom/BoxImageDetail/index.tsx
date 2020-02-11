@@ -16,7 +16,6 @@ interface IProps {
 
 const BoxImageDetail: FC<IProps> = (props) => {
   const { arrImages } = props;
-  console.log(arrImages);
   const [isImageViewVisible, setIsImageViewVisible] = useState(false);
   const [indexImage, setIndexImage] = useState<number>(0);
   const _renderItem = (item: any, index: number) => {

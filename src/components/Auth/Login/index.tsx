@@ -40,7 +40,6 @@ const Login: FC<IProps> = (props) => {
   const [loading, setLoading] = useState(false);
   const { dispatch, state } = useContext(AuthContext);
   const { navigation } = props;
-  console.log(navigation);
   const FormValidationSchema = Yup.object().shape({
     email: Yup.string()
       .required('Vui lòng nhập email')

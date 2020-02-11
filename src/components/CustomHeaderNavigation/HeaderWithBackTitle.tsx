@@ -44,7 +44,7 @@ const HeaderWithBackTitle : FC<IProps> = (props) => {
 
       <Text style={[styles.textHeader, textHeaderStyle]}>{title}</Text>
 
-      <View style={{ width: wp('10%'), alignItems: 'flex-end' }}>
+      <View style={{ alignItems: 'flex-end' }}>
         {rightComponent && rightComponent}
       </View>
     </View>

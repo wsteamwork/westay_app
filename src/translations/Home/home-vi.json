@@ -16,7 +16,8 @@
         "chooseCheckinDate": "Chọn ngày nhận phòng",
         "chooseCheckoutDate": "Chọn ngày trả phòng",
         "nightSelected": "đêm được chọn",
-        "submit": "Lưu lại"
+        "submit": "Lưu lại",
+        "next": "Tiếp tục"
     },
     "choosePeople": {
         "guest": "Khách",
