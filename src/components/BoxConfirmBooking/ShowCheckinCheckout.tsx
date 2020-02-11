@@ -10,7 +10,7 @@ import ChooseDayBookingLT from 'components/ChooseDayBookingLT';
 import { formatDateBooking } from 'utils/mixins';
 import { AuthContext } from 'store/context/auth';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
 
@@ -27,7 +27,8 @@ const ShowCheckinCheckout: FC<IProps> = (props) => {
           <Text style={styles.title}>Date</Text>
           <View style={styles.showDate}>
             <Text style={styles.date}>
-              {formatDateBooking(movein, languageStatus)} - {formatDateBooking(moveout, languageStatus)}
+              {formatDateBooking(movein, languageStatus)} -{' '}
+              {formatDateBooking(moveout, languageStatus)}
             </Text>
             <Entypo name="chevron-right" size={25} color="#484848" />
           </View>
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 16,
-    paddingVertical: hp('4%')
+    paddingVertical: hp('4%'),
   },
   showDate: {
     flexDirection: 'row',

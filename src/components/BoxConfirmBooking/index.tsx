@@ -14,28 +14,17 @@ import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
-  open: boolean;
-  setClose: Dispatch<SetStateAction<boolean>>;
 }
 
 const BoxConfirmBooking: FC<IProps> = (props) => {
-  const { navigation, open, setClose } = props;
+  const { navigation } = props;
   const dispatch = useDispatch<Dispatch<LTBookingAction>>();
   const [people, setPeople] = useState<number>(1);
   useEffect(() => {
     dispatch({ type: 'setNumberOfGuests', payload: people });
   }, [people]);
   return (
-    <Modal
-      isVisible={open}
-      onBackButtonPress={() => setClose(false)}
-      onBackdropPress={() => setClose(false)}
-      useNativeDriver={true}
-      hideModalContentWhileAnimating={true}
-      animationIn="fadeInUp"
-      animationOut="fadeOutDown"
-      coverScreen={true}
-      style={{ margin: 0 }}>
+    <View>
       <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
         <ScrollView style={{ marginBottom: hp('10%') }}>
           <HeaderWithBackTitle handlePress={() => navigation.goBack()} title="Confirm Booking" />
@@ -73,7 +62,7 @@ const BoxConfirmBooking: FC<IProps> = (props) => {
           customStyle={styles.buttonStyle}
         />
       </View>
-    </Modal>
+    </View>
   );
 };
 

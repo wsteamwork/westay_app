@@ -164,9 +164,8 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
     setToDate('');
     setMarkedDates({});
     initialAvailableDate();
-    navigation.navigate('BoxConfirmBooking');
   };
-
+  
   const handleShowConfirmBooking = () => {
     dispatchBooking({ type: 'setMoveIn', payload: fromDate });
     dispatchBooking({ type: 'setMoveOut', payload: toDate });
@@ -176,6 +175,7 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
       payload: room.guests.recommendation + room.guests.max_additional_guest,
     });
     setOpenConfirmBooking(!openConfirmBooking);
+    navigation.navigate('BoxConfirmBooking');
   };
 
   return (
@@ -278,7 +278,6 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
             handlePress={handleShowConfirmBooking}
           />
         </View>
-        <BoxConfirmBooking open={openConfirmBooking} setClose={setOpenConfirmBooking} />
       </View>
     </Modal>
   );
