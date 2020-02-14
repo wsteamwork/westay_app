@@ -25,7 +25,6 @@ interface IProps extends NavigationInjectedProps {
 const BoxImageLT: FC<IProps> = (props) => {
   const { navigation } = props;
   const { state } = useContext(AuthContext);
-  const { languageStatus } = state;
   const dispatch = useDispatch<Dispatch<LTRoomReducerAction>>();
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   const idRoom = navigation.getParam('idRoom', 0);

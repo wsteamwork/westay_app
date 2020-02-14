@@ -10,7 +10,7 @@ import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { axios, TOKEN } from 'utils/api';
 import Toast from 'react-native-root-toast';
 import storage from 'utils/storage';
-import { AuthContext } from 'store/context/auth';
+import { AuthContext, getProfile } from 'store/context/auth';
 import { Input } from 'react-native-elements';
 import { inputContainerStyleGlobal } from 'utils/mixins';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -81,6 +81,7 @@ const Register: FC<IProps> = (props) => {
           delay: 0,
         });
         dispatch({ type: 'SET_TOKEN', payload: `Bearer ${data.access_token}` });
+        getProfile(data.access_token, dispatch, languageStatus);
         navigation.navigate('Home');
       })
       .catch((err) => {
@@ -210,7 +211,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: wp('8%'),
     width: wp('100%'),
-    paddingHorizontal: wp('6%'),
+    paddingHorizontal: wp('5%'),
     color: COLOR_TEXT_DEFAULT,
   },
   titleSubText: {

@@ -21,37 +21,44 @@ import BoxCustomerInformation from 'components/BoxCustomerInformation';
 import BoxConfirmBooking from 'components/BoxConfirmBooking';
 import ShowCheckinCheckout from 'components/BoxConfirmBooking/ShowCheckinCheckout';
 import BoxBookingRoom from 'components/LTRoom/BoxDetailRoom/BoxBookingRoom';
+import BoxDirectTransfer from 'components/BoxDirectTransfer';
+import BoxPaymentBaoKim from 'components/BoxPaymentBaoKim';
+import WebViewBaoKim from 'components/BoxPaymentBaoKim/WebViewBaoKim';
 
-const stackNavigator = createStackNavigator({
-  Main: {
-    screen: BottomNavigation,
-  },
-  IntroApp: { screen: IntroApp },
-  Register: { screen: Register },
-  Login: { screen: Login },
-  Settings: { screen: Settings },
-  EditProfile: {screen: EditProfile },
-  TermsAndConditions: { screen: TermsAndConditions },
-  ForgotPassword: { screen: ForgotPassword },
-  PrivacyPolicy: { screen: PrivacyPolicy },
-  DetailScreen: { screen: BoxImageLT },
-  BoxImageLT: { screen: BoxImageLT },
-  BoxDetailRoom: { screen: BoxDetailRoom },
-  ListRooms: { screen: ListRooms},
-  SearchSuggest: { screen: SearchSuggest },
-  Filter: { screen: Filter},
-  MapFilter: { screen: MyMapView},
-  CollectionScreen: { screen: CollectionScreen},
+const stackNavigator = createStackNavigator(
+  {
+    Main: {
+      screen: BottomNavigation,
+    },
+    IntroApp: { screen: IntroApp },
+    Register: { screen: Register },
+    Login: { screen: Login },
+    Settings: { screen: Settings },
+    EditProfile: { screen: EditProfile },
+    TermsAndConditions: { screen: TermsAndConditions },
+    ForgotPassword: { screen: ForgotPassword },
+    PrivacyPolicy: { screen: PrivacyPolicy },
+    DetailScreen: { screen: BoxImageLT },
+    BoxDetailRoom: { screen: BoxDetailRoom },
+    ListRooms: { screen: ListRooms },
+    SearchSuggest: { screen: SearchSuggest },
+    Filter: { screen: Filter },
+    MapFilter: { screen: MyMapView },
+    CollectionScreen: { screen: CollectionScreen },
     ChooseDayBookingLT: { screen: ChooseDayBookingLT },
     BoxBookingRoom: { screen: BoxBookingRoom },
     ShowCheckinCheckout: { screen: ShowCheckinCheckout },
     BoxConfirmBooking: { screen: BoxConfirmBooking },
     BoxCustomerInformation: { screen: BoxCustomerInformation },
-},
-{
-  defaultNavigationOptions: ({ navigation }) => ({
-    header: () => null,
-  }),
-});
+    BoxDirectTransfer: { screen: BoxDirectTransfer },
+    BoxPaymentBaoKim: { screen: BoxPaymentBaoKim },
+    WebViewBaoKim: { screen: WebViewBaoKim },
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      header: () => null,
+    }),
+  },
+);
 
 export default createAppContainer(stackNavigator);

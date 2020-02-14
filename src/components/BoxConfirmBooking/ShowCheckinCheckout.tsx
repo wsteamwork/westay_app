@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import { StyleSheet, View, TouchableNativeFeedback } from 'react-native';
 import { wp } from 'utils/responsive';
 import { Text } from 'react-native-elements';
@@ -6,7 +6,6 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { hp } from 'components/Utils/responsive.style';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-import ChooseDayBookingLT from 'components/ChooseDayBookingLT';
 import { formatDateBooking } from 'utils/mixins';
 import { AuthContext } from 'store/context/auth';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
@@ -19,10 +18,9 @@ const ShowCheckinCheckout: FC<IProps> = (props) => {
   const { state } = useContext(AuthContext);
   const { languageStatus } = state;
   const { movein, moveout } = useSelector<ReducersList, any>((state) => state.ltbooking);
-  const [chooseDate, setChooseDate] = useState<boolean>(false);
   return (
     <View>
-      <TouchableNativeFeedback style={styles.touchable} onPress={() => setChooseDate(!chooseDate)}>
+      <TouchableNativeFeedback style={styles.touchable} onPress={() => navigation.navigate('ChooseDayBookingLT')}>
         <View style={styles.container}>
           <Text style={styles.title}>Date</Text>
           <View style={styles.showDate}>
@@ -33,7 +31,6 @@ const ShowCheckinCheckout: FC<IProps> = (props) => {
           </View>
         </View>
       </TouchableNativeFeedback>
-      <ChooseDayBookingLT open={chooseDate} setClose={setChooseDate} />
     </View>
   );
 };

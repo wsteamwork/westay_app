@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/Feather';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-import ChooseDayBookingLT from 'components/ChooseDayBookingLT';
 
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
@@ -15,7 +14,6 @@ interface IProps extends NavigationInjectedProps {
 
 const BoxIntroRoom: FC<IProps> = (props) => {
   const { navigation } = props;
-  const [chooseDate, setChooseDate] = useState<boolean>(false);
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   return (
     <View style={styles.container}>
@@ -28,7 +26,7 @@ const BoxIntroRoom: FC<IProps> = (props) => {
         containerStyle={styles.containerStyle}
         titleStyle={styles.titleStyle}
         pricingStyle={styles.pricingStyle}
-        onButtonPress={() => setChooseDate(!chooseDate)}
+        onButtonPress={() => navigation.navigate('ChooseDayBookingLT')}
       />
       <ButtonOriginal
         title="More details"
@@ -37,7 +35,6 @@ const BoxIntroRoom: FC<IProps> = (props) => {
         useViewComponent={false}
         handlePress={() => navigation.navigate('BoxDetailRoom')}
       />
-      <ChooseDayBookingLT open={chooseDate} setClose={setChooseDate} />
     </View>
   );
 };

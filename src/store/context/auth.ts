@@ -51,14 +51,17 @@ export const authReducer: Reducer<AuthState, AuthAction> = (state:AuthState = au
 
 export const setFcmToken = (payload:string) => ({ type: SET_FCM_TOKEN, payload });
 
-export const getProfile = (token:string, dispatch:Dispatch<AuthAction>, languageStatus:string) => {
-  return axios
+export const getProfile = async (token:string, dispatch:Dispatch<AuthAction>, languageStatus:string) => {
+  let res = await axios
     .get('profile?include=city,district', {
       headers: { Authorization: token, 'Accept-Language': languageStatus },
     })
-    .then(res => res.data.data)
-    .then(data => {
-      dispatch({ type: SET_PROFILE, payload: data });
-    })
-    .catch(() => dispatch({ type: SET_PROFILE, payload: null }));
+    if(res) {
+      console.log(1)
+      dispatch({ type: 'SET_PROFILE', payload: res.data.data })
+    }
+    else {
+      console.log(2)
+      dispatch({ type: SET_PROFILE, payload: null })
+    }
 };
