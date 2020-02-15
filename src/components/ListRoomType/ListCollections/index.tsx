@@ -10,13 +10,14 @@ import { compose } from 'recompose';
 
 interface IProps extends NavigationInjectedProps{
   title: string,
+  typeData: string,
   data: any[],
   total: number,
   _renderItem: (item?: any, index?: any) => ReactElement;
 }
 
 const ListCollections: FC<IProps> = (props) => {
-  const { title, data, _renderItem, total, navigation } = props;
+  const { title, data, _renderItem, total, typeData, navigation } = props;
 
   return (
     <View>
@@ -38,7 +39,7 @@ const ListCollections: FC<IProps> = (props) => {
         keyExtractor={(item, index) => index.toString()}
       />
 
-      <TouchableWithScale _onPress={()=> navigation.navigate('CollectionScreen')}>
+      <TouchableWithScale _onPress={()=> navigation.navigate('CollectionScreen', {typeDataCollection: typeData, titleCollection: title})}>
         <Text style={[styles.txtAll]}>
           Show all {`(${total}+)`} &#10095;
         </Text>

@@ -21,6 +21,7 @@ import {axios} from 'utils/api';
 import * as Animatable from 'react-native-animatable';
 import ContactButton from 'components/ContactButton';
 import {IDataCollections} from 'types/Rooms/RoomRequests';
+import RNBootSplash from "react-native-bootsplash";
 
 const Home: FC = (props) => {
   const { state, dispatch } = useContext(AuthContext);
@@ -39,21 +40,34 @@ const Home: FC = (props) => {
     setDataTypeHouse(response.data.data);
   };
 
-  useEffect(() => {
-    getRoomsHomepage(dispatchHome, languageStatus);
-    getHomePageCollection('editor_choice').then((res) => {
+  let init = async () => {
+    await getDataTypeHouse();
+    await getRoomsHomepage(dispatchHome, languageStatus);
+    await getHomePageCollection('editor_choice', 8).then((res) => {
       setEditorChoice({
         data: res.data.data,
-        meta: res.data.data.length})
+        meta: res.data!.meta!.pagination!.total
+      })
     });
-    getHomePageCollection('for_family').then((res) => {
+    await getHomePageCollection('for_family', 8).then((res) => {
       setForFamily({
         data: res.data.data,
-        meta: res.data.data.length})
+        meta: res.data!.meta!.pagination!.total})
     });
-    getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res.data.data));
-    getDataTypeHouse();
+    await getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res.data.data));
+
+  };
+
+  useEffect(() => {
+    init().finally(() => {
+      RNBootSplash.hide({ duration: 250 });
+    });
+
   }, [languageStatus]);
+
+  // useEffect(() => {
+  //
+  // }, []);
 
 
   const _renderEditorChoice = (item: any, index: number) => {
@@ -99,11 +113,11 @@ const Home: FC = (props) => {
   };
 
   return (
-    <Animatable.View animation="fadeInUp" style={{ flex: 1 }} useNativeDriver>
+    <Animatable.View animation="fadeInUp" style={{ flex: 1, backgroundColor: '#fff' }} useNativeDriver>
       <StatusBar
-        translucent={true}
+        translucent={false}
         barStyle={'dark-content'}
-        backgroundColor="transparent"
+        backgroundColor="#fff"
         animated={true}
       />
       <ScrollView style={styles.container} stickyHeaderIndices={[0]}>
@@ -120,11 +134,11 @@ const Home: FC = (props) => {
         </View>
 
         <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
-          <ListCollections data={editorChoice.data} total={editorChoice.meta} title='Editor Choice' _renderItem={_renderEditorChoice} />
+          <ListCollections data={editorChoice.data} typeData='editor_choice' total={editorChoice.meta} title='Editor Choice' _renderItem={_renderEditorChoice} />
         </View>
 
         <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
-          <ListCollections data={forFamily.data} total={forFamily.meta} title='For Family' _renderItem={_renderForFamily} />
+          <ListCollections data={forFamily.data} typeData='for_family' total={forFamily.meta} title='For Family' _renderItem={_renderForFamily} />
         </View>
 
         <View style={[styles.pdLeft, { marginTop: hp('1%') }]}>
@@ -145,11 +159,10 @@ const Home: FC = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop:StatusBar.currentHeight,
+    // paddingTop:StatusBar.currentHeight,
   },
   pdLeft: {
     paddingLeft: wp('5%'),
-    // marginTop: hp('3%')
     marginBottom: hp('1.5%'),
     marginTop: __currentPlatform ? StatusBar.currentHeight : 38
   },
@@ -160,10 +173,8 @@ const styles = StyleSheet.create({
     height: hp('5%')
   },
   searchComponent: {
-    // marginTop:StatusBar.currentHeight,
     paddingBottom: hp('1%'),
     paddingHorizontal: wp('5%'),
-    // backgroundColor: '#fff'
   }
 });
 

@@ -1,4 +1,4 @@
-import React, {FC, memo} from 'react';
+import React, {FC, memo, useState, useEffect, Fragment} from 'react';
 import {
   StyleSheet,
   View,
@@ -8,7 +8,7 @@ import {
   Text,
   Alert,
   StatusBar,
-  NativeModules,
+  NativeModules, ScrollView, FlatList,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {hp, wp} from 'utils/responsive';
@@ -21,6 +21,11 @@ import { compose } from 'recompose';
 // @ts-ignore
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import ListCollectionsSquare from 'components/ListRoomType/ListCollectionsSquare';
+import {IDataCollections} from 'types/Rooms/RoomRequests';
+import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
+import CollectionsSquareCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsSquareCard';
+import {TypeApartment} from 'types/Rooms/RoomResponses';
+import RoomTypeCard from 'components/GlobalComponents/Cards/RoomTypeCard';
 
 const { StatusBarManager } = NativeModules;
 const {
@@ -42,9 +47,31 @@ interface IProps extends NavigationInjectedProps{
 
 const CollectionScreen: FC<IProps> = (props) => {
   const { navigation } = props;
+  const [dataRooms, setDataRooms] = useState<IDataCollections>({data: [], meta: 0});
+
+  const typeData = navigation.getParam('typeDataCollection');
+  const title = navigation.getParam('titleCollection');
+
+  useEffect(() => {
+    getHomePageCollection(typeData, 30).then((res) => setDataRooms({data: res.data.data, meta: res.data.meta!.pagination.total}));
+  }, []);
+
+  const _renderItem = (item: any, index: number) => {
+    return (
+      <View style={{ flex: 1 }} key={index}>
+        <CollectionsSquareCard room={item} />
+      </View>
+    );
+  };
 
   const renderNavBar = () => (
     <View style={[styles.navContainer, elevationShadowStyle(6)]}>
+      <StatusBar
+        translucent={true}
+        barStyle={'dark-content'}
+        backgroundColor="#fff"
+        animated={true}
+      />
       <View style={styles.statusBar} />
       <View style={[styles.navBar]}>
         <TouchableWithScale _onPress={()=>navigation.goBack()}>
@@ -55,20 +82,33 @@ const CollectionScreen: FC<IProps> = (props) => {
   );
 
   const renderContent = () => (
-    <View style={[styles.navContainer, {height:1000}]}>
-      <ListCollectionsSquare title='Studio For Rent' typeData='studio_for_rent' />
-    </View>
+    <FlatList
+      showsHorizontalScrollIndicator={false}
+      data={dataRooms.data}
+      renderItem={({ item, index }) => _renderItem(item, index)}
+      extraData={dataRooms.data}
+      keyExtractor={(item, index) => index.toString()}
+      contentContainerStyle={styles.bodyContainer}
+    />
+
+    // <ScrollView style={styles.bodyContainer}>
+    //   {dataRooms.data.map((room, i) => (
+    //     <View key={i} style={{backgroundColor: 'blue', marginVertical: 10, width: '100%'}}>
+    //       <CollectionsSquareCard room={room} />
+    //     </View>
+    //   ))}
+    // </ScrollView>
   );
 
   return (
     <View style={styles.container}>
       <ReactNativeParallaxHeader
         headerMinHeight={HEADER_HEIGHT + STATUS_BAR_HEIGHT}
-        headerMaxHeight={200}
+        headerMaxHeight={hp('25%')}
         extraScrollHeight={20}
         navbarColor="#fff"
         statusBarColor='transparent'
-        title="Tên bộ sưu tập"
+        title={title}
         titleStyle={styles.titleStyle}
         backgroundImage={images.background}
         backgroundImageScale={1.2}
@@ -77,12 +117,11 @@ const CollectionScreen: FC<IProps> = (props) => {
         renderNavBar={renderNavBar}
         renderContent={renderContent}
         containerStyle={styles.container}
-        contentContainerStyle={styles.contentContainer}
+        // contentContainerStyle={styles.contentContainer}
         innerContainerStyle={styles.container}
-        // scrollViewProps={{
-        //   onScrollBeginDrag: () => Alert.alert('onScrollBeginDrag'),
-        //   onScrollEndDrag: () => Alert.alert('onScrollEndDrag'),
-        // }}
+        scrollViewProps={{
+          showsVerticalScrollIndicator: false
+        }}
       />
     </View>
   );
@@ -92,8 +131,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  contentContainer: {
+  // contentContainer: {
+  //   flexGrow: 1,
+  //   flexDirection: 'row',
+  //   flexWrap: 'wrap',
+  //   paddingHorizontal: wp('5%'),
+  //   paddingVertical: hp('5%'),
+  //   backgroundColor: 'red',
+  // },
+  bodyContainer:{
     flexGrow: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: wp('5%'),
+    paddingVertical: hp('5%'),
+    justifyContent: 'space-between',
   },
   navContainer: {
     height: HEADER_HEIGHT + STATUS_BAR_HEIGHT,
@@ -114,6 +166,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     fontSize: SIZE_TEXT_TITLE,
+    width: wp('80%')
   },
 });
 
