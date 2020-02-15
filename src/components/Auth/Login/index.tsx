@@ -1,9 +1,4 @@
-import React, {
-  FC,
-  useRef,
-  useContext,
-  useState,
-} from 'react';
+import React, { FC, useRef, useContext, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -21,7 +16,7 @@ import { Formik, FormikHelpers } from 'formik';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { axios, TOKEN } from 'utils/api';
 import storage from 'utils/storage';
-import { AuthContext } from 'store/context/auth';
+import { AuthContext, getProfile } from 'store/context/auth';
 import { Input } from 'react-native-elements';
 import { inputContainerStyleGlobal } from 'utils/mixins';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -39,6 +34,7 @@ const Login: FC<IProps> = (props) => {
   const passwordRef = useRef<any>(null);
   const [loading, setLoading] = useState(false);
   const { dispatch, state } = useContext(AuthContext);
+  const { languageStatus } = state;
   const { navigation } = props;
   const FormValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -59,8 +55,9 @@ const Login: FC<IProps> = (props) => {
     };
     setLoading(true);
     try {
-      axios.post('login', body).then(res => {
+      axios.post('login', body).then((res) => {
         const data = res.data;
+        console.log('data', data);
         setLoading(false);
         storage.save({
           key: TOKEN,
@@ -68,6 +65,7 @@ const Login: FC<IProps> = (props) => {
           expires: data.expires_in,
         });
         dispatch({ type: 'SET_TOKEN', payload: `Bearer ${data.access_token}` });
+        getProfile(data.access_token, dispatch, languageStatus);
         navigation.navigate('Home');
       });
     } catch (err) {
@@ -101,55 +99,55 @@ const Login: FC<IProps> = (props) => {
               enableOnAndroid
               extraHeight={50}
               showsVerticalScrollIndicator={false}>
-                <View style={styles.container} collapsable={false}>
-                  <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-                  <Text style={styles.titleText}>Log in</Text>
-                  <Input
-                    ref={emailRef}
-                    placeholder="Your Email"
-                    keyboardType="email-address"
-                    returnKeyType="next"
-                    value={values.email}
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    errorMessage={errors.email}
-                    onSubmitEditing={() => passwordRef.current.focus()}
-                    autoCorrect={false}
-                    inputContainerStyle={styles.inputContainerStyle}
-                    containerStyle={styles.containerStyle}
-                    errorStyle={{ color: 'red' }}
-                  />
-                  <Input
-                    ref={passwordRef}
-                    placeholder="Password"
-                    keyboardType="default"
-                    returnKeyType="done"
-                    secureTextEntry={true}
-                    value={values.password}
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    errorMessage={errors.password}
-                    errorStyle={{ color: 'red' }}
-                    inputContainerStyle={styles.inputContainerStyle}
-                    containerStyle={styles.containerStyle}
-                  />
-                  <View style={styles.forgotPassword}>
-                    <Text
-                      style={{ fontSize: wp('4%'), color: '#8A8A8F' }}
-                      onPress={() => navigation.navigate('ForgotPassword')}>
-                      Forgot Password
-                    </Text>
-                  </View>
-                  <ButtonOriginal title="Log in" handlePress={handleSubmit} loading={loading} />
-                  <View style={styles.action}>
-                    <Text style={styles.titleSubText}>
-                      <Text>Don’t have an account? </Text>
-                      <Text onPress={() => navigation.navigate('Register')} style={styles.textSwitch}>
-                        Sign up
-                      </Text>{' '}
-                    </Text>
-                  </View>
+              <View style={styles.container} collapsable={false}>
+                <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
+                <Text style={styles.titleText}>Log in</Text>
+                <Input
+                  ref={emailRef}
+                  placeholder="Your Email"
+                  keyboardType="email-address"
+                  returnKeyType="next"
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  errorMessage={errors.email}
+                  onSubmitEditing={() => passwordRef.current.focus()}
+                  autoCorrect={false}
+                  inputContainerStyle={styles.inputContainerStyle}
+                  containerStyle={styles.containerStyle}
+                  errorStyle={{ color: 'red' }}
+                />
+                <Input
+                  ref={passwordRef}
+                  placeholder="Password"
+                  keyboardType="default"
+                  returnKeyType="done"
+                  secureTextEntry={true}
+                  value={values.password}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  errorMessage={errors.password}
+                  errorStyle={{ color: 'red' }}
+                  inputContainerStyle={styles.inputContainerStyle}
+                  containerStyle={styles.containerStyle}
+                />
+                <View style={styles.forgotPassword}>
+                  <Text
+                    style={{ fontSize: wp('4%'), color: '#8A8A8F' }}
+                    onPress={() => navigation.navigate('ForgotPassword')}>
+                    Forgot Password
+                  </Text>
                 </View>
+                <ButtonOriginal title="Log in" handlePress={handleSubmit} loading={loading} />
+                <View style={styles.action}>
+                  <Text style={styles.titleSubText}>
+                    <Text>Don’t have an account? </Text>
+                    <Text onPress={() => navigation.navigate('Register')} style={styles.textSwitch}>
+                      Sign up
+                    </Text>{' '}
+                  </Text>
+                </View>
+              </View>
             </KeyboardAwareScrollView>
           </SafeAreaView>
         );
@@ -174,7 +172,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: wp('8%'),
     width: wp('100%'),
-    paddingHorizontal: wp('6%'),
+    paddingHorizontal: wp('5%'),
     color: COLOR_TEXT_DEFAULT,
   },
   titleSubText: {

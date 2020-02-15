@@ -1,25 +1,21 @@
-import React, { FC, useContext, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import React, { FC, useContext, useState, Dispatch, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { AuthContext } from 'store/context/auth';
 import { hp, wp } from 'utils/responsive';
-import Modal from 'react-native-modal';
 import { ReducersList } from 'store/redux/reducers';
-import {LTRoomReducerAction, getRoomAvailableDate} from 'store/redux/reducers/LTRoom/RoomDetails';
+import { LTRoomReducerAction, getRoomAvailableDate } from 'store/redux/reducers/LTRoom/RoomDetails';
 import { CalendarList, LocaleConfig } from 'react-native-calendars';
 import { Text, Icon } from 'react-native-elements';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import XDate from 'xdate';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import ShowChooseDate from './ShowChooseDate';
-import BoxConfirmBooking from 'components/BoxConfirmBooking';
 import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
-  open: boolean;
-  setClose: Dispatch<SetStateAction<boolean>>;
 }
 
 interface DateObj {
@@ -65,14 +61,12 @@ LocaleConfig.locales['vi'] = {
 LocaleConfig.defaultLocale = 'vi';
 
 const ChooseDayBookingLT: FC<IProps> = (props) => {
-  const { navigation, open, setClose } = props;
+  const { navigation } = props;
   const { state } = useContext(AuthContext);
   const { t } = useTranslation();
-  const [openConfirmBooking, setOpenConfirmBooking] = useState<boolean>(false);
   const { room, roomAvailable, roomId } = useSelector<ReducersList, any>(
     (state) => state.ltRoomDetails,
   );
-  console.log('roomAvailable',roomAvailable);
   const { languageStatus } = state;
   const [isFromDatePicked, setIsFromDatePicked] = useState<boolean>(false);
   const [isToDatePicked, setIsToDatePicked] = useState<boolean>(false);
@@ -165,7 +159,6 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
     setToDate('');
     setMarkedDates({});
     initialAvailableDate();
-    navigation.navigate('BoxConfirmBooking');
   };
 
   const handleShowConfirmBooking = () => {
@@ -176,112 +169,100 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
       type: 'setMaxGuestRoom',
       payload: room.guests.recommendation + room.guests.max_additional_guest,
     });
-    setOpenConfirmBooking(!openConfirmBooking);
+    navigation.navigate('BoxConfirmBooking');
   };
 
   return (
-    <Modal
-      isVisible={open}
-      onBackButtonPress={() => setClose(false)}
-      onBackdropPress={() => setClose(false)}
-      useNativeDriver={true}
-      hideModalContentWhileAnimating={true}
-      animationIn="fadeInUp"
-      animationOut="fadeOutDown"
-      coverScreen={true}
-      style={{ margin: 0 }}>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <View style={{ backgroundColor: '#ffffff', width: '100%', paddingTop: hp('13%') }}>
-          <HeaderWithBackTitle
-            handlePress={() => navigation.goBack()}
-            rightComponent={
-              fromDate ? (
-                <Text
-                  onPress={handleReset}
-                  style={{ fontSize: 16, fontWeight: '700', color: '#666' }}>
-                  Đặt lại
-                </Text>
-              ) : (
-                <Text></Text>
-              )
-            }
-            containerStyle={{ paddingHorizontal: wp('8%'), paddingBottom: hp('1%') }}
-          />
-          <ShowChooseDate fromDate={fromDate} toDate={toDate} />
-        </View>
-
-        <CalendarList
-          minDate={roomAvailable[0]}
-          maxDate={roomAvailable.slice(-1)[0]}
-          onDayPress={(day: any) => {
-            onDayPress(day);
-          }}
-          onDayLongPress={(day: any) => {
-            onDayPress(day);
-          }}
-          monthFormat={'MMMM. yyyy'}
-          hideArrows={false}
-          hideExtraDays={true}
-          disableMonthChange={true}
-          hideDayNames={false}
-          showWeekNumbers={false}
-          pastScrollRange={0}
-          futureScrollRange={24}
-          scrollEnabled={true}
-          showScrollIndicator={false}
-          markedDates={markedDates}
-          markingType={'period'}
-          theme={{
-            selectedDayBackgroundColor: '#008489',
-            selectedDayTextColor: '#ffffff',
-            todayTextColor: '#00adf5',
-            dayTextColor: '#2d4150',
-            selectedDotColor: '#ffffff',
-            monthTextColor: '#008489',
-            textDayFontWeight: '600',
-            textMonthFontWeight: 'bold',
-            textDayHeaderFontWeight: '600',
-            textDayFontSize: 16,
-            textDayHeaderFontSize: 14,
-            textMonthFontSize: 20,
-            arrowColor: '#008489',
-            'stylesheet.day.period': {
-              base: {
-                overflow: 'hidden',
-                height: 34,
-                alignItems: 'center',
-                width: 38,
-              },
-            },
-          }}
-          renderArrow={(direction) => (
-            <Icon
-              name={direction === 'left' ? 'chevron-left' : 'chevron-right'}
-              size={24}
-              color="#008489"
-            />
-          )}
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: hp('12%') }}>
+      <View style={{ backgroundColor: '#ffffff', width: '100%'}} >
+        <HeaderWithBackTitle
+          handlePress={() => navigation.goBack()}
+          rightComponent={
+            fromDate ? (
+              <Text
+                onPress={handleReset}
+                style={{ fontSize: 16, fontWeight: '700', color: '#666' }}>
+                Đặt lại
+              </Text>
+            ) : (
+              <Text></Text>
+            )
+          }
+          containerStyle={{ paddingHorizontal: wp('8%') }}
         />
-        <View style={styles.buttonWrapper}>
-          <Text style={{ fontSize: 18 }}>
-            {!fromDate && !toDate && t('home:chooseDate:chooseCheckinDate')}
-            {fromDate && !toDate && t('home:chooseDate:chooseCheckoutDate')}
-            {fromDate &&
-              toDate &&
-              nightSelected &&
-              `${nightSelected} ${t('home:chooseDate:nightSelected')}`}
-          </Text>
-
-          <ButtonOriginal
-            width={wp('25%')}
-            title={t('home:chooseDate:next')}
-            customStyle={{ backgroundColor: '#008489' }}
-            handlePress={handleShowConfirmBooking}
-          />
-        </View>
-        <BoxConfirmBooking open={openConfirmBooking} setClose={setOpenConfirmBooking} />
+        <ShowChooseDate fromDate={fromDate} toDate={toDate} />
       </View>
-    </Modal>
+
+      <CalendarList
+        minDate={roomAvailable[0]}
+        maxDate={roomAvailable.slice(-1)[0]}
+        onDayPress={(day: any) => {
+          onDayPress(day);
+        }}
+        onDayLongPress={(day: any) => {
+          onDayPress(day);
+        }}
+        monthFormat={'MMMM. yyyy'}
+        hideArrows={false}
+        hideExtraDays={true}
+        disableMonthChange={true}
+        hideDayNames={false}
+        showWeekNumbers={false}
+        pastScrollRange={0}
+        futureScrollRange={24}
+        scrollEnabled={true}
+        showScrollIndicator={false}
+        markedDates={markedDates}
+        markingType={'period'}
+        theme={{
+          selectedDayBackgroundColor: '#008489',
+          selectedDayTextColor: '#ffffff',
+          todayTextColor: '#00adf5',
+          dayTextColor: '#2d4150',
+          selectedDotColor: '#ffffff',
+          monthTextColor: '#008489',
+          textDayFontWeight: '600',
+          textMonthFontWeight: 'bold',
+          textDayHeaderFontWeight: '600',
+          textDayFontSize: 16,
+          textDayHeaderFontSize: 14,
+          textMonthFontSize: 20,
+          arrowColor: '#008489',
+          'stylesheet.day.period': {
+            base: {
+              overflow: 'hidden',
+              height: 34,
+              alignItems: 'center',
+              width: 38,
+            },
+          },
+        }}
+        renderArrow={(direction) => (
+          <Icon
+            name={direction === 'left' ? 'chevron-left' : 'chevron-right'}
+            size={24}
+            color="#008489"
+          />
+        )}
+      />
+      <View style={styles.buttonWrapper}>
+        <Text style={{ fontSize: 18 }}>
+          {!fromDate && !toDate && t('home:chooseDate:chooseCheckinDate')}
+          {fromDate && !toDate && t('home:chooseDate:chooseCheckoutDate')}
+          {fromDate &&
+            toDate &&
+            nightSelected &&
+            `${nightSelected} ${t('home:chooseDate:nightSelected')}`}
+        </Text>
+
+        <ButtonOriginal
+          width={wp('25%')}
+          title={t('home:chooseDate:next')}
+          customStyle={{ backgroundColor: '#008489' }}
+          handlePress={handleShowConfirmBooking}
+        />
+      </View>
+    </View>
   );
 };
 

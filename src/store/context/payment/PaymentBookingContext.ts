@@ -1,3 +1,4 @@
+import { ProfileInfoRes } from './../../../types/Profile/ProfileResponse';
 import qs from 'query-string';
 import { createContext } from 'react';
 import {axios} from 'utils/api';
@@ -23,22 +24,20 @@ export interface IPaymentContext {
 }
 
 export type PaymentState = {
-  readonly customer: RoomIndexRes | null;
-  readonly lists: BookingIndexRes | null;
-  readonly payment_methods: PaymentMethod[];
+  readonly customer: ProfileInfoRes | null;
+  readonly bankList: PaymentMethod[] | null;
+  readonly priceOfBooking: string;
 };
 
-export type PaymentAction = {
-  type: 'setAll';
-  room: RoomIndexRes;
-  lists: PaymentBankListRes;
-  payment_methods: PaymentMethod[];
-};
+export type PaymentAction = 
+  | { type: "SET_INFO"; payload: ProfileInfoRes | null}
+  | { type: "SET_PRICE"; payload: string}
+  | { type: "SET_BANK_LIST"; payload: any}
 
 
 export const PaymentBookingStateInit:PaymentState = {
   customer: null,
-  priceOfBooking: null,
+  priceOfBooking: '',
   bankList: null,
 
 };
@@ -74,7 +73,7 @@ export const priceCalculate = async (params:BookingCreateReq, languageStatus:str
   return res.data;
 };
 
-export const getBankList = async (uuid:number, languageStatus:string) => {
+export const getBankList = async (uuid:string, languageStatus:string) => {
   const params = {
     include: 'room.details',
   };
@@ -87,7 +86,7 @@ export const getBankList = async (uuid:number, languageStatus:string) => {
   return res.data;
 };
 
-export const redirectToBaoKim = async (uuid:number, bank_id:number, languageStatus:string) => {
+export const redirectToBaoKim = async (uuid:string, bank_id:number, languageStatus:string) => {
   const request = {
     payment_method: bank_id === 128 ? VISA : INTERNET_BANKING,
     bank_payment_method_id: bank_id,
@@ -100,13 +99,13 @@ export const redirectToBaoKim = async (uuid:number, bank_id:number, languageStat
 };
 
 export const getProfile = (dispatch:Dispatch, languageStatus:string) => {
-  const url = `profile`;
+  const url = `profile?include=city,district`;
 
   fetchData(url, languageStatus)
     .then(res => dispatch(setInfo(res.data)))
     .catch(err => console.log(err));
 };
 
-const setInfo = payload => ({ type: 'SET_INFO', payload });
-const setPrice = payload => ({ type: 'SET_PRICE', payload });
+const setInfo = (payload: ProfileInfoRes) => ({ type: 'SET_INFO', payload });
+const setPrice =(payload: any)  => ({ type: 'SET_PRICE', payload });
 

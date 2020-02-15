@@ -5,7 +5,6 @@ import { Text } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import ChooseDayBookingLT from 'components/ChooseDayBookingLT';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
@@ -13,7 +12,6 @@ interface IProps extends NavigationInjectedProps {
 const BoxBookingRoom: FC<IProps> = (props) => {
   const { navigation } = props;
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
-  const [chooseDate, setChooseDate] = useState<boolean>(false);
   return (
     <View style={styles.boxPrice}>
       <View
@@ -29,10 +27,9 @@ const BoxBookingRoom: FC<IProps> = (props) => {
       </View>
       <TouchableOpacity
         style={styles.buttonStyle}
-        onPress={() => setChooseDate(!chooseDate)}>
+        onPress={() => navigation.navigate('ChooseDayBookingLT')}>
         <Text style={styles.titleStyle}>Book Now</Text>
       </TouchableOpacity>
-      <ChooseDayBookingLT open={chooseDate} setClose={setChooseDate} />
     </View>
   );
 };

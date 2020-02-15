@@ -41,7 +41,6 @@ const EditProfile: FC<IProps> = (props) => {
   const { state, dispatch } = useContext(AuthContext);
   const { token, profile, languageStatus } = state;
   const [loadingSubmit, setLoadingSubmit] = useState(false);
-  // const [selected, setSelected] = useState(profile.gender);
   const [selected, setSelected] = useState(null);
   useEffect(() => {
     getProfile(token, dispatch, languageStatus);

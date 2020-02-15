@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: wp('8%'),
     width: wp('100%'),
-    paddingHorizontal: wp('6%'),
+    paddingHorizontal: wp('5%'),
     color: COLOR_TEXT_DEFAULT,
   },
   titleSubText: {

@@ -1,7 +1,6 @@
-import React, { FC, SetStateAction, Dispatch, useState, useEffect } from 'react';
+import React, { FC, Dispatch, useState, useEffect } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import ChooseGuest from 'components/ChooseGuest';
-import Modal from 'react-native-modal';
 import { Divider } from 'react-native-elements';
 import { hp, wp } from 'utils/responsive';
 import ShowCheckinCheckout from './ShowCheckinCheckout';
@@ -14,72 +13,46 @@ import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
-  open: boolean;
-  setClose: Dispatch<SetStateAction<boolean>>;
 }
 
 const BoxConfirmBooking: FC<IProps> = (props) => {
-  const { navigation, open, setClose } = props;
+  const { navigation } = props;
   const dispatch = useDispatch<Dispatch<LTBookingAction>>();
   const [people, setPeople] = useState<number>(1);
   useEffect(() => {
     dispatch({ type: 'setNumberOfGuests', payload: people });
   }, [people]);
   return (
-    <Modal
-      isVisible={open}
-      onBackButtonPress={() => setClose(false)}
-      onBackdropPress={() => setClose(false)}
-      useNativeDriver={true}
-      hideModalContentWhileAnimating={true}
-      animationIn="fadeInUp"
-      animationOut="fadeOutDown"
-      coverScreen={true}
-      style={{ margin: 0 }}>
-      <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
-        <ScrollView style={{ marginBottom: hp('10%') }}>
-          <HeaderWithBackTitle handlePress={() => navigation.goBack()} title="Confirm Booking" />
-          <ShowInfoBasicRoom />
-          <Divider
-            style={{
-              backgroundColor: '#dfdfdf',
-              marginTop: hp('2%'),
-              marginHorizontal: hp('2.5%'),
-            }}
-          />
-          <ShowCheckinCheckout />
-          <Divider
-            style={{
-              backgroundColor: '#dfdfdf',
-              marginBottom: hp('2%'),
-              marginHorizontal: hp('2.5%'),
-            }}
-          />
-          <ChooseGuest people={people} setPeople={setPeople} />
-          <Divider
-            style={{
-              backgroundColor: '#dfdfdf',
-              marginVertical: hp('2%'),
-              marginHorizontal: hp('2.5%'),
-            }}
-          />
-          <ShowPriceCalculator />
-        </ScrollView>
-      </View>
-      <View style={styles.boxPrice}>
+    <View style={styles.container}>
+      <ScrollView>
+        <HeaderWithBackTitle handlePress={() => navigation.goBack()} title="Confirm Booking" />
+        <ShowInfoBasicRoom />
+        <Divider style={styles.divider1} />
+        <ShowCheckinCheckout />
+        <Divider style={styles.divider2} />
+        <ChooseGuest people={people} setPeople={setPeople} />
+        <Divider style={styles.divider} />
+        <ShowPriceCalculator />
+      </ScrollView>
+      <View style={styles.BoxConfirm}>
         <ButtonOriginal
           title="Reserve"
           handlePress={() => navigation.navigate('BoxCustomerInformation')}
           customStyle={styles.buttonStyle}
         />
       </View>
-    </Modal>
+    </View>
   );
 };
 
 BoxConfirmBooking.defaultProps = {};
 const styles = StyleSheet.create({
-  boxPrice: {
+  container: {
+    flex: 1,
+    marginTop: hp('4%'),
+    backgroundColor: '#ffffff',
+  },
+  BoxConfirm: {
     position: 'absolute',
     bottom: 0,
     width: wp('100%'),
@@ -106,6 +79,21 @@ const styles = StyleSheet.create({
     color: 'red',
     fontWeight: '500',
     marginRight: 3,
+  },
+
+  divider1: {
+    backgroundColor: '#dfdfdf',
+    marginHorizontal: hp('2.5%'),
+  },
+  divider2: {
+    marginBottom: hp('2%'),
+    backgroundColor: '#dfdfdf',
+    marginHorizontal: hp('2.5%'),
+  },
+  divider: {
+    backgroundColor: '#dfdfdf',
+    marginVertical: hp('2%'),
+    marginHorizontal: hp('2.5%'),
   },
 });
 export default withNavigation(BoxConfirmBooking);

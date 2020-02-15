@@ -15,6 +15,7 @@ interface IProps {
   icon?: any;
   iconRight?: boolean;
   useViewComponent?: boolean;
+  disabled?: boolean;
 }
 const ButtonOriginal: FC<IProps> = (props) => {
   const {
@@ -27,6 +28,7 @@ const ButtonOriginal: FC<IProps> = (props) => {
     iconRight,
     useViewComponent,
     height,
+    disabled
   } = props;
   return (
       <Button
@@ -43,6 +45,7 @@ const ButtonOriginal: FC<IProps> = (props) => {
         titleStyle={styles.titleStyle}
         iconRight={iconRight}
         icon={icon}
+        disabled={disabled}
         {...props}
       />
   );
