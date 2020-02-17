@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { wp } from 'utils/responsive';
 import { Text } from 'react-native-elements';
+import { AuthContext } from 'store/context/auth';
+import { formatDateBooking } from 'utils/mixins';
 interface IProps {
   fromDate: string;
   toDate: string;
@@ -11,6 +13,8 @@ interface IProps {
 const ShowChooseDate: FC<IProps> = (props) => {
   const { fromDate, toDate } = props;
   const { t } = useTranslation();
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
   return (
     <View
       style={{
@@ -27,7 +31,7 @@ const ShowChooseDate: FC<IProps> = (props) => {
             color: '#666666',
           }}>
           {fromDate ? (
-            fromDate
+            formatDateBooking(fromDate, languageStatus, true)
           ) : (
             <Text
               style={{
@@ -61,7 +65,7 @@ const ShowChooseDate: FC<IProps> = (props) => {
             textAlign: 'right',
           }}>
           {toDate ? (
-            toDate
+            formatDateBooking(toDate, languageStatus, true)
           ) : (
             <Text
               style={

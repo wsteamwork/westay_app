@@ -313,6 +313,7 @@ export const inputContainerStyleGlobal =  {
     shadowRadius: 3.84,
 };
 
-export const formatDateBooking = (date: string, lang: string) => {
-  return lang === 'vi' ? moment(date).format('DD/MM') : moment(date).format('ll').split(",")[0];
+export const formatDateBooking = (date: string, lang: string, showYear?: boolean) => {
+  let dateVN = showYear ? moment(date).format('DD/MM/YYYY') : moment(date).format('DD/MM');
+  return lang === 'vi' ? dateVN : moment(date).format('ll').split(",")[0];
 }

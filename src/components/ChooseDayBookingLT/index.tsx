@@ -14,6 +14,7 @@ import XDate from 'xdate';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import ShowChooseDate from './ShowChooseDate';
 import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
+import { formatDateBooking } from 'utils/mixins';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
@@ -201,7 +202,7 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
           }
           containerStyle={{ paddingHorizontal: wp('8%') }}
         />
-        <ShowChooseDate fromDate={fromDate} toDate={toDate} />
+        <ShowChooseDate fromDate={fromDate} toDate={toDate}/>
       </View>
 
       {useMemo(
