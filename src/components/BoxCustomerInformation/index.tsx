@@ -113,104 +113,107 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
       .max(12, 'Tối đa 12 ký tự'),
   });
 
-  return (
-    <Formik
-      initialValues={formikInit}
-      onSubmit={handleClickSubmit}
-      validationSchema={FormValidationSchema}
-      validateOnChange={false}>
-      {({ handleChange, values, handleBlur, handleSubmit, errors }) => {
-        return (
-          <View style={styles.container}>
-            <ScrollView>
-              <SafeAreaView>
-                <KeyboardAwareScrollView
-                  style={styles.scrollView}
-                  enableOnAndroid
-                  extraHeight={50}
-                  showsVerticalScrollIndicator={false}>
-                  <View collapsable={false}>
-                    <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-                    <Text style={styles.titleText}>Customer Information</Text>
-                    <Input
-                      ref={nameRef}
-                      placeholder="Customer name"
-                      returnKeyType="next"
-                      value={values.name}
-                      onChangeText={handleChange('name')}
-                      onBlur={handleBlur('name')}
-                      errorMessage={errors.name}
-                      onSubmitEditing={() => emailRef.current.focus()}
-                      autoCorrect={false}
-                      inputContainerStyle={styles.inputContainerStyle}
-                      containerStyle={styles.containerStyle}
-                      errorStyle={{ color: 'red' }}
-                    />
-                    <Input
-                      ref={emailRef}
-                      placeholder="Email"
-                      keyboardType="email-address"
-                      returnKeyType="next"
-                      value={values.email}
-                      onChangeText={handleChange('email')}
-                      onBlur={handleBlur('email')}
-                      errorMessage={errors.email}
-                      onSubmitEditing={() => phoneRef.current.focus()}
-                      autoCorrect={false}
-                      inputContainerStyle={styles.inputContainerStyle}
-                      containerStyle={styles.containerStyle}
-                      errorStyle={{ color: 'red' }}
-                    />
-                    <Input
-                      ref={phoneRef}
-                      placeholder="Phone"
-                      keyboardType="phone-pad"
-                      returnKeyType="next"
-                      value={values.phone}
-                      onChangeText={handleChange('phone')}
-                      onBlur={handleBlur('phone')}
-                      errorMessage={errors.phone}
-                      onSubmitEditing={() => othersRef.current.focus()}
-                      autoCorrect={false}
-                      inputContainerStyle={styles.inputContainerStyle}
-                      containerStyle={styles.containerStyle}
-                      errorStyle={{ color: 'red' }}
-                    />
-                    <Input
-                      ref={othersRef}
-                      multiline={true}
-                      numberOfLines={1}
-                      placeholder="Other requirements"
-                      returnKeyType="done"
-                      value={values.others}
-                      onChangeText={handleChange('others')}
-                      onBlur={handleBlur('others')}
-                      errorMessage={errors.others}
-                      autoCorrect={false}
-                      inputContainerStyle={styles.inputContainerMuiltiStyle}
-                      containerStyle={styles.containerStyle}
-                      errorStyle={{ color: 'red' }}
-                    />
-                    <Text style={styles.titlePayment}>Choose one payment method</Text>
-                    <View style={styles.radioGroup}>
-                      <RadioGroup radioButtons={data} onPress={onChoosePayment} />
+  return useMemo(
+    () => (
+      <Formik
+        initialValues={formikInit}
+        onSubmit={handleClickSubmit}
+        validationSchema={FormValidationSchema}
+        validateOnChange={false}>
+        {({ handleChange, values, handleBlur, handleSubmit, errors }) => {
+          return (
+            <View style={styles.container}>
+              <ScrollView>
+                <SafeAreaView>
+                  <KeyboardAwareScrollView
+                    style={styles.scrollView}
+                    enableOnAndroid
+                    extraHeight={50}
+                    showsVerticalScrollIndicator={false}>
+                    <View collapsable={false}>
+                      <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
+                      <Text style={styles.titleText}>Customer Information</Text>
+                      <Input
+                        ref={nameRef}
+                        placeholder="Customer name"
+                        returnKeyType="next"
+                        value={values.name}
+                        onChangeText={handleChange('name')}
+                        onBlur={handleBlur('name')}
+                        errorMessage={errors.name}
+                        onSubmitEditing={() => emailRef.current.focus()}
+                        autoCorrect={false}
+                        inputContainerStyle={styles.inputContainerStyle}
+                        containerStyle={styles.containerStyle}
+                        errorStyle={{ color: 'red' }}
+                      />
+                      <Input
+                        ref={emailRef}
+                        placeholder="Email"
+                        keyboardType="email-address"
+                        returnKeyType="next"
+                        value={values.email}
+                        onChangeText={handleChange('email')}
+                        onBlur={handleBlur('email')}
+                        errorMessage={errors.email}
+                        onSubmitEditing={() => phoneRef.current.focus()}
+                        autoCorrect={false}
+                        inputContainerStyle={styles.inputContainerStyle}
+                        containerStyle={styles.containerStyle}
+                        errorStyle={{ color: 'red' }}
+                      />
+                      <Input
+                        ref={phoneRef}
+                        placeholder="Phone"
+                        keyboardType="phone-pad"
+                        returnKeyType="next"
+                        value={values.phone}
+                        onChangeText={handleChange('phone')}
+                        onBlur={handleBlur('phone')}
+                        errorMessage={errors.phone}
+                        onSubmitEditing={() => othersRef.current.focus()}
+                        autoCorrect={false}
+                        inputContainerStyle={styles.inputContainerStyle}
+                        containerStyle={styles.containerStyle}
+                        errorStyle={{ color: 'red' }}
+                      />
+                      <Input
+                        ref={othersRef}
+                        multiline={true}
+                        numberOfLines={1}
+                        placeholder="Other requirements"
+                        returnKeyType="done"
+                        value={values.others}
+                        onChangeText={handleChange('others')}
+                        onBlur={handleBlur('others')}
+                        errorMessage={errors.others}
+                        autoCorrect={false}
+                        inputContainerStyle={styles.inputContainerMuiltiStyle}
+                        containerStyle={styles.containerStyle}
+                        errorStyle={{ color: 'red' }}
+                      />
+                      <Text style={styles.titlePayment}>Choose one payment method</Text>
+                      <View style={styles.radioGroup}>
+                        <RadioGroup radioButtons={data} onPress={onChoosePayment} />
+                      </View>
                     </View>
-                  </View>
-                </KeyboardAwareScrollView>
-              </SafeAreaView>
-            </ScrollView>
+                  </KeyboardAwareScrollView>
+                </SafeAreaView>
+              </ScrollView>
 
-            <View style={styles.boxButton}>
-              <ButtonOriginal
-                title="Pay now"
-                handlePress={handleSubmit}
-                customStyle={styles.buttonStyle}
-              />
+              <View style={styles.boxButton}>
+                <ButtonOriginal
+                  title="Pay now"
+                  handlePress={handleSubmit}
+                  customStyle={styles.buttonStyle}
+                />
+              </View>
             </View>
-          </View>
-        );
-      }}
-    </Formik>
+          );
+        }}
+      </Formik>
+    ),
+    [profile],
   );
 };
 

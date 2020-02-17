@@ -185,14 +185,12 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation project(':lottie-react-native')
-    implementation project(':react-native-maps')
-    implementation project(':react-native-vector-icons')
     implementation "com.google.android.gms:play-services-base:16.1.0"
     implementation(project(':react-native-maps')){
             exclude group: 'com.google.android.gms', module: 'play-services-base'
             exclude group: 'com.google.android.gms', module: 'play-services-maps'
         }
+    implementation project(':lottie-react-native')
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'

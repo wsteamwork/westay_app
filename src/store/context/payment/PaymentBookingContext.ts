@@ -1,5 +1,4 @@
 import { ProfileInfoRes } from './../../../types/Profile/ProfileResponse';
-import qs from 'query-string';
 import { createContext } from 'react';
 import {axios} from 'utils/api';
 import {INTERNET_BANKING, VISA} from 'types/globalTypes';
@@ -73,19 +72,6 @@ export const priceCalculate = async (params:BookingCreateReq, languageStatus:str
   return res.data;
 };
 
-export const getBankList = async (uuid:string, languageStatus:string) => {
-  const params = {
-    include: 'room.details',
-  };
-  const queryString = qs.stringify(params);
-
-  const url = `bank-list/${uuid}?${queryString}`;
-  const res = await axios.get(url, {
-    headers: { 'Accept-Language': languageStatus },
-  });
-  return res.data;
-};
-
 export const redirectToBaoKim = async (uuid:string, bank_id:number, languageStatus:string) => {
   const request = {
     payment_method: bank_id === 128 ? VISA : INTERNET_BANKING,
@@ -95,7 +81,7 @@ export const redirectToBaoKim = async (uuid:string, bank_id:number, languageStat
   const res = await axios.post(`payment/${uuid}`, request, {
     headers: { 'Accept-Language': languageStatus },
   });
-  return res.data;
+  return res.data.data;
 };
 
 export const getProfile = (dispatch:Dispatch, languageStatus:string) => {
