@@ -112,7 +112,6 @@ const Filter: FC<IProps> = (props) => {
 
     navigation.goBack();
   };
-  console.log(arrayAccommodationType);
   return (
     <View style={{ flex: 1 }}>
       <HeaderWithBackTitle

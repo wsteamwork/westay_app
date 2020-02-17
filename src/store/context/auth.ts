@@ -57,11 +57,9 @@ export const getProfile = async (token:string, dispatch:Dispatch<AuthAction>, la
       headers: { Authorization: token, 'Accept-Language': languageStatus },
     })
     if(res) {
-      console.log(1)
       dispatch({ type: 'SET_PROFILE', payload: res.data.data })
     }
     else {
-      console.log(2)
       dispatch({ type: SET_PROFILE, payload: null })
     }
 };

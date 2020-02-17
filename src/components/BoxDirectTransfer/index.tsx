@@ -20,7 +20,6 @@ const BoxDirectTransfer: FC<IProps> = (props) => {
   const { navigation } = props;
   const { t } = useTranslation();
   const dataBooking = navigation.getParam('dataBooking', null);
-  console.log('dataBooking', dataBooking);
   return (
     <View style={styles.container}>
       <View>
@@ -100,7 +99,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#ffffff',
-    marginTop: hp('4%'),
   },
   boxContent: {
     padding: 8,

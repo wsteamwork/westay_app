@@ -27,7 +27,6 @@ const BoxPaymentBaoKim: FC<IProps> = (props) => {
   const [idBank, setIdBank] = useState(0);
   const [paymentPending, setPaymentPending] = useState(false);
   const dataBooking = navigation.getParam('dataBooking', null);
-  console.log('dataBooking', dataBooking);
   useEffect(() => {
     let uuid = dataBooking.uuid;
     getBankList(uuid, languageStatus)
@@ -121,7 +120,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#ffffff',
-    marginTop: hp('4%'),
   },
   titleText: {
     marginBottom: hp('3%'),
