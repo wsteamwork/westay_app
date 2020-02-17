@@ -10,7 +10,11 @@ import { Text, Image } from 'react-native-elements';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import { LTBookingAction, getBankList, redirectToBaoKim } from 'store/redux/reducers/LTBooking/ltbooking';
+import {
+  LTBookingAction,
+  getBankList,
+  redirectToBaoKim,
+} from 'store/redux/reducers/LTBooking/ltbooking';
 
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
