@@ -1,21 +1,20 @@
 import React, {FC, useEffect, useContext, useState, memo, useMemo} from 'react';
-import { View } from 'react-native';
+import {View} from 'react-native';
 import {
   setInstantBook,
   setPriceDayFrom,
   setAmenities,
-  setRoomType,
-  setArrayAmenities, setRentType, setPriceDayTo, setArrayRentType,
+  setAccommodationType,
+  setArrayAmenities,
+  setPriceDayTo,
+  setArrayRentType,
 } from 'store/actions/search/searchActions';
 import {useTranslation} from 'react-i18next';
 import {useCheckbox, getDataFilter, __currentPlatform} from 'utils/mixins';
-import {AuthContext, AuthState, IAuthGlobal} from 'store/context/auth';
-import {
-  NavigationInjectedProps,
-  withNavigation,
-} from 'react-navigation';
+import {AuthContext} from 'store/context/auth';
+import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 // @ts-ignore
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 // @ts-ignore
 import {compose} from 'recompose';
 import LoadingScreen from 'components/GlobalComponents/LoadingScreen';
@@ -26,35 +25,35 @@ import FilterByDateAndFastBook from 'components/Filter/FilterByDateAndFastBook';
 import {wp} from 'utils/responsive';
 import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
 import IonIcons from 'react-native-vector-icons/Ionicons';
+import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
+import {ReducersList} from 'store/redux/reducers';
 
 interface IProps extends NavigationInjectedProps {
 }
 
 const Filter: FC<IProps> = (props) => {
   const { navigation } = props;
-
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { state: authState, dispatch:authDispatch } = useContext<IAuthGlobal>(AuthContext);
-  const { languageStatus } = authState;
-  const rent_type = useSelector((state:any) => state.searchField.rent_type);
-  const instant_book = useSelector((state:any) => state.searchField.instant_book);
-  const price_day_from = useSelector((state:any) => state.searchField.price_day_from);
-  const price_day_to = useSelector((state:any) => state.searchField.price_day_to);
-  const arrayRentType = useSelector((state:any) => state.cityDistrict.arrayRentType);
-  const arrayAmenities = useSelector(
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
+  const instant_book = useSelector<ReducersList, number | undefined>((state) => state.searchField.instant_book);
+  const min_price = useSelector<ReducersList, number | undefined>((state) => state.searchField.min_price);
+  const max_price = useSelector<ReducersList, number | undefined>((state) => state.searchField.max_price);
+  const arrayAccommodationType = useSelector<ReducersList, number[]>((state) => state.cityDistrict.arrayRentType);
+  const arrayAmenities = useSelector<ReducersList, number[]>(
     (state:any) => state.cityDistrict.arrayAmenities,
   );
-  const [sortByDay, setSortByDay] = useState(rent_type === 2);
+  // const [sortByDay, setSortByDay] = useState(rent_type === 2);
   const [sortByFastBook, setSortFastBook] = useState(instant_book === 1);
 
   const checkPrice = () => {
-    if (price_day_from && price_day_to) {
-      return [price_day_from, price_day_to];
-    } else if (price_day_from) {
-      return [price_day_from, 50000000];
-    } else if (price_day_to) {
-      return [200000, price_day_to];
+    if (min_price && max_price) {
+      return [min_price, max_price];
+    } else if (min_price) {
+      return [min_price, 50000000];
+    } else if (max_price) {
+      return [200000, max_price];
     } else {
       return [200000, 50000000];
     }
@@ -75,35 +74,32 @@ const Filter: FC<IProps> = (props) => {
   const handleReset = () => {
     setTypeRoom([]);
     setTypeAmenities([]);
-    setSortByDay(false);
     setSortFastBook(false);
     setValue([200000, 50000000]);
   };
 
   useEffect(() => {
     arrayAmenities.length && setTypeAmenities(arrayAmenities);
-    arrayRentType.length && setTypeRoom(arrayRentType);
+    arrayAccommodationType!.length && setTypeRoom(arrayAccommodationType);
 
-    getDate();
+    getDataByFilter();
   }, [languageStatus]);
 
-  const getDate = async () => {
+  const getDataByFilter = async () => {
     setLoading(true);
     const response = await getDataFilter(languageStatus);
     setLoading(false);
     setSections(response);
   };
-
   const handleSubmit = () => {
     typeRoom.length
-      ? dispatch(setRoomType(typeRoom.map((item:any) => item.id).join(',')))
-      : dispatch(setRoomType(null));
-
+      ? dispatch(setAccommodationType(typeRoom.map((item:any) => item.id).join(',')))
+      : dispatch(setAccommodationType(null));
     typeAmenities.length
       ? dispatch(setAmenities(typeAmenities.map((item:any) => item.id).join(',')))
       : dispatch(setAmenities(null));
 
-    sortByDay ? dispatch(setRentType(2)) : dispatch(setRentType(null));
+    // sortByDay ? dispatch(setRentType(2)) : dispatch(setRentType(null));
 
     sortByFastBook
       ? dispatch(setInstantBook(1))
@@ -116,33 +112,30 @@ const Filter: FC<IProps> = (props) => {
 
     navigation.goBack();
   };
-
   return (
     <View style={{ flex: 1 }}>
-      {/*<HeaderWithBackTitle*/}
-      {/*  title={t('filter:name')}*/}
-      {/*  rightComponent={*/}
-      {/*    <IonIcons*/}
-      {/*      name={__currentPlatform ? 'md-refresh' : 'ios-refresh'}*/}
-      {/*      size={wp('6%')}*/}
-      {/*      color={COLOR_TEXT_DEFAULT}*/}
-      {/*      onPress={handleReset}*/}
-      {/*    />*/}
-      {/*  }*/}
-      {/*  textHeaderStyle={{ color: COLOR_TEXT_DEFAULT }}*/}
-      {/*/>*/}
+      <HeaderWithBackTitle
+        title={t('filter:name')}
+        rightComponent={
+          <IonIcons
+            name={__currentPlatform ? 'md-refresh' : 'ios-refresh'}
+            size={wp('6%')}
+            color={COLOR_TEXT_DEFAULT}
+            onPress={handleReset}
+          />
+        }
+        textHeaderStyle={{ color: COLOR_TEXT_DEFAULT }}
+      />
 
-      <View style={{ flex: 1, paddingHorizontal: wp('4%') }}>
+      <View style={{ flex: 1, paddingHorizontal: wp('4%'), backgroundColor:'#fff' }}>
         {useMemo(
           () => (
             <FilterByDateAndFastBook
-              sortByDay={sortByDay}
               sortByFastBook={sortByFastBook}
-              setSortByDay={setSortByDay}
               setSortFastBook={setSortFastBook}
             />
           ),
-          [sortByDay, sortByFastBook],
+          [sortByFastBook],
         )}
 
         {useMemo(

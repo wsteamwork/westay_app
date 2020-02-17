@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-// apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 import com.android.build.OutputFile
 
@@ -135,6 +135,8 @@ android {
         versionCode 1
         versionName "1.0"
         missingDimensionStrategy 'react-native-camera', 'general'
+        multiDexEnabled true
+        renderscriptSupportModeEnabled true
     }
     splits {
         abi {
@@ -184,6 +186,22 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':lottie-react-native')
+    implementation project(':react-native-maps')
+    implementation project(':react-native-vector-icons')
+    implementation "com.google.android.gms:play-services-base:16.1.0"
+    implementation(project(':react-native-maps')){
+            exclude group: 'com.google.android.gms', module: 'play-services-base'
+            exclude group: 'com.google.android.gms', module: 'play-services-maps'
+        }
+    implementation project(':lottie-react-native')
+    implementation project(':react-native-firebase')
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+    implementation "com.google.firebase:firebase-core:16.0.9"
+    implementation "com.google.firebase:firebase-messaging:18.0.0"
+    implementation 'me.leolin:ShortcutBadger:1.1.21@aar' // <-- Add this line if you wish to use badge on Android
+
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")

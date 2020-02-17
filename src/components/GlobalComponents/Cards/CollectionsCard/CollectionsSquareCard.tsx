@@ -1,20 +1,25 @@
-import React, { FC } from 'react';
+import React, {FC, useContext} from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Image } from 'react-native-elements';
 import { COLOR_TEXT_SUBTITLE, NORMAL, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
 import { TypeApartment } from 'types/Rooms/RoomResponses';
 import { hp, wp } from 'utils/responsive';
+import {IMAGE_STORAGE_XS} from 'types/globalTypes';
+import {AuthContext} from 'store/context/auth';
+import {cleanAccents, formatPrice} from 'utils/mixins';
+import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 
-interface IProps {
-  item: TypeApartment,
+interface IProps extends NavigationInjectedProps{
+  room: any,
   showNumberRoom?: boolean
 }
 
 const CollectionsSquareCard: FC<IProps> = (props) => {
-  const { item, showNumberRoom } = props;
+  const { room, showNumberRoom, navigation } = props;
+  const { state : {languageStatus}} = useContext(AuthContext);
 
   const handleClick = () => {
-    Alert.alert('click', 'ban da click')
+    navigation.navigate('DetailScreen', { idRoom: room.id });
   };
 
   return (
@@ -25,34 +30,34 @@ const CollectionsSquareCard: FC<IProps> = (props) => {
     >
       <Image
         borderRadius={8}
-        source={{ uri: item.image }}
+        source={{ uri: IMAGE_STORAGE_XS + room.avatar.images[0].name }}
         style={styles.image}
         resizeMode="cover"
         progressiveRenderingEnabled
         PlaceholderContent={<ActivityIndicator />}
       />
       <Text numberOfLines={1} style={styles.txtAddress}>
-        Hoang Mai district
+        {languageStatus === 'en' ? cleanAccents(room.district) : room.district}
         <Text style={{ fontWeight: '700' }}> &#8231; </Text>
-        Ha noi
+        {languageStatus === 'en' ? cleanAccents(room.city): room.city}
       </Text>
 
       <Text numberOfLines={1} style={styles.txtRoomName}>
-        ten phong kha la dai o day ahihi ahihi hihi haha
+        {room.about_room.name}
       </Text>
 
       <Text style={styles.txtArea}>
-        30 m2
+        {room.total_area ? room.total_area : '?'} m2
         <Text style={{ fontWeight: '700' }}> &#8231; </Text>
-        2 room(s)
+        {room.bedrooms.number_bedroom} room(s)
       </Text>
 
       <Text numberOfLines={1} style={styles.priceText}>
-        $900 /month
+        {formatPrice(room.price_display)} /month
       </Text>
 
       <Text numberOfLines={1} style={styles.txtRoomType}>
-        APARTMENT
+        {room.accommodation_type_txt}
       </Text>
     </TouchableOpacity>
   );
@@ -95,4 +100,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CollectionsSquareCard;
+export default withNavigation(CollectionsSquareCard);

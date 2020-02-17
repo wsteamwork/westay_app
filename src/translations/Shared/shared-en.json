@@ -5,7 +5,8 @@
     "cardRoom": {
         "bedroom": "Bedroom",
         "night": "night",
-        "hours": "hours"
+        "hours": "hours",
+        "month": "month"
     },
     "searchResults": "Search results",
     "signInandUp": "Signin/Signup",

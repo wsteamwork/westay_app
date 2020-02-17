@@ -1,28 +1,24 @@
-import React, {useContext, useMemo, FC, } from 'react';
+import React, {useMemo, FC, Fragment} from 'react';
 import {
   View,
   Text,
   Platform,
   ActivityIndicator,
   StyleSheet,
-  TouchableOpacity, StyleProp, TouchableOpacityProps, ImageStyle, ImageProps, ViewStyle, TextInputProps,
+  TouchableOpacity,
+  ImageStyle,
+  ViewStyle,
 } from 'react-native';
-import { Image, Tooltip } from 'react-native-elements';
+import {Image} from 'react-native-elements';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IonIcons from 'react-native-vector-icons/Ionicons';
-import {
-  withNavigation,
-  NavigationInjectedProps,
-  NavigationScreenProp,
-  NavigationRoute,
-  NavigationParams,
-} from 'react-navigation';
-import { useTranslation } from 'react-i18next';
+import {withNavigation, NavigationInjectedProps} from 'react-navigation';
+import {useTranslation} from 'react-i18next';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {IMAGE_STORAGE_LG} from 'types/globalTypes';
+import {IMAGE_STORAGE_SM, IMAGE_NOT_FOUND} from 'types/globalTypes';
 import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
 import {wp, hp} from 'utils/responsive';
-import {elevationShadowStyle} from 'utils/mixins';
+import {elevationShadowStyle, formatPrice} from 'utils/mixins';
 // @ts-ignore
 import {compose} from 'recompose';
 
@@ -30,24 +26,28 @@ const checkISO = Platform.OS === 'ios';
 
 interface IProps extends  NavigationInjectedProps{
   customStyle?: ViewStyle,
-  item?:any,
+  room: any,
   imageStyle?: ImageStyle
 }
 
 const RoomCard: FC<IProps> = (props) => {
   const { t } = useTranslation();
-  const { item, customStyle, imageStyle, navigation } = props;
+  const { room, customStyle, imageStyle, navigation } = props;
   // const { stateSaved } = useContext(SavedContext);
   // const { wishList } = stateSaved;
 
-  // const handleClick = () => {
-  //   navigation.navigate('DetailScreen', { idRoom: item.id });
-  // };
+  // useEffect(() => {
+  // }, [room]);
+
+
+  const handleClick = () => {
+    navigation.navigate('DetailScreen', { idRoom: room.id });
+  };
 
   return (
     <TouchableOpacity
       activeOpacity={1}
-      // onPress={handleClick}
+      onPress={handleClick}
       style={[styles.container, customStyle, elevationShadowStyle(3)]}
     >
       {/*{useMemo(*/}
@@ -59,54 +59,47 @@ const RoomCard: FC<IProps> = (props) => {
       {/*    ),*/}
       {/*  [wishList],*/}
       {/*)}*/}
-
       {useMemo(
         () => (
           <Image
             source={{
-              // uri: `${IMAGE_STORAGE_LG + item.image}`,
-              uri: 'https://m.westay.vn/static/images/property/house.jpg',
+              uri: room.image,
             }}
             style={[styles.image, imageStyle]}
             resizeMode="cover"
             PlaceholderContent={<ActivityIndicator />}
           />
         ),
-        [item],
+        [room],
       )}
 
-      {useMemo(
-        () =>
-          // item.instant_book === 1 && (
-          1 === 1 && (
+         { room.instant_book === 1 && (
                               <View style={{ position: 'absolute', top: 5, left: 5 }}>
                                 <View style={styles.instant_book}>
                                   <FontAwesome name={'bolt'} color="#fff" size={wp('3.5%')} />
                                 </View>
                               </View>
-                            ),
-        [item],
-      )}
+          )}
 
-      {useMemo(
-        () => (
+
           <View style={styles.description}>
             <View style={{width: '70%'}}>
               <View style={styles.item}>
-                <Text style={styles.text_room_type}>can ho chung cu</Text>
+                <Text style={styles.text_room_type}>{room.room_type}</Text>
 
-                {(
-                  <IconEntypo name = "dot-single" size = {wp('2%')} />
-                )}
-                {(
-                  <Text style = {styles.text_room_type}>
-                    3 {t('shared:cardRoom:bedroom')}
-                  </Text>
+                {room.number_room !== 0 && (
+                  <Fragment>
+                    <IconEntypo name = "dot-single" size = {wp('2%')} />
+
+                    <Text style = {styles.text_room_type}>
+                      {room.number_room} {t('shared:cardRoom:bedroom')}
+                    </Text>
+                  </Fragment>
                 )}
               </View>
 
               <Text numberOfLines={1} style={styles.name}>
-                ten rat la dai o day mamk am ams
+                {room.name}
               </Text>
 
               <View style={styles.item}>
@@ -115,26 +108,22 @@ const RoomCard: FC<IProps> = (props) => {
                   size={wp('3.5%')}
                 />
                 <Text numberOfLines={1} style={styles.address}>
-                  {/*{item.district_name}, {item.city_name}*/}
-                  Ha noi, dong ada
+                  {room.district_name}, {room.city_name}
                 </Text>
               </View>
             </View>
 
               <View style={styles.boxPrice}>
                 <Text style={ styles.price_day} >
-                  $320
+                  {formatPrice(room.price_display)}
                 </Text>
 
                 <Text>
-                  /{t('shared:cardRoom:night')}
+                  /{t('shared:cardRoom:month')}
                 </Text>
               </View>
 
           </View>
-        ),
-        [item],
-      )}
     </TouchableOpacity>
   );
 };

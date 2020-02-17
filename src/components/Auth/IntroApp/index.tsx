@@ -1,30 +1,43 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { StyleSheet, View, Image, Alert, Text } from 'react-native';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { hp, wp } from 'utils/responsive';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-interface IProps {
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
+
+interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
 
-const Profile: FC<IProps> = (props) => {
-  const { initialProps } = props;
-
+const IntroApp: FC<IProps> = (props) => {
+  const { navigation } = props;
   return (
     <View style={styles.textContainerMiddle}>
       <Image
         style={styles.image}
-        source={require('../../../src/static/images/pngkey.com-traveling-png-1965681.png')}
+        source={require('../../../../src/static/images/pngkey.com-traveling-png-1965681.png')}
       />
-      <FontAwesome name="users" size={18} />
-      <Text style={styles.titleText}>Plan your trips</Text>
+      <Text style={styles.titleText}>Welcome to Westay</Text>
       <Text style={styles.titleSubText}>Book one of our unique hotel to escape the ordinary</Text>
       <ButtonOriginal
         title="Log in"
-        handlePress={() => Alert.alert('thanh cong')}
+        handlePress={() => navigation.navigate('Login')}
         customStyle={styles.marginBottom}
       />
-      <ButtonOriginal title="Create Acount" handlePress={() => Alert.alert('thanh cong')} />
+      <ButtonOriginal
+        title="Create Acount"
+        handlePress={() => navigation.navigate('Register')}
+        customStyle={styles.marginBottom}
+      />
+        
+      <Text style={styles.settingsText} onPress={() => navigation.navigate('Settings')}>
+        <IconAntDesign
+          name="setting"
+          size={wp('5%')}
+          color='#484848'
+        />{' '}
+        Cài đặt
+      </Text>
     </View>
   );
 };
@@ -55,7 +68,7 @@ const styles = StyleSheet.create({
   titleText: {
     marginBottom: hp('2%'),
     fontSize: wp('7%'),
-    fontWeight: '600',
+    fontWeight: '700',
   },
   titleSubText: {
     marginBottom: hp('6%'),
@@ -64,6 +77,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#8A8A8F',
   },
+  settingsText: {
+    fontWeight: '700',
+    fontSize: 18,
+    color: '#484848',
+  },
 });
-Profile.defaultProps = {};
-export default Profile;
+IntroApp.defaultProps = {};
+export default withNavigation(IntroApp);

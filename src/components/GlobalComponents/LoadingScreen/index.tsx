@@ -17,7 +17,7 @@ const LoadingScreen: FC<IProps> = (props) => {
       visible={loading}
       animation="fade"
       cancelable={true}
-      overlayColor="rgba(0, 0, 0, 0.7)"
+      overlayColor="rgba(0, 0, 0, 0.85)"
       children={
         <View style={{ flex: 1, justifyContent:'center', alignItems:'center'}}>
           <View style={{ width: wp('40%'), height: wp('40%')}}>

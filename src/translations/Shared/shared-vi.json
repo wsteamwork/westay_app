@@ -5,7 +5,8 @@
     "cardRoom": {
         "bedroom": "phòng ngủ",
         "night": "đêm",
-        "hours": "giờ"
+        "hours": "giờ",
+        "month" : "tháng"
     },
     "searchResults": "Kết quả tìm kiếm",
     "signInandUp": "Đăng nhập/Đăng ký",

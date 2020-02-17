@@ -22,7 +22,7 @@ import {
 } from 'types/Search/searchTypes';
 
 
-export const setNumberGuest = (payload: any) => (dispatch: (arg0: { type: string; payload: any; }) => void) => {
+export const setNumberGuest = (payload: number) => (dispatch: (arg0: { type: string; payload: number; }) => void) => {
   dispatch({
     type: SET_NUMBER_GUEST,
     payload,
@@ -92,7 +92,7 @@ export const setTimeOut = (time: any) => (dispatch: (arg0: { type: string; paylo
   });
 };
 
-export const setSearchText = (text: any) => (dispatch: (arg0: { type: string; payload: any; }) => void) => {
+export const setSearchText = (text: string) => (dispatch: (arg0: { type: string; payload: any; }) => void) => {
   dispatch({
     type: SET_SEARCH_TEXT,
     payload: text,
@@ -106,16 +106,16 @@ export const getCity = (payload: any) => (dispatch: (arg0: { type: string; paylo
   });
 };
 
-export const setNumberRoom = (payload: any) => (dispatch: (arg0: { type: string; payload: any; }) => any) =>
+export const setNumberRoom = (payload: number) => (dispatch: (arg0: { type: string; payload: number; }) => any) =>
   dispatch({ type: SET_NUMBER_ROOM, payload });
 
 export const setToggleChoosePeople = (payload: any) => (dispatch: (arg0: { type: string; payload: any; }) => any) =>
   dispatch({ type: SET_TOGGLE_CHOOSE_PEOPLE, payload });
 
-export const setAmenities = (payload: null) => (dispatch: (arg0: { type: string; payload: null; }) => any) =>
+export const setAmenities = (payload: any) => (dispatch: (arg0: { type: string; payload: any; }) => any) =>
   dispatch({ type: SET_AMENITIES, payload });
 
-export const setRoomType = (payload: null) => (dispatch: (arg0: { type: string; payload: null; }) => any) =>
+export const setAccommodationType = (payload: number | null) => (dispatch: (arg0: { type: string; payload: number | null; }) => any) =>
   dispatch({ type: SET_ROOM_TYPE, payload });
 
 export const setRentType = (payload: number | null) => (dispatch: (arg0: { type: string; payload: number | null; }) => any) =>
@@ -130,10 +130,8 @@ export const setPriceDayFrom = (payload: any) => (dispatch: (arg0: { type: strin
 export const setPriceDayTo = (payload: any) => (dispatch: (arg0: { type: string; payload: any; }) => any) =>
   dispatch({ type: SET_PRICE_DAY_TO, payload });
 
-// @ts-ignore
-export const setArrayRentType = payload => (dispatch: (arg0: { type: string; payload: any; }) => any) =>
+export const setArrayRentType = (payload: any) => (dispatch: (arg0: { type: string; payload: any; }) => any) =>
   dispatch({ type: ARRAY_RENT_TYPE, payload });
 
-// @ts-ignore
-export const setArrayAmenities = payload => (dispatch: (arg0: { type: string; payload: any; }) => any) =>
+export const setArrayAmenities = (payload: any) => (dispatch: (arg0: { type: string; payload: any; }) => any) =>
   dispatch({ type: ARRAY_AMENITIES, payload });

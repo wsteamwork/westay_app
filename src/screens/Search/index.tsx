@@ -9,15 +9,14 @@ const Search: FC<IProps> = (props) => {
   const { } = props;
 
   return (
-    <View style={styles.searchScreenContainer}>
-      <SearchComponent />
-    </View>
+    <SearchComponent />
   );
 };
 
 const styles = StyleSheet.create({
   searchScreenContainer: {
     flex: 1,
+    // backgroundColor:'red'
   }
 });
 Search.defaultProps = {

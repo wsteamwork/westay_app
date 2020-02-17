@@ -84,7 +84,7 @@ export type RoomScheduleRes = {
 };
 
 export type LTRoomAvailableRes = {
-  move_in: LTAvailableDate[];
+  move_in: string[];
   move_out: any[];
 };
 
@@ -154,4 +154,16 @@ export interface PriceSpecialDays {
   price_charge_guest: number;
   status: number;
   status_txt: string;
+}
+
+export interface Coordinate {
+  latitude: number;
+  longitude: number
+}
+
+export interface MapCoords {
+  lat_min: number;
+  lat_max: number;
+  long_min: number;
+  long_max: number;
 }

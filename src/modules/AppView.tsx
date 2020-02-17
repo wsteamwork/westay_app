@@ -1,52 +1,35 @@
-import React from 'react';
-import { View } from 'react-native-animatable';
-import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import Home from '../screens/Home';
-import Profile from '../screens/Profile';
-import Search from '../screens/Search';
-import Trip from '../screens/Trip';
-import NavBottom from '../components/NavBottom';
-import Register from 'components/Auth/Register';
-import Login from 'components/Auth/Login';
-import ForgotPassword from 'components/Auth/ForgotPassword';
+import React, {FC, useEffect, useState, memo} from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
+import IntroApp from 'modules/IntroApp';
+import NavigatorView from 'navigation/Navigator';
 
-const TabBarComponent = (props: any) => <View style={{
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: 0
-}}><NavBottom /></View>;
+const AppView: FC = () => {
+  const [open, setOpen] = useState(true);
 
-const AppView = createBottomTabNavigator(
-  {
-    Search: {
-      // screen: Profile
-      // screen: Register
-      screen: Login
-      // screen: ForgotPassword
-    },
-    Home: {
-      screen: Home
-    },
-    Trip: {
-      screen: Trip
-    },
-    Profile: {
-      screen: Search
-    },
-  },
-  {
-    defaultNavigationOptions: {
-
-    },
-    backBehavior: "history",
-    tabBarComponent: () => (
-      <TabBarComponent />
-    ),
-    tabBarOptions: {
-      keyboardHidesTabBar: true,
+  const onDone = async () => {
+    try {
+      await AsyncStorage.setItem('firstOpen', 'true');
+      setOpen(true);
+    } catch (error) {
+      console.log(error);
     }
-  }
-);
+  };
 
-export default createAppContainer(AppView);
+  const useFirstOpenApp = async () => {
+    const data = await AsyncStorage.getItem('firstOpen');
+
+    if (data) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    useFirstOpenApp();
+  }, []);
+
+  return open ? <NavigatorView /> : <IntroApp onDone={onDone} />;
+};
+
+export default memo(AppView);

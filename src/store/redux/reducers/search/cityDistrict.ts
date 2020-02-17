@@ -5,8 +5,27 @@ import {
   SET_CITY_DISTRICT,
   SET_TOGGLE_CHOOSE_PEOPLE,
 } from 'types/Search/searchTypes';
+import {Reducer} from 'redux';
+import {CityType} from 'types/Cities/CityResponse';
+import {SearchSuggestRes} from 'types/Search/SearchResponse';
 
-const cityDistrictInitialState = {
+export type CityDistrictState = {
+  city_district: SearchSuggestRes | null,
+  currCity: CityType | null,
+  openChoosePeople: boolean,
+  arrayRentType: number[],
+  arrayAmenities: number[],
+}
+
+export type CityDistrictAction =
+  |  {type: 'GET_CITY'; payload: CityType }
+  |  {type: 'SET_CITY_DISTRICT'; payload:  SearchSuggestRes}
+  |  {type: 'SET_TOGGLE_CHOOSE_PEOPLE'; payload: boolean }
+  |  {type: 'ARRAY_RENT_TYPE'; payload: number[] }
+  |  {type: 'ARRAY_AMENITIES'; payload: number[] }
+
+
+const cityDistrictInitialState:CityDistrictState = {
   city_district: null,
   currCity: null,
   openChoosePeople: false,
@@ -14,7 +33,10 @@ const cityDistrictInitialState = {
   arrayAmenities: [],
 };
 
-const cityDistrictReducer = (state = cityDistrictInitialState, action:any) => {
+const cityDistrictReducer: Reducer<CityDistrictState, CityDistrictAction> = (
+  state:CityDistrictState = cityDistrictInitialState,
+  action:CityDistrictAction
+):CityDistrictState => {
   switch (action.type) {
     case GET_CITY:
       return { ...state, currCity: action.payload };

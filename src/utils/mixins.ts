@@ -1,6 +1,28 @@
+import { hp } from './responsive';
 import {Platform, Animated} from 'react-native';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import {axios} from './api';
+import {SearchFilterState} from 'store/redux/reducers/search/searchField';
+import {CityType} from 'types/Cities/CityResponse';
+import qs from 'query-string';
+import {AuthContext} from 'store/context/auth';
+// @ts-ignore
+import Share from 'react-native-share';
+
+import moment from 'moment';
+export const convertString = (query: object)  => {
+  return {
+    ...query,
+    include: 'media,prices,details,city,district',
+  };
+};
+
+export const updateObject = <T>(oldObject: T, newObject: Partial<T>): T => {
+  return {
+    ...oldObject,
+    ...newObject
+  };
+};
 
 export const cleanAccents = (str: string): string => {
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
@@ -67,6 +89,56 @@ export const animatedStyle = (animatedValue: any) => {
   };
 };
 
+export const formatMoney = (
+  amount: any,
+  decimalCount: number = 0,
+  decimal: string = '.',
+  thousands: string = ','
+): string | void => {
+  try {
+    decimalCount = Math.abs(decimalCount);
+    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+    const negativeSign = amount < 0 ? '-' : '';
+
+    let i: any = parseInt(
+      (amount = Math.abs(Number(amount) || 0).toFixed(decimalCount))
+    ).toString();
+    let j: number = i.length > 3 ? i.length % 3 : 0;
+
+    return (
+      negativeSign +
+      (j ? i.substr(0, j) + thousands : '') +
+      i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousands) +
+      (decimalCount
+        ? decimal +
+      Math.abs(amount - i)
+        .toFixed(decimalCount)
+        .slice(2)
+        : '')
+    );
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+// @ts-ignore
+export const formatPrice = (price: number): string | number => {
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
+
+  const lang = languageStatus;
+  try {
+    let format = '';
+    if (price >= 1000000) {
+      format = (price / 1000000).toFixed(1) + 'tr';
+    }
+    return lang && lang === 'vi' ? format : `$${price}`;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 export const useCheckbox = () => {
   const [typeRoom, setTypeRoom] = useState<any>([]);
   const [typeAmenities, setTypeAmenities] = useState<any>([]);
@@ -121,7 +193,7 @@ export const getDataFilter = async (languageStatus: string) => {
     }),
   ]);
 
-  const dataType1 = data[0].data
+  const dataRoomType = data[0].data
     ? data[0].data.map((item:any) => ({
       id: item.id,
       name: item.value,
@@ -129,7 +201,7 @@ export const getDataFilter = async (languageStatus: string) => {
     }))
     : [];
 
-  const dataType2 = data[1].data
+  const dataComfortsType = data[1].data
     ? data[1].data.data.map((item:any) => ({
       id: item.id,
       name: item.details.data[0].name,
@@ -138,40 +210,109 @@ export const getDataFilter = async (languageStatus: string) => {
     : [];
 
   return [
-    {title: 'Loại phòng', data: dataType1},
-    {title: 'Tiện nghi', data: dataType2},
+    {title: 'Loại phòng', data: dataRoomType},
+    {title: 'Tiện nghi', data: dataComfortsType},
   ];
 };
 
-export const formatMoney = (
-  amount: any,
-  decimalCount: number = 0,
-  decimal: string = '.',
-  thousands: string = ','
-): string | void => {
-  try {
-    decimalCount = Math.abs(decimalCount);
-    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+export const getDataListRooms = async (
+  searchField:SearchFilterState,
+  currCity:CityType | null,
+  uri = '',
+  findAround:boolean,
+  languageStatus:string,
+) => {
+  let query:SearchFilterState = {
+    name: searchField.name,
+    number_guest: searchField.number_guest,
+    bedrooms: searchField.bedrooms,
+    check_in: searchField.check_in,
+    check_out: searchField.check_out,
+  };
 
-    const negativeSign = amount < 0 ? '-' : '';
-
-    let i: any = parseInt(
-      (amount = Math.abs(Number(amount) || 0).toFixed(decimalCount))
-    ).toString();
-    let j: number = i.length > 3 ? i.length % 3 : 0;
-
-    return (
-      negativeSign +
-      (j ? i.substr(0, j) + thousands : '') +
-      i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousands) +
-      (decimalCount
-        ? decimal +
-      Math.abs(amount - i)
-        .toFixed(decimalCount)
-        .slice(2)
-        : '')
-    );
-  } catch (e) {
-    console.error(e);
+  if (currCity && currCity.type === 1) {
+    query = { ...query, city_id: currCity.id };
   }
+
+  if (currCity && currCity.type === 2) {
+    query = { ...query, district_id: currCity.id };
+  }
+
+  if (searchField.check_in) {
+    query = { ...query, check_in: searchField.check_in };
+  }
+
+  if (searchField.check_out) {
+    query = { ...query, check_out: searchField.check_out };
+  }
+
+  if (searchField.comfort_lists) {
+    query = { ...query, comfort_lists: searchField.comfort_lists };
+  }
+
+  if (searchField.accommodation_type) {
+    query = { ...query, accommodation_type: searchField.accommodation_type };
+  }
+
+  if (searchField.instant_book) {
+    query = { ...query, instant_book: searchField.instant_book };
+  }
+
+  if (searchField.min_price) {
+    query = { ...query, min_price: searchField.min_price };
+  }
+
+  if (searchField.max_price) {
+    query = { ...query, max_price: searchField.max_price };
+  }
+
+  let url = `long-term-rooms?${qs.stringify(convertString(query))}&${uri}`;
+
+  if (findAround) {
+    url = `long-term-rooms?${qs.stringify(convertString(query))}&${uri}`;
+  }
+
+  return axios
+    .get(url, { headers: { 'Accept-Language': languageStatus } })
+    .then(res => {
+      return res
+    })
+    .catch(err => console.log(err));
 };
+
+export const handleShareSocial = (status:string, link:string, t:any) =>{
+
+  Share.shareSingle({
+    title: t('account:shared:titleShare'),
+    url: link,
+    failOnCancel: false,
+    message: t('account:shared:messageShare'),
+    social:
+      status === 'fb'
+        ? Share.Social.FACEBOOK
+        : status === 'ins'
+        ? Share.Social.INSTAGRAM
+        : Share.Social.GOOGLEPLUS,
+  });
+};
+
+export const inputContainerStyleGlobal =  {
+    height: hp('7%'),
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderRadius: 25,
+    paddingLeft: 16,
+    elevation: 10,
+    borderColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+};
+
+export const formatDateBooking = (date: string, lang: string) => {
+  return lang === 'vi' ? moment(date).format('DD/MM') : moment(date).format('ll').split(",")[0];
+}

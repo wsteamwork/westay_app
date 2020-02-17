@@ -1,16 +1,23 @@
-import React, { FC, ReactElement } from 'react';
+import React, {FC, ReactElement, memo} from 'react';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import { wp, hp, stylesGlobal } from 'utils/responsive';
 import { COLOR_INFO, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
 import LeftSpacePaddingHorizontalScroll from 'components/GlobalComponents/LeftSpacePaddingHorizontalScroll'
-interface IProps {
+import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
+import {NavigationActions, withNavigation, NavigationInjectedProps} from 'react-navigation';
+// @ts-ignore
+import { compose } from 'recompose';
+
+interface IProps extends NavigationInjectedProps{
   title: string,
+  typeData: string,
   data: any[],
+  total: number,
   _renderItem: (item?: any, index?: any) => ReactElement;
 }
 
 const ListCollections: FC<IProps> = (props) => {
-  const { title, data, _renderItem } = props;
+  const { title, data, _renderItem, total, typeData, navigation } = props;
 
   return (
     <View>
@@ -32,9 +39,11 @@ const ListCollections: FC<IProps> = (props) => {
         keyExtractor={(item, index) => index.toString()}
       />
 
-      <Text style={[styles.txtAll]}>
-        Show all (99+) &#10095;
-      </Text>
+      <TouchableWithScale _onPress={()=> navigation.navigate('CollectionScreen', {typeDataCollection: typeData, titleCollection: title})}>
+        <Text style={[styles.txtAll]}>
+          Show all {`(${total}+)`} &#10095;
+        </Text>
+      </TouchableWithScale>
     </View>
   );
 };
@@ -48,4 +57,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ListCollections;
+export default compose(
+  memo,
+  withNavigation,
+)(ListCollections);
