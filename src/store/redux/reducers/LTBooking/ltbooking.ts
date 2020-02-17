@@ -1,3 +1,4 @@
+import { VISA, INTERNET_BANKING } from './../../../../types/globalTypes';
 import { Reducer } from 'redux';
 import { AxiosRes } from './../../../../types/ResponseTemplate';
 import { axios } from './../../../../utils/api';
@@ -98,3 +99,24 @@ export const createLTBooking = async (req: LTBookingCreateReq): Promise<LTBookin
   );
   return res.data.data;
 };
+
+export const getBankList = async (uuid:string, languageStatus:string) => {
+  const url = `long-term-booking-bank-list/${uuid}`;
+  const res = await axios.get(url, {
+    headers: { 'Accept-Language': languageStatus },
+  });
+  return res.data;
+};
+
+export const redirectToBaoKim = async (uuid:string, bank_id:number, languageStatus:string) => {
+  const request = {
+    payment_method: bank_id === 128 ? VISA : INTERNET_BANKING,
+    bank_payment_method_id: bank_id,
+  };
+
+  const res = await axios.post(`long-term-booking-payment/${uuid}`, request, {
+    headers: { 'Accept-Language': languageStatus },
+  });
+  return res.data;
+};
+

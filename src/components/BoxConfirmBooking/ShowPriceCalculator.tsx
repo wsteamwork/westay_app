@@ -1,4 +1,4 @@
-import React, { FC, useEffect, Dispatch } from 'react';
+import React, { FC, useEffect, Dispatch, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { wp } from 'utils/responsive';
 import { Text } from 'react-native-elements';
@@ -31,23 +31,27 @@ const ShowPriceCalculator: FC<IProps> = (props) => {
       }),
     );
   }, []);
-  return (
-    <View>
-      <View style={styles.container}>
-        <Text style={styles.title}>Giá thanh toán</Text>
-        <Text style={styles.date}>đ {formatMoney(LTBookingPriceCalculate.price_original)}</Text>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.title}>Đặt cọc (1 tháng)</Text>
-        <Text style={styles.date}>đ {formatMoney(LTBookingPriceCalculate.deposit)}</Text>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.totalText}>Tổng cộng</Text>
-        <Text style={styles.totalText}>
-          đ {formatMoney(LTBookingPriceCalculate.price_with_fee)}
-        </Text>
-      </View>
-    </View>
+  return useMemo(
+    () =>
+      LTBookingPriceCalculate && (
+        <View>
+          <View style={styles.container}>
+            <Text style={styles.title}>Giá thanh toán</Text>
+            <Text style={styles.date}>đ {formatMoney(LTBookingPriceCalculate.price_original)}</Text>
+          </View>
+          <View style={styles.container}>
+            <Text style={styles.title}>Đặt cọc (1 tháng)</Text>
+            <Text style={styles.date}>đ {formatMoney(LTBookingPriceCalculate.deposit)}</Text>
+          </View>
+          <View style={styles.container}>
+            <Text style={styles.totalText}>Tổng cộng</Text>
+            <Text style={styles.totalText}>
+              đ {formatMoney(LTBookingPriceCalculate.price_with_fee)}
+            </Text>
+          </View>
+        </View>
+      ),
+    [LTBookingPriceCalculate],
   );
 };
 

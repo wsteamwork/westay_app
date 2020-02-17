@@ -88,8 +88,8 @@ const ForgotPassword: FC<IProps> = (props) => {
               enableOnAndroid
               extraHeight={50}
               showsVerticalScrollIndicator={false}>
+              <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
               <View style={styles.container} collapsable={false}>
-                <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
                 <Text style={styles.titleText}>Forgot Password</Text>
                 <Text style={styles.titleSubText}>
                   Enter the email address registered with your account and we will send you a
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: wp('3%'),
     width: wp('100%'),
+    backgroundColor: '#ffffff',
   },
   scrollView: {
     width: wp('100%'),

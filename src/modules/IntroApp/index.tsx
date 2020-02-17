@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   item: {
+    flex:1,
     width: wp('100%'),
     height: hp('100%'),
     position: 'relative'

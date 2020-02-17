@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState, Dispatch, useEffect } from 'react';
+import React, { FC, useContext, useState, Dispatch, useEffect, useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -92,6 +92,8 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
 
   const onDayPress = (day: DateObj) => {
     if (!isFromDatePicked || (isFromDatePicked && isToDatePicked)) {
+      setToDate('');
+      dispatchBooking({ type: 'setMoveOut', payload: '' });
       setupStartMarker(day);
       getAvailableDate(day.dateString);
     } else if (!isToDatePicked) {
@@ -173,8 +175,8 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: hp('12%') }}>
-      <View style={{ backgroundColor: '#ffffff', width: '100%'}} >
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: hp('8%') }}>
+      <View style={{ backgroundColor: '#ffffff', width: '100%' }}>
         <HeaderWithBackTitle
           handlePress={() => navigation.goBack()}
           rightComponent={
@@ -193,58 +195,64 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
         <ShowChooseDate fromDate={fromDate} toDate={toDate} />
       </View>
 
-      <CalendarList
-        minDate={roomAvailable[0]}
-        maxDate={roomAvailable.slice(-1)[0]}
-        onDayPress={(day: any) => {
-          onDayPress(day);
-        }}
-        onDayLongPress={(day: any) => {
-          onDayPress(day);
-        }}
-        monthFormat={'MMMM. yyyy'}
-        hideArrows={false}
-        hideExtraDays={true}
-        disableMonthChange={true}
-        hideDayNames={false}
-        showWeekNumbers={false}
-        pastScrollRange={0}
-        futureScrollRange={24}
-        scrollEnabled={true}
-        showScrollIndicator={false}
-        markedDates={markedDates}
-        markingType={'period'}
-        theme={{
-          selectedDayBackgroundColor: '#008489',
-          selectedDayTextColor: '#ffffff',
-          todayTextColor: '#00adf5',
-          dayTextColor: '#2d4150',
-          selectedDotColor: '#ffffff',
-          monthTextColor: '#008489',
-          textDayFontWeight: '600',
-          textMonthFontWeight: 'bold',
-          textDayHeaderFontWeight: '600',
-          textDayFontSize: 16,
-          textDayHeaderFontSize: 14,
-          textMonthFontSize: 20,
-          arrowColor: '#008489',
-          'stylesheet.day.period': {
-            base: {
-              overflow: 'hidden',
-              height: 34,
-              alignItems: 'center',
-              width: 38,
-            },
-          },
-        }}
-        renderArrow={(direction) => (
-          <Icon
-            name={direction === 'left' ? 'chevron-left' : 'chevron-right'}
-            size={24}
-            color="#008489"
-          />
-        )}
-      />
+      {useMemo(
+        () =>
+          roomAvailable && (
+            <CalendarList
+              minDate={roomAvailable[0]}
+              maxDate={roomAvailable.slice(-1)[0]}
+              onDayPress={(day: any) => {
+                onDayPress(day);
+              }}
+              onDayLongPress={(day: any) => {
+                onDayPress(day);
+              }}
+              monthFormat={'MMMM. yyyy'}
+              hideArrows={false}
+              hideExtraDays={true}
+              disableMonthChange={true}
+              hideDayNames={false}
+              showWeekNumbers={false}
+              pastScrollRange={0}
+              futureScrollRange={24}
+              scrollEnabled={true}
+              showScrollIndicator={false}
+              markedDates={markedDates}
+              markingType={'period'}
+              theme={{
+                selectedDayBackgroundColor: '#008489',
+                selectedDayTextColor: '#ffffff',
+                todayTextColor: '#00adf5',
+                dayTextColor: '#2d4150',
+                selectedDotColor: '#ffffff',
+                monthTextColor: '#008489',
+                textDayFontWeight: '600',
+                textMonthFontWeight: 'bold',
+                textDayHeaderFontWeight: '600',
+                textDayFontSize: 16,
+                textDayHeaderFontSize: 14,
+                textMonthFontSize: 20,
+                arrowColor: '#008489',
+                'stylesheet.day.period': {
+                  base: {
+                    overflow: 'hidden',
+                    height: 34,
+                    alignItems: 'center',
+                    width: 38,
+                  },
+                },
+              }}
+              renderArrow={(direction) => (
+                <Icon
+                  name={direction === 'left' ? 'chevron-left' : 'chevron-right'}
+                  size={24}
+                  color="#008489"
+                />
+              )}
+            />
+          ),
+        [roomAvailable, markedDates],
+      )}
       <View style={styles.buttonWrapper}>
         <Text style={{ fontSize: 18 }}>
           {!fromDate && !toDate && t('home:chooseDate:chooseCheckinDate')}
@@ -260,6 +268,7 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
           title={t('home:chooseDate:next')}
           customStyle={{ backgroundColor: '#008489' }}
           handlePress={handleShowConfirmBooking}
+          disabled={!fromDate || !toDate}
         />
       </View>
     </View>
