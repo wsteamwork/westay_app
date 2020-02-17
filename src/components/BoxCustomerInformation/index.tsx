@@ -217,7 +217,6 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: hp('4%'),
     backgroundColor: '#ffffff',
   },
   boxButton: {

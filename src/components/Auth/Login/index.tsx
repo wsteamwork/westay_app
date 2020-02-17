@@ -57,7 +57,6 @@ const Login: FC<IProps> = (props) => {
     try {
       axios.post('login', body).then((res) => {
         const data = res.data;
-        console.log('data', data);
         setLoading(false);
         storage.save({
           key: TOKEN,
@@ -99,9 +98,9 @@ const Login: FC<IProps> = (props) => {
               enableOnAndroid
               extraHeight={50}
               showsVerticalScrollIndicator={false}>
-              <View style={styles.container} collapsable={false}>
-                <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-                <Text style={styles.titleText}>Log in</Text>
+              <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
+              <Text style={styles.titleText}>Log in</Text>
+              <View style={styles.boxWrapper} collapsable={false}>
                 <Input
                   ref={emailRef}
                   placeholder="Your Email"
@@ -159,10 +158,14 @@ const Login: FC<IProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#ffffff'
+  },
+  boxWrapper: {
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingHorizontal: wp('3%'),
     width: wp('100%'),
+    backgroundColor: '#ffffff'
   },
   scrollView: {
     width: wp('100%'),

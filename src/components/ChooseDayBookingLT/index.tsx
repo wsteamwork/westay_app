@@ -173,8 +173,8 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: hp('12%') }}>
-      <View style={{ backgroundColor: '#ffffff', width: '100%'}} >
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: hp('8%') }}>
+      <View style={{ backgroundColor: '#ffffff', width: '100%' }}>
         <HeaderWithBackTitle
           handlePress={() => navigation.goBack()}
           rightComponent={
@@ -188,7 +188,7 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
               <Text></Text>
             )
           }
-          containerStyle={{ paddingHorizontal: wp('8%') }}
+          containerStyle={{ paddingHorizontal: wp('8%')}}
         />
         <ShowChooseDate fromDate={fromDate} toDate={toDate} />
       </View>
