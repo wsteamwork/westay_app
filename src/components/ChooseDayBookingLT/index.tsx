@@ -99,6 +99,7 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
     } else if (!isToDatePicked) {
       let oldMarkedDates = { ...markedDates };
       let [mMarkedDates, range] = setupMarkedDates(fromDate, day.dateString, oldMarkedDates);
+      initialAvailableDate();
       if (range >= 0) {
         setIsFromDatePicked(true);
         setIsToDatePicked(true);
@@ -112,6 +113,7 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
     let newMarkedDates = {
       [day.dateString]: {
         startingDay: true,
+        disabled: true,
         color: '#ff6600',
         textColor: '#ffffff',
       },
@@ -132,6 +134,7 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
           [toDate]: {
             color: '#008489',
             selected: true,
+            disabled: true,
             textColor: '#ffffff',
           },
         };
@@ -140,11 +143,17 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
         for (var i = 1; i <= range; i++) {
           let tempDate = mFromDate.addDays(1).toString('yyyy-MM-dd');
           if (i < range) {
-            markedDates[tempDate] = { color: '#008489', selected: true, textColor: '#ffffff' };
+            markedDates[tempDate] = {
+              color: '#008489',
+              selected: true,
+              disabled: true,
+              textColor: '#ffffff',
+            };
           } else {
             setToDate(tempDate);
             markedDates[tempDate] = {
               endingDay: true,
+              disabled: true,
               color: '#ff6600',
               textColor: '#ffffff',
             };
