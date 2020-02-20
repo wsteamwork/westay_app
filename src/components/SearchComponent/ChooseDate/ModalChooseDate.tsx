@@ -12,6 +12,11 @@ import { RoomDetailContext } from 'store/context/room/RoomDetailContext';
 import { setCheckIn, setCheckOut } from 'store/actions/search/searchActions';
 import Modal from 'react-native-modal';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
+
 interface IProps extends NavigationInjectedProps {
   open: boolean;
   setClose: Dispatch<SetStateAction<boolean>>;
