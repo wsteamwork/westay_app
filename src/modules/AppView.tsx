@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState, memo} from 'react';
+import React, { FC, useEffect, useState, memo } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import IntroApp from 'modules/IntroApp';
 import NavigatorView from 'navigation/Navigator';
@@ -25,11 +25,12 @@ const AppView: FC = () => {
     }
   };
 
-  useEffect(() => {
-    useFirstOpenApp();
-  }, []);
+  // useEffect(() => {
+  //   useFirstOpenApp();
+  // }, []);
 
-  return open ? <NavigatorView /> : <IntroApp onDone={onDone} />;
+  // return open ? <NavigatorView /> : <IntroApp onDone={onDone} />;
+  return <NavigatorView />;
 };
 
 export default memo(AppView);
