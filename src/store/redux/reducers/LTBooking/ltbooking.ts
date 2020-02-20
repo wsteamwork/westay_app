@@ -154,7 +154,7 @@ export const getLongTermBookingList = async (
     headers: { Authorization: token, 'Accept-Language': languageStatus },
   });
   if (res) {
-    let bookingListLT = res.data;
+    let bookingListLT = res.data.data;
     dispatch({ type: 'setDataBookingByStatus', payload: bookingListLT });
   } else {
     dispatch({ type: 'setError', payload: true });
