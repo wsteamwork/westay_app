@@ -25,6 +25,7 @@ export type LTBookingReducerState = {
   readonly LTDataInvoice: PaymentBankListRes | null;
   readonly LTPaymentError: boolean;
   readonly bookings: LTBookingIndexRes[];
+  readonly booking: LTBookingIndexRes | null;
   readonly error: boolean;
 };
 
@@ -43,6 +44,7 @@ export type LTBookingAction =
   | { type: 'setLTPaymentError'; payload: boolean }
   | { type: 'setBankList'; payload: PaymentMethod[] }
   | { type: 'setDataBookingByStatus'; payload: LTBookingIndexRes[] }
+  | { type: 'setDataBookingById'; payload: LTBookingIndexRes }
   | { type: 'setError'; payload: boolean };
 
 export const init: LTBookingReducerState = {
@@ -56,6 +58,7 @@ export const init: LTBookingReducerState = {
   bankList: null,
   LTPaymentError: false,
   bookings: [],
+  booking: null,
   error: false,
 };
 
@@ -84,6 +87,8 @@ export const ltBookingReducer: Reducer<LTBookingReducerState, LTBookingAction> =
       return updateObject(state, { LTPaymentError: action.payload });
     case 'setDataBookingByStatus':
       return updateObject(state, { bookings: action.payload });
+    case 'setDataBookingById':
+      return updateObject(state, { booking: action.payload });
     case 'setError':
       return updateObject(state, { error: action.payload });
     default:
@@ -135,6 +140,24 @@ export const redirectToBaoKim = async (uuid: string, bank_id: number, languageSt
     headers: { 'Accept-Language': languageStatus },
   });
   return res.data;
+};
+
+export const getLongTermBookingById = async (
+  bookingId: number,
+  token: string,
+  dispatch: Dispatch<LTBookingAction>,
+  languageStatus: string,
+) => {
+  const url = `long-term-bookings/${bookingId}?include=contracts`;
+  let res = await axios.get(url, {
+    headers: { Authorization: token, 'Accept-Language': languageStatus },
+  });
+  if (res) {
+    let booking = res.data.data;
+    return booking;
+  } else {
+    dispatch({ type: 'setError', payload: true });
+  }
 };
 
 export const getLongTermBookingList = async (

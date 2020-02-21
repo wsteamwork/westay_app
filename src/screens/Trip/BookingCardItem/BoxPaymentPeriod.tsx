@@ -1,9 +1,10 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import { hp } from 'components/Utils/responsive.style';
 import { AuthContext } from 'store/context/auth';
+import ModalChoosePaymentMethod from './ModalChoosePaymentMethod';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -13,12 +14,14 @@ interface IProps {
   datePayment: string;
   pricePayment: string;
   paymentStatus: number;
+  bookingId: number;
 }
 
 const BoxPaymentPeriod: FC<IProps> = (props) => {
-  const { datePayment, pricePayment, paymentStatus } = props;
+  const { datePayment, pricePayment, paymentStatus, bookingId } = props;
   const { state } = useContext(AuthContext);
   const { languageStatus } = state;
+  const [modalChoosePayment, setModalChoosePayment] = useState<boolean>(false);
   return (
     <View style={styles.container}>
       <View>
@@ -35,6 +38,7 @@ const BoxPaymentPeriod: FC<IProps> = (props) => {
             title="Thanh toán"
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.titleStyle}
+            onPress={() => setModalChoosePayment(!modalChoosePayment)}
           />
         </View>
       ) : (
@@ -44,6 +48,7 @@ const BoxPaymentPeriod: FC<IProps> = (props) => {
           </Text>
         </View>
       )}
+      <ModalChoosePaymentMethod open={modalChoosePayment} setClose={setModalChoosePayment} bookingId={bookingId}/>
     </View>
   );
 };

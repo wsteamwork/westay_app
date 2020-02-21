@@ -1,9 +1,9 @@
 import React, { FC, useRef, useState, useContext, useEffect, useMemo } from 'react';
-import { View, StyleSheet, SafeAreaView, Keyboard } from 'react-native';
+import { View, StyleSheet, SafeAreaView, Keyboard, ScrollView } from 'react-native';
 import { hp, wp } from 'utils/responsive';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import { NavigationInjectedProps, withNavigation, ScrollView } from 'react-navigation';
+import { NavigationInjectedProps, withNavigation} from 'react-navigation';
 import { Formik, FormikHelpers } from 'formik';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Text, Input } from 'react-native-elements';

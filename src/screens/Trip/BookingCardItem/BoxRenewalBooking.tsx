@@ -2,16 +2,17 @@ import React, { FC } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { hp } from 'utils/responsive';
-
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
 
-interface IProps {
+interface IProps extends NavigationInjectedProps{
   initProps?: any;
 }
 
 const BoxRenewalBooking: FC<IProps> = (props) => {
+  const {navigation} = props;
   return (
     <View style={styles.container}>
       <View style={styles.boxRenewal}>
@@ -23,6 +24,7 @@ const BoxRenewalBooking: FC<IProps> = (props) => {
         <Button
           title="Gia hạn"
           buttonStyle={styles.buttonRenewStyle}
+          onPress={() => navigation.navigate('ReNewalBooking')}
           titleStyle={styles.titleStyle}
         />
       </View>
@@ -54,4 +56,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#ff6600',
   },
 });
-export default BoxRenewalBooking;
+export default withNavigation(BoxRenewalBooking);

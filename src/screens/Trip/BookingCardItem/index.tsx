@@ -47,21 +47,23 @@ const BookingCardItem: FC<IProps> = (props) => {
             datePayment={moment(nextPaymentDue.payment_due_date).format('DD/MM/YYYY')}
             pricePayment={numeral(nextPaymentDue.payment_amount).format('0,0')}
             paymentStatus={booking.contracts.data[0].payment.payment_period[0].payment_status}
-          />
-          <Divider style={styles.divider} />
-        </View>
-      )}
-      {bookingType === CURRENT && nextPaymentDue && (
-        <View>
-          <BoxPaymentPeriod
-            datePayment={moment(nextPaymentDue.payment_due_date).format('DD/MM/YYYY')}
-            pricePayment={numeral(nextPaymentDue.payment_amount).format('0,0')}
-            paymentStatus={nextPaymentDue.payment_status}
+            bookingId={booking.id}
           />
           <Divider style={styles.divider} />
         </View>
       )}
       {bookingType === CURRENT && !nextPaymentDue && (
+        <View>
+          <BoxPaymentPeriod
+            datePayment={moment(nextPaymentDue.payment_due_date).format('DD/MM/YYYY')}
+            pricePayment={numeral(nextPaymentDue.payment_amount).format('0,0')}
+            paymentStatus={nextPaymentDue.payment_status}
+            bookingId={booking.id}
+          />
+          <Divider style={styles.divider} />
+        </View>
+      )}
+      {bookingType === CURRENT && nextPaymentDue && (
         <View>
           <BoxRenewalBooking />
           <Divider style={styles.divider} />
