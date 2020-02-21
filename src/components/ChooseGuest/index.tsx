@@ -6,6 +6,11 @@ import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   people: number;
   setPeople: (value: number) => void;

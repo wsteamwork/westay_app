@@ -10,6 +10,12 @@ import {
   getLTCalculatedBookingPrice,
 } from 'store/redux/reducers/LTBooking/ltbooking';
 import { formatMoney } from 'utils/mixins';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
+ 
 interface IProps {
   initialProps?: any;
 }

@@ -2,6 +2,11 @@
 import React, { FC } from 'react';
 import { WebView } from 'react-native-webview';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

@@ -1,9 +1,11 @@
-import React, { FC, Dispatch, SetStateAction } from 'react';
+import React, { FC, Dispatch, SetStateAction, useContext } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Divider, Button } from 'react-native-elements';
 import { hp, wp } from 'utils/responsive';
 import Modal from 'react-native-modal';
-
+import { AuthContext } from 'store/context/auth';
+import numeral from 'numeral';
+import moment from 'moment';
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
@@ -11,10 +13,14 @@ import Modal from 'react-native-modal';
 interface IProps {
   open: boolean;
   setClose: Dispatch<SetStateAction<boolean>>;
+  booking: any;
 }
 
 const ModalCurrentContract: FC<IProps> = (props) => {
-  const { open, setClose } = props;
+  const { open, setClose, booking } = props;
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
+  const currentContract = booking.contracts.data[booking.contracts.data.length - 1];
   return (
     <Modal
       isVisible={open}
@@ -33,42 +39,58 @@ const ModalCurrentContract: FC<IProps> = (props) => {
           </View>
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Mã hợp đồng</Text>
-            <Text style={styles.itemLeft}>#CTPL1OK1MR</Text>
+            <Text style={styles.itemLeft}>#{currentContract.uuid}</Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Giá thanh toán</Text>
-            <Text style={styles.itemLeft}>đ 9,000,000</Text>
+            <Text style={styles.itemLeft}>
+              {languageStatus === 'en' ? '$' : 'đ'}{' '}
+              {numeral(currentContract.price_original).format('0,0')}
+            </Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Đặt cọc (1tháng)</Text>
-            <Text style={styles.itemLeft}>đ 9,000,000</Text>
+            <Text style={styles.itemLeft}>
+              {languageStatus === 'en' ? '$' : 'đ'}{' '}
+              {numeral(currentContract.price_with_fee - currentContract.price_original).format(
+                '0,0',
+              )}
+            </Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Tổng cộng</Text>
-            <Text style={styles.itemLeft}>đ 18,000,000</Text>
+            <Text style={styles.itemLeft}>
+              {languageStatus === 'en' ? '$' : 'đ'}{' '}
+              {numeral(currentContract.price_with_fee).format('0,0')}
+            </Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Số ngày</Text>
-            <Text style={styles.itemLeft}>30 ngày</Text>
+            <Text style={styles.itemLeft}>
+              {currentContract.range_stay} {languageStatus === 'en' ? 'days' : 'ngày'}
+            </Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Ngày chuyển đến</Text>
-            <Text style={styles.itemLeft}>20/02/2020</Text>
+            <Text style={styles.itemLeft}>{currentContract.move_in.replace(/-/g, '/')}</Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Ngày chuyển đi</Text>
-            <Text style={styles.itemLeft}>23/04/2020</Text>
+            <Text style={styles.itemLeft}>{currentContract.move_out.replace(/-/g, '/')}</Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Ngày đặt phòng</Text>
-            <Text style={styles.itemLeft}>16:33 - 23/04/2020</Text>
+            <Text style={styles.itemLeft}>
+              {currentContract.created_at.substring(11, 16)} -{' '}
+              {moment(currentContract.created_at).format('DD/MM/YYYY')}
+            </Text>
           </View>
           <Divider style={styles.divider} />
         </ScrollView>

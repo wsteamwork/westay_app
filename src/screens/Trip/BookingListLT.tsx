@@ -14,28 +14,21 @@ import { Text } from 'react-native-elements';
  */
 
 interface IProps {
-  status: string[];
   bookingType: number;
 }
 
 const BookingListLT: FC<IProps> = (props) => {
-  const { status, bookingType } = props;
-  const { state } = useContext(AuthContext);
-  const { token, languageStatus } = state;
-  const dispatch = useDispatch<Dispatch<LTBookingAction>>();
+  const { bookingType } = props;
   const { bookings } = useSelector<ReducersList, any>((state) => state.ltbooking);
-  console.log('bookings', bookings)
-  useEffect(() => {
-    getLongTermBookingList(token, dispatch, languageStatus, status);
-  }, [status]);
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ alignItems: 'center' }}>
       {bookings.length ? (
         bookings.map((o: any) => (
-          <BookingCardItem key={o.id} booking={o} status={status} bookingType={bookingType} />
+          <BookingCardItem key={o.id} booking={o} bookingType={bookingType} />
         ))
       ) : (
-        <Text></Text>
+        <Text>loading...</Text>
       )}
     </ScrollView>
   );

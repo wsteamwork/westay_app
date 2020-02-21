@@ -1,11 +1,13 @@
-import React, { FC, Dispatch, SetStateAction } from 'react';
+import React, { FC, Dispatch, SetStateAction, useContext } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Button, Divider } from 'react-native-elements';
 import { hp, wp } from 'utils/responsive';
 import Modal from 'react-native-modal';
 import { elevationShadowStyle } from 'utils/mixins';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
-
+import moment from 'moment';
+import { AuthContext } from 'store/context/auth';
+import numeral from 'numeral';
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
@@ -13,10 +15,14 @@ import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 interface IProps {
   open: boolean;
   setClose: Dispatch<SetStateAction<boolean>>;
+  booking: any;
 }
 
 const ModalPaymentPeriod: FC<IProps> = (props) => {
-  const { open, setClose } = props;
+  const { open, setClose, booking } = props;
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
+  const currentContract = booking.contracts.data[booking.contracts.data.length - 1];
   return (
     <Modal
       isVisible={open}
@@ -33,44 +39,31 @@ const ModalPaymentPeriod: FC<IProps> = (props) => {
           <View style={styles.boxWrapper}>
             <Text style={styles.headerText}>Thông tin kỳ thanh toán</Text>
           </View>
-          <View style={[styles.containerItem, elevationShadowStyle(10)]}>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.titleHeader}>Kỳ thanh toán số</Text>
-              <Text style={styles.itemLeft}>1</Text>
+          {currentContract.payment.payment_period.map((row: any, i: number) => (
+            <View key={i} style={[styles.containerItem, elevationShadowStyle(10)]}>
+              <View style={styles.boxWrapper}>
+                <Text style={styles.titleHeader}>Kỳ thanh toán số</Text>
+                <Text style={styles.itemLeft}>{i + 1}</Text>
+              </View>
+              <Divider style={styles.divider} />
+              <View style={styles.boxWrapper}>
+                <Text style={styles.title}>Hạn thanh toán</Text>
+                <Text style={styles.itemLeft}>
+                  {moment(row.payment_due_date).format('DD/MM/YYYY')}
+                </Text>
+              </View>
+              <View style={styles.boxWrapper}>
+                <Text style={styles.title}>Cần thanh toán</Text>
+                <Text style={styles.itemLeft}>
+                  {languageStatus === 'en' ? '$' : 'đ'} {numeral(row.payment_amount).format('0,0')}
+                </Text>
+              </View>
+              <View style={styles.boxWrapper}>
+                <Text style={styles.title}>Trạng thái</Text>
+                <Text style={styles.itemLeft}>{row.payment_status_txt}</Text>
+              </View>
             </View>
-            <Divider style={styles.divider} />
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Hạn thanh toán</Text>
-              <Text style={styles.itemLeft}>14/02/2020</Text>
-            </View>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Cần thanh toán</Text>
-              <Text style={styles.itemLeft}>đ 9,000,000</Text>
-            </View>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Trạng thái</Text>
-              <Text style={styles.itemLeft}>Chưa thanh toán</Text>
-            </View>
-          </View>
-          <View style={[styles.containerItem, elevationShadowStyle(10)]}>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.titleHeader}>Kỳ thanh toán số</Text>
-              <Text style={styles.itemLeft}>2</Text>
-            </View>
-            <Divider style={styles.divider} />
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Hạn thanh toán</Text>
-              <Text style={styles.itemLeft}>14/06/2020</Text>
-            </View>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Cần thanh toán</Text>
-              <Text style={styles.itemLeft}>đ 19,000,000</Text>
-            </View>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Trạng thái</Text>
-              <Text style={styles.itemLeft}>Chưa thanh toán</Text>
-            </View>
-          </View>
+          ))}
         </ScrollView>
         <View style={styles.BoxConfirm}>
           <Button

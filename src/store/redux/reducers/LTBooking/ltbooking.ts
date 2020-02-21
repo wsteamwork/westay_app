@@ -144,10 +144,10 @@ export const getLongTermBookingList = async (
   status: string[],
 ) => {
   let statusList = status.join();
+  
   let query = {
-    size: 10,
     include: 'contracts,longTermRoom',
-    status: statusList,
+    booking_status: statusList,
   };
   const url = `long-term-bookings?${qs.stringify(query)}`;
   let res = await axios.get(url, {

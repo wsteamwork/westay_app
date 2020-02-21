@@ -8,16 +8,16 @@ import { Button } from 'react-native-elements';
 import ModalCurrentContract from './ModalCurrentContract';
 import ModalPaymentPeriod from './ModalPaymentPeriod';
 import ModalAllBookingContract from './ModalAllBookingContract';
-
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
 
 interface IProps {
-  initialProps?: any;
+  booking: any;
 }
 
 const BoxContract: FC<IProps> = (props) => {
+  const { booking } = props;
   const [modalCurrentContract, setModalCurrentContract] = useState<boolean>(false);
   const [modalPaymentPeriod, setModalPaymentPeriod] = useState<boolean>(false);
   const [modalAllBookingContract, setModalAllBookingContract] = useState<boolean>(false);
@@ -81,12 +81,22 @@ const BoxContract: FC<IProps> = (props) => {
           </View>
         </View>
         <View style={styles.boxItem}>
-          <IconFoundation
-            name="burst-new"
-            size={wp('8%')}
-            color={COLOR_BUTTON_DEFAULT}
-            style={styles.icon}
-          />
+          {booking.contracts.data[0].status === 1 && (
+            <IconFoundation
+              name="burst-new"
+              size={wp('8%')}
+              color={COLOR_BUTTON_DEFAULT}
+              style={styles.icon}
+            />
+          )}
+          {booking.contracts.data[0].status !== 1 && booking.contracts.data[0].status !== 5 && (
+            <IconAntDesign
+              name="checkcircle"
+              size={wp('7%')}
+              color={COLOR_BUTTON_DEFAULT}
+              style={styles.icon}
+            />
+          )}
           <View style={styles.boxDetail}>
             <Text numberOfLines={1} style={styles.title}>
               Trạng thái
@@ -94,7 +104,7 @@ const BoxContract: FC<IProps> = (props) => {
             <Button
               titleStyle={styles.titleStatus}
               containerStyle={styles.buttonStyle}
-              title="Đặt phòng mới"
+              title={booking.contracts.data[0].status_txt}
               type="clear"
               iconRight
               buttonStyle={styles.buttonStyle}
@@ -102,11 +112,20 @@ const BoxContract: FC<IProps> = (props) => {
           </View>
         </View>
       </View>
-      <ModalCurrentContract open={modalCurrentContract} setClose={setModalCurrentContract} />
-      <ModalPaymentPeriod open={modalPaymentPeriod} setClose={setModalPaymentPeriod} />
+      <ModalCurrentContract
+        open={modalCurrentContract}
+        setClose={setModalCurrentContract}
+        booking={booking}
+      />
+      <ModalPaymentPeriod
+        open={modalPaymentPeriod}
+        setClose={setModalPaymentPeriod}
+        booking={booking}
+      />
       <ModalAllBookingContract
         open={modalAllBookingContract}
         setClose={setModalAllBookingContract}
+        booking={booking}
       />
     </View>
   );

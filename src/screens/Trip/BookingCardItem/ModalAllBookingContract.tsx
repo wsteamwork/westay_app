@@ -5,6 +5,7 @@ import { hp, wp } from 'utils/responsive';
 import Modal from 'react-native-modal';
 import { elevationShadowStyle } from 'utils/mixins';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
+import { LTBookingContracts, LTBookingIndexRes } from 'types/Booking/BookingResponses';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -13,10 +14,11 @@ import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 interface IProps {
   open: boolean;
   setClose: Dispatch<SetStateAction<boolean>>;
+  booking: any;
 }
 
 const ModalAllBookingContract: FC<IProps> = (props) => {
-  const { open, setClose } = props;
+  const { open, setClose, booking } = props;
   return (
     <Modal
       isVisible={open}
@@ -33,52 +35,31 @@ const ModalAllBookingContract: FC<IProps> = (props) => {
           <View style={styles.boxWrapper}>
             <Text style={styles.headerText}>Tất cả hợp đồng</Text>
           </View>
-          <View style={[styles.containerItem, elevationShadowStyle(10)]}>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.titleHeader}>Hợp đồng số</Text>
-              <Text style={styles.itemLeft}>1</Text>
+          {booking.contracts.data.map((con: any, i: number) => (
+            <View key={i} style={[styles.containerItem, elevationShadowStyle(10)]}>
+              <View style={styles.boxWrapper}>
+                <Text style={styles.titleHeader}>Hợp đồng số</Text>
+                <Text style={styles.itemLeft}>{i + 1}</Text>
+              </View>
+              <Divider style={styles.divider} />
+              <View style={styles.boxWrapper}>
+                <Text style={styles.title}>Mã hợp đồng</Text>
+                <Text style={styles.itemLeft}>#{con.uuid}</Text>
+              </View>
+              <View style={styles.boxWrapper}>
+                <Text style={styles.title}>Ngày chuyến đến</Text>
+                <Text style={styles.itemLeft}>{con.move_in.replace(/-/g, '/')}</Text>
+              </View>
+              <View style={styles.boxWrapper}>
+                <Text style={styles.title}>Ngày chuyến đi</Text>
+                <Text style={styles.itemLeft}>{con.move_out.replace(/-/g, '/')}</Text>
+              </View>
+              <View style={styles.boxWrapper}>
+                <Text style={styles.title}>Trạng thái</Text>
+                <Text style={styles.itemLeft}>{con.status_txt}</Text>
+              </View>
             </View>
-            <Divider style={styles.divider} />
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Mã hợp đồng</Text>
-              <Text style={styles.itemLeft}>#CTPL1OK1MR</Text>
-            </View>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Ngày chuyến đến</Text>
-              <Text style={styles.itemLeft}>23/02/2020</Text>
-            </View>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Ngày chuyến đi</Text>
-              <Text style={styles.itemLeft}>23/04/2020</Text>
-            </View>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Trạng thái</Text>
-              <Text style={styles.itemLeft}>Chưa thanh toán</Text>
-            </View>
-          </View>
-          <View style={[styles.containerItem, elevationShadowStyle(10)]}>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.titleHeader}>Hợp đồng số</Text>
-              <Text style={styles.itemLeft}>2</Text>
-            </View>
-            <Divider style={styles.divider} />
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Mã hợp đồng</Text>
-              <Text style={styles.itemLeft}>#CTPL1OK1MR</Text>
-            </View>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Ngày chuyến đến</Text>
-              <Text style={styles.itemLeft}>23/02/2020</Text>
-            </View>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Ngày chuyến đi</Text>
-              <Text style={styles.itemLeft}>23/04/2020</Text>
-            </View>
-            <View style={styles.boxWrapper}>
-              <Text style={styles.title}>Trạng thái</Text>
-              <Text style={styles.itemLeft}>Đã xác nhận</Text>
-            </View>
-          </View>
+          ))}
         </ScrollView>
         <View style={styles.BoxConfirm}>
           <Button

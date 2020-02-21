@@ -16,6 +16,10 @@ import {
   redirectToBaoKim,
 } from 'store/redux/reducers/LTBooking/ltbooking';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

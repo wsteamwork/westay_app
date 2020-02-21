@@ -17,6 +17,11 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { WEBSITE_SRC } from 'types/globalTypes';
 import { createLTBooking } from 'store/redux/reducers/LTBooking/ltbooking';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

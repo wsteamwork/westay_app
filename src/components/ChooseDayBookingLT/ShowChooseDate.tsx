@@ -5,6 +5,11 @@ import { wp } from 'utils/responsive';
 import { Text } from 'react-native-elements';
 import { AuthContext } from 'store/context/auth';
 import { formatDateBooking } from 'utils/mixins';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   fromDate: string;
   toDate: string;
