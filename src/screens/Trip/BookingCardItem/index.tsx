@@ -9,8 +9,8 @@ import BoxContract from './BoxContract';
 import { IMAGE_STORAGE_SM, IMAGE_NOT_FOUND } from 'types/globalTypes';
 import moment from 'moment';
 import numeral from 'numeral';
-import BoxRenewalBooking from './BoxRenewalBooking';
 import BoxFinishedBooking from './BoxFinishedBooking';
+import BoxRenewalBooking from 'components/BoxRenewalBooking';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -52,7 +52,7 @@ const BookingCardItem: FC<IProps> = (props) => {
           <Divider style={styles.divider} />
         </View>
       )}
-      {bookingType === CURRENT && !nextPaymentDue && (
+      {bookingType === CURRENT && nextPaymentDue && (
         <View>
           <BoxPaymentPeriod
             datePayment={moment(nextPaymentDue.payment_due_date).format('DD/MM/YYYY')}
@@ -63,9 +63,9 @@ const BookingCardItem: FC<IProps> = (props) => {
           <Divider style={styles.divider} />
         </View>
       )}
-      {bookingType === CURRENT && nextPaymentDue && (
+      {bookingType === CURRENT && !nextPaymentDue && (
         <View>
-          <BoxRenewalBooking />
+          <BoxRenewalBooking move_in_new={booking.latest_move_out.substring(0,10)} uuid={booking.uuid}/>
           <Divider style={styles.divider} />
         </View>
       )}

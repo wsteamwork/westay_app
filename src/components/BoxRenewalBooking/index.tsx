@@ -7,12 +7,13 @@ import { NavigationInjectedProps, withNavigation } from 'react-navigation';
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
 
-interface IProps extends NavigationInjectedProps{
-  initProps?: any;
+interface IProps extends NavigationInjectedProps {
+  move_in_new: string;
+  uuid: string;
 }
 
 const BoxRenewalBooking: FC<IProps> = (props) => {
-  const {navigation} = props;
+  const { navigation, move_in_new, uuid } = props;
   return (
     <View style={styles.container}>
       <View style={styles.boxRenewal}>
@@ -24,7 +25,7 @@ const BoxRenewalBooking: FC<IProps> = (props) => {
         <Button
           title="Gia hạn"
           buttonStyle={styles.buttonRenewStyle}
-          onPress={() => navigation.navigate('ReNewalBooking')}
+          onPress={() => navigation.navigate('ReNewalBooking', { move_in_new: move_in_new, uuid: uuid })}
           titleStyle={styles.titleStyle}
         />
       </View>

@@ -25,6 +25,7 @@ import BoxDirectTransfer from 'components/BoxDirectTransfer';
 import BoxPaymentBaoKim from 'components/BoxPaymentBaoKim';
 import WebViewBaoKim from 'components/BoxPaymentBaoKim/WebViewBaoKim';
 import ReNewalBooking from 'components/ReNewalBooking';
+import BoxRenewalBooking from 'components/BoxRenewalBooking';
 
 const stackNavigator = createStackNavigator(
   {
@@ -54,7 +55,8 @@ const stackNavigator = createStackNavigator(
     BoxDirectTransfer: { screen: BoxDirectTransfer },
     BoxPaymentBaoKim: { screen: BoxPaymentBaoKim },
     WebViewBaoKim: { screen: WebViewBaoKim },
-    ReNewalBooking: {screen: ReNewalBooking }
+    ReNewalBooking: {screen: ReNewalBooking },
+    BoxRenewalBooking: {screen: BoxRenewalBooking}
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
