@@ -1,10 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { wp, hp } from 'utils/responsive';
 import { Text } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

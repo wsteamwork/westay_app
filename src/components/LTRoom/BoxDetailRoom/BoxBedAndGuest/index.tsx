@@ -9,6 +9,11 @@ import Foundation from 'react-native-vector-icons/Foundation';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import _ from 'lodash';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
 }

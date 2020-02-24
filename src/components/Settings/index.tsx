@@ -17,6 +17,11 @@ import storage from 'utils/storage';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

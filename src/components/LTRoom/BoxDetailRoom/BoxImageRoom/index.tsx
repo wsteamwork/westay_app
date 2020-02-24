@@ -18,6 +18,11 @@ import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import _ from 'lodash';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
   arrImages?: any;

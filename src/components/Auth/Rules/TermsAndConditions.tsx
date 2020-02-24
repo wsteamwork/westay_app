@@ -2,6 +2,10 @@ import React from 'react';
 import { View, ActivityIndicator} from 'react-native';
 import { WebView } from 'react-native-webview';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 const TermsAndConditions = () => {
   return (
     <View style={{ flex: 1 }}>

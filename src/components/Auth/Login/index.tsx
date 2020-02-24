@@ -21,6 +21,11 @@ import { Input } from 'react-native-elements';
 import { inputContainerStyleGlobal } from 'utils/mixins';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Toast from 'react-native-root-toast';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

@@ -7,6 +7,10 @@ import Account from 'components/Account';
 import { COLOR_TITLE_HEADER } from 'styles/global.style';
 import IconTabCustom from 'components/Shared/IconTabCustom';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 const config = {
   animation: 'spring',
   config: {

@@ -4,6 +4,11 @@ import { wp, hp } from 'utils/responsive';
 import MapView, { Circle } from 'react-native-maps';
 import { ReducersList } from 'store/redux/reducers';
 import { useSelector } from 'react-redux';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
 }

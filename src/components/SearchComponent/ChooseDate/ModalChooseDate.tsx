@@ -1,5 +1,5 @@
 import React, { FC, useContext, useState, Dispatch, SetStateAction } from 'react';
-import { StyleSheet, View, StatusBar } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from 'store/context/auth';

@@ -6,6 +6,10 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
 }

@@ -9,6 +9,11 @@ import { hp, wp } from 'utils/responsive';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import LeftSpacePaddingHorizontalScroll from 'components/GlobalComponents/LeftSpacePaddingHorizontalScroll';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
   arrImages?: any;

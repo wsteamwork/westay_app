@@ -1,9 +1,13 @@
-import React, { FC, useState } from 'react';
-import { StyleSheet, View, Image, Alert, Text } from 'react-native';
+import React, { FC } from 'react';
+import { StyleSheet, View, Image, Text } from 'react-native';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { hp, wp } from 'utils/responsive';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
 
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;

@@ -3,6 +3,11 @@ import { View, Text, TextInput, StyleSheet, KeyboardTypeOptions, NativeSynthetic
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { wp, hp } from 'utils/responsive';
 import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_DEFAULT } from 'styles/global.style';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
   placeholder?: string;

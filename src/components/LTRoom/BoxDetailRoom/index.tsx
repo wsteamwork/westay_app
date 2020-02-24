@@ -19,6 +19,10 @@ import { ReducersList } from 'store/redux/reducers';
 import { IMAGE_STORAGE_LG } from 'types/globalTypes';
 import _ from 'lodash';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

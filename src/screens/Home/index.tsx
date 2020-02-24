@@ -24,8 +24,8 @@ import {IDataCollections} from 'types/Rooms/RoomRequests';
 import RNBootSplash from "react-native-bootsplash";
 
 const Home: FC = (props) => {
-  const { state, dispatch } = useContext(AuthContext);
-  const { token, languageStatus } = state;
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
   const dispatchHome = useDispatch<Dispatch<ReducersActions>>();
   const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
@@ -64,11 +64,6 @@ const Home: FC = (props) => {
     });
 
   }, [languageStatus]);
-
-  // useEffect(() => {
-  //
-  // }, []);
-
 
   const _renderEditorChoice = (item: any, index: number) => {
     return (

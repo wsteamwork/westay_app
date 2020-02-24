@@ -5,6 +5,10 @@ import { Text, Image, Avatar } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
 }

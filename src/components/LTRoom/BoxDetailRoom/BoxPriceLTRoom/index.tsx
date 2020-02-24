@@ -8,6 +8,11 @@ import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBac
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
 }

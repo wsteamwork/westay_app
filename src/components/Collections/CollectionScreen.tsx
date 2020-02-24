@@ -1,38 +1,34 @@
-import React, {FC, memo, useState, useEffect, Fragment} from 'react';
+import React, { FC, memo, useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
   Platform,
-  TouchableOpacity,
   Dimensions,
-  Text,
-  Alert,
   StatusBar,
-  NativeModules, ScrollView, FlatList,
+  NativeModules,
+  FlatList,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {hp, wp} from 'utils/responsive';
-import {elevationShadowStyle} from 'utils/mixins';
-import {SIZE_TEXT_TITLE} from 'styles/global.style';
+import { hp, wp } from 'utils/responsive';
+import { elevationShadowStyle } from 'utils/mixins';
+import { SIZE_TEXT_TITLE } from 'styles/global.style';
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 // @ts-ignore
 import { compose } from 'recompose';
 // @ts-ignore
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
-import ListCollectionsSquare from 'components/ListRoomType/ListCollectionsSquare';
-import {IDataCollections} from 'types/Rooms/RoomRequests';
-import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
+import { IDataCollections } from 'types/Rooms/RoomRequests';
+import { getHomePageCollection } from 'store/Hooks/CardRoomHooks';
 import CollectionsSquareCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsSquareCard';
-import {TypeApartment} from 'types/Rooms/RoomResponses';
-import RoomTypeCard from 'components/GlobalComponents/Cards/RoomTypeCard';
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
 
 const { StatusBarManager } = NativeModules;
-const {
-        height: SCREEN_HEIGHT,
-      } = Dimensions.get('window');
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
-const IS_IPHONE_X = SCREEN_HEIGHT  === 812 || SCREEN_HEIGHT  === 896;
+const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : StatusBarManager.HEIGHT;
 const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
@@ -41,19 +37,19 @@ const images = {
   background: require('../../assets/images/images_web/background_sea.jpg'), // Put your own image here
 };
 
-interface IProps extends NavigationInjectedProps{
-
-}
+interface IProps extends NavigationInjectedProps {}
 
 const CollectionScreen: FC<IProps> = (props) => {
   const { navigation } = props;
-  const [dataRooms, setDataRooms] = useState<IDataCollections>({data: [], meta: 0});
+  const [dataRooms, setDataRooms] = useState<IDataCollections>({ data: [], meta: 0 });
 
   const typeData = navigation.getParam('typeDataCollection');
   const title = navigation.getParam('titleCollection');
 
   useEffect(() => {
-    getHomePageCollection(typeData, 30).then((res) => setDataRooms({data: res.data.data, meta: res.data.meta!.pagination.total}));
+    getHomePageCollection(typeData, 30).then((res) =>
+      setDataRooms({ data: res.data.data, meta: res.data.meta!.pagination.total }),
+    );
   }, []);
 
   const _renderItem = (item: any, index: number) => {
@@ -74,7 +70,7 @@ const CollectionScreen: FC<IProps> = (props) => {
       />
       <View style={styles.statusBar} />
       <View style={[styles.navBar]}>
-        <TouchableWithScale _onPress={()=>navigation.goBack()}>
+        <TouchableWithScale _onPress={() => navigation.goBack()}>
           <Icon name="arrow-back" size={25} color="#000" />
         </TouchableWithScale>
       </View>
@@ -107,7 +103,7 @@ const CollectionScreen: FC<IProps> = (props) => {
         headerMaxHeight={hp('25%')}
         extraScrollHeight={20}
         navbarColor="#fff"
-        statusBarColor='transparent'
+        statusBarColor="transparent"
         title={title}
         titleStyle={styles.titleStyle}
         backgroundImage={images.background}
@@ -120,7 +116,7 @@ const CollectionScreen: FC<IProps> = (props) => {
         // contentContainerStyle={styles.contentContainer}
         innerContainerStyle={styles.container}
         scrollViewProps={{
-          showsVerticalScrollIndicator: false
+          showsVerticalScrollIndicator: false,
         }}
       />
     </View>
@@ -139,7 +135,7 @@ const styles = StyleSheet.create({
   //   paddingVertical: hp('5%'),
   //   backgroundColor: 'red',
   // },
-  bodyContainer:{
+  bodyContainer: {
     flexGrow: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -149,7 +145,7 @@ const styles = StyleSheet.create({
   },
   navContainer: {
     height: HEADER_HEIGHT + STATUS_BAR_HEIGHT,
-    paddingHorizontal: wp('5%')
+    paddingHorizontal: wp('5%'),
   },
   statusBar: {
     height: STATUS_BAR_HEIGHT,
@@ -166,11 +162,8 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     fontSize: SIZE_TEXT_TITLE,
-    width: wp('80%')
+    width: wp('80%'),
   },
 });
 
-export default compose(
-  memo,
-  withNavigation,
-)(CollectionScreen);
+export default compose(memo, withNavigation)(CollectionScreen);
