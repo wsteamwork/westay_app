@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "53949270433",
+    "firebase_url": "https://westay-1545367596792.firebaseio.com",
+    "project_id": "westay-1545367596792",
+    "storage_bucket": "westay-1545367596792.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53949270433:android:3feb53d92dcb77dcb5e3e0",
+        "android_client_info": {
+          "package_name": "com.westay_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53949270433-9l37did5pkkmtpbh2p13dkj5igpptcbg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4ppD-00poxjh1FRWZSJ2rhWYSMA2kS38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53949270433-9l37did5pkkmtpbh2p13dkj5igpptcbg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -43,18 +43,6 @@ const Home: FC = (props) => {
   let init = async () => {
     await getDataTypeHouse();
     await getRoomsHomepage(dispatchHome, languageStatus);
-    await getHomePageCollection('editor_choice', 8).then((res) => {
-      setEditorChoice({
-        data: res.data.data,
-        meta: res.data!.meta!.pagination!.total
-      })
-    });
-    await getHomePageCollection('for_family', 8).then((res) => {
-      setForFamily({
-        data: res.data.data,
-        meta: res.data!.meta!.pagination!.total})
-    });
-    await getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res.data.data));
 
   };
 
@@ -65,9 +53,20 @@ const Home: FC = (props) => {
 
   }, [languageStatus]);
 
-  // useEffect(() => {
-  //
-  // }, []);
+  useEffect(() => {
+    getHomePageCollection('editor_choice', 8).then((res) => {
+      setEditorChoice({
+        data: res.data.data,
+        meta: res.data!.meta!.pagination!.total
+      })
+    });
+    getHomePageCollection('for_family', 8).then((res) => {
+      setForFamily({
+        data: res.data.data,
+        meta: res.data!.meta!.pagination!.total})
+    });
+    getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res.data.data));
+  }, []);
 
 
   const _renderEditorChoice = (item: any, index: number) => {

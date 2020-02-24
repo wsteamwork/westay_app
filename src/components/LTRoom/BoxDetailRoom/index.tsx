@@ -72,8 +72,8 @@ const BoxDetailRoom: FC<IProps> = (props) => {
       setMediaToTal(images);
   }, []);
   return (
-    <View>
-      <ScrollView style={{ marginBottom: hp('8%') }}>
+    <View style={{backgroundColor:'white'}}>
+      <ScrollView style={{ marginBottom: hp('8%'), backgroundColor:'white'}}>
         <View>
           <BoxImageRoom arrImages={mediaToTal}/>
         </View>
