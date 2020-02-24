@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native-animatable';
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from '../screens/Home';
 import Trip from '../screens/Trip';
 import NavBottom from '../components/NavBottom';
 import Account from 'components/Account';
-import {COLOR_TITLE_HEADER} from 'styles/global.style';
+import { COLOR_TITLE_HEADER } from 'styles/global.style';
 import IconTabCustom from 'components/Shared/IconTabCustom';
 
 const config = {
@@ -21,7 +21,7 @@ const config = {
   },
 };
 
-const Stack = (screen:any, nameScreen:string, nameIcon:string) => {
+const Stack = (screen: any, nameScreen: string, nameIcon: string) => {
   const ScreenStack = createSwitchNavigator({
     [nameScreen]: {
       screen,
@@ -32,18 +32,18 @@ const Stack = (screen:any, nameScreen:string, nameIcon:string) => {
   });
 
   ScreenStack.navigationOptions = ({ navigation }) => ({
-    tabBarIcon: ({ focused }:any) => {
+    tabBarIcon: ({ focused }: any) => {
       return (
         <IconTabCustom
           name={nameIcon}
-          color={focused ? COLOR_TITLE_HEADER : '#8E8E93' }
+          color={focused ? COLOR_TITLE_HEADER : '#8E8E93'}
           navigation={navigation}
         />
       );
     },
     tabBarOptions: {
       showLabel: false,
-    }
+    },
   });
 
   return ScreenStack;

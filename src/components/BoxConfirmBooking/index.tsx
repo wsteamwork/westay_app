@@ -11,6 +11,11 @@ import { useDispatch } from 'react-redux';
 import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

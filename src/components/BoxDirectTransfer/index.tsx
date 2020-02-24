@@ -12,6 +12,10 @@ import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBac
 import { COLOR_TEXT_DEFAULT, COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import { formatMoney } from 'utils/mixins';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

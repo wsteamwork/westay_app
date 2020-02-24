@@ -3,17 +3,17 @@ import { View, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { AuthContext } from 'store/context/auth';
-import { hp, wp } from 'utils/responsive';
-import { ReducersList } from 'store/redux/reducers';
-import { LTRoomReducerAction, getRoomAvailableDate } from 'store/redux/reducers/LTRoom/RoomDetails';
 import { CalendarList, LocaleConfig } from 'react-native-calendars';
 import { Text, Icon } from 'react-native-elements';
-import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import XDate from 'xdate';
+import { AuthContext } from 'store/context/auth';
+import { ReducersList } from 'store/redux/reducers';
+import { LTRoomReducerAction, getRoomAvailableDate } from 'store/redux/reducers/LTRoom/RoomDetails';
+import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
+import ShowChooseDate from 'components/ChooseDayBookingLT/ShowChooseDate';
+import { wp, hp } from 'utils/responsive';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import ShowChooseDate from './ShowChooseDate';
-import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
+import { axios } from 'utils/api';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -65,29 +65,25 @@ LocaleConfig.locales['vi'] = {
 };
 LocaleConfig.defaultLocale = 'vi';
 
-const ChooseDayBookingLT: FC<IProps> = (props) => {
+const ReNewalBooking: FC<IProps> = (props) => {
   const { navigation } = props;
   const { state } = useContext(AuthContext);
   const { t } = useTranslation();
-  const { room, roomAvailable, roomId } = useSelector<ReducersList, any>(
+  const move_in_new = navigation.getParam('move_in_new');
+  const uuid = navigation.getParam('uuid');
+  const { roomAvailable, roomId } = useSelector<ReducersList, any>(
     (state) => state.ltRoomDetails,
   );
   const { languageStatus } = state;
-  const [isFromDatePicked, setIsFromDatePicked] = useState<boolean>(false);
   const [isToDatePicked, setIsToDatePicked] = useState<boolean>(false);
   const [markedDates, setMarkedDates] = useState<any>({});
-  const [fromDate, setFromDate] = useState<string>('');
+  const [fromDate, setFromDate] = useState<string>(move_in_new);
   const [toDate, setToDate] = useState<string>('');
   const [nightSelected, setNightSelected] = useState<number>(0);
   const dispatch = useDispatch<Dispatch<LTRoomReducerAction>>();
-  const dispatchBooking = useDispatch<Dispatch<LTBookingAction>>();
-  const initialAvailableDate = () => {
-    getRoomAvailableDate(roomId, languageStatus)
-      .then((res) => dispatch({ type: 'setRoomAvailable', payload: res.move_in }))
-      .catch((err) => console.log(err));
-  };
   useEffect(() => {
-    initialAvailableDate();
+    getAvailableDate(move_in_new);
+    setupStartMarker(move_in_new);
   }, []);
   const getAvailableDate = (date: string) => {
     getRoomAvailableDate(roomId, languageStatus, date)
@@ -96,36 +92,28 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
   };
 
   const onDayPress = (day: DateObj) => {
-    if (!isFromDatePicked || (isFromDatePicked && isToDatePicked)) {
-      setToDate('');
-      dispatchBooking({ type: 'setMoveOut', payload: '' });
-      setupStartMarker(day);
-      getAvailableDate(day.dateString);
-    } else if (!isToDatePicked) {
+    if (!isToDatePicked) {
       let oldMarkedDates = { ...markedDates };
       let [mMarkedDates, range] = setupMarkedDates(fromDate, day.dateString, oldMarkedDates);
-      initialAvailableDate();
       if (range >= 0) {
-        setIsFromDatePicked(true);
         setIsToDatePicked(true);
         setMarkedDates(mMarkedDates);
       } else {
-        setupStartMarker(day);
+        setupStartMarker(day.dateString);
       }
     }
   };
-  const setupStartMarker = (day: DateObj) => {
+  const setupStartMarker = (day: string) => {
     let newMarkedDates = {
-      [day.dateString]: {
+      [day]: {
         startingDay: true,
         disabled: true,
         color: '#ff6600',
         textColor: '#ffffff',
       },
     };
-    setIsFromDatePicked(true);
     setIsToDatePicked(false);
-    setFromDate(day.dateString);
+    setFromDate(day);
     setMarkedDates(newMarkedDates);
   };
 
@@ -169,23 +157,21 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
     return [markedDates, range];
   };
   const handleReset = () => {
-    setIsFromDatePicked(false);
     setIsToDatePicked(false);
-    setFromDate('');
     setToDate('');
     setMarkedDates({});
-    initialAvailableDate();
+    setupStartMarker(move_in_new);
   };
 
-  const handleShowConfirmBooking = () => {
-    dispatchBooking({ type: 'setMoveIn', payload: fromDate });
-    dispatchBooking({ type: 'setMoveOut', payload: toDate });
-    dispatchBooking({ type: 'setRoomId', payload: roomId });
-    dispatchBooking({
-      type: 'setMaxGuestRoom',
-      payload: room.guests.recommendation + room.guests.max_additional_guest,
-    });
-    navigation.navigate('BoxConfirmBooking');
+  const handleShowConfirmBooking = async () => {
+    try {
+      await axios.post(`long-term-bookings/contract-renewal/${uuid}`, {
+        move_out: toDate
+      });
+    } catch (error) {
+      console.error(error)
+    }
+    navigation.goBack();
   };
 
   return (
@@ -279,7 +265,7 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
 
         <ButtonOriginal
           width={wp('25%')}
-          title={t('home:chooseDate:next')}
+          title={'Gia hạn'}
           customStyle={{ backgroundColor: '#008489' }}
           handlePress={handleShowConfirmBooking}
           disabled={!fromDate || !toDate}
@@ -315,4 +301,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(ChooseDayBookingLT);
+export default withNavigation(ReNewalBooking);
