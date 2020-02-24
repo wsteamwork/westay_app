@@ -8,6 +8,7 @@ import { Button } from 'react-native-elements';
 import ModalCurrentContract from './ModalCurrentContract';
 import ModalPaymentPeriod from './ModalPaymentPeriod';
 import ModalAllBookingContract from './ModalAllBookingContract';
+
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */

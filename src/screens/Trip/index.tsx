@@ -19,16 +19,6 @@ const LazyPlaceholder = () => (
     <Text>Loading…</Text>
   </View>
 );
-// const FirstRoute = () => (
-//   <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
-// );
-
-// const SecondRoute = () => (
-//   <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-// );
-// const ThreeRoute = () => (
-//   <View style={[styles.scene, { backgroundColor: 'red' }]} />
-// );
 
 const initialLayout = { width: Dimensions.get('window').width };
 

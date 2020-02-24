@@ -1,10 +1,8 @@
 import React from 'react';
-import { View } from 'react-native-animatable';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from '../screens/Home';
 import Trip from '../screens/Trip';
-import NavBottom from '../components/NavBottom';
 import Account from 'components/Account';
 import { COLOR_TITLE_HEADER } from 'styles/global.style';
 import IconTabCustom from 'components/Shared/IconTabCustom';

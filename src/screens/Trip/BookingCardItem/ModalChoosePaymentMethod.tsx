@@ -1,4 +1,4 @@
-import React, { FC, SetStateAction, useState, useContext } from 'react';
+import React, { FC, useState, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Overlay, Button } from 'react-native-elements';
 import { hp, wp } from 'utils/responsive';

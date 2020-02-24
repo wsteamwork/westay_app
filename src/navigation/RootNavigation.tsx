@@ -27,6 +27,10 @@ import WebViewBaoKim from 'components/BoxPaymentBaoKim/WebViewBaoKim';
 import ReNewalBooking from 'components/ReNewalBooking';
 import BoxRenewalBooking from 'components/BoxRenewalBooking';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 const stackNavigator = createStackNavigator(
   {
     Main: {

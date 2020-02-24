@@ -29,14 +29,9 @@ const IntroApp: FC<IProps> = (props) => {
         handlePress={() => navigation.navigate('Register')}
         customStyle={styles.marginBottom}
       />
-        
+
       <Text style={styles.settingsText} onPress={() => navigation.navigate('Settings')}>
-        <IconAntDesign
-          name="setting"
-          size={wp('5%')}
-          color='#484848'
-        />{' '}
-        Cài đặt
+        <IconAntDesign name="setting" size={wp('5%')} color="#484848" /> Cài đặt
       </Text>
     </View>
   );
