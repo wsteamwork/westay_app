@@ -84,10 +84,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     backgroundColor: '#ffffff',
+    paddingBottom: 50,
   },
   containerItem: {
     flexDirection: 'column',
-    marginVertical: hp('3%'),
+    marginVertical: hp('2%'),
     marginHorizontal: hp('3%'),
     backgroundColor: 'white',
     paddingHorizontal: hp('2%'),
@@ -137,6 +138,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.39,
     shadowRadius: 8.3,
     elevation: 10,
+
   },
   titleStyle: {
     fontSize: 14,

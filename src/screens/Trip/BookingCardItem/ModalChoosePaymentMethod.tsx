@@ -74,7 +74,7 @@ const ModalChoosePaymentMethod: FC<IProps> = (props) => {
         <View style={styles.radioGroup}>
           <RadioGroup radioButtons={data} onPress={onChoosePayment} />
         </View>
-        <View style={styles.boxButton}>
+        <View>
           <Button title="Tiếp tục" buttonStyle={styles.buttonStyle} onPress={handleChooseMethod} />
         </View>
       </View>
@@ -99,24 +99,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   boxButton: {
-    position: 'absolute',
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.39,
-    shadowRadius: 8.3,
-    elevation: 10,
-    paddingHorizontal: wp('2%'),
+    
   },
   buttonStyle: {
     borderRadius: 5,
+    marginTop: hp('5%'),
     elevation: 3,
-    width: hp('45%'),
+    width: '100%',
     backgroundColor: COLOR_BUTTON_DEFAULT,
   },
 });

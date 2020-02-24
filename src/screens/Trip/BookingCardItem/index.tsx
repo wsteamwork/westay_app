@@ -52,7 +52,7 @@ const BookingCardItem: FC<IProps> = (props) => {
           <Divider style={styles.divider} />
         </View>
       )}
-      {bookingType === CURRENT && !nextPaymentDue && (
+      {bookingType === CURRENT && nextPaymentDue && (
         <View>
           <BoxPaymentPeriod
             datePayment={moment(nextPaymentDue.payment_due_date).format('DD/MM/YYYY')}
@@ -63,9 +63,12 @@ const BookingCardItem: FC<IProps> = (props) => {
           <Divider style={styles.divider} />
         </View>
       )}
-      {bookingType === CURRENT && nextPaymentDue && (
+      {bookingType === CURRENT && !nextPaymentDue && (
         <View>
-          <BoxRenewalBooking move_in_new={booking.latest_move_out.substring(0,10)} uuid={booking.uuid}/>
+          <BoxRenewalBooking
+            move_in_new={booking.latest_move_out.substring(0, 10)}
+            uuid={booking.uuid}
+          />
           <Divider style={styles.divider} />
         </View>
       )}

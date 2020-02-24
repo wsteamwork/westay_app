@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   containerItem: {
     flexDirection: 'column',
-    marginVertical: hp('3%'),
+    marginVertical: hp('2%'),
     marginHorizontal: hp('3%'),
     backgroundColor: 'white',
     paddingHorizontal: hp('2%'),
