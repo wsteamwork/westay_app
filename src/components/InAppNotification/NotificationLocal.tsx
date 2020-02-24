@@ -3,11 +3,20 @@ import {StyleSheet, Animated, Platform, Dimensions, NativeModules, Image} from '
 import PropTypes, {any} from 'prop-types';
 import DefaultNoti from 'components/InAppNotification/DefaultNoti';
 
-const { StatusBarManager } = NativeModules;
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const {StatusBarManager}      = NativeModules;
+const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 
-const IS_IPHONE_X = SCREEN_HEIGHT  === 812 || SCREEN_HEIGHT  === 896;
+const IS_IPHONE_X       = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
+
+interface ShowProps {
+  title: string,
+  message: string,
+  onPress: void | null,
+  icon: any,
+  vibrate: boolean,
+  avatar: string,
+}
 
 interface IProps {
   height: number,
@@ -20,19 +29,64 @@ interface IProps {
 }
 
 const NotificationLocal: FC<IProps> = (props) => {
-  const { height: baseHeight,
+  const {
+          height: baseHeight,
           topOffset,
           backgroundColour,
           iconApp,
           notificationBodyComponent: NotificationBody,
-          openCloseDuration
-  } = props;
-  const [isOpen, setIsOpen] = useState(false);
+          openCloseDuration,
+          closeInterval,
+        }                                 = props;
+  const [isOpen, setIsOpen]               = useState(false);
   const [animatedValue, setAnimatedValue] = useState<any>(new Animated.Value(0));
+  const [showProps, setShowProps]         = useState<ShowProps>({
+    title: '',
+    message: '',
+    onPress: null,
+    icon: null,
+    vibrate: true,
+    avatar: '',
+  });
 
   const height = baseHeight + STATUS_BAR_HEIGHT;
 
-  const showNotification=(done:any)=> {
+  const show             = ({
+                              title = '',
+                              message = '',
+                              onPress = null,
+                              icon = null,
+                              vibrate = true,
+                              avatar = '',
+                            }) => {
+    // Clear any currently showing notification timeouts so the new one doesn't get prematurely
+    // closed
+
+    let currentNotificationInterval ;
+
+    clearTimeout(currentNotificationInterval);
+
+    const showNotificationWithStateChanges = () => {
+
+      setIsOpen(false);
+
+      showNotification(() => {
+        currentNotificationInterval = setTimeout(() => {
+
+          setIsOpen(false);
+          closeNotification();
+        }, closeInterval);
+      });
+
+      if (isOpen) {
+        setIsOpen(false);
+        closeNotification(showNotificationWithStateChanges);
+      } else {
+        showNotificationWithStateChanges();
+      }
+    };
+  };
+  const showNotification = (done: any) => {
     Animated.timing(animatedValue, {
       toValue: 1,
       duration: openCloseDuration,
@@ -40,7 +94,7 @@ const NotificationLocal: FC<IProps> = (props) => {
     }).start(done);
   };
 
-  const closeNotification=(done:any)=> {
+  const closeNotification = (done?: any) => {
     Animated.timing(animatedValue, {
       toValue: 0,
       duration: openCloseDuration,
@@ -50,9 +104,9 @@ const NotificationLocal: FC<IProps> = (props) => {
 
   return (
     <Animated.View
-      style={[
+      style = {[
         styles.container,
-        { height, backgroundColor: backgroundColour },
+        {height, backgroundColor: backgroundColour},
         {
           transform: [
             {
@@ -66,15 +120,15 @@ const NotificationLocal: FC<IProps> = (props) => {
       ]}
     >
       {/*<NotificationBody*/}
-      {/*  title={ title }*/}
-      {/*  message={message}*/}
-      {/*  onPress={onPress}*/}
-      {/*  isOpen={isOpen}*/}
-      {/*  iconApp={iconApp}*/}
-      {/*  icon={icon}*/}
-      {/*  vibrate={vibrate}*/}
-      {/*  avatar={avatar}*/}
-      {/*  onClose={() =>{*/}
+      {/*  title = {title}*/}
+      {/*  message = {message}*/}
+      {/*  onPress = {onPress}*/}
+      {/*  isOpen = {isOpen}*/}
+      {/*  iconApp = {iconApp}*/}
+      {/*  icon = {icon}*/}
+      {/*  vibrate = {vibrate}*/}
+      {/*  avatar = {avatar}*/}
+      {/*  onClose = {() => {*/}
       {/*    setIsOpen(false);*/}
       {/*    setAnimatedValue(closeNotification);*/}
       {/*  }}*/}
