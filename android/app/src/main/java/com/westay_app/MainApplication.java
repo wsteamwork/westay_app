@@ -11,8 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.airbnb.android.react.lottie.LottiePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
-// import com.cmcewen.blurview.BlurViewPackage;
-// import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -31,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
           packages.add(new LottiePackage());
           packages.add(new RNFirebaseMessagingPackage());
+           packages.add(new RNFirebaseNotificationsPackage());
           return packages;
         }
 

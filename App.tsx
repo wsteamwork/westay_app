@@ -12,6 +12,7 @@ import {persistor, store} from 'store';
 import 'react-native-gesture-handler';
 import RootNavigation from 'navigation/RootNavigation';
 import AppView from 'modules/AppViewContainer';
+import RemotePushController from 'modules/services/RemotePushController';
 
 const customTextProps = {
   style: {
@@ -60,6 +61,7 @@ const App: FC = () => {
           </PersistGate>
         </Provider>
       </ThemeProvider>
+      <RemotePushController/>
     </Suspense>
   );
 };
