@@ -1,20 +1,20 @@
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import React, {FC, memo} from 'react';
-import { Alert, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import React, { FC, memo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
 import LinearGradient from "react-native-linear-gradient";
-import { SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
-import { NumberRoomCity} from 'types/Rooms/RoomResponses';
-import { hp, wp } from 'utils/responsive';
-import {useTranslation} from 'react-i18next';
-import { formatPrice} from 'utils/mixins';
-import {useDispatch} from 'react-redux';
-import {setSearchText, getCity} from 'store/actions/search/searchActions';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { useDispatch } from 'react-redux';
 // @ts-ignore
 import { compose } from 'recompose';
+import { getCity, setSearchText } from 'store/actions/search/searchActions';
+import { SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
+import { NumberRoomCity } from 'types/Rooms/RoomResponses';
+import { formatPrice } from 'utils/mixins';
+import { hp, wp } from 'utils/responsive';
 
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   item: NumberRoomCity,
 }
 
@@ -64,37 +64,39 @@ const styles = StyleSheet.create({
     bottom: 0
   },
   image: {
+    // backgroundColor: 'red',
     position: 'relative',
     height: wp('65%'),
-    width: wp('85%'),
+    maxHeight: 220,
+    width: wp('86%'),
     overflow: 'hidden',
     borderRadius: 16
   },
   name: {
     // fontSize: wp('6%'),
     fontSize: SIZE_TEXT_TITLE_MEDIUM,
-    fontWeight: '700',
+    fontWeight: '600',
     color: 'white'
   },
   price: {
     fontSize: SIZE_TEXT_SUBTITLE,
-    fontWeight: '500',
+    fontWeight: '400',
     color: 'white'
   },
   divider: {
     height: 2,
     backgroundColor: 'white',
-    width: wp('10%'),
+    width: wp('13%'),
     borderRadius: 8,
     marginVertical: hp('1%')
   },
   boxInfo: {
     width: wp('90%'),
-    height: hp('15%'),
+    height: hp('10%'),
     position: 'absolute',
     bottom: 0,
     left: 0,
-    padding: wp('4%'),
+    padding: 14,
     justifyContent: 'flex-end',
   }
 });

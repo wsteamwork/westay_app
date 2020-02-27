@@ -1,22 +1,21 @@
-import React, {FC, useContext} from 'react';
-import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Image } from 'react-native-elements';
-import { COLOR_TEXT_SUBTITLE, NORMAL, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
-import { TypeApartment } from 'types/Rooms/RoomResponses';
+import React, { FC, useContext } from 'react';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image, normalize } from 'react-native-elements';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { AuthContext } from 'store/context/auth';
+import { COLOR_TEXT_SUBTITLE, NORMAL, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE, LIGHT, COLOR_TEXT_TITLE } from 'styles/global.style';
+import { IMAGE_STORAGE_XS } from 'types/globalTypes';
+import { cleanAccents, formatPrice } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
-import {IMAGE_STORAGE_XS} from 'types/globalTypes';
-import {AuthContext} from 'store/context/auth';
-import {cleanAccents, formatPrice} from 'utils/mixins';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   room: any,
   showNumberRoom?: boolean
 }
 
 const CollectionsSquareCard: FC<IProps> = (props) => {
   const { room, showNumberRoom, navigation } = props;
-  const { state : {languageStatus}} = useContext(AuthContext);
+  const { state: { languageStatus } } = useContext(AuthContext);
 
   const handleClick = () => {
     navigation.navigate('DetailScreen', { idRoom: room.id });
@@ -38,8 +37,8 @@ const CollectionsSquareCard: FC<IProps> = (props) => {
       />
       <Text numberOfLines={1} style={styles.txtAddress}>
         {languageStatus === 'en' ? cleanAccents(room.district) : room.district}
-        <Text style={{ fontWeight: '700' }}> &#8231; </Text>
-        {languageStatus === 'en' ? cleanAccents(room.city): room.city}
+        <Text style={{ fontWeight: '500' }}> &#8231; </Text>
+        {languageStatus === 'en' ? cleanAccents(room.city) : room.city}
       </Text>
 
       <Text numberOfLines={1} style={styles.txtRoomName}>
@@ -47,18 +46,18 @@ const CollectionsSquareCard: FC<IProps> = (props) => {
       </Text>
 
       <Text style={styles.txtArea}>
-        {room.total_area ? room.total_area : '?'} m2
-        <Text style={{ fontWeight: '700' }}> &#8231; </Text>
-        {room.bedrooms.number_bedroom} room(s)
+        {room.total_area ? `${room.total_area} m2` : (null)}
+        <Text style={{ fontWeight: '500' }}> &#8231; </Text>
+        {room.bedrooms.number_bedroom} bedrooms
       </Text>
 
-      <Text numberOfLines={1} style={styles.priceText}>
+      {/* <Text numberOfLines={1} style={styles.priceText}>
         {formatPrice(room.price_display)} /month
-      </Text>
+      </Text> */}
 
-      <Text numberOfLines={1} style={styles.txtRoomType}>
+      {/* <Text numberOfLines={1} style={styles.txtRoomType}>
         {room.accommodation_type_txt}
-      </Text>
+      </Text> */}
     </TouchableOpacity>
   );
 };
@@ -66,20 +65,24 @@ const CollectionsSquareCard: FC<IProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     width: wp('45%') - 4,
-    marginBottom: hp('4%')
+    marginBottom: 13
   },
   image: {
-    height: wp('40%')
+    height: wp('41%')
   },
   txtAddress: {
-    fontSize: 11.5,
-    fontWeight: NORMAL,
-    paddingTop: hp('0.5%')
+    alignSelf: 'flex-start',
+    fontSize: 12,
+    fontWeight: LIGHT,
+    color: COLOR_TEXT_TITLE,
+    paddingTop: 4,
+    // backgroundColor: 'red'
   },
   txtRoomName: {
-    fontWeight: SEMI_BOLD,
+    // backgroundColor: 'blue',
+    fontWeight: NORMAL,
     fontSize: SIZE_TEXT_SUBTITLE,
-    paddingTop: hp('0.5%')
+    paddingTop: 4
   },
   txtArea: {
     fontWeight: SEMI_BOLD,

@@ -1,22 +1,21 @@
-import React, {FC, useContext} from 'react';
-import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, { FC, useContext } from 'react';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Image } from 'react-native-elements';
-import { LIGHT, NORMAL, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
-import { TypeApartment } from 'types/Rooms/RoomResponses';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { AuthContext } from 'store/context/auth';
+import { COLOR_TEXT_TITLE, LIGHT, NORMAL, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
+import { IMAGE_STORAGE_XS } from 'types/globalTypes';
+import { cleanAccents, formatPrice } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
-import {IMAGE_STORAGE_XS} from 'types/globalTypes';
-import {AuthContext} from 'store/context/auth';
-import {cleanAccents, formatPrice} from 'utils/mixins';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   room: any,
   showNumberRoom?: boolean
 }
 
 const CollectionsRectangleCard: FC<IProps> = (props) => {
   const { room, showNumberRoom, navigation } = props;
-  const { state} = useContext(AuthContext);
+  const { state } = useContext(AuthContext);
   const { languageStatus } = state;
   const handleClick = () => {
     navigation.navigate('DetailScreen', { idRoom: room.id });
@@ -40,7 +39,7 @@ const CollectionsRectangleCard: FC<IProps> = (props) => {
       </Text>
       <Text numberOfLines={1} style={styles.subtitleText}>
         {room.accommodation_type_txt}
-        <Text style={{ fontWeight: '700' }}> &#8231; </Text>
+        <Text style={{ fontWeight: '600' }}> &#8231; </Text>
         {languageStatus === 'en'
           ? cleanAccents(room.city)
           : room.city}
@@ -48,11 +47,11 @@ const CollectionsRectangleCard: FC<IProps> = (props) => {
 
       {showNumberRoom && (
         <Text style={styles.contentText}>
-          {room.total_area ? room.total_area : '?'} m2
-          <Text style={{ fontWeight: '700' }}> &#8231; </Text>
-          {room.bathrooms.number_bathroom} bathroom(s)
-          <Text style={{ fontWeight: '700' }}> &#8231; </Text>
-          {room.bedrooms.number_bedroom} room(s)
+          {room.total_area ? `${room.total_area} m2` : (null)}
+          {/* <Text style={{ fontWeight: '500' }}> &#8231; </Text> */}
+          {/* {room.bathrooms.number_bathroom} bathrooms */}
+          <Text style={{ fontWeight: '500' }}> &#8231; </Text>
+          {room.bedrooms.number_bedroom} bedrooms
         </Text>
       )}
 
@@ -65,13 +64,14 @@ const CollectionsRectangleCard: FC<IProps> = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: wp('42%'),
+    width: wp('40%'),
     marginRight: 4
   },
   image: {
-    height: wp('48%')
+    height: wp('44%')
   },
   titleText: {
+    color: COLOR_TEXT_TITLE,
     fontWeight: SEMI_BOLD,
     paddingTop: hp('0.5%'),
     fontSize: SIZE_TEXT_SUBTITLE

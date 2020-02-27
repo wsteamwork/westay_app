@@ -4,7 +4,7 @@ import styles from './styles/index.style';
 import { itemWidth, sliderWidth } from './styles/SliderEntry.style';
 interface IProps {
   dataSwiper: Array<any>;
-  _renderItem: (item?: any, index?:number) => ReactNode;
+  _renderItem: (item?: any, index?: number) => ReactNode;
   autoplay?: boolean;
   autoplayDelay?: number;
   customStylesContent?: any;

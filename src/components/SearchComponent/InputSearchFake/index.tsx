@@ -1,15 +1,16 @@
-import React, {FC} from 'react';
-import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
-import {wp, hp} from 'utils/responsive';
-import {useTranslation} from 'react-i18next';
-import {useSelector} from 'react-redux';
-import {ReducersList} from 'store/redux/reducers';
-import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
+import { hp } from 'components/Utils/responsive.style';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {elevationShadowStyle} from 'utils/mixins';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { useSelector } from 'react-redux';
+import { ReducersList } from 'store/redux/reducers';
+import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { elevationShadowStyle } from 'utils/mixins';
+import { wp } from 'utils/responsive';
 
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   animation?: any,
 }
 
@@ -21,40 +22,40 @@ const InputSearchFake: FC<IProps> = (props) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={[styles.containerStyleInput, elevationShadowStyle(4)]}
+        style={[styles.containerStyleInput, elevationShadowStyle(2)]}
         activeOpacity={1}
-        onPress={()=> navigation.navigate('SearchSuggest')}
+        onPress={() => navigation.navigate('SearchSuggest')}
       >
         <Ionicons
-          name = {'ios-search'}
-          color = {COLOR_TEXT_DEFAULT}
-          size = {wp('5%')}
-          style = {{paddingLeft: wp('5%')}}
+          name={'ios-search'}
+          color={COLOR_TEXT_DEFAULT}
+          size={wp('5%')}
+          style={{ paddingLeft: wp('5%') }}
         />
 
         {!searchText ? (
-          <Text style={{ fontSize: wp('4%'), paddingLeft: wp('4%'), color:'#7676769d' }}>
+          <Text style={{ fontSize: wp('4%'), paddingLeft: wp('4%'), color: '#7676769d' }}>
             {t('home:searchHomeAnimated:descInput')}
           </Text>
         ) : (
-          <Text style={styles.textSearchText}>{searchText}</Text>
-        )}
+            <Text style={styles.textSearchText}>{searchText}</Text>
+          )}
       </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     // paddingHorizontal: '5%',
   },
   containerStyleInput: {
-    marginTop: hp('3%'),
+    marginTop: hp('5%'),
     borderRadius: 50,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
-    height:hp('7%'),
+    height: 45,
   },
   textSearchText: {
     fontSize: wp('4%'),
