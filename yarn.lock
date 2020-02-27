@@ -6372,6 +6372,11 @@ react-native-permissions@^2.0.9:
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-2.0.9.tgz#5eabdaa952dd099d14e3790af691f49ff2de0895"
   integrity sha512-64F95x4Y1RqsQiPco+Qs+OAm3rKUTRfWDMpp1f0If9YfRXOxxVFJqf7mSlVvlSY4pZAhZgLVydOmA7aTTduPUw==
 
+react-native-progressive-image@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-progressive-image/-/react-native-progressive-image-1.0.4.tgz#6403d55969fc5c42662d8eeebb555b016c7adece"
+  integrity sha1-ZAPVWWn8XEJmLY7uu1VbAWx63s4=
+
 react-native-push-notification@^3.1.9:
   version "3.1.9"
   resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.1.9.tgz#760ee06e743fef74fc9fcb672dac40794fdc4c47"
