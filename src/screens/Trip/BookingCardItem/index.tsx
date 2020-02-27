@@ -11,6 +11,7 @@ import moment from 'moment';
 import numeral from 'numeral';
 import BoxFinishedBooking from './BoxFinishedBooking';
 import BoxRenewalBooking from 'components/BoxRenewalBooking';
+import BoxInspector from './BoxInspector';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -61,6 +62,8 @@ const BookingCardItem: FC<IProps> = (props) => {
             bookingId={booking.id}
           />
           <Divider style={styles.divider} />
+          <BoxInspector booking={booking}/>
+          <Divider style={styles.divider} />
         </View>
       )}
       {bookingType === CURRENT && !nextPaymentDue && (
@@ -70,6 +73,7 @@ const BookingCardItem: FC<IProps> = (props) => {
             uuid={booking.uuid}
           />
           <Divider style={styles.divider} />
+          <BoxInspector booking={booking}/>
         </View>
       )}
       {bookingType === FINISHED && (
@@ -78,7 +82,6 @@ const BookingCardItem: FC<IProps> = (props) => {
           <Divider style={styles.divider} />
         </View>
       )}
-
       <BoxContract booking={booking} />
     </View>
   );

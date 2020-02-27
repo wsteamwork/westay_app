@@ -32,10 +32,7 @@ const LocalPushController: FC<IProps> = (props) => {
   const getFcmToken = async () => {
     const fcmToken = await firebase.messaging().getToken();
     if (fcmToken) {
-      console.log(fcmToken);
-      showAlert('Your Firebase Token is:', fcmToken);
     } else {
-      showAlert('Failed', 'No token received');
     }
   };
 

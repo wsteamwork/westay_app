@@ -26,6 +26,7 @@ export type LTBookingReducerState = {
   readonly LTPaymentError: boolean;
   readonly bookings: LTBookingIndexRes[];
   readonly booking: LTBookingIndexRes | null;
+  readonly completedInspector: boolean;
   readonly error: boolean;
 };
 
@@ -45,6 +46,7 @@ export type LTBookingAction =
   | { type: 'setBankList'; payload: PaymentMethod[] }
   | { type: 'setDataBookingByStatus'; payload: LTBookingIndexRes[] }
   | { type: 'setDataBookingById'; payload: LTBookingIndexRes }
+  | { type: 'setCompletedInspector'; payload: boolean }
   | { type: 'setError'; payload: boolean };
 
 export const init: LTBookingReducerState = {
@@ -60,6 +62,7 @@ export const init: LTBookingReducerState = {
   bookings: [],
   booking: null,
   error: false,
+  completedInspector: false,
 };
 
 export const ltBookingReducer: Reducer<LTBookingReducerState, LTBookingAction> = (
@@ -89,6 +92,8 @@ export const ltBookingReducer: Reducer<LTBookingReducerState, LTBookingAction> =
       return updateObject(state, { bookings: action.payload });
     case 'setDataBookingById':
       return updateObject(state, { booking: action.payload });
+    case 'setCompletedInspector':
+      return updateObject(state, { completedInspector: action.payload });
     case 'setError':
       return updateObject(state, { error: action.payload });
     default:
@@ -148,7 +153,7 @@ export const getLongTermBookingById = async (
   dispatch: Dispatch<LTBookingAction>,
   languageStatus: string,
 ) => {
-  const url = `long-term-bookings/${bookingId}?include=contracts`;
+  const url = `long-term-bookings/${bookingId}?include=contracts,longTermRoom,city,district`;
   let res = await axios.get(url, {
     headers: { Authorization: token, 'Accept-Language': languageStatus },
   });
@@ -169,7 +174,7 @@ export const getLongTermBookingList = async (
   let statusList = status.join();
   
   let query = {
-    include: 'contracts,longTermRoom',
+    include: 'contracts,longTermRoom,city,district',
     booking_status: statusList,
   };
   const url = `long-term-bookings?${qs.stringify(query)}`;

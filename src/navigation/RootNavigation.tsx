@@ -26,6 +26,9 @@ import BoxPaymentBaoKim from 'components/BoxPaymentBaoKim';
 import WebViewBaoKim from 'components/BoxPaymentBaoKim/WebViewBaoKim';
 import ReNewalBooking from 'components/ReNewalBooking';
 import BoxRenewalBooking from 'components/BoxRenewalBooking';
+import BoxChooseInspectorType from 'components/BoxChooseInspectorType.tsx';
+import InspectorDetail from 'components/BoxChooseInspectorType.tsx/InspectorDetail';
+import InspectorItem from 'components/BoxChooseInspectorType.tsx/InspectorItem';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -59,8 +62,11 @@ const stackNavigator = createStackNavigator(
     BoxDirectTransfer: { screen: BoxDirectTransfer },
     BoxPaymentBaoKim: { screen: BoxPaymentBaoKim },
     WebViewBaoKim: { screen: WebViewBaoKim },
-    ReNewalBooking: {screen: ReNewalBooking },
-    BoxRenewalBooking: {screen: BoxRenewalBooking}
+    ReNewalBooking: { screen: ReNewalBooking },
+    BoxRenewalBooking: { screen: BoxRenewalBooking },
+    BoxChooseInspectorType: { screen: BoxChooseInspectorType },
+    InspectorDetail: { screen: InspectorDetail },
+    InspectorItem: { screen: InspectorItem },
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

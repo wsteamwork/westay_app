@@ -27,9 +27,7 @@ const RemotePushController = () => {
   const getFcmToken = async () => {
     const fcmToken = await firebase.messaging().getToken();
     if (fcmToken) {
-      showAlert('Your Firebase Token is:', fcmToken);
     } else {
-      showAlert('Failed', 'No token received');
     }
   };
 
