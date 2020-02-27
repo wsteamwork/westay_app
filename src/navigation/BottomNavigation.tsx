@@ -3,9 +3,14 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from '../screens/Home';
 import Trip from '../screens/Trip';
-import Account from 'components/Account';
+// import Account from 'components/Account';
+import Profile from 'components/Profile';
 import { COLOR_TITLE_HEADER } from 'styles/global.style';
 import IconTabCustom from 'components/Shared/IconTabCustom';
+import {withInternet} from 'hocs/withInternet';
+import {withAuth} from 'hocs/withAuth';
+// @ts-ignore
+import { compose } from 'recompose';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -57,10 +62,18 @@ const BottomNavigation = createBottomTabNavigator(
       screen: Stack(Home, 'Home', 'home'),
     },
     Trip: {
-      screen: Stack(Trip, 'Trip', 'book'),
+      screen: Stack(
+        compose(
+          withAuth,
+          withInternet,
+        )(Trip), 'Trip', 'book'),
     },
     Profile: {
-      screen: Stack(Account, 'Account', 'user'),
+      screen: Stack(
+        compose(
+          withAuth,
+          withInternet,
+        )(Profile), 'Account', 'user'),
     },
   },
   {
