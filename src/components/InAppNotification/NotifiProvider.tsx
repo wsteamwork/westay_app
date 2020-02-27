@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import {NotificationContext} from 'store/context/notification/NotifiContext';
 
 const ProviderNotifi = (props:any) => {
@@ -15,14 +14,9 @@ const ProviderNotifi = (props:any) => {
   return (
     <NotificationContext.Provider value={{ showNotification }}>
       {props.children}
-      <Notification {...props} ref={refNoti} />
+      {/*<Notification {...props} ref={refNoti} />*/}
     </NotificationContext.Provider>
   );
-};
-
-ProviderNotifi.propTypes = {
-  ...Notification.propTypes,
-  children: PropTypes.element.isRequired,
 };
 
 export default ProviderNotifi;

@@ -5,7 +5,7 @@ import {ThemeProvider} from 'react-native-elements';
 import i18n from './src/translations';
 import {COLOR_BUTTON_DEFAULT} from 'styles/global.style';
 import {useNetInfo} from '@react-native-community/netinfo';
-import {AuthContext, authReducer, authInit} from 'store/context/auth';
+import {AuthContext, authReducer, authInit, SET_TOKEN, SET_LANGUAGE_STATUS} from 'store/context/auth';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from 'store';
@@ -13,6 +13,8 @@ import 'react-native-gesture-handler';
 import RootNavigation from 'navigation/RootNavigation';
 import AppView from 'modules/AppViewContainer';
 import RemotePushController from 'modules/services/RemotePushController';
+import {TOKEN} from 'utils/api';
+import storage from 'utils/storage';
 
 const customTextProps = {
   style: {
@@ -30,6 +32,22 @@ const theme = {
 const App: FC = () => {
   const [authState, authDispatch] = useReducer(authReducer, authInit);
   const { isConnected } = useNetInfo();
+
+  const getStorage = async () => {
+    storage
+      .load({ autoSync: true, key: TOKEN })
+      .then(data => authDispatch({ type: SET_TOKEN, payload: `Bearer ${data}` }))
+      .catch(err => authDispatch({ type: SET_TOKEN, payload: null }));
+
+    // storage
+    //   .load({ autoSync: true, key: 'initLanguage' })
+    //   .then(data => dispatch({ type: SET_LANGUAGE_STATUS, payload: data }))
+    //   .catch(err => dispatch({ type: SET_LANGUAGE_STATUS, payload: 'vi' }));
+  };
+
+  useEffect(() => {
+    getStorage();
+  }, []);
 
   return (
     <Suspense
