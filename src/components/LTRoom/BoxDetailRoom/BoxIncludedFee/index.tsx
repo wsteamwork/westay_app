@@ -1,13 +1,17 @@
-import React, { FC, useState } from 'react';
-import { StyleSheet, View, TouchableNativeFeedback, Modal } from 'react-native';
-import { wp } from 'utils/responsive';
-import { Text, Divider } from 'react-native-elements';
-import Entypo from 'react-native-vector-icons/Entypo';
-import { hp } from 'components/Utils/responsive.style';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import { ScrollView } from 'react-native-gesture-handler';
+import { hp } from 'components/Utils/responsive.style';
+import React, { FC, useState } from 'react';
+import { Modal, ScrollView, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
+import { Divider, Text } from 'react-native-elements';
+import Entypo from 'react-native-vector-icons/Entypo';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
+import { wp } from 'utils/responsive';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
 }
@@ -45,22 +49,22 @@ const BoxIncludedFee: FC<IProps> = (props) => {
                   <Divider style={styles.divider} />
                 </View>
               ) : (
-                <View style={styles.boxContainer} key={i}>
-                  <View key={i} style={styles.boxPrice}>
-                    <Text style={styles.txtTerm}>{o.name}</Text>
-                    <Text style={styles.price}>
-                      {o.calculate_function == 3 || o.calculate_function == 6
-                        ? `${o.calculate_function_txt}`
-                        : `$${o.value} ${o.calculate_function_txt}`}
-                    </Text>
+                  <View style={styles.boxContainer} key={i}>
+                    <View key={i} style={styles.boxPrice}>
+                      <Text style={styles.txtTerm}>{o.name}</Text>
+                      <Text style={styles.price}>
+                        {o.calculate_function == 3 || o.calculate_function == 6
+                          ? `${o.calculate_function_txt}`
+                          : `$${o.value} ${o.calculate_function_txt}`}
+                      </Text>
+                    </View>
+                    <Divider style={styles.divider} />
                   </View>
-                  <Divider style={styles.divider} />
-                </View>
-              ),
+                ),
             )
           ) : (
-            <Text></Text>
-          )}
+              <Text></Text>
+            )}
         </ScrollView>
       </Modal>
     </View>
@@ -93,8 +97,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     marginBottom: hp('2%'),
-},
-txtTerm: {
+  },
+  txtTerm: {
     fontSize: 16,
     width: wp('50%'),
     color: '#484848',

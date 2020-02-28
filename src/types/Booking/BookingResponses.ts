@@ -78,7 +78,7 @@ export interface LTBookingIndexRes {
   booking_purpose: string;
   status_reviews: number;
   bank_list: any;
-  contracts?: TransformerInclude<LTBookingContracts>;
+  contracts: TransformerInclude<LTBookingContracts>;
 }
 
 export interface LTBookingContracts {

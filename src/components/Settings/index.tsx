@@ -11,12 +11,18 @@ import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBac
 import { COLOR_TEXT_DEFAULT, COLOR_BUTTON_DEFAULT, COLOR_TITLE_HEADER } from 'styles/global.style';
 import { Text, Divider } from 'react-native-elements';
 import { wp, hp } from 'utils/responsive';
-import { AuthContext } from 'store/context/auth';
+import {AuthContext, SET_TOKEN, SET_LANGUAGE_STATUS} from 'store/context/auth';
 import { useTranslation } from 'react-i18next';
 import storage from 'utils/storage';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import {TOKEN} from 'utils/api';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
@@ -28,7 +34,7 @@ const Settings: FC<IProps> = (props) => {
   const { t, i18n } = useTranslation();
   const [visibleCurrency, setVisibleCurrency] = useState(false);
   const handleChangeLanguage = (status: any) => {
-    dispatch({ type: 'SET_LANGUAGE_STATUS', payload: status });
+    dispatch({ type: SET_LANGUAGE_STATUS, payload: status });
     storage.save({
       key: 'initLanguage',
       data: status,
@@ -37,9 +43,9 @@ const Settings: FC<IProps> = (props) => {
     status === 'vi' ? i18n.changeLanguage('vi') : i18n.changeLanguage('en');
   };
   const handleLogout = () => {
-    storage.remove({ key: 'TOKEN' });
-    dispatch({ type: 'SET_TOKEN', payload: null });
-    navigation.navigate('Login');
+    storage.remove({ key: TOKEN });
+    dispatch({ type: SET_TOKEN, payload: null });
+    navigation.goBack();
   };
   return (
     <View style={styles.container}>

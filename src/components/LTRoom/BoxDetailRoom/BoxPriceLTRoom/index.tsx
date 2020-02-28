@@ -1,13 +1,17 @@
-import React, { FC, useState } from 'react';
-import { StyleSheet, View, TouchableNativeFeedback, Modal } from 'react-native';
-import { wp } from 'utils/responsive';
-import { Text, Divider } from 'react-native-elements';
-import Entypo from 'react-native-vector-icons/Entypo';
-import { hp } from 'components/Utils/responsive.style';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import { ScrollView } from 'react-native-gesture-handler';
+import { hp } from 'components/Utils/responsive.style';
+import React, { FC, useState } from 'react';
+import { Modal, ScrollView, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
+import { Divider, Text } from 'react-native-elements';
+import Entypo from 'react-native-vector-icons/Entypo';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
+import { wp } from 'utils/responsive';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
 }
@@ -36,14 +40,14 @@ const BoxPriceLTRoom: FC<IProps> = (props) => {
           <Text style={styles.textHeader}>Price by lease term</Text>
           {listing.prices && listing.prices.prices.length
             ? listing.prices.prices.map((o: any, i: number) => (
-                <View key={i} style={styles.boxContainer}>
-                  <View style={styles.boxPrice}>
-                    <Text style={styles.txtTerm}>{o.term}</Text>
-                    <Text style={styles.price}> ${o.price}</Text>
-                  </View>
-                  <Divider style={styles.divider} />
+              <View key={i} style={styles.boxContainer}>
+                <View style={styles.boxPrice}>
+                  <Text style={styles.txtTerm}>{o.term}</Text>
+                  <Text style={styles.price}> ${o.price}</Text>
                 </View>
-              ))
+                <Divider style={styles.divider} />
+              </View>
+            ))
             : ''}
         </ScrollView>
       </Modal>

@@ -9,6 +9,10 @@ import { ReducersList } from 'store/redux/reducers';
 import { SIZE_TEXT_TITLE } from 'styles/global.style';
 import { wp } from 'utils/responsive';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

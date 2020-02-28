@@ -1,13 +1,20 @@
 import React from 'react';
-import { View } from 'react-native-animatable';
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from '../screens/Home';
 import Trip from '../screens/Trip';
-import NavBottom from '../components/NavBottom';
-import Account from 'components/Account';
-import {COLOR_TITLE_HEADER} from 'styles/global.style';
+// import Account from 'components/Account';
+import Profile from 'components/Profile';
+import { COLOR_TITLE_HEADER } from 'styles/global.style';
 import IconTabCustom from 'components/Shared/IconTabCustom';
+import {withInternet} from 'hocs/withInternet';
+import {withAuth} from 'hocs/withAuth';
+// @ts-ignore
+import { compose } from 'recompose';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
 
 const config = {
   animation: 'spring',
@@ -21,7 +28,7 @@ const config = {
   },
 };
 
-const Stack = (screen:any, nameScreen:string, nameIcon:string) => {
+const Stack = (screen: any, nameScreen: string, nameIcon: string) => {
   const ScreenStack = createSwitchNavigator({
     [nameScreen]: {
       screen,
@@ -32,18 +39,18 @@ const Stack = (screen:any, nameScreen:string, nameIcon:string) => {
   });
 
   ScreenStack.navigationOptions = ({ navigation }) => ({
-    tabBarIcon: ({ focused }:any) => {
+    tabBarIcon: ({ focused }: any) => {
       return (
         <IconTabCustom
           name={nameIcon}
-          color={focused ? COLOR_TITLE_HEADER : '#8E8E93' }
+          color={focused ? COLOR_TITLE_HEADER : '#8E8E93'}
           navigation={navigation}
         />
       );
     },
     tabBarOptions: {
       showLabel: false,
-    }
+    },
   });
 
   return ScreenStack;
@@ -55,10 +62,18 @@ const BottomNavigation = createBottomTabNavigator(
       screen: Stack(Home, 'Home', 'home'),
     },
     Trip: {
-      screen: Stack(Trip, 'Trip', 'book'),
+      screen: Stack(
+        compose(
+          withAuth,
+          withInternet,
+        )(Trip), 'Trip', 'book'),
     },
     Profile: {
-      screen: Stack(Account, 'Account', 'user'),
+      screen: Stack(
+        compose(
+          withAuth,
+          withInternet,
+        )(Profile), 'Account', 'user'),
     },
   },
   {

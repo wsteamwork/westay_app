@@ -1,14 +1,17 @@
-import React, { FC, useState, useMemo } from 'react';
-import { StyleSheet, View, Modal, Image } from 'react-native';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import LeftSpacePaddingHorizontalScroll from 'components/GlobalComponents/LeftSpacePaddingHorizontalScroll';
+import React, { FC, useMemo, useState } from 'react';
+import { FlatList, Image, Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-elements';
 // @ts-ignore
 import ImageViewer from 'react-native-image-zoom-viewer';
-import _ from 'lodash';
-import { hp, wp } from 'utils/responsive';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import LeftSpacePaddingHorizontalScroll from 'components/GlobalComponents/LeftSpacePaddingHorizontalScroll';
+import { hp, wp } from 'utils/responsive';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
   arrImages?: any;

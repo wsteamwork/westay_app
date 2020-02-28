@@ -1,12 +1,14 @@
 import React, { FC, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { wp, hp } from 'utils/responsive';
+import { hp } from 'utils/responsive';
 import { Text } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-// @ts-ignore
-import HTMLView from 'react-native-htmlview';
-import entities from 'entities';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
 }
@@ -17,25 +19,6 @@ const BoxDescriptionRoom: FC<IProps> = (props) => {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
-  // const renderNode = (node: any, index: any, parent: any, defaultRenderer: any) => {
-  //   if (
-  //     (node.name === 'p' || (node.name === 'em' && parent === 'p'))) {
-  //     return (
-  //       <Text key={index} numberOfLines={4}>
-  //         {entities.decodeHTML(node.children[0].data) === 'undefined'
-  //           ? ''
-  //           : entities.decodeHTML(node.children[0].data)}
-  //         ...
-  //       </Text>
-  //     );
-  //   } else {
-  //     return (
-  //       <Text key={index} numberOfLines={4}>
-  //         {defaultRenderer(node.children, parent)}
-  //       </Text>
-  //     );
-  //   }
-  // };
 
   return (
     <View style={styles.container}>

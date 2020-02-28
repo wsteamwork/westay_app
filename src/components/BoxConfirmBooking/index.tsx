@@ -7,10 +7,17 @@ import ShowCheckinCheckout from './ShowCheckinCheckout';
 import ShowPriceCalculator from './ShowPriceCalculator';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import ShowInfoBasicRoom from './ShowInfoBasicRoom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { ReducersList } from 'store/redux/reducers';
+import { IMAGE_STORAGE_LG } from 'types/globalTypes';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
@@ -22,14 +29,20 @@ const BoxConfirmBooking: FC<IProps> = (props) => {
   useEffect(() => {
     dispatch({ type: 'setNumberOfGuests', payload: people });
   }, [people]);
+  const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   return (
     <View style={styles.container}>
       <ScrollView>
         <HeaderWithBackTitle handlePress={() => navigation.goBack()} title="Confirm Booking" />
-        <ShowInfoBasicRoom />
-        <Divider style={styles.divider1} />
+        <ShowInfoBasicRoom
+          roomName={listing.about_room.name}
+          district={listing.district.data.name}
+          city={listing.city.data.name}
+          image_url={`${IMAGE_STORAGE_LG + listing.avatar.images[0].name}`}
+        />
+        <Divider style={styles.divider} />
         <ShowCheckinCheckout />
-        <Divider style={styles.divider2} />
+        <Divider style={styles.divider} />
         <ChooseGuest people={people} setPeople={setPeople} />
         <Divider style={styles.divider} />
         <ShowPriceCalculator />

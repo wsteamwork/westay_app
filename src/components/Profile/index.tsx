@@ -20,10 +20,10 @@ interface IProps extends NavigationInjectedProps {
 
 const Profile: FC<IProps> = (props) => {
   const { state, dispatch } = useContext(AuthContext);
-  const { languageStatus, token } = state;
+  const { languageStatus, token, fcmToken } = state;
   const { navigation } = props;
   const { t } = useTranslation();
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Phạm Đức Nhất</Text>

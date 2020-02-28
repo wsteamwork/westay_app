@@ -14,6 +14,10 @@ import * as Yup from 'yup';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import Toast from 'react-native-root-toast';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

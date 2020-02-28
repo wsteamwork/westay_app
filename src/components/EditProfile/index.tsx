@@ -22,6 +22,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import ItemProfile from './ItemProfile';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

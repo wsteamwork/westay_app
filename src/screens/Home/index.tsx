@@ -24,8 +24,8 @@ import { __currentPlatform } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
 
 const Home: FC = (props) => {
-  const { state, dispatch } = useContext(AuthContext);
-  const { token, languageStatus } = state;
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
   const dispatchHome = useDispatch<Dispatch<ReducersActions>>();
   const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
@@ -43,19 +43,6 @@ const Home: FC = (props) => {
   let init = async () => {
     await getDataTypeHouse();
     await getRoomsHomepage(dispatchHome, languageStatus);
-    await getHomePageCollection('editor_choice', 8).then((res) => {
-      setEditorChoice({
-        data: res.data.data,
-        meta: res.data!.meta!.pagination!.total
-      })
-    });
-    await getHomePageCollection('for_family', 8).then((res) => {
-      setForFamily({
-        data: res.data.data,
-        meta: res.data!.meta!.pagination!.total
-      })
-    });
-    await getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res.data.data));
   };
 
   useEffect(() => {
@@ -65,9 +52,21 @@ const Home: FC = (props) => {
 
   }, [languageStatus]);
 
-  // useEffect(() => {
-  //
-  // }, []);
+  useEffect(() => {
+    getHomePageCollection('editor_choice', 8).then((res) => {
+      setEditorChoice({
+        data: res.data.data,
+        meta: res.data!.meta!.pagination!.total
+      })
+    });
+    getHomePageCollection('for_family', 8).then((res) => {
+      setForFamily({
+        data: res.data.data,
+        meta: res.data!.meta!.pagination!.total
+      })
+    });
+    getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res.data.data));
+  }, []);
 
 
   const _renderEditorChoice = (item: any, index: number) => {

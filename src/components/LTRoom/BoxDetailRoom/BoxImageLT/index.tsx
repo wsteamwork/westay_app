@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   StatusBar,
   Alert,
-  ActivityIndicator,
 } from 'react-native';
 import { wp, hp } from 'utils/responsive';
 import BoxIntroRoom from './BoxIntroRoom';
@@ -14,13 +13,17 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-import { IMAGE_STORAGE_LG, IMAGE_NOT_FOUND, IMAGE_STORAGE_SM } from 'types/globalTypes';
+import { IMAGE_NOT_FOUND, IMAGE_STORAGE_SM } from 'types/globalTypes';
 import { Dispatch } from 'redux';
 import { handleShareSocial } from 'utils/mixins';
 import { useTranslation } from 'react-i18next';
 import { LTRoomReducerAction, getDataLTRoom } from 'store/redux/reducers/LTRoom/RoomDetails';
 import { LTRoomIndexRes } from 'types/LTR/LTRoom/LTRoom';
 import Loadable from 'react-loadable';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
 
 const Loading = Loadable({
   loader: () => import('components/GlobalComponents/LoadingScreen'),

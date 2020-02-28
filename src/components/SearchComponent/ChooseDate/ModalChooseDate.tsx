@@ -1,5 +1,5 @@
 import React, { FC, useContext, useState, Dispatch, SetStateAction } from 'react';
-import { StyleSheet, View, StatusBar } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from 'store/context/auth';
@@ -11,6 +11,11 @@ import { ReducersList } from 'store/redux/reducers';
 import { RoomDetailContext } from 'store/context/room/RoomDetailContext';
 import { setCheckIn, setCheckOut } from 'store/actions/search/searchActions';
 import Modal from 'react-native-modal';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 
 interface IProps extends NavigationInjectedProps {
   open: boolean;

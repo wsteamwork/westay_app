@@ -1,11 +1,18 @@
 import { VISA, INTERNET_BANKING } from './../../../../types/globalTypes';
-import { Reducer } from 'redux';
-import { AxiosRes } from './../../../../types/ResponseTemplate';
+import { Reducer, Dispatch } from 'redux';
+import { AxiosRes, BaseResponse } from './../../../../types/ResponseTemplate';
 import { axios } from './../../../../utils/api';
-import { LTBookingPriceCalculatorReq, LTBookingCreateReq } from './../../../../types/Booking/BookingRequests';
+import {
+  LTBookingPriceCalculatorReq,
+  LTBookingCreateReq,
+} from './../../../../types/Booking/BookingRequests';
 import { updateObject } from 'utils/mixins';
 import { PaymentBankListRes, PaymentMethod } from './../../../../types/Payment/PaymentResponse';
-import { LTBookingPriceCalculatorRes, LTBookingIndexRes } from './../../../../types/Booking/BookingResponses';
+import {
+  LTBookingPriceCalculatorRes,
+  LTBookingIndexRes,
+} from './../../../../types/Booking/BookingResponses';
+import qs from 'query-string';
 
 export type LTBookingReducerState = {
   readonly roomId: number;
@@ -17,6 +24,10 @@ export type LTBookingReducerState = {
   readonly LTBookingPriceCalculate: LTBookingPriceCalculatorRes | null;
   readonly LTDataInvoice: PaymentBankListRes | null;
   readonly LTPaymentError: boolean;
+  readonly bookings: LTBookingIndexRes[];
+  readonly booking: LTBookingIndexRes | null;
+  readonly completedInspector: boolean;
+  readonly error: boolean;
 };
 
 export type LTBookState = {
@@ -32,7 +43,11 @@ export type LTBookingAction =
   | { type: 'setLTBookingPriceCalculate'; payload: LTBookingPriceCalculatorRes }
   | { type: 'setLTDataInvoice'; payload: PaymentBankListRes }
   | { type: 'setLTPaymentError'; payload: boolean }
-  | { type: 'setBankList'; payload: PaymentMethod[]};
+  | { type: 'setBankList'; payload: PaymentMethod[] }
+  | { type: 'setDataBookingByStatus'; payload: LTBookingIndexRes[] }
+  | { type: 'setDataBookingById'; payload: LTBookingIndexRes }
+  | { type: 'setCompletedInspector'; payload: boolean }
+  | { type: 'setError'; payload: boolean };
 
 export const init: LTBookingReducerState = {
   roomId: 0,
@@ -43,12 +58,16 @@ export const init: LTBookingReducerState = {
   LTBookingPriceCalculate: null,
   LTDataInvoice: null,
   bankList: null,
-  LTPaymentError: false
+  LTPaymentError: false,
+  bookings: [],
+  booking: null,
+  error: false,
+  completedInspector: false,
 };
 
 export const ltBookingReducer: Reducer<LTBookingReducerState, LTBookingAction> = (
   state: LTBookingReducerState = init,
-  action: LTBookingAction
+  action: LTBookingAction,
 ): LTBookingReducerState => {
   switch (action.type) {
     case 'setRoomId':
@@ -61,7 +80,7 @@ export const ltBookingReducer: Reducer<LTBookingReducerState, LTBookingAction> =
       return updateObject(state, { numberOfGuests: action.payload });
     case 'setMaxGuestRoom':
       return updateObject(state, { maxGuestRoom: action.payload });
-      case 'setBankList':
+    case 'setBankList':
       return updateObject(state, { bankList: action.payload });
     case 'setLTBookingPriceCalculate':
       return updateObject(state, { LTBookingPriceCalculate: action.payload });
@@ -69,24 +88,32 @@ export const ltBookingReducer: Reducer<LTBookingReducerState, LTBookingAction> =
       return updateObject(state, { LTDataInvoice: action.payload });
     case 'setLTPaymentError':
       return updateObject(state, { LTPaymentError: action.payload });
+    case 'setDataBookingByStatus':
+      return updateObject(state, { bookings: action.payload });
+    case 'setDataBookingById':
+      return updateObject(state, { booking: action.payload });
+    case 'setCompletedInspector':
+      return updateObject(state, { completedInspector: action.payload });
+    case 'setError':
+      return updateObject(state, { error: action.payload });
     default:
       return state;
   }
 };
 
 export const getLTCalculatedBookingPrice = async (
-  body: LTBookingPriceCalculatorReq
+  body: LTBookingPriceCalculatorReq,
 ): Promise<LTBookingPriceCalculatorRes> => {
   const { move_in, move_out, long_term_room_id } = body;
   const req: LTBookingPriceCalculatorReq = {
     long_term_room_id: long_term_room_id,
     move_in,
-    move_out
+    move_out,
   };
 
   const res: AxiosRes<LTBookingPriceCalculatorRes> = await axios.post(
     `long-term-bookings/price-calculator`,
-    req
+    req,
   );
 
   return res.data.data;
@@ -95,12 +122,12 @@ export const getLTCalculatedBookingPrice = async (
 export const createLTBooking = async (req: LTBookingCreateReq): Promise<LTBookingIndexRes> => {
   const res: AxiosRes<LTBookingIndexRes> = await axios.post(
     'long-term-bookings?include=contracts',
-    req
+    req,
   );
   return res.data.data;
 };
 
-export const getBankList = async (uuid:string, languageStatus:string) => {
+export const getBankList = async (uuid: string, languageStatus: string) => {
   const url = `long-term-booking-bank-list/${uuid}`;
   const res = await axios.get(url, {
     headers: { 'Accept-Language': languageStatus },
@@ -108,7 +135,7 @@ export const getBankList = async (uuid:string, languageStatus:string) => {
   return res.data;
 };
 
-export const redirectToBaoKim = async (uuid:string, bank_id:number, languageStatus:string) => {
+export const redirectToBaoKim = async (uuid: string, bank_id: number, languageStatus: string) => {
   const request = {
     payment_method: bank_id === 128 ? VISA : INTERNET_BANKING,
     bank_payment_method_id: bank_id,
@@ -120,3 +147,44 @@ export const redirectToBaoKim = async (uuid:string, bank_id:number, languageStat
   return res.data;
 };
 
+export const getLongTermBookingById = async (
+  bookingId: number,
+  token: string,
+  dispatch: Dispatch<LTBookingAction>,
+  languageStatus: string,
+) => {
+  const url = `long-term-bookings/${bookingId}?include=contracts,longTermRoom,city,district`;
+  let res = await axios.get(url, {
+    headers: { Authorization: token, 'Accept-Language': languageStatus },
+  });
+  if (res) {
+    let booking = res.data.data;
+    return booking;
+  } else {
+    dispatch({ type: 'setError', payload: true });
+  }
+};
+
+export const getLongTermBookingList = async (
+  token: string,
+  dispatch: Dispatch<LTBookingAction>,
+  languageStatus: string,
+  status: string[],
+) => {
+  let statusList = status.join();
+  
+  let query = {
+    include: 'contracts,longTermRoom,city,district',
+    booking_status: statusList,
+  };
+  const url = `long-term-bookings?${qs.stringify(query)}`;
+  let res = await axios.get(url, {
+    headers: { Authorization: token, 'Accept-Language': languageStatus },
+  });
+  if (res) {
+    let bookingListLT = res.data.data;
+    dispatch({ type: 'setDataBookingByStatus', payload: bookingListLT });
+  } else {
+    dispatch({ type: 'setError', payload: true });
+  }
+};

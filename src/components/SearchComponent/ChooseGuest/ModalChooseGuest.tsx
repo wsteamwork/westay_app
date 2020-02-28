@@ -10,6 +10,10 @@ import { useTranslation } from 'react-i18next';
 import { setNumberGuest, setNumberRoom } from 'store/actions/search/searchActions';
 import { ReducersList } from 'store/redux/reducers';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   open: boolean;
   setClose: Dispatch<SetStateAction<boolean>>;

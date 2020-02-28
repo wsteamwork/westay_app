@@ -14,7 +14,11 @@ import XDate from 'xdate';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import ShowChooseDate from './ShowChooseDate';
 import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
-import { formatDateBooking } from 'utils/mixins';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }

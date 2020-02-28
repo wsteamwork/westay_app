@@ -21,6 +21,12 @@ import { Input } from 'react-native-elements';
 import { inputContainerStyleGlobal } from 'utils/mixins';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Toast from 'react-native-root-toast';
+import {asyncLogin} from 'store/actions/asyncLogin';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
@@ -34,7 +40,7 @@ const Login: FC<IProps> = (props) => {
   const passwordRef = useRef<any>(null);
   const [loading, setLoading] = useState(false);
   const { dispatch, state } = useContext(AuthContext);
-  const { languageStatus } = state;
+  const { languageStatus, fcmToken } = state;
   const { navigation } = props;
   const FormValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -47,6 +53,9 @@ const Login: FC<IProps> = (props) => {
       .min(6, 'Tối thiếu 6 ký tự')
       .max(255, 'Tối đa 255 ký tự'),
   });
+
+  console.log('fcmToken' + fcmToken);
+
   const handleClickSubmit = async (values: LoginValues, actions: FormikHelpers<LoginValues>) => {
     Keyboard.dismiss();
     const body = {
@@ -55,18 +64,10 @@ const Login: FC<IProps> = (props) => {
     };
     setLoading(true);
     try {
-      axios.post('login', body).then((res) => {
-        const data = res.data;
-        setLoading(false);
-        storage.save({
-          key: TOKEN,
-          data: data.access_token,
-          expires: data.expires_in,
-        });
-        dispatch({ type: 'SET_TOKEN', payload: `Bearer ${data.access_token}` });
-        getProfile(data.access_token, dispatch, languageStatus);
-        navigation.navigate('Home');
-      });
+      await asyncLogin(body, dispatch, fcmToken, languageStatus);
+
+      setLoading(false);
+      navigation.goBack();
     } catch (err) {
       setLoading(false);
       if (err.response.data.data.errors.email) {

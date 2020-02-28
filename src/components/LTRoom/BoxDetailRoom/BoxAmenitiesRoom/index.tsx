@@ -1,12 +1,16 @@
 import React, { FC, useMemo, useState } from 'react';
 import { StyleSheet, View, Modal, ScrollView, TouchableOpacity } from 'react-native';
 import { Text, Tooltip } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/EvilIcons';
 import { hp, wp } from 'utils/responsive';
 import SvgUri from 'react-native-svg-uri';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps {
   initialProps?: any;
 }

@@ -9,6 +9,11 @@ import { ReducersList } from 'store/redux/reducers';
 import { formatDateBooking } from 'utils/mixins';
 import { AuthContext } from 'store/context/auth';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps{
   initialProps?: any;
 }

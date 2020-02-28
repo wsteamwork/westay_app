@@ -19,6 +19,10 @@ import BoxInfoHost from './BoxInfoHost';
 import BoxInfoRoom from './BoxInfoRoom';
 import BoxPriceLTRoom from './BoxPriceLTRoom';
 
+/**
+ * @author DucNhatDMJ<phamducnhat1977@gmail.com>
+ */
+
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
@@ -72,8 +76,8 @@ const BoxDetailRoom: FC<IProps> = (props) => {
     setMediaToTal(images);
   }, []);
   return (
-    <View>
-      <ScrollView style={{ marginBottom: hp('8%') }}>
+    <View style={{backgroundColor:'white'}}>
+      <ScrollView style={{ marginBottom: hp('8%'), backgroundColor:'white'}}>
         <View>
           <BoxImageRoom arrImages={mediaToTal} />
         </View>
