@@ -1,29 +1,30 @@
-import React, {FC, useContext, useState, Fragment, memo, useEffect} from 'react';
-import {StyleSheet, View, Animated, Text, TouchableOpacity} from 'react-native';
-import {useSelector} from 'react-redux';
-import {useTranslation} from 'react-i18next';
-import {AuthContext} from 'store/context/auth';
-import {ReducersList} from 'store/redux/reducers';
-import {SearchFilterState} from 'store/redux/reducers/search/searchField';
-import {CityType} from 'types/Cities/CityResponse';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
-import LottieView from 'lottie-react-native';
-import {wp, COLOR_BUTTON_DEFAULT, hp} from 'utils/responsive';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-// @ts-ignore
-import {compose} from 'recompose';
-import {getDataListRooms, elevationShadowStyle} from 'utils/mixins';
 import RoomCard from 'components/GlobalComponents/Cards/RoomCard';
-import qs from 'query-string';
-import {changeDataMap} from 'components/Map/handleMap';
-import SearchComponent from 'components/SearchComponent';
-import Feather from 'react-native-vector-icons/Feather';
-import {COLOR_TITLE_HEADER} from 'styles/global.style';
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import {AxiosResponse} from 'axios';
-import {AxiosRes, BaseResponse} from 'types/ResponseTemplate';
+import { changeDataMap } from 'components/Map/handleMap';
+import SearchComponent from 'components/SearchComponent';
+import LottieView from 'lottie-react-native';
+import qs from 'query-string';
+import React, { FC, Fragment, memo, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Animated, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { useSelector } from 'react-redux';
+// @ts-ignore
+import { compose } from 'recompose';
+import { AuthContext } from 'store/context/auth';
+import { ReducersList } from 'store/redux/reducers';
+import { SearchFilterState } from 'store/redux/reducers/search/searchField';
+import { COLOR_TITLE_HEADER } from 'styles/global.style';
+import { CityType } from 'types/Cities/CityResponse';
+import { BaseResponse } from 'types/ResponseTemplate';
+import { elevationShadowStyle, getDataListRooms } from 'utils/mixins';
+import { COLOR_BUTTON_DEFAULT, hp, wp } from 'utils/responsive';
+import InputSearchFake from 'components/SearchComponent/InputSearchFake';
+import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   paddingHeight: string,
   animatedY: any,
   onScroll: any
@@ -43,9 +44,9 @@ const ListRooms: FC<IProps> = (props) => {
   const [totalResult, setTotalResult] = useState<number>(0);
   const [refreshing, setRefreshing] = useState(false);
 
-  const getData = async (value:boolean, page = 1, url = '', findAround:boolean = false) => {
+  const getData = async (value: boolean, page = 1, url = '', findAround: boolean = false) => {
     // @ts-ignore
-    const resData:BaseResponse<any> = value
+    const resData: BaseResponse<any> = value
       ? await getDataListRooms(
         searchField,
         currCity,
@@ -60,7 +61,7 @@ const ListRooms: FC<IProps> = (props) => {
         languageStatus,
       );
     setTotalResult(resData.data.meta.pagination.total);
-    const changeResData:any = changeDataMap(resData.data.data);
+    const changeResData: any = changeDataMap(resData.data.data);
 
     value ? setData([...data, ...changeResData]) : setData([...changeResData]);
     setRefreshing(false);
@@ -90,9 +91,9 @@ const ListRooms: FC<IProps> = (props) => {
     coords ? getDataFindAround() : getData(false);
   }, [searchField, coords, languageStatus]);
 
-  const _renderItem = (item:any, index:number)=> {
+  const _renderItem = (item: any, index: number) => {
     return (
-      <View key={index} style={{ marginVertical: hp('1.5%'), paddingHorizontal: wp('5%') }}>
+      <View key={index} style={{ marginVertical: hp('1%'), paddingHorizontal: wp('5%') }}>
         <RoomCard
           room={item.item}
         />
@@ -113,59 +114,64 @@ const ListRooms: FC<IProps> = (props) => {
           autoPlay
         />
       ) : (
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
-
-          <SearchComponent showListSuggest={false} showInputFake={true} styleContainer={styles.containerSearch}/>
-
-          <View style = {[styles.boxFilter, elevationShadowStyle(6)]}>
-            <Text>
-              {totalResult} rooms found
-            </Text>
-            <TouchableOpacity activeOpacity={1} onPress={()=>navigation.navigate('Filter')}>
-              <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                <Text>Filter</Text>
-                <Feather
-                  name = {'filter'}
-                  size = {wp('3.5%')}
-                  style = {{marginLeft: wp('2%')}}
-                  color = {COLOR_TITLE_HEADER}
-                />
+          <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <SafeAreaView>
+              <HeaderWithBackTitle title={'Result'} textHeaderStyle={{ marginLeft: wp('-5%') }} />
+              <View style={{ paddingHorizontal: wp('5%'), backgroundColor: 'white' }}>
+                <InputSearchFake />
               </View>
-            </TouchableOpacity>
-          </View>
+            </SafeAreaView>
+            {/* <SearchComponent showInfoGuestAndDates={false} showListSuggest={false} showInputFake={true} styleContainer={styles.containerSearch} /> */}
+            <View style={[styles.boxFilter, elevationShadowStyle(0)]}>
+              <Text>
+                {totalResult} rooms found
+             </Text>
+              <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate('Filter')}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text>Filter</Text>
+                  <Feather
+                    name={'filter'}
+                    size={wp('3.5%')}
+                    style={{ marginLeft: wp('2%') }}
+                    color={COLOR_TITLE_HEADER}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
 
-          <Animated.FlatList
-            // showsVerticalScrollIndicator={false}
-            style={{flex: 1 }}
-            renderItem={_renderItem}
-            data={data}
-            keyExtractor={(item:any, index:number) => index.toString()}
-            onEndReached={handleLoadMore}
-            onEndReachedThreshold={20}
-            contentContainerStyle={{ paddingTop: paddingHeight, justifyContent:'center', alignItems: 'center', minHeight: '60%'  }}
-            scrollIndicatorInsets={{ top: paddingHeight }}
-            onScroll={onScroll}
-            _mustAddThis={animatedY}
-            ListEmptyComponent={
-              <View style={styles.viewNotFound}>
-                <Text style={{fontSize: wp('5%'), fontWeight: '700' }}>
-                  {t('listRooms:noResult')}
-                </Text>
-              </View>
-            }
-          />
+            <Animated.FlatList
+              // showsVerticalScrollIndicator={false}
+              style={{ flex: 1 }}
+              renderItem={_renderItem}
+              data={data}
+              keyExtractor={(item: any, index: number) => index.toString()}
+              onEndReached={handleLoadMore}
+              onEndReachedThreshold={20}
+              contentContainerStyle={{ paddingTop: paddingHeight, justifyContent: 'center', alignItems: 'center', minHeight: '60%' }}
+              scrollIndicatorInsets={{ top: paddingHeight }}
+              showsVerticalScrollIndicator={false}
+              onScroll={onScroll}
+              _mustAddThis={animatedY}
+              ListEmptyComponent={
+                <View style={styles.viewNotFound}>
+                  <Text style={{ fontSize: wp('5%'), fontWeight: '700' }}>
+                    {t('listRooms:noResult')}
+                  </Text>
+                </View>
+              }
+            />
 
             <TouchableWithScale _onPress={handleClickMap} style={styles.viewIconMap}
             >
-              <Fontisto
+              <Ionicons
                 name={'map'}
                 size={wp('5%')}
                 color={COLOR_BUTTON_DEFAULT}
                 style={styles.iconMap}
               />
             </TouchableWithScale>
-        </View>
-      )}
+          </View>
+        )}
     </Fragment>
   );
 };
@@ -198,11 +204,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: wp('3%'),
+    paddingTop: 20,
+    paddingBottom: 10,
     width: '100%',
     paddingHorizontal: wp('5%')
   },
-  containerSearch:{
+  containerSearch: {
     flex: 0,
     paddingTop: 0
   }

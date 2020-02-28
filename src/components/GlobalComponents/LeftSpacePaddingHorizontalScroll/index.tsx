@@ -11,7 +11,7 @@ const LeftSpacePaddingHorizontalScroll: FC<IProps> = (props) => {
   const { width } = props;
 
   return (
-    <View style={{ backgroundColor: 'red', width: width, margin: 0, padding: 0 }}></View>
+    <View style={{ backgroundColor: 'white', width: width, margin: 0, padding: 0 }}></View>
   );
 };
 

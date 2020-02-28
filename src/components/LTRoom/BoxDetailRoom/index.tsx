@@ -1,23 +1,23 @@
+import _ from 'lodash';
 import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { wp, hp } from 'utils/responsive';
-import BoxInfoRoom from './BoxInfoRoom';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Divider } from 'react-native-elements';
-import BoxInfoHost from './BoxInfoHost';
-import BoxBedAndGuest from './BoxBedAndGuest';
-import BoxDescriptionRoom from './BoxDescriptionRoom';
-import BoxAmenitiesRoom from './BoxAmenitiesRoom';
-import BoxImageRoom from './BoxImageRoom';
-import BoxCircleMapRoom from './BoxCircleMapRoom';
-import BoxPriceLTRoom from './BoxPriceLTRoom';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { useSelector } from 'react-redux';
-import BoxImageDetail from './BoxImageDetail';
-import BoxIncludedFee from './BoxIncludedFee';
-import BoxBookingRoom from './BoxBookingRoom';
 import { ReducersList } from 'store/redux/reducers';
 import { IMAGE_STORAGE_LG } from 'types/globalTypes';
-import _ from 'lodash';
+import { hp, wp } from 'utils/responsive';
+import BoxAmenitiesRoom from './BoxAmenitiesRoom';
+import BoxBedAndGuest from './BoxBedAndGuest';
+import BoxBookingRoom from './BoxBookingRoom';
+import BoxCircleMapRoom from './BoxCircleMapRoom';
+import BoxDescriptionRoom from './BoxDescriptionRoom';
+import BoxImageDetail from './BoxImageDetail';
+import BoxImageRoom from './BoxImageRoom';
+import BoxIncludedFee from './BoxIncludedFee';
+import BoxInfoHost from './BoxInfoHost';
+import BoxInfoRoom from './BoxInfoRoom';
+import BoxPriceLTRoom from './BoxPriceLTRoom';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -66,45 +66,48 @@ const BoxDetailRoom: FC<IProps> = (props) => {
     }
     let images = arrayImg
       ? _.map(arrayImg, (o, i) => {
-          return {
-            url: `${IMAGE_STORAGE_LG + arrayImg[i].name}`,
-            width: wp('100%'),
-            height: hp('50%'),
-          };
-        })
+        return {
+          url: `${IMAGE_STORAGE_LG + arrayImg[i].name}`,
+          width: wp('100%'),
+          height: hp('50%'),
+        };
+      })
       : [];
-      setMediaToTal(images);
+    setMediaToTal(images);
   }, []);
   return (
-    <View style={{backgroundColor:'white'}}>
-      <ScrollView style={{ marginBottom: hp('8%'), backgroundColor:'white'}}>
+    <View style={{ backgroundColor: 'white' }}>
+      <ScrollView style={{ marginBottom: 50, backgroundColor: 'white' }}>
         <View>
-          <BoxImageRoom arrImages={mediaToTal}/>
+          <BoxImageRoom arrImages={mediaToTal} />
         </View>
         <View style={styles.container}>
           <BoxInfoRoom />
-          <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
+          <Divider style={{ backgroundColor: '#8AA9896d', marginVertical: 10 }} />
           <BoxInfoHost />
-          <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
+          <Divider style={{ backgroundColor: '#8AA9896d', marginVertical: 10 }} />
           <BoxBedAndGuest />
-          <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
+          <Divider style={{ backgroundColor: '#8AA9896d', marginVertical: 10 }} />
           <BoxDescriptionRoom />
-          <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
-          <BoxImageDetail arrImages={mediaToTal}/>
-          <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
+          <Divider style={{ backgroundColor: '#8AA9896d', marginVertical: 10 }} />
+          <BoxImageDetail arrImages={mediaToTal} />
+          <Divider style={{ backgroundColor: '#8AA9896d', marginVertical: 10 }} />
           <BoxAmenitiesRoom />
         </View>
         <View>
+          <BoxPriceLTRoom />
+          <Divider style={{ backgroundColor: '#8AA9896d' }} />
+          <BoxIncludedFee />
+          <Divider style={{ backgroundColor: '#8AA9896d' }} />
+        </View>
+
+        <View>
           <BoxCircleMapRoom />
         </View>
-        <View>
-          <BoxPriceLTRoom />
-          <Divider style={{ backgroundColor: '#bcbcbc' }} />
-          <BoxIncludedFee />
-          <Divider style={{ backgroundColor: '#bcbcbc' }} />
-        </View>
       </ScrollView>
-      <BoxBookingRoom />
+      <View>
+        <BoxBookingRoom />
+      </View>
     </View>
   );
 };

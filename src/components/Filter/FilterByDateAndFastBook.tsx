@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
-import {StyleSheet, View, Switch, Text} from 'react-native';
-import {wp, hp} from 'utils/responsive';
-import {useTranslation} from 'react-i18next';
-import {COLOR_BUTTON_DEFAULT} from 'styles/global.style';
+import { useTranslation } from 'react-i18next';
+import { StyleSheet, Switch, Text, View } from 'react-native';
+import { COLOR_BUTTON_DEFAULT, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
+import { hp } from 'utils/responsive';
 
 interface IProps {
   // sortByDay: boolean,
   // setSortByDay: (value: boolean)=> void,
   sortByFastBook: boolean,
-  setSortFastBook: (value: boolean)=>void ,
+  setSortFastBook: (value: boolean) => void,
 }
 
 const FilterByDateAndFastBook: FC<IProps> = (props) => {
@@ -16,7 +16,7 @@ const FilterByDateAndFastBook: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <View style={{ marginTop: hp('2%') }}>
+    <View style={{ marginTop: hp('0%') }}>
       {/*<View style={styles.item}>*/}
       {/*  <Text style={styles.text}>*/}
       {/*    {t('filter:filterByDateAndFastBook:byDate')}*/}
@@ -46,10 +46,10 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: hp('6%'),
+    height: hp('5%'),
     justifyContent: 'space-between',
   },
-  text: { fontSize: wp('4%'), fontWeight: '700' },
+  text: { fontSize: SIZE_TEXT_TITLE_MEDIUM, fontWeight: '500' },
 });
 
 export default FilterByDateAndFastBook;

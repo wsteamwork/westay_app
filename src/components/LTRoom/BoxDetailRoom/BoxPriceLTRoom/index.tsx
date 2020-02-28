@@ -1,11 +1,12 @@
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import { hp } from 'components/Utils/responsive.style';
 import React, { FC, useState } from 'react';
-import { Modal, ScrollView, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
+import { Modal, ScrollView, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { Divider, Text } from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
+import { COLOR_TEXT_TITLE, SIZE_TEXT_TITLE, SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
 import { wp } from 'utils/responsive';
 
 /**
@@ -21,12 +22,12 @@ const BoxPriceLTRoom: FC<IProps> = (props) => {
   const [collapsedPrice, setCollapsedPrice] = useState(false);
   return (
     <View>
-      <TouchableNativeFeedback style={styles.touchable} onPress={() => setCollapsedPrice(true)}>
+      <TouchableWithoutFeedback style={styles.touchable} onPress={() => setCollapsedPrice(true)}>
         <View style={styles.container}>
           <Text style={styles.title}>Price by lease term</Text>
           <Entypo name="chevron-right" size={25} color="#adadad" />
         </View>
-      </TouchableNativeFeedback>
+      </TouchableWithoutFeedback>
       <Modal
         animationType="slide"
         transparent={false}
@@ -59,7 +60,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 16,
+    alignItems: 'center',
+    backgroundColor: 'white',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
   },
   boxContainer: {
     flexDirection: 'column',
@@ -78,23 +82,27 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     paddingHorizontal: wp('4%'),
-    fontSize: 20,
-    fontWeight: '700',
+    fontSize: SIZE_TEXT_TITLE,
+    color: COLOR_TEXT_TITLE,
+    fontWeight: '500',
     marginBottom: hp('2%'),
   },
   txtTerm: {
-    fontSize: 16,
+    fontSize: SIZE_TEXT_TITLE_MEDIUM,
     width: wp('70%'),
     color: '#484848',
   },
   price: {
     alignItems: 'flex-start',
-    fontSize: 20,
+    fontSize: SIZE_TEXT_TITLE,
     fontWeight: '600',
   },
   title: {
-    fontSize: 18,
-    fontWeight: '500',
+    // justifyContent: 'center',
+    fontSize: SIZE_TEXT_TITLE,
+    // marginBottom: hp('2%'),
+    fontWeight: '600',
+    color: COLOR_TEXT_TITLE,
   },
   divider: {
     backgroundColor: '#bcbcbc',

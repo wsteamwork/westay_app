@@ -1,18 +1,18 @@
-import React, {FC, memo} from 'react';
-import {StyleSheet, View, SectionList, Text, TouchableOpacity} from 'react-native';
-import {withNavigation, NavigationInjectedProps} from 'react-navigation';
-import {hp, wp} from 'utils/responsive';
-import {COLOR_TEXT_DEFAULT, COLOR_BUTTON_DEFAULT} from 'styles/global.style';
-import {useDispatch, useSelector} from 'react-redux';
-import {setEmptyCityDistrict, setSearchText, getCity} from 'store/actions/search/searchActions';
-import {setHistorySearch} from 'store/actions/asyncStorage';
-import {ReducersList} from 'store/redux/reducers';
-import IconSimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import React, { FC, memo } from 'react';
+import { SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import IconSimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { useDispatch, useSelector } from 'react-redux';
 // @ts-ignore
 import { compose } from 'recompose';
+import { setHistorySearch } from 'store/actions/asyncStorage';
+import { getCity, setEmptyCityDistrict, setSearchText } from 'store/actions/search/searchActions';
+import { ReducersList } from 'store/redux/reducers';
+import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_DEFAULT, SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE } from 'styles/global.style';
+import { wp } from 'utils/responsive';
 
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   sections: []
 }
 
@@ -22,7 +22,7 @@ const SectionListInput: FC<IProps> = (props) => {
 
   const { sections, navigation } = props;
 
-  const handleClick = (item:any) => {
+  const handleClick = (item: any) => {
     if (item.type !== 3) {
       dispatch(setSearchText(item.name));
       navigation.navigate('ListRooms');
@@ -32,19 +32,19 @@ const SectionListInput: FC<IProps> = (props) => {
       navigation.navigate('DetailScreen', { idRoom: item.id });
     }
 
-    if (!historySearch.some((i:any) => i.name === item.name)) {
+    if (!historySearch.some((i: any) => i.name === item.name)) {
       dispatch(setHistorySearch([...historySearch, item]));
     }
   };
 
-  const _renderSectionHeader = ( section:any ) =>
+  const _renderSectionHeader = (section: any) =>
     section.data.length ? (
       <View style={styles.sectionHeader}>
         <Text style={styles.textSectionHeader}>{section.title}</Text>
       </View>
     ) : null;
 
-  const _renderItem = ( item:any ) => {
+  const _renderItem = (item: any) => {
     return (
       <TouchableOpacity
         style={styles.renderItem}
@@ -58,12 +58,12 @@ const SectionListInput: FC<IProps> = (props) => {
             color={COLOR_TEXT_DEFAULT}
           />
         ) : (
-          <IconAntDesign
-            name="home"
-            size={wp('5%')}
-            color={COLOR_TEXT_DEFAULT}
-          />
-        )}
+            <IconAntDesign
+              name="home"
+              size={wp('5%')}
+              color={COLOR_TEXT_DEFAULT}
+            />
+          )}
 
         <Text numberOfLines={1} style={styles.textRenderItem}>
           {item.name}
@@ -74,9 +74,10 @@ const SectionListInput: FC<IProps> = (props) => {
 
   return (
     <SectionList
+      style={{ backgroundColor: 'white' }}
       sections={sections}
-      renderItem={({item})=>_renderItem(item)}
-      renderSectionHeader={({section})=>_renderSectionHeader(section)}
+      renderItem={({ item }) => _renderItem(item)}
+      renderSectionHeader={({ section }) => _renderSectionHeader(section)}
       keyExtractor={(item, index) => index.toString()}
       stickySectionHeadersEnabled={true}
       showsVerticalScrollIndicator={false}
@@ -88,29 +89,30 @@ const styles = StyleSheet.create({
   renderItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: hp('6%'),
+    justifyContent: 'center',
+    height: 38,
     borderBottomColor: '#ddd',
-    borderBottomWidth: 1,
-    marginVertical: hp('1%'),
+    // borderBottomWidth: 0.5,
+    marginVertical: 4,
   },
   textRenderItem: {
-    fontSize: wp('4%'),
-    paddingLeft: wp('3%'),
+    fontSize: SIZE_TEXT_SUBTITLE,
+    paddingHorizontal: wp('3%'),
     color: COLOR_TEXT_DEFAULT,
     width: '92%',
   },
   sectionHeader: {
     justifyContent: 'center',
-    height: hp('5%'),
+    height: 40,
     borderLeftColor: COLOR_BUTTON_DEFAULT,
     borderLeftWidth: 2,
     backgroundColor: 'white',
   },
   textSectionHeader: {
-    fontSize: wp('5%'),
+    fontSize: SIZE_TEXT_TITLE,
     color: COLOR_TEXT_DEFAULT,
-    fontWeight: '700',
-    paddingLeft: wp('4%'),
+    fontWeight: '500',
+    paddingHorizontal: wp('4%'),
   },
 });
 

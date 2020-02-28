@@ -1,25 +1,18 @@
-import React, { FC, useEffect, Fragment, useMemo, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  ImageBackground,
-  TouchableOpacity,
-  StatusBar,
-  Alert,
-} from 'react-native';
-import { wp, hp } from 'utils/responsive';
-import BoxIntroRoom from './BoxIntroRoom';
+import React, { FC, Fragment, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import Loadable from 'react-loadable';
+import { Alert, ImageBackground, StatusBar, StyleSheet, TouchableOpacity, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReducersList } from 'store/redux/reducers';
-import { IMAGE_NOT_FOUND, IMAGE_STORAGE_SM } from 'types/globalTypes';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import { handleShareSocial } from 'utils/mixins';
-import { useTranslation } from 'react-i18next';
-import { LTRoomReducerAction, getDataLTRoom } from 'store/redux/reducers/LTRoom/RoomDetails';
+import { ReducersList } from 'store/redux/reducers';
+import { getDataLTRoom, LTRoomReducerAction } from 'store/redux/reducers/LTRoom/RoomDetails';
+import { IMAGE_NOT_FOUND, IMAGE_STORAGE_SM } from 'types/globalTypes';
 import { LTRoomIndexRes } from 'types/LTR/LTRoom/LTRoom';
-import Loadable from 'react-loadable';
+import { handleShareSocial } from 'utils/mixins';
+import { hp, wp } from 'utils/responsive';
+import BoxIntroRoom from './BoxIntroRoom';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -30,7 +23,7 @@ const Loading = Loadable({
   loading: () => null,
 });
 
-interface IProps extends NavigationInjectedProps {}
+interface IProps extends NavigationInjectedProps { }
 
 const BoxImageLT: FC<IProps> = (props) => {
   const { navigation } = props;
@@ -118,11 +111,11 @@ const styles = StyleSheet.create({
   },
   featureImage: {
     position: 'absolute',
+    top: StatusBar.currentHeight || 30,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    top: StatusBar.currentHeight,
     width: wp('100%'),
     height: hp('8%'),
     zIndex: 1,

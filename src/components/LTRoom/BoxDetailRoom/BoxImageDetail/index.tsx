@@ -5,7 +5,7 @@ import { Text } from 'react-native-elements';
 // @ts-ignore
 import ImageViewer from 'react-native-image-zoom-viewer';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_TITLE, SIZE_TEXT_TITLE } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
 
 /**
@@ -70,7 +70,7 @@ const BoxImageDetail: FC<IProps> = (props) => {
       <View style={styles.boxTitle}>
         <Text style={styles.txtTitle}>Take a tour</Text>
         <Text style={styles.explore} onPress={() => setIsImageViewVisible(true)}>
-          +{arrImages.length - 5} Photos
+          View all {arrImages.length} photos
         </Text>
       </View>
       <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
@@ -105,90 +105,37 @@ const BoxImageDetail: FC<IProps> = (props) => {
 
 const styles = StyleSheet.create({
   boxImage: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
+    // flex: 1,
+    display: 'flex',
+    // height: 'auto',
+    maxHeight: 150,
+    // flex: 1
   },
   boxTitle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  slider: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  imgAvatar: {
-    width: '100%',
-    height: '100%',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  featureImage: {
-    position: 'absolute',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    top: hp('2%'),
-    width: wp('100%'),
-    height: hp('8%'),
-  },
-  btnBack: {
-    flex: 1,
-    paddingLeft: 16,
-    paddingTop: 10,
-  },
-  bgIcon: {
-    width: 40,
-    height: 40,
-    backgroundColor: 'rgba(0,0,0,0.2)',
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'relative',
-    top: 0,
-    right: 0,
-  },
-  boxBtn: {
-    position: 'absolute',
-    display: 'flex',
-    flexDirection: 'row',
-    bottom: hp('2%'),
-    width: wp('100%'),
-    height: hp('8%'),
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    right: hp('3%'),
-  },
-  btnMore: {
-    backgroundColor: '#fff',
-    padding: 6,
-  },
-  textBtnMore: {
-    color: COLOR_TEXT_DEFAULT,
-    fontSize: 12,
-  },
   txtTitle: {
-    fontSize: 24,
-    marginBottom: hp('2%'),
-    fontWeight: '700',
-    color: '#484848',
+    fontSize: SIZE_TEXT_TITLE,
+    // marginBottom: hp('2%'),
+    fontWeight: '600',
+    color: COLOR_TEXT_TITLE,
   },
   pdLeft: {
-    marginTop: 38,
+    // flex: 5
+    // marginTop: 38,
   },
   image: {
     height: hp('15%'),
+    maxHeight: 110,
     width: wp('40%'),
-    borderRadius: 5,
+    borderRadius: 8,
   },
   explore: {
-    fontSize: 14,
-    color: 'rgb(84, 211, 194)',
-    fontWeight: '700',
+    fontWeight: '400',
+    color: COLOR_BUTTON_DEFAULT,
   },
 });
 BoxImageDetail.defaultProps = {};

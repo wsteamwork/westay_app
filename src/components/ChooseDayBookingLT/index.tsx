@@ -1,19 +1,20 @@
-import React, { FC, useContext, useState, Dispatch, useEffect, useMemo } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { AuthContext } from 'store/context/auth';
-import { hp, wp } from 'utils/responsive';
-import { ReducersList } from 'store/redux/reducers';
-import { LTRoomReducerAction, getRoomAvailableDate } from 'store/redux/reducers/LTRoom/RoomDetails';
-import { CalendarList, LocaleConfig } from 'react-native-calendars';
-import { Text, Icon } from 'react-native-elements';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import XDate from 'xdate';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import ShowChooseDate from './ShowChooseDate';
+import React, { Dispatch, FC, useContext, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { CalendarList, LocaleConfig } from 'react-native-calendars';
+import { Icon, Text } from 'react-native-elements';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { AuthContext } from 'store/context/auth';
+import { ReducersList } from 'store/redux/reducers';
 import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
+import { getRoomAvailableDate, LTRoomReducerAction } from 'store/redux/reducers/LTRoom/RoomDetails';
+import { COLOR_TEXT_TITLE, SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
+import { hp, wp } from 'utils/responsive';
+import XDate from 'xdate';
+import ShowChooseDate from './ShowChooseDate';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -189,129 +190,141 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: hp('8%') }}>
-      <View style={{ backgroundColor: '#ffffff', width: '100%' }}>
-        <HeaderWithBackTitle
-          handlePress={() => navigation.goBack()}
-          rightComponent={
-            fromDate ? (
-              <Text
-                onPress={handleReset}
-                style={{ fontSize: 16, fontWeight: '700', color: '#666' }}>
-                Đặt lại
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ backgroundColor: 'white', width: '100%' }}>
+          <HeaderWithBackTitle
+            handlePress={() => navigation.goBack()}
+            rightComponent={
+              fromDate ? (
+                <Text
+                  onPress={handleReset}
+                  style={{ fontSize: SIZE_TEXT_TITLE_MEDIUM, fontWeight: '500', color: COLOR_TEXT_TITLE }}>
+                  Đặt lại
               </Text>
-            ) : (
-              <Text></Text>
-            )
-          }
-          containerStyle={{ paddingHorizontal: wp('8%') }}
-        />
-        <ShowChooseDate fromDate={fromDate} toDate={toDate}/>
-      </View>
+              ) : (
+                  <Text></Text>
+                )
+            }
+            containerStyle={{ paddingHorizontal: wp('8%') }}
+          />
+          <ShowChooseDate fromDate={fromDate} toDate={toDate} />
+        </View>
 
-      {useMemo(
-        () =>
-          roomAvailable && (
-            <CalendarList
-              minDate={roomAvailable[0]}
-              maxDate={roomAvailable.slice(-1)[0]}
-              onDayPress={(day: any) => {
-                onDayPress(day);
-              }}
-              onDayLongPress={(day: any) => {
-                onDayPress(day);
-              }}
-              monthFormat={'MMMM. yyyy'}
-              hideArrows={false}
-              hideExtraDays={true}
-              disableMonthChange={true}
-              hideDayNames={false}
-              showWeekNumbers={false}
-              pastScrollRange={0}
-              futureScrollRange={24}
-              scrollEnabled={true}
-              showScrollIndicator={false}
-              markedDates={markedDates}
-              markingType={'period'}
-              theme={{
-                selectedDayBackgroundColor: '#008489',
-                selectedDayTextColor: '#ffffff',
-                todayTextColor: '#00adf5',
-                dayTextColor: '#2d4150',
-                selectedDotColor: '#ffffff',
-                monthTextColor: '#008489',
-                textDayFontWeight: '600',
-                textMonthFontWeight: 'bold',
-                textDayHeaderFontWeight: '600',
-                textDayFontSize: 16,
-                textDayHeaderFontSize: 14,
-                textMonthFontSize: 20,
-                arrowColor: '#008489',
-                'stylesheet.day.period': {
-                  base: {
-                    overflow: 'hidden',
-                    height: 34,
-                    alignItems: 'center',
-                    width: 38,
-                  },
-                },
-              }}
-              renderArrow={(direction) => (
-                <Icon
-                  name={direction === 'left' ? 'chevron-left' : 'chevron-right'}
-                  size={24}
-                  color="#008489"
+        {useMemo(
+          () =>
+            roomAvailable && (
+              <View style={{ backgroundColor: 'white', flex: 1, marginBottom: 40 }}>
+                <CalendarList
+                  minDate={roomAvailable[0]}
+                  maxDate={roomAvailable.slice(-1)[0]}
+                  onDayPress={(day: any) => {
+                    onDayPress(day);
+                  }}
+                  onDayLongPress={(day: any) => {
+                    onDayPress(day);
+                  }}
+                  monthFormat={'MMMM. yyyy'}
+                  hideArrows={false}
+                  hideExtraDays={true}
+                  disableMonthChange={true}
+                  hideDayNames={false}
+                  showWeekNumbers={false}
+                  pastScrollRange={0}
+                  futureScrollRange={24}
+                  scrollEnabled={true}
+                  showScrollIndicator={false}
+                  markedDates={markedDates}
+                  markingType={'period'}
+                  theme={{
+                    selectedDayBackgroundColor: '#008489',
+                    selectedDayTextColor: '#ffffff',
+                    todayTextColor: '#00adf5',
+                    dayTextColor: '#2d4150',
+                    selectedDotColor: '#ffffff',
+                    monthTextColor: '#008489',
+                    textDayFontWeight: '600',
+                    textMonthFontWeight: 'bold',
+                    textDayHeaderFontWeight: '600',
+                    textDayFontSize: SIZE_TEXT_SUBTITLE,
+                    textDayHeaderFontSize: SIZE_TEXT_CONTENT,
+                    textMonthFontSize: SIZE_TEXT_TITLE_MEDIUM,
+                    arrowColor: '#008489',
+                    'stylesheet.day.period': {
+                      base: {
+                        overflow: 'hidden',
+                        height: 30,
+                        alignItems: 'center',
+                        width: 30,
+                      },
+                    },
+                  }}
+                  renderArrow={(direction) => (
+                    <Icon
+                      name={direction === 'left' ? 'chevron-left' : 'chevron-right'}
+                      size={24}
+                      color="#008489"
+                    />
+                  )}
                 />
-              )}
+              </View>
+            ),
+          [roomAvailable, markedDates],
+        )}
+        <View style={styles.buttonWrapper}>
+          <View style={{ flex: 1, justifyContent: 'center' }}>
+            <Text style={{ fontSize: SIZE_TEXT_SUBTITLE, color: COLOR_TEXT_TITLE }}>
+              {!fromDate && !toDate && t('home:chooseDate:chooseCheckinDate')}
+              {fromDate && !toDate && t('home:chooseDate:chooseCheckoutDate')}
+              {fromDate &&
+                toDate &&
+                nightSelected &&
+                `${nightSelected} ${t('home:chooseDate:nightSelected')}`}
+            </Text>
+          </View>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
+            <ButtonOriginal
+              width={wp('35%')}
+              title={t('home:chooseDate:next')}
+              customTitleStyle={{ fontSize: SIZE_TEXT_SUBTITLE, padding: 0 }}
+              customStyle={{ backgroundColor: '#008489', height: hp('6%'), maxHeight: 34 }}
+              handlePress={handleShowConfirmBooking}
+              disabled={!fromDate || !toDate}
             />
-          ),
-        [roomAvailable, markedDates],
-      )}
-      <View style={styles.buttonWrapper}>
-        <Text style={{ fontSize: 18 }}>
-          {!fromDate && !toDate && t('home:chooseDate:chooseCheckinDate')}
-          {fromDate && !toDate && t('home:chooseDate:chooseCheckoutDate')}
-          {fromDate &&
-            toDate &&
-            nightSelected &&
-            `${nightSelected} ${t('home:chooseDate:nightSelected')}`}
-        </Text>
-
-        <ButtonOriginal
-          width={wp('25%')}
-          title={t('home:chooseDate:next')}
-          customStyle={{ backgroundColor: '#008489' }}
-          handlePress={handleShowConfirmBooking}
-          disabled={!fromDate || !toDate}
-        />
+          </View>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   buttonWrapper: {
-    paddingVertical: 10,
+    height: 50,
+    flex: 1,
+    // backgroundColor: 'red',
+    // height: '100%',
+    // paddingVertical: 0,
     paddingHorizontal: wp('4%'),
     backgroundColor: 'white',
     borderTopWidth: 1,
     borderColor: '#ccc',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    // display: 'flex',
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
     flexDirection: 'row',
     position: 'absolute',
-    bottom: hp('0%'),
+    bottom: 0,
     width: wp('100%'),
-    height: hp('9%'),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 3,
+    // height: hp('9%'),
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
+    // elevation: 3,
   },
 });
 

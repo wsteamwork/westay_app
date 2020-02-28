@@ -1,14 +1,11 @@
-import React, {FC, useState} from 'react';
-import {StyleSheet, View, Alert, Text} from 'react-native';
-import ListCategory from 'components/GlobalComponents/ListCategory';
-import ListPropertySearch from 'components/ListPropertySearch';
-import {SearchSuggestData} from 'types/Search/SearchResponse';
-import TransitionView from 'components/GlobalComponents/TransitionView';
 import CardWithSideText from 'components/GlobalComponents/CardWithSideText';
+import ListCategory from 'components/GlobalComponents/ListCategory';
+import TransitionView from 'components/GlobalComponents/TransitionView';
+import ListPropertySearch from 'components/ListPropertySearch';
+import React, { FC, useState } from 'react';
+import { Alert, StyleSheet, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Feather from 'react-native-vector-icons/Feather';
-import {wp} from 'utils/responsive';
-import {COLOR_TITLE_HEADER} from 'styles/global.style';
+import { SearchSuggestData } from 'types/Search/SearchResponse';
 
 interface IProps {
 
@@ -47,10 +44,10 @@ const SuggestCityDistrict: FC<IProps> = (props) => {
             />
           </View>
         ) : (
-          <View>
-            <ListPropertySearch />
-          </View>
-        )
+            <View>
+              <ListPropertySearch />
+            </View>
+          )
       }
     </View>
   );

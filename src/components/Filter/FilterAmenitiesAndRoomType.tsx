@@ -1,29 +1,29 @@
 import React, { FC } from 'react';
-import {StyleSheet, View, SectionList, Text, SectionListData} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {hp, wp} from 'utils/responsive';
-import {__currentPlatform} from 'utils/mixins';
+import { SectionList, StyleSheet, Text, View } from 'react-native';
 // @ts-ignore
 import Checkbox from 'react-native-modest-checkbox';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { __currentPlatform } from 'utils/mixins';
+import { hp, wp } from 'utils/responsive';
 
 interface IProps {
   sections: [],
   roomType: [],
   amenities: [],
-  addDataRoomType: (change: any, id: any)=> void,
-  addDataAmenities: (change: any, id: any)=> void,
+  addDataRoomType: (change: any, id: any) => void,
+  addDataAmenities: (change: any, id: any) => void,
 }
 
 const FilterAmenitiesAndRoomType: FC<IProps> = (props) => {
   const {
-          sections,
-          roomType,
-          amenities,
-          addDataRoomType,
-          addDataAmenities,
-        } = props;
+    sections,
+    roomType,
+    amenities,
+    addDataRoomType,
+    addDataAmenities,
+  } = props;
 
-  const _renderItem = ( item:any, i:number ) => {
+  const _renderItem = (item: any, i: number) => {
     return (
       <View key={i}>
         <Checkbox
@@ -31,7 +31,7 @@ const FilterAmenitiesAndRoomType: FC<IProps> = (props) => {
           labelBefore
           uncheckedComponent={
             <Ionicons
-              name={__currentPlatform ? 'md-square-outline' : 'ios-square-outline' }
+              name={__currentPlatform ? 'md-square-outline' : 'ios-square-outline'}
               size={wp('6%')}
             />
           }
@@ -44,10 +44,10 @@ const FilterAmenitiesAndRoomType: FC<IProps> = (props) => {
           label={item.name}
           checked={
             item.type === 1
-              ? roomType.some((i:any) => i.name === item.name)
-              : amenities.some((i:any) => i.name === item.name)
+              ? roomType.some((i: any) => i.name === item.name)
+              : amenities.some((i: any) => i.name === item.name)
           }
-          onChange={(change:any) =>
+          onChange={(change: any) =>
             item.type === 1
               ? addDataRoomType(change, item.id)
               : addDataAmenities(change, item.id)
@@ -58,7 +58,7 @@ const FilterAmenitiesAndRoomType: FC<IProps> = (props) => {
     );
   };
 
-  const _renderSectionHeader = (section:any ) => {
+  const _renderSectionHeader = (section: any) => {
     return (
       <View>
         <Text
@@ -81,8 +81,8 @@ const FilterAmenitiesAndRoomType: FC<IProps> = (props) => {
     <View style={styles.container}>
       <SectionList
         sections={sections}
-        renderItem={({item,index}) =>_renderItem(item,index)}
-        renderSectionHeader={({section})=>_renderSectionHeader(section)}
+        renderItem={({ item, index }) => _renderItem(item, index)}
+        renderSectionHeader={({ section }) => _renderSectionHeader(section)}
         keyExtractor={(item, index) => index.toString()}
         stickySectionHeadersEnabled={true}
         showsVerticalScrollIndicator={false}
@@ -93,9 +93,9 @@ const FilterAmenitiesAndRoomType: FC<IProps> = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: hp('2%'),
+    // marginTop: hp('2%'),
     flex: 1,
-    marginBottom: hp('6.5%')
+    // marginBottom: hp('6.5%')
   },
 });
 

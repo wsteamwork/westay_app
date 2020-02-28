@@ -1,11 +1,12 @@
-import React, { FC, useMemo, useState } from 'react';
-import { StyleSheet, View, Modal, ScrollView, TouchableOpacity } from 'react-native';
-import { Text, Tooltip } from 'react-native-elements';
-import { hp, wp } from 'utils/responsive';
-import SvgUri from 'react-native-svg-uri';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
+import React, { FC, useMemo, useState } from 'react';
+import { Modal, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text, Tooltip } from 'react-native-elements';
+import SvgUri from 'react-native-svg-uri';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
+import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_TITLE, SIZE_TEXT_TITLE } from 'styles/global.style';
+import { hp, wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -40,7 +41,7 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
             ),
         )}
         <TouchableOpacity onPress={() => setCollapsedComfort(true)}>
-          <Text style={{ fontSize: 25, color: 'rgb(84, 211, 194)' }}>
+          <Text style={{ fontSize: 24, color: COLOR_BUTTON_DEFAULT, fontWeight: '400' }}>
             +{listing.total_comforts - 5}
           </Text>
         </TouchableOpacity>
@@ -101,46 +102,46 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                     ))}
                   </View>
                 ) : (
-                  <Text></Text>
-                )}
+                    <Text></Text>
+                  )}
                 {listing.comforts.livingrooms !== undefined &&
-                listing.comforts.livingrooms.length ? (
-                  <View
-                    style={{
-                      marginBottom: hp('3%'),
-                    }}>
-                    <Text
+                  listing.comforts.livingrooms.length ? (
+                    <View
                       style={{
-                        fontSize: 20,
-                        fontWeight: '700',
+                        marginBottom: hp('3%'),
                       }}>
-                      Livingrooms
-                    </Text>
-                    {listing.comforts.livingrooms.map((o: any, i: number) => (
-                      <View
-                        key={i}
+                      <Text
                         style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          flexWrap: 'wrap',
-                          width: wp('90%'),
-                          marginVertical: 10,
+                          fontSize: 20,
+                          fontWeight: '700',
                         }}>
-                        <Text
+                        Livingrooms
+                    </Text>
+                      {listing.comforts.livingrooms.map((o: any, i: number) => (
+                        <View
+                          key={i}
                           style={{
-                            fontSize: 18,
-                            color: '#484848',
-                            textAlignVertical: 'center',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            flexWrap: 'wrap',
+                            width: wp('90%'),
+                            marginVertical: 10,
                           }}>
-                          {o.comfort_trans[0].name}
-                        </Text>
-                        <SvgUri width="28" height="28" source={{ uri: o.icon }} />
-                      </View>
-                    ))}
-                  </View>
-                ) : (
-                  <Text></Text>
-                )}
+                          <Text
+                            style={{
+                              fontSize: 18,
+                              color: '#484848',
+                              textAlignVertical: 'center',
+                            }}>
+                            {o.comfort_trans[0].name}
+                          </Text>
+                          <SvgUri width="28" height="28" source={{ uri: o.icon }} />
+                        </View>
+                      ))}
+                    </View>
+                  ) : (
+                    <Text></Text>
+                  )}
                 {listing.comforts.bedrooms !== undefined && listing.comforts.bedrooms.length ? (
                   <View
                     style={{
@@ -176,8 +177,8 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                     ))}
                   </View>
                 ) : (
-                  <Text></Text>
-                )}
+                    <Text></Text>
+                  )}
                 {listing.comforts.bathrooms !== undefined && listing.comforts.bathrooms.length ? (
                   <View
                     style={{
@@ -213,8 +214,8 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                     ))}
                   </View>
                 ) : (
-                  <Text></Text>
-                )}
+                    <Text></Text>
+                  )}
                 {listing.comforts.kitchens !== undefined && listing.comforts.kitchens.length ? (
                   <View
                     style={{
@@ -250,46 +251,46 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                     ))}
                   </View>
                 ) : (
-                  <Text></Text>
-                )}
+                    <Text></Text>
+                  )}
                 {listing.comforts.entertainment !== undefined &&
-                listing.comforts.entertainment.length ? (
-                  <View
-                    style={{
-                      marginBottom: hp('3%'),
-                    }}>
-                    <Text
+                  listing.comforts.entertainment.length ? (
+                    <View
                       style={{
-                        fontSize: 20,
-                        fontWeight: '700',
+                        marginBottom: hp('3%'),
                       }}>
-                      Entertainment
-                    </Text>
-                    {listing.comforts.entertainment.map((o: any, i: number) => (
-                      <View
-                        key={i}
+                      <Text
                         style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          flexWrap: 'wrap',
-                          width: wp('90%'),
-                          marginVertical: 10,
+                          fontSize: 20,
+                          fontWeight: '700',
                         }}>
-                        <Text
+                        Entertainment
+                    </Text>
+                      {listing.comforts.entertainment.map((o: any, i: number) => (
+                        <View
+                          key={i}
                           style={{
-                            fontSize: 18,
-                            color: '#484848',
-                            textAlignVertical: 'center',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            flexWrap: 'wrap',
+                            width: wp('90%'),
+                            marginVertical: 10,
                           }}>
-                          {o.comfort_trans[0].name}
-                        </Text>
-                        <SvgUri width="28" height="28" source={{ uri: o.icon }} />
-                      </View>
-                    ))}
-                  </View>
-                ) : (
-                  <Text></Text>
-                )}
+                          <Text
+                            style={{
+                              fontSize: 18,
+                              color: '#484848',
+                              textAlignVertical: 'center',
+                            }}>
+                            {o.comfort_trans[0].name}
+                          </Text>
+                          <SvgUri width="28" height="28" source={{ uri: o.icon }} />
+                        </View>
+                      ))}
+                    </View>
+                  ) : (
+                    <Text></Text>
+                  )}
                 {listing.comforts.common !== undefined && listing.comforts.common.length ? (
                   <View
                     style={{
@@ -325,8 +326,8 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                     ))}
                   </View>
                 ) : (
-                  <Text></Text>
-                )}
+                    <Text></Text>
+                  )}
                 {listing.comforts.others !== undefined && listing.comforts.others.length ? (
                   <View
                     style={{
@@ -362,8 +363,8 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                     ))}
                   </View>
                 ) : (
-                  <Text></Text>
-                )}
+                    <Text></Text>
+                  )}
               </View>
             </ScrollView>
           </Modal>
@@ -379,11 +380,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   txtTitle: {
-    fontSize: 24,
+    fontSize: SIZE_TEXT_TITLE,
     marginBottom: hp('2%'),
-    fontWeight: '700',
-    color: '#484848'
-
+    fontWeight: '600',
+    color: COLOR_TEXT_TITLE,
   },
   txtDescription: {
     fontSize: 16,

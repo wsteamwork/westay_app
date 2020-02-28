@@ -1,3 +1,4 @@
+import ContactButton from 'components/ContactButton';
 import CollectionsRectangleCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsRectangleCard';
 import DestinationCard from 'components/GlobalComponents/Cards/DestinationCard';
 import ValuableCard from 'components/GlobalComponents/Cards/ValuableCard';
@@ -21,7 +22,6 @@ import { NumberRoomCity } from 'types/Rooms/RoomResponses';
 import { axios } from 'utils/api';
 import { __currentPlatform } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
-import ContactButton from 'components/ContactButton';
 
 const Home: FC = (props) => {
   const { state } = useContext(AuthContext);
@@ -43,7 +43,6 @@ const Home: FC = (props) => {
   let init = async () => {
     await getDataTypeHouse();
     await getRoomsHomepage(dispatchHome, languageStatus);
-
   };
 
   useEffect(() => {
@@ -174,6 +173,8 @@ const styles = StyleSheet.create({
     height: hp('5%')
   },
   searchComponent: {
+    // marginTop: hp('5%'),
+    paddingTop: hp('5%'),
     paddingBottom: hp('1%'),
     paddingHorizontal: wp('5%'),
   }
