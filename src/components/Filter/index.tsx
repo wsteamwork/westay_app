@@ -1,32 +1,24 @@
-import React, {FC, useEffect, useContext, useState, memo, useMemo} from 'react';
-import {View} from 'react-native';
-import {
-  setInstantBook,
-  setPriceDayFrom,
-  setAmenities,
-  setAccommodationType,
-  setArrayAmenities,
-  setPriceDayTo,
-  setArrayRentType,
-} from 'store/actions/search/searchActions';
-import {useTranslation} from 'react-i18next';
-import {useCheckbox, getDataFilter, __currentPlatform} from 'utils/mixins';
-import {AuthContext} from 'store/context/auth';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
-// @ts-ignore
-import {useDispatch, useSelector} from 'react-redux';
-// @ts-ignore
-import {compose} from 'recompose';
-import LoadingScreen from 'components/GlobalComponents/LoadingScreen';
-import FilterByPrice from 'components/Filter/FilterByPrice';
+import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import FilterActions from 'components/Filter/FilterActions';
 import FilterAmenitiesAndRoomType from 'components/Filter/FilterAmenitiesAndRoomType';
 import FilterByDateAndFastBook from 'components/Filter/FilterByDateAndFastBook';
-import {wp} from 'utils/responsive';
-import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
+import FilterByPrice from 'components/Filter/FilterByPrice';
+import LoadingScreen from 'components/GlobalComponents/LoadingScreen';
+import React, { FC, memo, useContext, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import IonIcons from 'react-native-vector-icons/Ionicons';
-import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import {ReducersList} from 'store/redux/reducers';
+import { NavigationInjectedProps, SafeAreaView, withNavigation } from 'react-navigation';
+// @ts-ignore
+import { useDispatch, useSelector } from 'react-redux';
+// @ts-ignore
+import { compose } from 'recompose';
+import { setAccommodationType, setAmenities, setArrayAmenities, setArrayRentType, setInstantBook, setPriceDayFrom, setPriceDayTo } from 'store/actions/search/searchActions';
+import { AuthContext } from 'store/context/auth';
+import { ReducersList } from 'store/redux/reducers';
+import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { getDataFilter, useCheckbox, __currentPlatform } from 'utils/mixins';
+import { hp, wp } from 'utils/responsive';
 
 interface IProps extends NavigationInjectedProps {
 }
@@ -42,7 +34,7 @@ const Filter: FC<IProps> = (props) => {
   const max_price = useSelector<ReducersList, number | undefined>((state) => state.searchField.max_price);
   const arrayAccommodationType = useSelector<ReducersList, number[]>((state) => state.cityDistrict.arrayRentType);
   const arrayAmenities = useSelector<ReducersList, number[]>(
-    (state:any) => state.cityDistrict.arrayAmenities,
+    (state: any) => state.cityDistrict.arrayAmenities,
   );
   // const [sortByDay, setSortByDay] = useState(rent_type === 2);
   const [sortByFastBook, setSortFastBook] = useState(instant_book === 1);
@@ -63,13 +55,13 @@ const Filter: FC<IProps> = (props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [sections, setSections] = useState<any>([]);
   const [
-          addDataRoomType,
-          typeRoom,
-          setTypeRoom,
-          addDataAmenities,
-          typeAmenities,
-          setTypeAmenities,
-        ] = useCheckbox();
+    addDataRoomType,
+    typeRoom,
+    setTypeRoom,
+    addDataAmenities,
+    typeAmenities,
+    setTypeAmenities,
+  ] = useCheckbox();
 
   const handleReset = () => {
     setTypeRoom([]);
@@ -93,10 +85,10 @@ const Filter: FC<IProps> = (props) => {
   };
   const handleSubmit = () => {
     typeRoom.length
-      ? dispatch(setAccommodationType(typeRoom.map((item:any) => item.id).join(',')))
+      ? dispatch(setAccommodationType(typeRoom.map((item: any) => item.id).join(',')))
       : dispatch(setAccommodationType(null));
     typeAmenities.length
-      ? dispatch(setAmenities(typeAmenities.map((item:any) => item.id).join(',')))
+      ? dispatch(setAmenities(typeAmenities.map((item: any) => item.id).join(',')))
       : dispatch(setAmenities(null));
 
     // sortByDay ? dispatch(setRentType(2)) : dispatch(setRentType(null));
@@ -113,7 +105,7 @@ const Filter: FC<IProps> = (props) => {
     navigation.goBack();
   };
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <HeaderWithBackTitle
         title={t('filter:name')}
         rightComponent={
@@ -127,7 +119,7 @@ const Filter: FC<IProps> = (props) => {
         textHeaderStyle={{ color: COLOR_TEXT_DEFAULT }}
       />
 
-      <View style={{ flex: 1, paddingHorizontal: wp('4%'), backgroundColor:'#fff' }}>
+      <View style={{ flex: 1, paddingHorizontal: wp('4%'), backgroundColor: 'white' }}>
         {useMemo(
           () => (
             <FilterByDateAndFastBook
@@ -164,10 +156,11 @@ const Filter: FC<IProps> = (props) => {
           ),
           [sections, typeRoom, typeAmenities],
         )}
-
-        <FilterActions handleSubmit={handleSubmit} />
+        <View style={{ backgroundColor: 'white', height: hp('8.5%'), justifyContent: 'center', alignItems: 'center' }}>
+          <FilterActions handleSubmit={handleSubmit} />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -8,29 +8,30 @@ interface IProps {
   imageSource?: string;
   hasBadge?: boolean;
   badgeColor?: string;
+  width?: number;
 };
 
 const AvatarWithBadge: FC<IProps> = (props) => {
-  const { rounded, imageSource, hasBadge, badgeColor } = props;
+  const { rounded, imageSource, hasBadge, badgeColor, width } = props;
 
   const styles = StyleSheet.create({
     defaultImageContainer: {
-      width: wp('10%'),
-      height: wp('10%'),
-      borderRadius: 8
+      width: width || wp('10%'),
+      height: width || wp('10%'),
+      borderRadius: 4
     },
     badgeContainer: {
       position: 'absolute',
-      top: wp('7%'),
-      right: -wp('0.5%'),
+      top: wp('8%'),
+      right: -wp('1%'),
       borderRadius: 360,
       backgroundColor: hasBadge && badgeColor ? badgeColor : COLOR_SUCCESS,
       justifyContent: 'center'
     },
     badge: {
       backgroundColor: hasBadge && badgeColor ? badgeColor : COLOR_SUCCESS,
-      width: wp('3.5%'),
-      height: wp('3.5%'),
+      width: wp('3.2%'),
+      height: wp('3.2%'),
       borderRadius: 360
     },
     roundImage: {

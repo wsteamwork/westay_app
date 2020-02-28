@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import { StyleSheet, View, TouchableNativeFeedback } from 'react-native';
+import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
 import { wp } from 'utils/responsive';
 import { Text } from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -25,7 +25,7 @@ const ShowCheckinCheckout: FC<IProps> = (props) => {
   const { movein, moveout } = useSelector<ReducersList, any>((state) => state.ltbooking);
   return (
     <View>
-      <TouchableNativeFeedback style={styles.touchable} onPress={() => navigation.navigate('ChooseDayBookingLT')}>
+      <TouchableWithoutFeedback style={styles.touchable} onPress={() => navigation.navigate('ChooseDayBookingLT')}>
         <View style={styles.container}>
           <Text style={styles.title}>Date</Text>
           <View style={styles.showDate}>
@@ -35,7 +35,7 @@ const ShowCheckinCheckout: FC<IProps> = (props) => {
             <Entypo name="chevron-right" size={25} color="#484848" />
           </View>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableWithoutFeedback>
     </View>
   );
 };

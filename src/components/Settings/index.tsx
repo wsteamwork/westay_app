@@ -4,7 +4,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  TouchableNativeFeedback,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import _ from 'lodash';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
@@ -104,36 +104,36 @@ const Settings: FC<IProps> = (props) => {
           </View>
           <Divider style={{ backgroundColor: '#bcbcbc' }} />
         </View>
-        <TouchableNativeFeedback onPress={() => setVisibleCurrency(true)}>
+        <TouchableWithoutFeedback onPress={() => setVisibleCurrency(true)}>
           <View style={styles.viewItem1}>
             <Text style={styles.textTitleItem}>{t('account:settings:notification')}</Text>
             <EvilIcons name="bell" size={25} color="#adadad" />
             {/* <Notification isVisible={visibleCurrency} onClose={()=>setVisibleCurrency(false)}/> */}
           </View>
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
         <Divider style={{ backgroundColor: '#bcbcbc' }} />
-        <TouchableNativeFeedback onPress={() => navigation.navigate('PrivacyPolicy')}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('PrivacyPolicy')}>
           <View style={styles.viewItem1}>
             <Text style={styles.textTitleItem}>{t('account:settings:privatePolicy')}</Text>
             <Entypo name="chevron-right" size={25} color="#adadad" />
 
           </View>
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
         <Divider style={{ backgroundColor: '#bcbcbc' }} />
-        <TouchableNativeFeedback onPress={() => navigation.navigate('TermsAndConditions')}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('TermsAndConditions')}>
           <View style={styles.viewItem1}>
             <Text style={styles.textTitleItem}>{t('account:settings:termsAndConditions')}</Text>
             <Entypo name="chevron-right" size={25} color="#adadad" />
           </View>
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
         <Divider style={{ backgroundColor: '#bcbcbc' }} />
         {token && (
           <View>
-            <TouchableNativeFeedback onPress={() => navigation.navigate('ForgotPassword')}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('ForgotPassword')}>
               <View style={styles.viewItem1}>
                 <Text style={styles.textTitleItem}>{t('account:settings:password')}</Text>
               </View>
-            </TouchableNativeFeedback>
+            </TouchableWithoutFeedback>
             <Divider style={{ backgroundColor: '#bcbcbc' }} />
             <TouchableOpacity onPress={handleLogout}>
               <View style={styles.viewItem1}>

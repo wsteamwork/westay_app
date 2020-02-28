@@ -1,59 +1,25 @@
-import React, {
-  FC,
-  useState,
-  useEffect,
-  useReducer,
-  useMemo,
-  useContext,
-  SyntheticEvent,
-} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  StatusBar,
-  Animated,
-  Keyboard,
-  NativeSyntheticEvent,
-  TextInputSubmitEditingEventData,
-  ScrollView,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
-import SearchInput from './SearchInput';
-import { wp, hp } from 'utils/responsive';
-import {
-  COLOR_TEXT_SUBTITLE,
-  SIZE_TEXT_TITLE_MEDIUM,
-  SIZE_TEXT_CONTENT,
-  COLOR_TEXT_DEFAULT,
-} from 'styles/global.style';
-import { SearchSuggestData, SearchSuggestRes } from 'types/Search/SearchResponse';
+import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import ModalChooseGuest from 'components/SearchComponent/ChooseGuest/ModalChooseGuest';
 import ModalChooseDate from 'components/SearchComponent/ChooseDate/ModalChooseDate';
-import {
-  RoomDetailContext,
-  roomReducer,
-  initStateRoom,
-} from 'store/context/room/RoomDetailContext';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { AuthContext } from 'store/context/auth';
-import { useDispatch, useSelector } from 'react-redux';
+import ModalChooseGuest from 'components/SearchComponent/ChooseGuest/ModalChooseGuest';
+import InputSearchFake from 'components/SearchComponent/InputSearchFake';
+import moment from 'moment';
+import React, { FC, useContext, useMemo, useReducer, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Animated, Keyboard, StyleSheet, Text, View } from 'react-native';
+import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { NavigationInjectedProps, withNavigation, SafeAreaView } from 'react-navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCityDistrict, setEmptyCityDistrict, setSearchText } from 'store/actions/search/searchActions';
+import { AuthContext } from 'store/context/auth';
+import { initStateRoom, RoomDetailContext, roomReducer } from 'store/context/room/RoomDetailContext';
 import { ReducersList } from 'store/redux/reducers';
-import {
-  setCityDistrict,
-  setEmptyCityDistrict,
-  setSearchText,
-} from 'store/actions/search/searchActions';
+import { COLOR_TEXT_DEFAULT, COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE, SIZE_TEXT_CONTENT, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
+import { SearchSuggestData, SearchSuggestRes } from 'types/Search/SearchResponse';
+import { hp, wp } from 'utils/responsive';
+import SearchInput from './SearchInput';
 import SearchNotFound from './SearchNotFound';
 import SectionListInput from './SectionListInput';
-import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import * as Animatable from 'react-native-animatable';
-import InputSearchFake from 'components/SearchComponent/InputSearchFake';
-import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import moment from 'moment';
 
 interface IProps extends NavigationInjectedProps {
   showInfoGuestAndDates?: boolean;
@@ -71,11 +37,11 @@ const SearchComponent: FC<IProps> = (props) => {
     navigation,
   } = props;
   const [dataSearchSuggest, setDataSearchSuggest] = useState<Array<SearchSuggestData>>([]);
-  const [modalGuest, setModalGuest]               = useState<boolean>(false);
-  const [modalDate, setModalDate]                 = useState<boolean>(false);
-  const [animation]                               = useState(new Animated.Value(0));
+  const [modalGuest, setModalGuest] = useState<boolean>(false);
+  const [modalDate, setModalDate] = useState<boolean>(false);
+  const [animation] = useState(new Animated.Value(0));
   const searchText = useSelector<ReducersList, string | undefined>(state => state.searchField.name);
-  const [searchTxt, setSearchTxt]               = useState<string | undefined>(searchText);
+  const [searchTxt, setSearchTxt] = useState<string | undefined>(searchText);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { state } = useContext(AuthContext);
@@ -136,30 +102,30 @@ const SearchComponent: FC<IProps> = (props) => {
   };
 
   return (
-    <RoomDetailContext.Provider value={{ stateRoom, dispatchRoomDetail }}>
-      <HeaderWithBackTitle title="Search" />
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <RoomDetailContext.Provider value={{ stateRoom, dispatchRoomDetail }}>
+        <HeaderWithBackTitle title="Search" />
 
-      <View style = {[styles.container, styleContainer]}>
-
+        <View style={[styles.container, styleContainer]}>
           {useMemo(
             () => (
               <View>
                 {showInputFake ? (
-                  <InputSearchFake/>
+                  <InputSearchFake />
                 ) : (
-                  <SearchInput value = {searchTxt} _onChangeText = {(value => handleChange(value))} _onClear={handleClear}
-                               _onKeyPress = {(e) => onEndEditing(e)} />
-                )}
+                    <SearchInput value={searchTxt} _onChangeText={(value => handleChange(value))} _onClear={handleClear}
+                      _onKeyPress={(e) => onEndEditing(e)} />
+                  )}
               </View>
             ),
             [searchTxt],
           )}
 
           {showInfoGuestAndDates && (
-            <View style = {styles.boxInfo}>
-              <TouchableWithScale style = {styles.boxDate} _onPress = {() => setModalDate(!modalDate)}>
-                <Text style = {{color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT}}>Choose Date</Text>
-                <Text style = {styles.txtDate}>
+            <View style={styles.boxInfo}>
+              <TouchableWithScale style={styles.boxDate} _onPress={() => setModalDate(!modalDate)}>
+                <Text style={{ color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT }}>Choose Date</Text>
+                <Text style={styles.txtDate}>
                   {!check_in ? t('home:chooseDate:check_in') :
                     moment(check_in).format('MMM DD')
                   }
@@ -169,11 +135,11 @@ const SearchComponent: FC<IProps> = (props) => {
                   }
                 </Text>
               </TouchableWithScale>
-              <View style = {styles.lineVertical} />
-              <TouchableWithScale style = {styles.boxDate} _onPress = {() => setModalGuest(!modalGuest)}>
-                <Text style = {{color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT}}>Number of Rooms</Text>
-                <Text style = {styles.txtDate}>
-                  {number_guest+ ' ' + t('home:choosePeople:guest')}
+              <View style={styles.lineVertical} />
+              <TouchableWithScale style={styles.boxDate} _onPress={() => setModalGuest(!modalGuest)}>
+                <Text style={{ color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT }}>Number of Rooms</Text>
+                <Text style={styles.txtDate}>
+                  {number_guest + ' ' + t('home:choosePeople:guest')}
                   &nbsp;-&nbsp;
                   {number_room + ' ' + t('home:choosePeople:room')}
 
@@ -182,48 +148,49 @@ const SearchComponent: FC<IProps> = (props) => {
             </View>
           )}
 
-        {useMemo(
-          () =>
-            showListSuggest && (
-              <View
-                style={{
-                  flex: 1,
-                  paddingTop: hp('3%'),
-                }}>
-                {!city_district ? (
-                  <SearchNotFound historySearch={historySearch} />
-                ) : Array.isArray(city_district) && !city_district.length ? (
-                  <View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                      <IconFontAwesome5
-                        name="search-location"
-                        size={wp('4%')}
-                        color={COLOR_TEXT_DEFAULT}
-                      />
-                      <Text style={styles.textNoResult}>{t('home:searchInput:noResult')}</Text>
-                    </View>
-
+          {useMemo(
+            () =>
+              showListSuggest && (
+                <View
+                  style={{
+                    flex: 1,
+                    // paddingTop: hp('3%'),
+                  }}>
+                  {!city_district ? (
                     <SearchNotFound historySearch={historySearch} />
-                  </View>
-                ) : (
-                  <SectionListInput sections={sections} />
-                )}
-              </View>
-            ),
-          [city_district, historySearch, sections],
-        )}
-      </View>
-      <ModalChooseGuest open={modalGuest} setClose={setModalGuest} />
-      <ModalChooseDate open={modalDate} setClose={setModalDate} />
-    </RoomDetailContext.Provider>
+                  ) : Array.isArray(city_district) && !city_district.length ? (
+                    <View>
+                      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <IconFontAwesome5
+                          name="search-location"
+                          size={wp('4%')}
+                          color={COLOR_TEXT_DEFAULT}
+                        />
+                        <Text style={styles.textNoResult}>{t('home:searchInput:noResult')}</Text>
+                      </View>
+
+                      <SearchNotFound historySearch={historySearch} />
+                    </View>
+                  ) : (
+                        <SectionListInput sections={sections} />
+                      )}
+                </View>
+              ),
+            [city_district, historySearch, sections],
+          )}
+        </View>
+        <ModalChooseGuest open={modalGuest} setClose={setModalGuest} />
+        <ModalChooseDate open={modalDate} setClose={setModalDate} />
+      </RoomDetailContext.Provider>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: wp('5%'),
-    paddingTop: hp('2%'),
-    backgroundColor: '#f6f6f6',
+    paddingHorizontal: wp('4%'),
+    // paddingTop: hp('2%'),
+    backgroundColor: 'white',
     position: 'relative',
     flex: 1,
   },
@@ -244,13 +211,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   txtDate: {
-    fontWeight: '700',
-    fontSize: SIZE_TEXT_TITLE_MEDIUM,
+    fontWeight: '500',
+    color: COLOR_TEXT_TITLE,
+    fontSize: SIZE_TEXT_SUBTITLE,
   },
   textNoResult: {
     fontSize: wp('4%'),
     color: COLOR_TEXT_DEFAULT,
-    fontWeight: '700',
+    fontWeight: '500',
     paddingLeft: wp('5%'),
   },
 });

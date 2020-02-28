@@ -173,6 +173,8 @@ const styles = StyleSheet.create({
     height: hp('5%')
   },
   searchComponent: {
+    // marginTop: hp('5%'),
+    paddingTop: hp('5%'),
     paddingBottom: hp('1%'),
     paddingHorizontal: wp('5%'),
   }

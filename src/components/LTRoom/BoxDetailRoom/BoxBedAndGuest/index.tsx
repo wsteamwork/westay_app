@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { wp, hp } from 'utils/responsive';
 import { Text } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/EvilIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 import Foundation from 'react-native-vector-icons/Foundation';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-import _ from 'lodash';
+import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE } from 'styles/global.style';
+import { wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -24,7 +23,7 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
   return (
     <View style={styles.container}>
       <View
-        style={{ flexDirection: 'row', marginBottom: hp('3%'), justifyContent: 'space-between' }}>
+        style={{ flexDirection: 'row', marginBottom: 6, justifyContent: 'space-between' }}>
         <View
           style={{
             flexDirection: 'column',
@@ -32,8 +31,8 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             alignItems: 'center',
             width: wp('30%'),
           }}>
-          <FontAwesomeIcon name="building" size={24} color="#666666" />
-          <Text style={styles.txtNameHost}>{listing.accommodation_type_txt}</Text>
+          <FontAwesomeIcon name="building" size={22} color="#666666" />
+          <Text style={styles.txtTitle}>{listing.accommodation_type_txt}</Text>
         </View>
         <View
           style={{
@@ -42,8 +41,8 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             alignItems: 'center',
             width: wp('30%'),
           }}>
-          <FontAwesomeIcon5 name="door-open" size={24} color="#666666" />
-          <Text style={styles.txtNameHost}>{listing.bedrooms.number_bedroom} bedrooms</Text>
+          <FontAwesomeIcon5 name="door-open" size={22} color="#666666" />
+          <Text style={styles.txtTitle}>{listing.bedrooms.number_bedroom} bedrooms</Text>
         </View>
         <View
           style={{
@@ -52,8 +51,8 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             alignItems: 'center',
             width: wp('30%'),
           }}>
-          <Foundation name="annotate" size={24} color="#666666" />
-          <Text style={styles.txtNameHost}>{listing.total_area} m2</Text>
+          <Foundation name="annotate" size={22} color="#666666" />
+          <Text style={styles.txtTitle}>{listing.total_area} m2</Text>
         </View>
       </View>
       <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'space-around' }}>
@@ -64,8 +63,8 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             alignItems: 'center',
             width: wp('30%'),
           }}>
-          <FontAwesomeIcon name="bath" size={24} color="#666666" />
-          <Text style={styles.txtNameHost}>{listing.bathrooms.number_bathroom} bathrooms</Text>
+          <FontAwesomeIcon name="bath" size={22} color="#666666" />
+          <Text style={styles.txtTitle}>{listing.bathrooms.number_bathroom} bathrooms</Text>
         </View>
         <View
           style={{
@@ -74,8 +73,8 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             alignItems: 'center',
             width: wp('30%'),
           }}>
-          <FontAwesomeIcon name="wifi" size={24} color="#666666" />
-          <Text style={styles.txtNameHost}>{listing.total_comforts} amenities</Text>
+          <FontAwesomeIcon name="wifi" size={22} color="#666666" />
+          <Text style={styles.txtTitle}>{listing.total_comforts} amenities</Text>
         </View>
         <View
           style={{
@@ -84,8 +83,8 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             alignItems: 'center',
             width: wp('30%'),
           }}>
-          <FontAwesomeIcon5 name="users" size={24} color="#666666" />
-          <Text style={styles.txtNameHost}>{listing.guests.recommendation} guests</Text>
+          <FontAwesomeIcon5 name="users" size={22} color="#666666" />
+          <Text style={styles.txtTitle}>{listing.guests.recommendation} guests</Text>
           <Text style={styles.txtMaxGuest}>(Max {listing.guests.max_additional_guest + listing.guests.recommendation} guests)</Text>
         </View>
       </View>
@@ -97,17 +96,16 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
   },
-  txtNameUser: {
-    fontSize: 14,
-  },
-  txtNameHost: {
-    fontSize: 14,
-    marginTop: hp('1%'),
-    fontWeight: '600',
+  txtTitle: {
+    fontSize: 13,
+    color: COLOR_TEXT_TITLE,
+    marginTop: 6,
+    fontWeight: '400',
   },
   txtMaxGuest: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 11,
+    color: COLOR_TEXT_SUBTITLE,
+    fontWeight: '400',
   },
 });
 BoxBedAndGuest.defaultProps = {};

@@ -76,35 +76,38 @@ const BoxDetailRoom: FC<IProps> = (props) => {
     setMediaToTal(images);
   }, []);
   return (
-    <View style={{backgroundColor:'white'}}>
-      <ScrollView style={{ marginBottom: hp('8%'), backgroundColor:'white'}}>
+    <View style={{ backgroundColor: 'white' }}>
+      <ScrollView style={{ marginBottom: 50, backgroundColor: 'white' }}>
         <View>
           <BoxImageRoom arrImages={mediaToTal} />
         </View>
         <View style={styles.container}>
           <BoxInfoRoom />
-          <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
+          <Divider style={{ backgroundColor: '#8AA9896d', marginVertical: 10 }} />
           <BoxInfoHost />
-          <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
+          <Divider style={{ backgroundColor: '#8AA9896d', marginVertical: 10 }} />
           <BoxBedAndGuest />
-          <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
+          <Divider style={{ backgroundColor: '#8AA9896d', marginVertical: 10 }} />
           <BoxDescriptionRoom />
-          <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
+          <Divider style={{ backgroundColor: '#8AA9896d', marginVertical: 10 }} />
           <BoxImageDetail arrImages={mediaToTal} />
-          <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
+          <Divider style={{ backgroundColor: '#8AA9896d', marginVertical: 10 }} />
           <BoxAmenitiesRoom />
         </View>
         <View>
+          <BoxPriceLTRoom />
+          <Divider style={{ backgroundColor: '#8AA9896d' }} />
+          <BoxIncludedFee />
+          <Divider style={{ backgroundColor: '#8AA9896d' }} />
+        </View>
+
+        <View>
           <BoxCircleMapRoom />
         </View>
-        <View>
-          <BoxPriceLTRoom />
-          <Divider style={{ backgroundColor: '#bcbcbc' }} />
-          <BoxIncludedFee />
-          <Divider style={{ backgroundColor: '#bcbcbc' }} />
-        </View>
       </ScrollView>
-      <BoxBookingRoom />
+      <View>
+        <BoxBookingRoom />
+      </View>
     </View>
   );
 };

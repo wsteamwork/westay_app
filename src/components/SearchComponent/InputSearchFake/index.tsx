@@ -1,4 +1,3 @@
-import { hp } from 'components/Utils/responsive.style';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -6,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { COLOR_TEXT_DEFAULT, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
 import { elevationShadowStyle } from 'utils/mixins';
 import { wp } from 'utils/responsive';
 
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: '5%',
   },
   containerStyleInput: {
-    marginTop: hp('5%'),
+    // marginTop: hp('5%'),
     borderRadius: 50,
     flexDirection: 'row',
     alignItems: 'center',
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
     height: 45,
   },
   textSearchText: {
-    fontSize: wp('4%'),
+    fontSize: SIZE_TEXT_SUBTITLE,
     marginLeft: wp('4%'),
     color: COLOR_TEXT_DEFAULT,
     fontWeight: '400',

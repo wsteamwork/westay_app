@@ -27,7 +27,7 @@ const BoxIntroRoom: FC<IProps> = (props) => {
         title={listing.about_room.name.length > 45 ? `${listing.about_room.name.substr(0, 45)}...` : listing.about_room.name}
         price={`$${listing.price_display}`}
         info={['1 Month', `${listing.district.data.name}, ${listing.city.data.name}`]}
-        button={{ title: 'Check Availability', icon: '', buttonStyle: styles.buttonStyle }}
+        button={{ title: 'Check Availability', icon: '', buttonStyle: styles.buttonStyle, titleStyle: styles.buttonTitleStyle }}
         containerStyle={styles.containerStyle}
         titleStyle={styles.titleStyle}
         pricingStyle={styles.pricingStyle}
@@ -37,6 +37,8 @@ const BoxIntroRoom: FC<IProps> = (props) => {
         customStyle={{ height: 44 }}
         title="More Detail"
         iconRight={true}
+        customTitleStyle={{ fontSize: 15 }}
+        // titleStyle={{}}
         icon={<Icon name="chevrons-down" size={18} color="white" />}
         useViewComponent={false}
         handlePress={() => navigation.navigate('BoxDetailRoom')}
@@ -62,6 +64,10 @@ const styles = StyleSheet.create({
     borderRadius: 360,
     width: wp('85%'),
     height: 44,
+  },
+  buttonTitleStyle: {
+    fontSize: 15,
+    fontWeight: '500'
   },
   titleStyle: {
     fontSize: SIZE_TEXT_TITLE + 2,

@@ -1,14 +1,16 @@
 import React, { FC, ReactChild } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE, LIGHT, NORMAL, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE_FLATLIST } from 'styles/global.style';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE, LIGHT, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE_FLATLIST } from 'styles/global.style';
 import { wp } from 'utils/responsive';
+import Shield from '../../../static/shield.svg';
 import AvatarWithBadge from '../AvatarWithBadge';
-import TouchableWithScale from '../TouchableComponent/TouchableWithScale';
+// import TouchableWithScaleAnimation from '../TouchableWithScaleAnimation';
 interface IProps {
   imageSource?: string;
   imagePosition?: 'Left' | 'Right';
-  title: string;
-  subtitle?: string;
+  title: ReactChild;
+  noAnimate?: boolean;
+  subtitle?: ReactChild;
   rounded?: boolean;
   hasImage?: boolean;
   icon?: ReactChild;
@@ -16,29 +18,30 @@ interface IProps {
   badgeColor?: string;
   onPress?: (item: any) => any;
   titleTextStyle?: Object;
+  infoBoxStyle?: Object;
+  rightInfo?: ReactChild;
+  widthImage?: number;
+  imageContainerStyle?: object;
+  hasVerified?: boolean;
 };
 
 const CardWithSideText: FC<IProps> = (props) => {
-  const { imageSource, imagePosition, title, subtitle, rounded, hasImage, icon, hasBadge, badgeColor, onPress, titleTextStyle } = props;
+  const { imageSource, imagePosition, title, subtitle, rounded, hasImage, icon, hasBadge, badgeColor, onPress, titleTextStyle, rightInfo, widthImage, infoBoxStyle, imageContainerStyle, noAnimate, hasVerified } = props;
 
   const styles = StyleSheet.create({
     outerPadding: {
       padding: 0,
     },
     container: {
-      height: wp('12%'),
-      flex: 1,
+      // height: wp('12%'),
+      // backgroundColor: 'red'
     },
     imageContainer: {
+      alignItems: 'center',
       padding: 4,
       flex: 1,
       flexDirection: imagePosition === 'Left' ? 'row' : 'row-reverse',
-      paddingHorizontal: 20,
-    },
-    defaultImageContainer: {
-      width: wp('10%'),
-      height: wp('10%'),
-      borderRadius: 8
+      paddingHorizontal: 10,
     },
     roundImage: {
       borderRadius: 360,
@@ -46,23 +49,30 @@ const CardWithSideText: FC<IProps> = (props) => {
     imageStyle: {
     },
     infoTextContainer: {
-      padding: 4,
-      height: wp('10%'),
-      justifyContent: 'center',
+      height: widthImage || wp('10%'),
+      // justifyContent: 'space-between',
       alignItems: 'flex-start',
       flex: 9,
-      paddingHorizontal: 10
+      paddingHorizontal: 8
     },
     titleContainer: {
-
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      // flex: 1
     },
     titleText: {
+      // paddingBottom: 2,
+      paddingLeft: 6,
+      // backgroundColor: 'red',
       fontSize: SIZE_TEXT_TITLE_FLATLIST,
-      fontWeight: NORMAL,
+      fontWeight: SEMI_BOLD,
       color: COLOR_TEXT_TITLE
     },
     subtitleContainer: {
-
+      paddingLeft: 6,
+      width: wp('100%'),
+      // justifyContent: 'flex-start',
     },
     subtitleText: {
       fontSize: SIZE_TEXT_CONTENT,
@@ -71,25 +81,26 @@ const CardWithSideText: FC<IProps> = (props) => {
     },
     iconContainer: {
       padding: 4,
-      // backgroundColor: 'red',
+      backgroundColor: 'white',
       height: wp('10%'),
       justifyContent: 'center',
       alignItems: imagePosition === 'Left' ? 'flex-end' : 'flex-start',
-      flex: 1,
+      // flex: 3,
       paddingHorizontal: imagePosition === 'Left' ? 4 : 0,
       paddingRight: imagePosition === 'Left' ? 0 : 4,
     }
   });
 
   return (
-    <TouchableWithScale
-      _onPress={onPress}
+    <TouchableWithoutFeedback
+      onPress={onPress}
     >
       <View style={styles.outerPadding}>
         <View style={styles.container}>
-          <View style={[styles.imageContainer]}>
+          <View style={[styles.imageContainer, imageContainerStyle]}>
             {hasImage ? (
               <AvatarWithBadge
+                width={widthImage}
                 imageSource={imageSource}
                 hasBadge={hasBadge}
                 rounded={rounded}
@@ -98,18 +109,23 @@ const CardWithSideText: FC<IProps> = (props) => {
             ) : <View></View>
             }
 
-            <View style={styles.infoTextContainer}>
-              <View style={styles.titleContainer}>
-                <Text style={[styles.titleText, titleTextStyle]}>{title}</Text>
+            <View style={[styles.infoTextContainer, infoBoxStyle]}>
+              <View style={[styles.titleContainer]}>
+                {hasVerified ? (<Shield width={14} height={14} />) : (null)}
+                <Text ellipsizeMode={"tail"} numberOfLines={2} style={[styles.titleText, titleTextStyle]}>{title}</Text>
+              </View>
+              <View style={styles.subtitleContainer}>
+                {subtitle}
               </View>
             </View>
             <View style={styles.iconContainer}>
               {icon}
+              {rightInfo}
             </View>
           </View>
         </View>
       </View>
-    </TouchableWithScale>
+    </TouchableWithoutFeedback>
   );
 };
 

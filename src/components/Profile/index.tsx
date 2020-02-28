@@ -3,7 +3,7 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  TouchableNativeFeedback,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import _ from 'lodash';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
@@ -29,19 +29,19 @@ const Profile: FC<IProps> = (props) => {
       <Text style={styles.titleText}>Phạm Đức Nhất</Text>
       <ScrollView style={styles.scrollView}>
         <Divider style={{ backgroundColor: '#bcbcbc' }} />
-        <TouchableNativeFeedback onPress={() => navigation.navigate('EditProfile')}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('EditProfile')}>
           <View style={styles.viewItem1}>
             <Text style={styles.textTitleItem}>{t('account:profile:name')}</Text>
             <Entypo name="chevron-right" size={25} color="#adadad" />
           </View>
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
         <Divider style={{ backgroundColor: '#bcbcbc' }} />
-        <TouchableNativeFeedback onPress={() => navigation.navigate('Settings')}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('Settings')}>
           <View style={styles.viewItem1}>
             <Text style={styles.textTitleItem}>{t('account:settings:name')}</Text>
             <Entypo name="chevron-right" size={25} color="#adadad" />
           </View>
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
         <Divider style={{ backgroundColor: '#bcbcbc' }} />
       </ScrollView>
     </View>

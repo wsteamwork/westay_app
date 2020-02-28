@@ -1,12 +1,12 @@
+import { wp } from 'components/Utils/responsive.style';
 import React, { FC } from 'react';
-import {View, Text, StyleSheet, Platform, StatusBar} from 'react-native';
+import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
 import IonIcons from 'react-native-vector-icons/Ionicons';
-import { wp, hp } from 'components/Utils/responsive.style';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { COLOR_TEXT_DEFAULT, COLOR_TEXT_TITLE, SIZE_TEXT_TITLE } from 'styles/global.style';
 
 const checkISO = Platform.OS === 'ios';
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   title?: string;
   showBack?: boolean;
   handlePress?: any;
@@ -14,7 +14,7 @@ interface IProps extends NavigationInjectedProps{
   containerStyle?: any;
   rightComponent?: any;
 }
-const HeaderWithBackTitle : FC<IProps> = (props) => {
+const HeaderWithBackTitle: FC<IProps> = (props) => {
   const {
     title,
     showBack,
@@ -31,7 +31,7 @@ const HeaderWithBackTitle : FC<IProps> = (props) => {
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <View style={{ width: wp('10%')}}>
+      <View style={{ width: wp('10%') }}>
         {showBack && (
           <IonIcons
             name={checkISO ? 'ios-arrow-back' : 'md-arrow-back'}
@@ -61,15 +61,17 @@ const styles = StyleSheet.create({
     paddingVertical: StatusBar.currentHeight,
     alignItems: 'center',
     flexDirection: 'row',
+    // marginTop: 32,
+    marginBottom: 10,
     paddingHorizontal: wp('5%'),
-    height: hp('8%'),
+    height: 40,
     backgroundColor: '#fff'
   },
   textHeader: {
     flex: 1,
-    fontWeight: '700',
-    fontSize: wp('5.5%'),
-    color: COLOR_TEXT_DEFAULT,
+    fontWeight: '400',
+    fontSize: SIZE_TEXT_TITLE,
+    color: COLOR_TEXT_TITLE,
     textAlign: 'center',
   },
 });

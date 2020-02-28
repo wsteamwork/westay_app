@@ -1,23 +1,15 @@
-import React, { FC, useState, useMemo } from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  Modal,
-} from 'react-native';
-import { hp, wp } from 'utils/responsive';
+import React, { FC, useMemo, useState } from 'react';
+import { Image, Modal, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Button, Text } from 'react-native-elements';
+// @ts-ignore
+import ImageViewer from 'react-native-image-zoom-viewer';
 import Swiper from 'react-native-swiper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { Button, Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-// @ts-ignore
-import ImageViewer from 'react-native-image-zoom-viewer';
-import _ from 'lodash';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { hp, wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -60,7 +52,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
     <View style={styles.boxImage}>
       {useMemo(
         () => (
-          <Swiper autoplay showsPagination={false}>
+          <Swiper autoplay={false} showsPagination={true} paginationStyle={{ bottom: 4 }} activeDotColor={COLOR_BUTTON_DEFAULT}>
             {arrImages.map((o: any, i: number) => (
               <TouchableWithoutFeedback
                 key={i}
@@ -106,17 +98,17 @@ const BoxImageRoom: FC<IProps> = (props) => {
       )}
       {/* {useMemo(
         () => ( */}
-          <Modal visible={isImageViewVisible} transparent={true}>
-            <ImageViewer
-              imageUrls={arrImages}
-              index={indexImage}
-              enableSwipeDown={true}
-              onSwipeDown={closeModal}
-              onCancel={closeModal}
-              renderFooter={footer}
-            />
-          </Modal>
-        {/* ),
+      <Modal visible={isImageViewVisible} transparent={true}>
+        <ImageViewer
+          imageUrls={arrImages}
+          index={indexImage}
+          enableSwipeDown={true}
+          onSwipeDown={closeModal}
+          onCancel={closeModal}
+          renderFooter={footer}
+        />
+      </Modal>
+      {/* ),
         [indexImage, isImageViewVisible, arrImages],
       )} */}
     </View>
@@ -125,7 +117,8 @@ const BoxImageRoom: FC<IProps> = (props) => {
 
 const styles = StyleSheet.create({
   boxImage: {
-    height: hp('35%'),
+    height: hp('40%'),
+    maxHeight: 400,
     backgroundColor: 'transparent',
   },
   slider: {

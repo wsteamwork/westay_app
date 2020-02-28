@@ -1,19 +1,19 @@
-import React, { FC, useContext, useState, Dispatch, useEffect, useMemo } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { AuthContext } from 'store/context/auth';
-import { hp, wp } from 'utils/responsive';
-import { ReducersList } from 'store/redux/reducers';
-import { LTRoomReducerAction, getRoomAvailableDate } from 'store/redux/reducers/LTRoom/RoomDetails';
-import { CalendarList, LocaleConfig } from 'react-native-calendars';
-import { Text, Icon } from 'react-native-elements';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import XDate from 'xdate';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import ShowChooseDate from './ShowChooseDate';
+import React, { Dispatch, FC, useContext, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { StyleSheet, View } from 'react-native';
+import { CalendarList, LocaleConfig } from 'react-native-calendars';
+import { Icon, Text } from 'react-native-elements';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { AuthContext } from 'store/context/auth';
+import { ReducersList } from 'store/redux/reducers';
 import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
+import { getRoomAvailableDate, LTRoomReducerAction } from 'store/redux/reducers/LTRoom/RoomDetails';
+import { hp, wp } from 'utils/responsive';
+import XDate from 'xdate';
+import ShowChooseDate from './ShowChooseDate';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -201,12 +201,12 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
                 Đặt lại
               </Text>
             ) : (
-              <Text></Text>
-            )
+                <Text></Text>
+              )
           }
           containerStyle={{ paddingHorizontal: wp('8%') }}
         />
-        <ShowChooseDate fromDate={fromDate} toDate={toDate}/>
+        <ShowChooseDate fromDate={fromDate} toDate={toDate} />
       </View>
 
       {useMemo(

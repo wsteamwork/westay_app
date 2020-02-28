@@ -1,7 +1,6 @@
-import { hp } from 'utils/responsive';
-import React, { FC } from 'react';
-import { StyleSheet, View } from 'react-native';
 import SearchComponent from 'components/SearchComponent';
+import React, { FC } from 'react';
+import { StyleSheet } from 'react-native';
 interface IProps {
 };
 
@@ -9,7 +8,7 @@ const Search: FC<IProps> = (props) => {
   const { } = props;
 
   return (
-    <SearchComponent />
+    <SearchComponent showInfoGuestAndDates={false} />
   );
 };
 

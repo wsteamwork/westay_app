@@ -1,16 +1,15 @@
 'use strict';
-import React, {FC, useState, useEffect} from 'react';
-import {StyleSheet, View, Text, FlatList, FlatListProps} from 'react-native';
-import {wp, hp} from 'utils/responsive';
-import {__currentPlatform} from 'utils/mixins';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
-import IonIcons                   from 'react-native-vector-icons/Ionicons';
-import moment from 'moment';
-import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import {useTranslation} from 'react-i18next';
-import {Moment} from 'moment';
 import Month from 'components/GlobalComponents/RangeDatepicker/Month';
+import ButtonOriginal from 'components/Utils/ButtonOriginal';
+import moment, { Moment } from 'moment';
+import React, { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import IonIcons from 'react-native-vector-icons/Ionicons';
+import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { __currentPlatform } from 'utils/mixins';
+import { hp, wp } from 'utils/responsive';
 
 interface IProps {
   horizontal?: boolean,
@@ -29,9 +28,9 @@ interface IProps {
   showReset?: boolean,
   showClose?: boolean,
   ignoreMinDate?: boolean,
-  onClose?: ()=> any,
-  onSelect: (to:any, from:any)=> any,
-  onConfirm?: (to:any, from:any)=> any,
+  onClose?: () => any,
+  onSelect: (to: any, from: any) => any,
+  onConfirm?: (to: any, from: any) => any,
   placeHolderStart?: string,
   placeHolderUntil?: string,
   // placeHolderClose: string,
@@ -43,12 +42,12 @@ interface IProps {
   infoText?: string,
   infoStyle?: object,
   infoContainerStyle?: object,
-  days?:any
+  days?: any
 }
 
 const RangeDatepicker: FC<IProps> = (props) => {
-  const {t} = useTranslation();
-  const {selectedBackgroundColor, selectedTextColor, todayColor , betweenSelectedColor, priceByDay, maxMonth} = props;
+  const { t } = useTranslation();
+  const { selectedBackgroundColor, selectedTextColor, todayColor, betweenSelectedColor, priceByDay, maxMonth } = props;
   const [startDateState, setStartDateState] = useState<any>(props.startDate && moment(props.startDate, 'YYYYMMDD'));
   const [untilDateState, setUntilDateState] = useState<any>(props.untilDate && moment(props.untilDate, 'YYYYMMDD'));
   const [availableDatesState, setAvailableDatesState] = useState(props.availableDates || null);
@@ -60,8 +59,8 @@ const RangeDatepicker: FC<IProps> = (props) => {
   }, [props.availableDates]);
 
   const onSelectDate = (date: Moment) => {
-    let startDate = null ;
-    let untilDate = null ;
+    let startDate = null;
+    let untilDate = null;
 
     if (startDateState && !untilDateState) {
       if (
@@ -90,7 +89,7 @@ const RangeDatepicker: FC<IProps> = (props) => {
     props.onSelect(startDate, untilDate);
   };
 
-  const isInvalidRange=(date:Moment) =>{
+  const isInvalidRange = (date: Moment) => {
     if (availableDatesState && availableDatesState.length > 0) {
       //select endDate condition
       if (startDateState && !untilDateState) {
@@ -142,14 +141,14 @@ const RangeDatepicker: FC<IProps> = (props) => {
 
   const handleConfirmDate = () => {
     props.onConfirm &&
-    props.onConfirm(startDateState, untilDateState);
+      props.onConfirm(startDateState, untilDateState);
   };
 
-  const handleRenderRow = (month:any) => {
+  const handleRenderRow = (month: any) => {
     let availableDates = availableDatesState;
 
     if (availableDates && availableDates.length > 0) {
-      availableDates = availableDates.filter(function(d) {
+      availableDates = availableDates.filter(function (d) {
         if (d.indexOf(month) >= 0) return true;
       });
     }
@@ -283,28 +282,28 @@ const RangeDatepicker: FC<IProps> = (props) => {
         {/*/>*/}
         <FlatList
           data={renderMonth}
-          renderItem={({item})=> handleRenderRow(item)}
+          renderItem={({ item }) => handleRenderRow(item)}
           initialNumToRender={1}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingBottom:hp('30%')}}
+          contentContainerStyle={{ paddingBottom: hp('30%') }}
         />
       </View>
       {props.showActions && (
         <View style={[styles.buttonWrapper, props.buttonContainerStyle]}>
           <Text style={{ fontSize: wp('4%') }}>
             {!startDateState &&
-             !untilDateState &&
-             t('home:chooseDate:chooseCheckinDate')}
+              !untilDateState &&
+              t('home:chooseDate:chooseCheckinDate')}
             {startDateState &&
-             !untilDateState &&
-             t('home:chooseDate:chooseCheckoutDate')}
+              !untilDateState &&
+              t('home:chooseDate:chooseCheckoutDate')}
             {startDateState &&
-             untilDateState &&
-             props.days &&
-             `${props.days} ${t('home:chooseDate:nightSelected')}`}
+              untilDateState &&
+              props.days &&
+              `${props.days} ${t('home:chooseDate:nightSelected')}`}
           </Text>
 
-          <ButtonOriginal width={wp('25%')} title={t('home:chooseDate:submit')} handlePress={handleConfirmDate}/>
+          <ButtonOriginal width={wp('25%')} title={t('home:chooseDate:submit')} handlePress={handleConfirmDate} />
         </View>
       )}
     </View>
@@ -328,18 +327,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    position:'absolute',
+    position: 'absolute',
     top: hp('90%'),
     width: wp('100%'),
     height: hp('10%'),
     zIndex: 9999
   },
-  boxList:{
+  boxList: {
     marginBottom: hp('10%'),
   }
 });
 
-RangeDatepicker.defaultProps={
+RangeDatepicker.defaultProps = {
   horizontal: false,
   showActions: true,
   priceByDay: {},
@@ -351,9 +350,9 @@ RangeDatepicker.defaultProps={
   showReset: true,
   showClose: true,
   ignoreMinDate: false,
-  onClose: () => {},
-  onSelect: () => {},
-  onConfirm: () => {},
+  onClose: () => { },
+  onSelect: () => { },
+  onConfirm: () => { },
   placeHolderStart: 'Start Date',
   placeHolderUntil: 'Until Date',
   // placeHolderClose: ' &#10005;',

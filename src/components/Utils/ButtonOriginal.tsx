@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
 import { Button } from 'react-native-elements';
 import { COLOR_BUTTON_DEFAULT, hp, wp } from 'utils/responsive';
 interface IProps {
@@ -13,9 +13,11 @@ interface IProps {
   iconRight?: boolean;
   useViewComponent?: boolean;
   disabled?: boolean;
+  customTitleStyle?: TextStyle;
 }
 const ButtonOriginal: FC<IProps> = (props) => {
   const {
+    customTitleStyle,
     handlePress,
     width,
     title,
@@ -40,7 +42,7 @@ const ButtonOriginal: FC<IProps> = (props) => {
       // }}
       // disabledStyle={{ backgroundColor: 'red' }}
       buttonStyle={[styles.buttonStyle, { width, height }, customStyle]}
-      titleStyle={styles.titleStyle}
+      titleStyle={[styles.titleStyle, customTitleStyle]}
       iconRight={iconRight}
       icon={icon}
       disabled={disabled}

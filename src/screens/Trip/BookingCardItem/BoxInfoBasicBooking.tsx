@@ -1,10 +1,10 @@
+import { hp } from 'components/Utils/responsive.style';
 import React, { FC } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { wp } from 'utils/responsive';
+import { StyleSheet, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
-import { hp } from 'components/Utils/responsive.style';
+import { wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -29,7 +29,7 @@ const BoxInfoBasicBooking: FC<IProps> = (props) => {
           rounded
           size="large"
           source={{
-            uri:  avatar,
+            uri: avatar,
           }}
         />
       </View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   boxImageRoom: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor:'white',
+    backgroundColor: 'white',
     // width: wp('25%'),
     flex: 2,
     // marginTop: 8,
