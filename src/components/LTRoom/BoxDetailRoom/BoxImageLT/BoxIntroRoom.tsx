@@ -1,12 +1,13 @@
-import React, { FC, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { wp, hp } from 'utils/responsive';
-import { PricingCard } from 'react-native-elements';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
+import React, { FC } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { PricingCard } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
+import { SIZE_TEXT_TITLE } from 'styles/global.style';
+import { wp } from 'utils/responsive';
 
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
@@ -29,9 +30,10 @@ const BoxIntroRoom: FC<IProps> = (props) => {
         onButtonPress={() => navigation.navigate('ChooseDayBookingLT')}
       />
       <ButtonOriginal
-        title="More details"
+        customStyle={{ height: 44 }}
+        title="More Detail"
         iconRight={true}
-        icon={<Icon name="chevrons-down" size={19} color="white" />}
+        icon={<Icon name="chevrons-down" size={18} color="white" />}
         useViewComponent={false}
         handlePress={() => navigation.navigate('BoxDetailRoom')}
       />
@@ -53,15 +55,15 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   buttonStyle: {
-    borderRadius: 25,
+    borderRadius: 360,
     width: wp('85%'),
-    height: hp('7%'),
+    height: 44,
   },
   titleStyle: {
-    fontSize: wp('6%'),
+    fontSize: SIZE_TEXT_TITLE + 2,
   },
   pricingStyle: {
-    fontSize: wp('8%'),
+    fontSize: SIZE_TEXT_TITLE + 2,
   },
 });
 BoxIntroRoom.defaultProps = {};

@@ -1,23 +1,23 @@
+import _ from 'lodash';
 import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { wp, hp } from 'utils/responsive';
-import BoxInfoRoom from './BoxInfoRoom';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Divider } from 'react-native-elements';
-import BoxInfoHost from './BoxInfoHost';
-import BoxBedAndGuest from './BoxBedAndGuest';
-import BoxDescriptionRoom from './BoxDescriptionRoom';
-import BoxAmenitiesRoom from './BoxAmenitiesRoom';
-import BoxImageRoom from './BoxImageRoom';
-import BoxCircleMapRoom from './BoxCircleMapRoom';
-import BoxPriceLTRoom from './BoxPriceLTRoom';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { useSelector } from 'react-redux';
-import BoxImageDetail from './BoxImageDetail';
-import BoxIncludedFee from './BoxIncludedFee';
-import BoxBookingRoom from './BoxBookingRoom';
 import { ReducersList } from 'store/redux/reducers';
 import { IMAGE_STORAGE_LG } from 'types/globalTypes';
-import _ from 'lodash';
+import { hp, wp } from 'utils/responsive';
+import BoxAmenitiesRoom from './BoxAmenitiesRoom';
+import BoxBedAndGuest from './BoxBedAndGuest';
+import BoxBookingRoom from './BoxBookingRoom';
+import BoxCircleMapRoom from './BoxCircleMapRoom';
+import BoxDescriptionRoom from './BoxDescriptionRoom';
+import BoxImageDetail from './BoxImageDetail';
+import BoxImageRoom from './BoxImageRoom';
+import BoxIncludedFee from './BoxIncludedFee';
+import BoxInfoHost from './BoxInfoHost';
+import BoxInfoRoom from './BoxInfoRoom';
+import BoxPriceLTRoom from './BoxPriceLTRoom';
 
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
@@ -62,20 +62,20 @@ const BoxDetailRoom: FC<IProps> = (props) => {
     }
     let images = arrayImg
       ? _.map(arrayImg, (o, i) => {
-          return {
-            url: `${IMAGE_STORAGE_LG + arrayImg[i].name}`,
-            width: wp('100%'),
-            height: hp('50%'),
-          };
-        })
+        return {
+          url: `${IMAGE_STORAGE_LG + arrayImg[i].name}`,
+          width: wp('100%'),
+          height: hp('50%'),
+        };
+      })
       : [];
-      setMediaToTal(images);
+    setMediaToTal(images);
   }, []);
   return (
     <View>
       <ScrollView style={{ marginBottom: hp('8%') }}>
         <View>
-          <BoxImageRoom arrImages={mediaToTal}/>
+          <BoxImageRoom arrImages={mediaToTal} />
         </View>
         <View style={styles.container}>
           <BoxInfoRoom />
@@ -86,7 +86,7 @@ const BoxDetailRoom: FC<IProps> = (props) => {
           <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
           <BoxDescriptionRoom />
           <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
-          <BoxImageDetail arrImages={mediaToTal}/>
+          <BoxImageDetail arrImages={mediaToTal} />
           <Divider style={{ backgroundColor: '#bcbcbc', marginVertical: hp('2%') }} />
           <BoxAmenitiesRoom />
         </View>
