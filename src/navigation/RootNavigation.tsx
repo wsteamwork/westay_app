@@ -26,9 +26,9 @@ import BoxPaymentBaoKim from 'components/BoxPaymentBaoKim';
 import WebViewBaoKim from 'components/BoxPaymentBaoKim/WebViewBaoKim';
 import ReNewalBooking from 'components/ReNewalBooking';
 import BoxRenewalBooking from 'components/BoxRenewalBooking';
-import BoxChooseInspectorType from 'components/BoxChooseInspectorType.tsx';
-import InspectorDetail from 'components/BoxChooseInspectorType.tsx/InspectorDetail';
-import InspectorItem from 'components/BoxChooseInspectorType.tsx/InspectorItem';
+import BoxChooseInspectorType from 'components/BoxChooseInspectorType';
+import InspectorDetail from 'components/BoxChooseInspectorType/InspectorDetail';
+import InspectorItem from 'components/BoxChooseInspectorType/InspectorItem';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
