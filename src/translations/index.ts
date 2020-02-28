@@ -32,13 +32,14 @@ const languageDetector = {
   type: 'languageDetector',
   async: true, // flags below detection to be async
   detect: async (callback: any) => {
-    const savedDataJSON = await storage
-      .load({
-        autoSync: true,
-        key: 'initLanguage',
-      })
-      .catch((err: any) => console.log(err));
-    const lng = savedDataJSON ? savedDataJSON : null;
+    // const savedDataJSON = await storage
+    //   .load({
+    //     autoSync: true,
+    //     key: 'initLanguage',
+    //   })
+    //   .catch((err: any) => console.log(err));
+    // const lng = savedDataJSON ? savedDataJSON : null;
+    const lng = 'vi';
     const selectLanguage = lng || 'vi';
     callback(selectLanguage);
   },

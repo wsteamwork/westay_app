@@ -5,23 +5,23 @@ import ListRoomType from 'components/ListRoomType';
 import ListCollections from 'components/ListRoomType/ListCollections';
 import ListCollectionsSquare from 'components/ListRoomType/ListCollectionsSquare';
 import ListDestinations from 'components/ListRoomType/ListDestinations_Valuable';
-import React, {FC, useContext, useEffect, Dispatch, useState} from 'react';
-import {ScrollView, StatusBar, StyleSheet, View} from 'react-native';
-import {NumberRoomCity} from 'types/Rooms/RoomResponses';
-import {__currentPlatform} from 'utils/mixins';
-import {hp, wp} from 'utils/responsive';
-import {useSelector, useDispatch} from 'react-redux';
-import {ReducersList, ReducersActions} from 'store/redux/reducers';
-import {AuthContext} from 'store/context/auth';
-import {getRoomsHomepage} from 'store/redux/reducers/Home/roomHomepage';
-import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
-import {IMAGE_STORAGE_SM, IMAGE_NOT_FOUND} from 'types/globalTypes';
 import InputSearchFake from 'components/SearchComponent/InputSearchFake';
-import {axios} from 'utils/api';
+import React, { Dispatch, FC, useContext, useEffect, useState } from 'react';
+import { ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import ContactButton from 'components/ContactButton';
-import {IDataCollections} from 'types/Rooms/RoomRequests';
 import RNBootSplash from "react-native-bootsplash";
+import { useDispatch, useSelector } from 'react-redux';
+import { AuthContext } from 'store/context/auth';
+import { getHomePageCollection } from 'store/Hooks/CardRoomHooks';
+import { ReducersActions, ReducersList } from 'store/redux/reducers';
+import { getRoomsHomepage } from 'store/redux/reducers/Home/roomHomepage';
+import { IMAGE_NOT_FOUND, IMAGE_STORAGE_SM } from 'types/globalTypes';
+import { IDataCollections } from 'types/Rooms/RoomRequests';
+import { NumberRoomCity } from 'types/Rooms/RoomResponses';
+import { axios } from 'utils/api';
+import { __currentPlatform } from 'utils/mixins';
+import { hp, wp } from 'utils/responsive';
+import ContactButton from 'components/ContactButton';
 
 const Home: FC = (props) => {
   const { state } = useContext(AuthContext);
@@ -30,8 +30,8 @@ const Home: FC = (props) => {
   const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
   );
-  const [editorChoice, setEditorChoice] = useState<IDataCollections>({data: [], meta: 0});
-  const [forFamily, setForFamily] = useState<IDataCollections>({data: [], meta: 0});
+  const [editorChoice, setEditorChoice] = useState<IDataCollections>({ data: [], meta: 0 });
+  const [forFamily, setForFamily] = useState<IDataCollections>({ data: [], meta: 0 });
   const [goodPrice, setGoodPrice] = useState<[]>([]);
   const [dataTypeHouse, setDataTypeHouse] = useState<[]>([]);
 
@@ -63,7 +63,8 @@ const Home: FC = (props) => {
     getHomePageCollection('for_family', 8).then((res) => {
       setForFamily({
         data: res.data.data,
-        meta: res.data!.meta!.pagination!.total})
+        meta: res.data!.meta!.pagination!.total
+      })
     });
     getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res.data.data));
   }, []);
@@ -87,7 +88,7 @@ const Home: FC = (props) => {
 
   const _renderDestination = (item: NumberRoomCity, index: number) => {
     return (
-      <View key={index}>
+      <View key={index} style={{ maxHeight: 220 }}>
         <DestinationCard item={item} />
       </View>
     );
@@ -95,18 +96,18 @@ const Home: FC = (props) => {
 
   const _renderValuableRoom = (room: any, index: number) => {
     const imgRoomSM = room.avatar.images && room.avatar.images.length
-              ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}`
-              : IMAGE_NOT_FOUND;
+      ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}`
+      : IMAGE_NOT_FOUND;
     return (
       <View key={index}>
         <ValuableCard city={room.city}
-                      district={room.district}
-                      priceDisplay={room.price_display}
-                      roomID={room.id}
-                      roomName={room.about_room.name}
-                      roomType={room.accommodation_type_txt}
-                      roomImage={imgRoomSM}
-                      avg_rating={room.avg_rating}/>
+          district={room.district}
+          priceDisplay={room.price_display}
+          roomID={room.id}
+          roomName={room.about_room.name}
+          roomType={room.accommodation_type_txt}
+          roomImage={imgRoomSM}
+          avg_rating={room.avg_rating} />
       </View>
     );
   };
@@ -124,7 +125,7 @@ const Home: FC = (props) => {
           <InputSearchFake />
         </View>
 
-        <View style={[styles.pdLeft,{ paddingLeft: wp('0%')}]}>
+        <View style={[styles.pdLeft, { paddingLeft: wp('0%'), paddingTop: 8 }]}>
           <ListRoomType data={dataTypeHouse} />
         </View>
 
@@ -150,7 +151,7 @@ const Home: FC = (props) => {
         <View style={styles.boxEmpty} />
       </ScrollView>
 
-      <ContactButton/>
+      <ContactButton />
     </Animatable.View>
   );
 };
@@ -166,7 +167,8 @@ const styles = StyleSheet.create({
     marginTop: __currentPlatform ? StatusBar.currentHeight : 38
   },
   mrTop: {
-    marginVertical: hp('1.5%')
+    // marginVertical: hp('1.5%')
+    marginVertical: 4
   },
   boxEmpty: {
     height: hp('5%')

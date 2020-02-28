@@ -8,8 +8,8 @@ export const getHomePageCollection = async (type: string, limit: number = -1): P
 
     return res;
   } catch (e) {
-    if (e) {
-      console.error(e);
-    }
+    // if (e) {
+      console.log(e.response.data);
+    // }
   }
 };

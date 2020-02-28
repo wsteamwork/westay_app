@@ -1,29 +1,29 @@
 // import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
-import React, {FC, Fragment, useState, useEffect, memo} from 'react';
-import {useTranslation} from 'react-i18next';
-import {StyleSheet, Text, View} from 'react-native';
-import {COLOR_INFO, SIZE_TEXT_SUBTITLE} from 'styles/global.style';
-import {hp, stylesGlobal, wp} from 'utils/responsive';
 import CollectionsSquareCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsSquareCard';
-import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
-import {IDataCollections} from 'types/Rooms/RoomRequests';
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import {withNavigation, NavigationInjectedProps} from 'react-navigation';
+import React, { FC, Fragment, memo, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 // @ts-ignore
 import { compose } from 'recompose';
+import { getHomePageCollection } from 'store/Hooks/CardRoomHooks';
+import { COLOR_INFO, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
+import { IDataCollections } from 'types/Rooms/RoomRequests';
+import { stylesGlobal, wp } from 'utils/responsive';
 
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   typeData: string,
   title: string
 }
 
 const ListCollectionsSquare: FC<IProps> = (props) => {
   const { typeData, title, navigation } = props;
-  const [dataRooms, setDataRooms] = useState<IDataCollections>({data: [], meta: 0});
+  const [dataRooms, setDataRooms] = useState<IDataCollections>({ data: [], meta: 0 });
   const { t } = useTranslation();
 
   useEffect(() => {
-    getHomePageCollection(typeData, 10).then((res) => setDataRooms({data: res.data.data, meta: res.data.meta!.pagination.total}));
+    getHomePageCollection(typeData, 10).then((res) => setDataRooms({ data: res.data.data, meta: res.data.meta!.pagination.total }));
   }, []);
 
   return (
@@ -44,7 +44,7 @@ const ListCollectionsSquare: FC<IProps> = (props) => {
       </View>
       {/*) : ''}*/}
 
-      <TouchableWithScale _onPress={()=> navigation.navigate('CollectionScreen', {typeDataCollection: typeData, titleCollection: title})}>
+      <TouchableWithScale _onPress={() => navigation.navigate('CollectionScreen', { typeDataCollection: typeData, titleCollection: title })}>
         <Text style={styles.txtAll}>
           Show all {`(${dataRooms.meta}+)`} &#10095;
         </Text>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     width: wp('90%')
   },
   txtAll: {
-    marginTop: hp('-2%'),
+    // marginTop: hp('0%'),
     fontSize: SIZE_TEXT_SUBTITLE,
     color: COLOR_INFO
   },

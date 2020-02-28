@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
-import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { useDispatch } from 'react-redux';
+import { setAccommodationType, setArrayRentType } from 'store/actions/search/searchActions';
 import { TypeApartment } from 'types/Rooms/RoomResponses';
-import { hp, wp } from 'utils/responsive';
-import { SIZE_TEXT_CONTENT } from 'styles/global.style';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
-import {useDispatch} from 'react-redux';
-import {setAccommodationType, setArrayRentType} from 'store/actions/search/searchActions';
+import { wp } from 'utils/responsive';
 
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   item: TypeApartment
 }
 
@@ -18,7 +17,7 @@ const RoomTypeCard: FC<IProps> = (props) => {
 
   const handleClick = () => {
     dispatch(setAccommodationType(item.id));
-    dispatch(setArrayRentType([{name: item.value, checked:true, id: item.id}]));
+    dispatch(setArrayRentType([{ name: item.value, checked: true, id: item.id }]));
     navigation.navigate('ListRooms');
   };
   return (
@@ -28,13 +27,13 @@ const RoomTypeCard: FC<IProps> = (props) => {
       onPress={handleClick}
     >
       <Avatar
-        size={60}
+        size={wp('13%')}
         source={{ uri: item.image }}
         rounded
         renderPlaceholderContent={<ActivityIndicator />}
         containerStyle={{ marginBottom: 8 }}
       />
-      <Text style={{ textAlign: 'center', fontSize: SIZE_TEXT_CONTENT }} numberOfLines={1}>
+      <Text style={{ textAlign: 'center', fontSize: 12 }} numberOfLines={1}>
         {item.value}
       </Text>
     </TouchableOpacity>
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // flex: 1,
     // justifyContent: 'flex-end',
-    width: wp('21%')
+    width: wp('20%')
   },
 });
 
