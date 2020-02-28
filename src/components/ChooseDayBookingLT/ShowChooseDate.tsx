@@ -1,10 +1,11 @@
 import React, { FC, useContext } from 'react';
-import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { wp } from 'utils/responsive';
+import { View } from 'react-native';
 import { Text } from 'react-native-elements';
 import { AuthContext } from 'store/context/auth';
+import { SIZE_TEXT_TITLE } from 'styles/global.style';
 import { formatDateBooking } from 'utils/mixins';
+import { wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -32,28 +33,28 @@ const ShowChooseDate: FC<IProps> = (props) => {
       <View style={{ flex: 1 }}>
         <Text
           style={{
-            fontSize: 18,
+            fontSize: SIZE_TEXT_TITLE,
             color: '#666666',
           }}>
           {fromDate ? (
             formatDateBooking(fromDate, languageStatus, true)
           ) : (
-            <Text
-              style={{
-                fontSize: 18,
-                color: '#ff6600',
-                fontWeight: 'bold',
-              }}>
-              {t('home:chooseDate:check_in')}
-            </Text>
-          )}
+              <Text
+                style={{
+                  fontSize: SIZE_TEXT_TITLE,
+                  color: '#ff6600',
+                  fontWeight: 'bold',
+                }}>
+                {t('home:chooseDate:check_in')}
+              </Text>
+            )}
         </Text>
       </View>
 
       <View>
         <Text
           style={{
-            fontSize: 30,
+            fontSize: SIZE_TEXT_TITLE,
             paddingBottom: 8,
             color: '#666666',
             textAlign: 'center',
@@ -65,28 +66,28 @@ const ShowChooseDate: FC<IProps> = (props) => {
       <View style={{ flex: 1 }}>
         <Text
           style={{
-            fontSize: 18,
+            fontSize: SIZE_TEXT_TITLE,
             color: '#666666',
             textAlign: 'right',
           }}>
           {toDate ? (
             formatDateBooking(toDate, languageStatus, true)
           ) : (
-            <Text
-              style={
-                fromDate
-                  ? {
-                      fontSize: 18,
+              <Text
+                style={
+                  fromDate
+                    ? {
+                      fontSize: SIZE_TEXT_TITLE,
                       color: '#ff6600',
                       fontWeight: 'bold',
                     }
-                  : {
-                      fontSize: 18,
+                    : {
+                      fontSize: SIZE_TEXT_TITLE,
                     }
-              }>
-              {t('home:chooseDate:check_out')}
-            </Text>
-          )}
+                }>
+                {t('home:chooseDate:check_out')}
+              </Text>
+            )}
         </Text>
       </View>
     </View>

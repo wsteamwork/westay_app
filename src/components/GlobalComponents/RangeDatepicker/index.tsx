@@ -5,7 +5,7 @@ import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import moment, { Moment } from 'moment';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { __currentPlatform } from 'utils/mixins';
@@ -175,138 +175,140 @@ const RangeDatepicker: FC<IProps> = (props) => {
   };
 
   return (
-    <View
-      style={{
-        backgroundColor: '#fff',
-        zIndex: 1000,
-        // alignSelf: 'center',
-        alignItems: 'center',
-        paddingHorizontal: wp('5%'),
-        position: 'relative'
-      }}
-    >
-      {props.showActions && (
-        <HeaderWithBackTitle
-          rightComponent={
-            <IonIcons
-              name={__currentPlatform ? 'md-refresh' : 'ios-refresh'}
-              size={wp('6%')}
-              color={COLOR_TEXT_DEFAULT}
-              onPress={onReset}
-            />
-          }
-        />
-      )}
+    <SafeAreaView>
+      <View
+        style={{
+          backgroundColor: '#fff',
+          zIndex: 1000,
+          // alignSelf: 'center',
+          alignItems: 'center',
+          paddingHorizontal: wp('5%'),
+          position: 'relative'
+        }}
+      >
+        {props.showActions && (
+          <HeaderWithBackTitle
+            rightComponent={
+              <IonIcons
+                name={__currentPlatform ? 'md-refresh' : 'ios-refresh'}
+                size={wp('6%')}
+                color={COLOR_TEXT_DEFAULT}
+                onPress={onReset}
+              />
+            }
+          />
+        )}
 
-      {props.showActions && (
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingHorizontal: wp('2.5%'),
-            paddingBottom: 5,
-            alignItems: 'center',
-          }}
-        >
-          <View style={{ flex: 1 }}>
-            <Text
-              style={{
-                fontSize: wp('4%'),
-                color: '#666',
-                textTransform: 'capitalize',
-              }}
-            >
-              {startDateState
-                ? `${t('home:chooseDate:day')} ${moment(
-                  startDateState,
-                ).format('L')}`
-                : props.placeHolderStart}
-            </Text>
-          </View>
+        {props.showActions && (
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: wp('2.5%'),
+              paddingBottom: 5,
+              alignItems: 'center',
+            }}
+          >
+            <View style={{ flex: 1 }}>
+              <Text
+                style={{
+                  fontSize: wp('4%'),
+                  color: '#666',
+                  textTransform: 'capitalize',
+                }}
+              >
+                {startDateState
+                  ? `${t('home:chooseDate:day')} ${moment(
+                    startDateState,
+                  ).format('L')}`
+                  : props.placeHolderStart}
+              </Text>
+            </View>
 
-          <View>
-            <Text
-              style={{
-                fontSize: wp('5%'),
-                paddingBottom: 2,
-                textAlign: 'center',
-              }}
-            >
-              &#8594;
+            <View>
+              <Text
+                style={{
+                  fontSize: wp('5%'),
+                  paddingBottom: 2,
+                  textAlign: 'center',
+                }}
+              >
+                &#8594;
             </Text>
-          </View>
+            </View>
 
-          <View style={{ flex: 1 }}>
-            <Text
-              style={{
-                fontSize: wp('4%'),
-                color: '#666',
-                textAlign: 'right',
-                textTransform: 'capitalize',
-              }}
-            >
-              {untilDateState
-                ? `Ngày ${moment(untilDateState).format('L')}`
-                : props.placeHolderUntil}
-            </Text>
+            <View style={{ flex: 1 }}>
+              <Text
+                style={{
+                  fontSize: wp('4%'),
+                  color: '#666',
+                  textAlign: 'right',
+                  textTransform: 'capitalize',
+                }}
+              >
+                {untilDateState
+                  ? `Ngày ${moment(untilDateState).format('L')}`
+                  : props.placeHolderUntil}
+              </Text>
+            </View>
           </View>
+        )}
+
+        {props.infoText != '' && (
+          <View style={props.infoContainerStyle}>
+            <Text style={props.infoStyle}>{props.infoText}</Text>
+          </View>
+        )}
+        <View style={styles.dayHeader}>
+          {props.dayHeadings.map((day, i) => {
+            return (
+              <Text
+                style={{ width: wp('90%') / 7, textAlign: 'center' }}
+                key={i}
+              >
+                {day}
+              </Text>
+            );
+          })}
         </View>
-      )}
-
-      {props.infoText != '' && (
-        <View style={props.infoContainerStyle}>
-          <Text style={props.infoStyle}>{props.infoText}</Text>
+        <View style={styles.boxList}>
+          {/*<ListView*/}
+          {/*  contentContainerStyle={{paddingBottom:hp('30%')}}*/}
+          {/*  horizontal={props.horizontal}*/}
+          {/*  dataSource={monthStack}*/}
+          {/*  renderRow={handleRenderRow}*/}
+          {/*  initialListSize={1}*/}
+          {/*  showsVerticalScrollIndicator={false}*/}
+          {/*  showsHorizontalScrollIndicator={false}*/}
+          {/*/>*/}
+          <FlatList
+            data={renderMonth}
+            renderItem={({ item }) => handleRenderRow(item)}
+            initialNumToRender={1}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: hp('30%') }}
+          />
         </View>
-      )}
-      <View style={styles.dayHeader}>
-        {props.dayHeadings.map((day, i) => {
-          return (
-            <Text
-              style={{ width: wp('90%') / 7, textAlign: 'center' }}
-              key={i}
-            >
-              {day}
+        {props.showActions && (
+          <View style={[styles.buttonWrapper, props.buttonContainerStyle]}>
+            <Text style={{ fontSize: wp('4%') }}>
+              {!startDateState &&
+                !untilDateState &&
+                t('home:chooseDate:chooseCheckinDate')}
+              {startDateState &&
+                !untilDateState &&
+                t('home:chooseDate:chooseCheckoutDate')}
+              {startDateState &&
+                untilDateState &&
+                props.days &&
+                `${props.days} ${t('home:chooseDate:nightSelected')}`}
             </Text>
-          );
-        })}
+
+            <ButtonOriginal width={wp('25%')} title={t('home:chooseDate:submit')} handlePress={handleConfirmDate} />
+          </View>
+        )}
       </View>
-      <View style={styles.boxList}>
-        {/*<ListView*/}
-        {/*  contentContainerStyle={{paddingBottom:hp('30%')}}*/}
-        {/*  horizontal={props.horizontal}*/}
-        {/*  dataSource={monthStack}*/}
-        {/*  renderRow={handleRenderRow}*/}
-        {/*  initialListSize={1}*/}
-        {/*  showsVerticalScrollIndicator={false}*/}
-        {/*  showsHorizontalScrollIndicator={false}*/}
-        {/*/>*/}
-        <FlatList
-          data={renderMonth}
-          renderItem={({ item }) => handleRenderRow(item)}
-          initialNumToRender={1}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: hp('30%') }}
-        />
-      </View>
-      {props.showActions && (
-        <View style={[styles.buttonWrapper, props.buttonContainerStyle]}>
-          <Text style={{ fontSize: wp('4%') }}>
-            {!startDateState &&
-              !untilDateState &&
-              t('home:chooseDate:chooseCheckinDate')}
-            {startDateState &&
-              !untilDateState &&
-              t('home:chooseDate:chooseCheckoutDate')}
-            {startDateState &&
-              untilDateState &&
-              props.days &&
-              `${props.days} ${t('home:chooseDate:nightSelected')}`}
-          </Text>
-
-          <ButtonOriginal width={wp('25%')} title={t('home:chooseDate:submit')} handlePress={handleConfirmDate} />
-        </View>
-      )}
-    </View>
+    </SafeAreaView>
   );
 };
 
