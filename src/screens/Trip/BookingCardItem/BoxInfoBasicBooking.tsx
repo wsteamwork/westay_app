@@ -24,6 +24,8 @@ const BoxInfoBasicBooking: FC<IProps> = (props) => {
     <View style={styles.container}>
       <View style={styles.boxImageRoom}>
         <Avatar
+          width={100}
+          height={100}
           rounded
           size="large"
           source={{
@@ -60,22 +62,28 @@ const styles = StyleSheet.create({
     alignContent: 'center',
   },
   boxImageRoom: {
-    width: wp('25%'),
-    marginTop: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor:'white',
+    // width: wp('25%'),
+    flex: 2,
+    // marginTop: 8,
   },
   boxInfoBooking: {
-    width: wp('65%'),
+    flex: 5,
+    paddingLeft: 12,
+    // width: wp('65%),
   },
   rowTitle: {
     marginBottom: hp('0.8%'),
   },
   label: {
     color: '#adadad',
-    fontWeight: '700',
+    fontWeight: '500',
   },
   title: {
     color: '#484848',
-    fontWeight: '700',
+    fontWeight: '500',
   },
 });
 BoxInfoBasicBooking.defaultProps = {};

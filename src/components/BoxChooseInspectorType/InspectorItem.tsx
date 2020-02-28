@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { StyleSheet, View, TouchableNativeFeedback } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { hp, wp } from 'utils/responsive';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
+import { hp, wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -19,7 +19,7 @@ const InspectorItem: FC<IProps> = (props) => {
   const { navigation, title, isCompleted } = props;
   return (
     <View>
-      <TouchableNativeFeedback
+      <TouchableWithoutFeedback
         style={styles.touchable}
         onPress={() => navigation.navigate('InspectorDetail', { title: title })}>
         <View style={styles.container}>
@@ -30,13 +30,13 @@ const InspectorItem: FC<IProps> = (props) => {
               <Entypo name="chevron-right" size={20} color="#484848" />
             </View>
           ) : (
-            <View style={styles.showDate}>
-              <Text style={styles.completed}>Đã hoàn thành</Text>
-              <Entypo name="chevron-right" size={20} color={COLOR_BUTTON_DEFAULT} />
-            </View>
-          )}
+              <View style={styles.showDate}>
+                <Text style={styles.completed}>Đã hoàn thành</Text>
+                <Entypo name="chevron-right" size={20} color={COLOR_BUTTON_DEFAULT} />
+              </View>
+            )}
         </View>
-      </TouchableNativeFeedback>
+      </TouchableWithoutFeedback>
     </View>
   );
 };

@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
-import { hp } from 'utils/responsive';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 
 /**
@@ -18,12 +17,12 @@ const BoxInspector: FC<IProps> = (props) => {
     <View style={styles.container}>
       <View style={styles.boxText}>
         <Text style={styles.title}>
-          Bạn vui lòng đánh giá trải nghiệm trong quá trình sử dụng căn hộ
+          Vui lòng cập nhật tình trạng căn hộ
         </Text>
       </View>
-      <View>
+      <View style={{ flex: 1 }}>
         <Button
-          title="Đánh giá"
+          title="Bắt đầu"
           buttonStyle={styles.buttonStyle}
           titleStyle={styles.titleStyle}
           onPress={() => {
@@ -37,22 +36,25 @@ const BoxInspector: FC<IProps> = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 8,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   boxText: {
-    width: hp('35%'),
+    justifyContent: 'center',
+    flex: 3,
   },
   title: {
     color: '#484848',
-    fontWeight: '700',
+    fontWeight: '500',
   },
   titleStyle: {
     fontSize: 14,
     marginBottom: 3,
   },
   buttonStyle: {
-    height: hp('4.5%'),
+    height: 34,
     backgroundColor: '#008489',
   },
 });

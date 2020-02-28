@@ -25,15 +25,13 @@ const BoxPaymentPeriod: FC<IProps> = (props) => {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.title}>Hạn thanh toán</Text>
-        <Text style={styles.date}>{datePayment}</Text>
+        <Text style={styles.title}>Thông tin thanh toán</Text>
+        <Text style={styles.date}>Hạn cuối: <Text style={{color: '#cc0066', fontWeight: '400'}}>{datePayment}</Text></Text>
+        <Text style={styles.date}>Giá trị: <Text style={{color: '#cc0066', fontWeight: '400'}}>{languageStatus === 'vi' ? 'đ' : '$'}{pricePayment}</Text></Text>
       </View>
 
       {paymentStatus === 0 ? (
-        <View>
-          <Text style={styles.title}>
-            {languageStatus === 'vi' ? 'đ' : '$'} {pricePayment}
-          </Text>
+        <View style={{justifyContent: 'center'}}>
           <Button
             title="Thanh toán"
             buttonStyle={styles.buttonStyle}
@@ -56,28 +54,30 @@ const BoxPaymentPeriod: FC<IProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    paddingHorizontal: 10,
     justifyContent: 'space-between',
   },
   date: {
-    color: COLOR_BUTTON_DEFAULT,
-    fontWeight: '700',
+    // color: COLOR_BUTTON_DEFAULT,
+    paddingVertical: 4,
+    fontWeight: '400',
   },
   title: {
     color: '#484848',
-    fontWeight: '700',
-    marginBottom: hp('0.8%'),
+    fontWeight: '500',
+    marginBottom: 4,
   },
   titleStyle: {
-    fontSize: 14,
+    fontSize: 13,
     marginBottom: 3,
   },
   buttonStyle: {
-    height: hp('4.5%'),
+    height: 34,
     backgroundColor: '#cc0066',
   },
   titlePayment: {
     color: COLOR_BUTTON_DEFAULT,
-    fontWeight: '700',
+    fontWeight: '500',
     marginTop: hp('1.6%'),
   }
 });

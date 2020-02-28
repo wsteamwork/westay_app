@@ -1,16 +1,15 @@
-import React, { FC, useState, useMemo, useEffect } from 'react';
-import { View, ScrollView, StyleSheet, Text } from 'react-native';
-import { Divider } from 'react-native-elements';
-import { hp, wp } from 'utils/responsive';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import Octicons from 'react-native-vector-icons/Octicons';
+import React, { FC, useEffect, useMemo, useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { AirbnbRating, Divider } from 'react-native-elements';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { AirbnbRating } from 'react-native-elements';
+import Octicons from 'react-native-vector-icons/Octicons';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
+import { hp, wp } from 'utils/responsive';
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
@@ -40,7 +39,7 @@ const InspectorDetail: FC<IProps> = (props) => {
     navigation.goBack();
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <HeaderWithBackTitle handlePress={() => navigation.goBack()} title={title} />
         <View style={styles.wrapper}>
@@ -59,7 +58,7 @@ const InspectorDetail: FC<IProps> = (props) => {
                 count={3}
                 reviews={['Bad', 'OK', 'Good']}
                 defaultRating={comfort1}
-                size={32}
+                size={24}
                 onFinishRating={(rating: number) => setComfort1(rating)}
               />
             </View>
@@ -82,7 +81,7 @@ const InspectorDetail: FC<IProps> = (props) => {
                 count={3}
                 reviews={['Bad', 'OK', 'Good']}
                 defaultRating={comfort2}
-                size={32}
+                size={24}
                 onFinishRating={(rating: number) => setComfort2(rating)}
               />
             </View>
@@ -105,7 +104,7 @@ const InspectorDetail: FC<IProps> = (props) => {
                 count={3}
                 reviews={['Bad', 'OK', 'Good']}
                 defaultRating={comfort3}
-                size={32}
+                size={24}
                 onFinishRating={(rating: number) => setComfort3(rating)}
               />
             </View>
@@ -128,7 +127,7 @@ const InspectorDetail: FC<IProps> = (props) => {
                 count={3}
                 reviews={['Bad', 'OK', 'Good']}
                 defaultRating={comfort4}
-                size={32}
+                size={24}
                 onFinishRating={(rating: number) => setComfort4(rating)}
               />
             </View>
@@ -136,15 +135,16 @@ const InspectorDetail: FC<IProps> = (props) => {
         </View>
         <Divider style={styles.divider} />
       </ScrollView>
-      <View style={styles.BoxConfirm}>
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <ButtonOriginal
+          height={42}
           title="Gửi"
           handlePress={handleCompletedInspector}
           customStyle={styles.buttonStyle}
           disabled={!completed}
         />
       </View>
-    </View>
+    </SafeAreaView >
   );
 };
 
@@ -170,17 +170,19 @@ const styles = StyleSheet.create({
   boxLeft: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-    width: '50%',
+    // width: '50%',
   },
   boxCamera: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
   boxRight: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     justifyContent: 'flex-end',
-    width: '50%',
-    marginTop: -20,
+    // align: 'center',
+    // width: '50%',
+    // backgroundColor: 'red'
+    // marginTop: -20,
   },
   iconRight: {
     marginRight: wp('4%'),
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
   },
   BoxConfirm: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 10,
     width: wp('100%'),
     height: hp('8%'),
     backgroundColor: '#fff',
@@ -206,6 +208,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   buttonStyle: {
+    // flex: 1,
     borderRadius: 5,
     elevation: 3,
   },

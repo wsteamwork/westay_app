@@ -1,17 +1,17 @@
-import React, { FC, useContext } from 'react';
-import { StyleSheet, View } from 'react-native';
-import BoxInfoBasicBooking from './BoxInfoBasicBooking';
-import { Divider } from 'react-native-elements';
-import { hp } from 'utils/responsive';
-import BoxPaymentPeriod from './BoxPaymentPeriod';
-import { elevationShadowStyle, CURRENT, UPCOMING, FINISHED } from 'utils/mixins';
-import BoxContract from './BoxContract';
-import { IMAGE_STORAGE_SM, IMAGE_NOT_FOUND } from 'types/globalTypes';
+import BoxRenewalBooking from 'components/BoxRenewalBooking';
 import moment from 'moment';
 import numeral from 'numeral';
+import React, { FC } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Divider } from 'react-native-elements';
+import { IMAGE_NOT_FOUND, IMAGE_STORAGE_SM } from 'types/globalTypes';
+import { CURRENT, elevationShadowStyle, FINISHED, UPCOMING } from 'utils/mixins';
+import { hp } from 'utils/responsive';
+import BoxContract from './BoxContract';
 import BoxFinishedBooking from './BoxFinishedBooking';
-import BoxRenewalBooking from 'components/BoxRenewalBooking';
+import BoxInfoBasicBooking from './BoxInfoBasicBooking';
 import BoxInspector from './BoxInspector';
+import BoxPaymentPeriod from './BoxPaymentPeriod';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -30,9 +30,9 @@ const BookingCardItem: FC<IProps> = (props) => {
       <BoxInfoBasicBooking
         avatar={
           booking.longTermRoom &&
-          booking.longTermRoom.data &&
-          booking.longTermRoom.data.avatar &&
-          booking.longTermRoom.data.avatar.images.length
+            booking.longTermRoom.data &&
+            booking.longTermRoom.data.avatar &&
+            booking.longTermRoom.data.avatar.images.length
             ? `${IMAGE_STORAGE_SM + booking.longTermRoom.data.avatar.images[0].name}`
             : IMAGE_NOT_FOUND
         }
@@ -62,7 +62,7 @@ const BookingCardItem: FC<IProps> = (props) => {
             bookingId={booking.id}
           />
           <Divider style={styles.divider} />
-          <BoxInspector booking={booking}/>
+          <BoxInspector booking={booking} />
           <Divider style={styles.divider} />
         </View>
       )}
@@ -73,7 +73,7 @@ const BookingCardItem: FC<IProps> = (props) => {
             uuid={booking.uuid}
           />
           <Divider style={styles.divider} />
-          <BoxInspector booking={booking}/>
+          <BoxInspector booking={booking} />
         </View>
       )}
       {bookingType === FINISHED && (
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     width: '98%',
   },
   divider: {
-    marginVertical: hp('2.5%'),
+    marginVertical: 12,
     height: 1.5,
     backgroundColor: '#efefef',
   },

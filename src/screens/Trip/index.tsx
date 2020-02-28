@@ -1,14 +1,14 @@
-import React, { FC, useState, useEffect, useContext } from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import { hp, wp } from 'utils/responsive';
-import BookingListLT from './BookingListLT';
-import { UPCOMING, CURRENT, FINISHED } from 'utils/mixins';
-import { getLongTermBookingList, LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
-import { AuthContext } from 'store/context/auth';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import { AuthContext } from 'store/context/auth';
+import { getLongTermBookingList, LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
+import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { CURRENT, FINISHED, UPCOMING } from 'utils/mixins';
+import { hp, wp } from 'utils/responsive';
+import BookingListLT from './BookingListLT';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -34,10 +34,10 @@ const Trip: FC<IProps> = (props) => {
       {index === 0 ? (
         <BookingListLT bookingType={UPCOMING} />
       ) : (
-        <View style={styles.scene}>
-          <Text>Loading…</Text>
-        </View>
-      )}
+          <View style={styles.scene}>
+            <Text>Loading…</Text>
+          </View>
+        )}
     </View>
   );
 
@@ -46,25 +46,25 @@ const Trip: FC<IProps> = (props) => {
       {index === 1 ? (
         <BookingListLT bookingType={CURRENT} />
       ) : (
-        <View style={styles.scene}>
-          <Text>Loading…</Text>
-        </View>
-      )}
+          <View style={styles.scene}>
+            <Text>Loading…</Text>
+          </View>
+        )}
     </View>
   );
 
-  const ThreeRoute = () => (
+  const ThirdRoute = () => (
     <View style={[styles.scene]}>
       {index === 2 ? (
         <BookingListLT bookingType={FINISHED} />
       ) : (
-        <View style={styles.scene}>
-          <Text>Loading…</Text>
-        </View>
-      )}
+          <View style={styles.scene}>
+            <Text>Loading…</Text>
+          </View>
+        )}
     </View>
   );
-  const renderTabBar = (props: any) => <TabBar {...props} />;
+  const renderTabBar = (props: any) => <TabBar pressColor={'red'} activeColor={'#2a7886'} inactiveColor={'#7676764d'} indicatorStyle={{ backgroundColor: '#8AA989' }} tabStyle={{ backgroundColor: 'white' }} {...props} />;
 
   const [routes] = useState([
     { key: 'first', title: 'Sắp đến' },
@@ -74,7 +74,7 @@ const Trip: FC<IProps> = (props) => {
   const renderScene = SceneMap({
     first: FirstRoute,
     second: SecondRoute,
-    three: ThreeRoute,
+    three: ThirdRoute,
   });
 
   const { state } = useContext(AuthContext);
@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleText: {
-    marginBottom: hp('5%'),
+    // backgroundColor: 'red',
+    marginBottom: 10,
     fontWeight: 'bold',
     fontSize: wp('6%'),
     width: wp('100%'),

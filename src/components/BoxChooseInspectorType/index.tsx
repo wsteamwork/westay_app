@@ -1,17 +1,14 @@
-import React, { FC, useEffect } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { Divider } from 'react-native-elements';
-import { hp, wp } from 'utils/responsive';
-import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import ShowInfoBasicRoom from 'components/BoxConfirmBooking/ShowInfoBasicRoom';
-import InspectorItem from './InspectorItem';
+import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
+import React, { FC } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { Divider } from 'react-native-elements';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-import { getDataLTRoom, LTRoomReducerAction } from 'store/redux/reducers/LTRoom/RoomDetails';
-import { LTRoomIndexRes } from 'types/LTR/LTRoom/LTRoom';
-import { Dispatch } from 'redux';
 import { IMAGE_STORAGE_LG } from 'types/globalTypes';
+import { hp } from 'utils/responsive';
+import InspectorItem from './InspectorItem';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -26,7 +23,7 @@ const BoxChooseInspectorType: FC<IProps> = (props) => {
   const { completedInspector } = useSelector<ReducersList, any>((state) => state.ltbooking);
   const booking = navigation.getParam('bookingInfo', 0);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <HeaderWithBackTitle handlePress={() => navigation.goBack()} title="Đánh giá phòng" />
         <ShowInfoBasicRoom
@@ -45,7 +42,7 @@ const BoxChooseInspectorType: FC<IProps> = (props) => {
         <InspectorItem title={'Phòng bếp'} />
         <Divider style={styles.divider} />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
