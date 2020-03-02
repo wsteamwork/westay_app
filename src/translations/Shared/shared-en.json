@@ -19,5 +19,12 @@
     "signin": "Sign in",
     "signup": "Sign up",
     "messages": "Messages",
-    "startChatWith": "Start chatting with"
+    "startChatWith": "Start chatting with",
+    "showAll" : "Show all",
+    "welcomeToWestay" : "Welcome to Westay",
+    "toExperienceHomestay" : "A place to experience homestay services with luxurious, indigenous travel styles",
+    "solutionForLong-termRental" : "Provide experience, the optimal solution for long-term rental",
+    "enjoyTheFunTogether!" : "Let's Westay enjoy the fun together!",
+    "start" : "Start",
+    "next" : "Next"
 }

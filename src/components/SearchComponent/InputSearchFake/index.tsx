@@ -34,7 +34,7 @@ const InputSearchFake: FC<IProps> = (props) => {
 
         {!searchText ? (
           <Text style={{ fontSize: wp('4%'), paddingLeft: wp('4%'), color: '#7676769d' }}>
-            {t('home:searchHomeAnimated:descInput')}
+            {t('home:searchInput:descInput')}
           </Text>
         ) : (
             <Text style={styles.textSearchText}>{searchText}</Text>

@@ -1,6 +1,7 @@
 {
     "filterActions": {
-        "search": "Tìm kiếm"
+        "search": "Tìm kiếm",
+        "searchAnything": "Tìm kiếm bất cứ điều gì"
     },
     "filterByDateAndFastBook": {
         "byDate": "Theo Ngày",
@@ -9,5 +10,7 @@
     "filterByPrice": {
         "priceRange": "Khoảng giá"
     },
-    "name": "Bộ lọc"
+    "name": "Bộ lọc",
+    "chooseDate": "Số ngày",
+    "numberOfRooms": "Số khách"
 }

@@ -22,6 +22,7 @@ import { inputContainerStyleGlobal } from 'utils/mixins';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Toast from 'react-native-root-toast';
 import {asyncLogin} from 'store/actions/asyncLogin';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -42,19 +43,20 @@ const Login: FC<IProps> = (props) => {
   const { dispatch, state } = useContext(AuthContext);
   const { languageStatus, fcmToken } = state;
   const { navigation } = props;
+  const { t } = useTranslation();
+
   const FormValidationSchema = Yup.object().shape({
     email: Yup.string()
-      .required('Vui lòng nhập email')
-      .email('Địa chỉ email không hợp lệ')
-      .min(6, 'Tối thiểu 6 ký tự')
-      .max(255, 'Tối đa 255 ký tự'),
+      .required(t('auth:login:emailRequired'))
+      .email(t('auth:login:invalidEmail'))
+      .min(6, t('auth:login:min6Character'))
+      .max(255, t('auth:login:max255Character')),
     password: Yup.string()
-      .required('Vui lòng nhập mật khẩu')
-      .min(6, 'Tối thiếu 6 ký tự')
-      .max(255, 'Tối đa 255 ký tự'),
+      .required(t('auth:login:passwordRequired'))
+      .min(6, t('auth:login:min6Character'))
+      .max(255, t('auth:login:max255Character')),
   });
 
-  console.log('fcmToken' + fcmToken);
 
   const handleClickSubmit = async (values: LoginValues, actions: FormikHelpers<LoginValues>) => {
     Keyboard.dismiss();
@@ -100,11 +102,11 @@ const Login: FC<IProps> = (props) => {
               extraHeight={50}
               showsVerticalScrollIndicator={false}>
               <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-              <Text style={styles.titleText}>Log in</Text>
+              <Text style={styles.titleText}>{t('auth:login:name')}</Text>
               <View style={styles.boxWrapper} collapsable={false}>
                 <Input
                   ref={emailRef}
-                  placeholder="Your Email"
+                  placeholder={t('auth:login:labelEmail')}
                   keyboardType="email-address"
                   returnKeyType="next"
                   value={values.email}
@@ -119,7 +121,7 @@ const Login: FC<IProps> = (props) => {
                 />
                 <Input
                   ref={passwordRef}
-                  placeholder="Password"
+                  placeholder={t('auth:login:password')}
                   keyboardType="default"
                   returnKeyType="done"
                   secureTextEntry={true}
@@ -135,15 +137,15 @@ const Login: FC<IProps> = (props) => {
                   <Text
                     style={{ fontSize: wp('4%'), color: '#8A8A8F' }}
                     onPress={() => navigation.navigate('ForgotPassword')}>
-                    Forgot Password
+                    {t('auth:forgetPassword:name')}
                   </Text>
                 </View>
-                <ButtonOriginal title="Log in" handlePress={handleSubmit} loading={loading} />
+                <ButtonOriginal title={t('auth:login:name')} handlePress={handleSubmit} loading={loading} />
                 <View style={styles.action}>
                   <Text style={styles.titleSubText}>
-                    <Text>Don’t have an account? </Text>
+                    <Text>{t('auth:login:notAccount')} </Text>
                     <Text onPress={() => navigation.navigate('Register')} style={styles.textSwitch}>
-                      Sign up
+                      {t('auth:register:name')}
                     </Text>{' '}
                   </Text>
                 </View>

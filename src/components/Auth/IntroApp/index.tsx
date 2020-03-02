@@ -4,6 +4,7 @@ import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { hp, wp } from 'utils/responsive';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -15,13 +16,14 @@ interface IProps extends NavigationInjectedProps {
 
 const IntroApp: FC<IProps> = (props) => {
   const { navigation } = props;
+  const { t } = useTranslation();
   return (
     <View style={styles.textContainerMiddle}>
       <Image
         style={styles.image}
         source={require('../../../../src/static/images/pngkey.com-traveling-png-1965681.png')}
       />
-      <Text style={styles.titleText}>Welcome to Westay</Text>
+      <Text style={styles.titleText}>{t('shared:welcomeToWestay')}</Text>
       <Text style={styles.titleSubText}>Book one of our unique hotel to escape the ordinary</Text>
       <ButtonOriginal
         title="Log in"

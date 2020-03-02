@@ -124,11 +124,11 @@ const ListRooms: FC<IProps> = (props) => {
             {/* <SearchComponent showInfoGuestAndDates={false} showListSuggest={false} showInputFake={true} styleContainer={styles.containerSearch} /> */}
             <View style={[styles.boxFilter, elevationShadowStyle(0)]}>
               <Text>
-                {totalResult} rooms found
+                {totalResult} {t('listRooms:roomsFound')}
              </Text>
               <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate('Filter')}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Text>Filter</Text>
+                  <Text>{t('filter:name')}</Text>
                   <Feather
                     name={'filter'}
                     size={wp('3.5%')}

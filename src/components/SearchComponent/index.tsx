@@ -104,7 +104,7 @@ const SearchComponent: FC<IProps> = (props) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <RoomDetailContext.Provider value={{ stateRoom, dispatchRoomDetail }}>
-        <HeaderWithBackTitle title="Search" />
+        <HeaderWithBackTitle title={t('filter:filterActions:search')} />
 
         <View style={[styles.container, styleContainer]}>
           {useMemo(
@@ -124,7 +124,7 @@ const SearchComponent: FC<IProps> = (props) => {
           {showInfoGuestAndDates && (
             <View style={styles.boxInfo}>
               <TouchableWithScale style={styles.boxDate} _onPress={() => setModalDate(!modalDate)}>
-                <Text style={{ color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT }}>Choose Date</Text>
+                <Text style={{ color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT }}>{t('filter:chooseDate')}</Text>
                 <Text style={styles.txtDate}>
                   {!check_in ? t('home:chooseDate:check_in') :
                     moment(check_in).format('MMM DD')
@@ -137,12 +137,11 @@ const SearchComponent: FC<IProps> = (props) => {
               </TouchableWithScale>
               <View style={styles.lineVertical} />
               <TouchableWithScale style={styles.boxDate} _onPress={() => setModalGuest(!modalGuest)}>
-                <Text style={{ color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT }}>Number of Rooms</Text>
+                <Text style={{ color: COLOR_TEXT_SUBTITLE, fontSize: SIZE_TEXT_CONTENT }}>{t('filter:numberOfRooms')}</Text>
                 <Text style={styles.txtDate}>
                   {number_guest + ' ' + t('home:choosePeople:guest')}
                   &nbsp;-&nbsp;
                   {number_room + ' ' + t('home:choosePeople:room')}
-
                 </Text>
               </TouchableWithScale>
             </View>

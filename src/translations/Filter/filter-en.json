@@ -1,6 +1,7 @@
 {
     "filterActions": {
-        "search": "Search"
+        "search": "Search",
+        "searchAnything": "Search anything"
     },
     "filterByDateAndFastBook": {
         "byDate": "By date",
@@ -9,5 +10,7 @@
     "filterByPrice": {
         "priceRange": "Price range"
     },
-    "name": "Filter"
+    "name": "Filter",
+    "chooseDate": "Choose Date",
+    "numberOfRooms": "Number of Rooms"
 }

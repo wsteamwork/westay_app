@@ -14,6 +14,7 @@ import { AuthContext, getProfile } from 'store/context/auth';
 import { Input } from 'react-native-elements';
 import { inputContainerStyleGlobal } from 'utils/mixins';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -36,21 +37,23 @@ const Register: FC<IProps> = (props) => {
   const { dispatch, state } = useContext(AuthContext);
   const { languageStatus } = state;
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
+
   const FormValidationSchema = Yup.object().shape({
     email: Yup.string()
-      .required('Vui lòng nhập email')
-      .email('Địa chỉ email không hợp lệ')
-      .min(6, 'Tối thiểu 6 ký tự')
-      .max(255, 'Tối đa 255 ký tự'),
+      .required(t('auth:login:emailRequired'))
+      .email(t('auth:login:invalidEmail'))
+      .min(6, t('auth:login:min6Character'))
+      .max(255, t('auth:login:max255Character')),
     password: Yup.string()
-      .required('Vui lòng nhập mật khẩu')
-      .min(6, 'Tối thiếu 6 ký tự')
-      .max(255, 'Tối đa 255 ký tự'),
+      .required(t('auth:login:passwordRequired'))
+      .min(6, t('auth:login:min6Character'))
+      .max(255, t('auth:login:max255Character')),
     passwordConfirm: Yup.string()
-      .required('Nhập lại mật khẩu')
-      .min(6, 'Tối thiếu 6 ký tự')
-      .max(255, 'Tối đa 255 ký tự')
-      .oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
+      .required(t('auth:register:passwordConf'))
+      .min(6, t('auth:register:min6Character'))
+      .max(255, t('auth:register:max255Character'))
+      .oneOf([Yup.ref('password')], t('auth:register:invalidPassConf')),
   });
   const handleClickSubmit = async (
     values: RegisterValues,
@@ -77,7 +80,7 @@ const Register: FC<IProps> = (props) => {
           data: data.access_token,
           expires: data.expires_in,
         });
-        Toast.show('Đăng ký thành công !', {
+        Toast.show(t('auth:register:signUpSuccess'), {
           duration: Toast.durations.LONG,
           position: -60,
           shadow: true,
@@ -122,11 +125,11 @@ const Register: FC<IProps> = (props) => {
               extraHeight={50}
               showsVerticalScrollIndicator={false}>
                 <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-                <Text style={styles.titleText}>Sign up</Text>
+                <Text style={styles.titleText}>{t('auth:register:name')}</Text>
               <View style={styles.boxWrapper} collapsable={false}>
                 <Input
                   ref={emailRef}
-                  placeholder="Your Email"
+                  placeholder={t('auth:login:labelEmail')}
                   keyboardType="email-address"
                   returnKeyType="next"
                   value={values.email}
@@ -141,7 +144,7 @@ const Register: FC<IProps> = (props) => {
                 />
                 <Input
                   ref={passwordRef}
-                  placeholder="Password"
+                  placeholder={t('auth:register:password')}
                   keyboardType="default"
                   returnKeyType="next"
                   secureTextEntry={true}
@@ -156,7 +159,7 @@ const Register: FC<IProps> = (props) => {
                 />
                 <Input
                   ref={rePasswordRef}
-                  placeholder="Confirm Password"
+                  placeholder={t('auth:register:passwordConf')}
                   keyboardType="default"
                   returnKeyType="done"
                   secureTextEntry={true}
@@ -169,25 +172,25 @@ const Register: FC<IProps> = (props) => {
                   containerStyle={styles.containerStyle}
                 />
                 <ButtonOriginal
-                  title="Sign up"
+                  title={t('auth:register:name')}
                   customStyle={styles.signup}
                   handlePress={handleSubmit}
                   loading={loading}
                 />
                 <View style={styles.policy}>
-                  <Text style={styles.text}>By signing up, you agreed with our</Text>
+                  <Text style={styles.text}>{t('auth:register:bySigningUp')}</Text>
                   <Text
                     style={styles.termConditions}
                     onPress={() => navigation.navigate('TermsAndConditions')}>
-                    Terms and Conditions
-                    <Text style={styles.text}> for Westay.</Text>
+                    {t('account:settings:termsAndConditions')}
+                    <Text style={styles.text}> {t('auth:register:forWestay')}</Text>
                   </Text>
                 </View>
                 <View style={styles.action}>
                   <Text style={styles.titleSubText} onPress={() => navigation.navigate('Login')}>
-                    <Text>Already have account? </Text>
+                    <Text>{t('auth:register:haveAccount')}</Text>
                     <Text style={styles.textSwitch} >
-                      Log in
+                      {t('auth:login:name')}
                     </Text>{' '}
                   </Text>
                 </View>

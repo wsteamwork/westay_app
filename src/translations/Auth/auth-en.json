@@ -4,12 +4,13 @@
         "invalidEmail": "Email address is not valid",
         "min6Character": "At least 6 characters",
         "max255Character": "Up to 255 characters",
-        "sucess": "An email has been sent to your e-mail address",
+        "success": "An email has been sent to your e-mail address",
         "name": "Forgot password",
         "desc": "Enter the email address registered with your account and we will send you a password change link.",
         "submit": "Send a password change path"
     },
     "login": {
+        "name": "Log in",
         "emailRequired": "Please enter email",
         "invalidEmail": "Email address is not valid",
         "min6Character": "At least 6 characters",
@@ -37,13 +38,15 @@
         "phone": "Phone number",
         "search": "Search",
         "password": "Password",
-        "passworfConf": "Enter the password",
+        "passwordConf": "Enter the password",
         "agree": "I agree with",
         "termsAndConditions": "terms of use",
+        "bySigningUp": "By signing up, you agreed with our",
         "privacyPolicy": "Privacy policy",
-        "forWestay": "of Westay",
-        "haveAccount": "Are you a Westay member?",
+        "forWestay": "for Westay",
+        "haveAccount": "Already have account? ",
         "signin": "Sign in",
-        "name": "Sign up"
+        "name": "Sign up",
+        "signUpSuccess": "Sign Up Success"
     }
 }

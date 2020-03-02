@@ -9,7 +9,7 @@ import { ThemeProvider } from 'react-native-elements';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from 'store';
-import { AuthContext, authInit, authReducer, SET_TOKEN } from 'store/context/auth';
+import {AuthContext, authInit, authReducer, SET_TOKEN, SET_LANGUAGE_STATUS} from 'store/context/auth';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import { TOKEN } from 'utils/api';
 import storage from 'utils/storage';
@@ -38,10 +38,10 @@ const App: FC = () => {
       .then(data => authDispatch({ type: SET_TOKEN, payload: `Bearer ${data}` }))
       .catch(err => authDispatch({ type: SET_TOKEN, payload: null }));
 
-    // storage
-    //   .load({ autoSync: true, key: 'initLanguage' })
-    //   .then(data => dispatch({ type: SET_LANGUAGE_STATUS, payload: data }))
-    //   .catch(err => dispatch({ type: SET_LANGUAGE_STATUS, payload: 'vi' }));
+    storage
+      .load({ autoSync: true, key: 'initLanguage' })
+      .then(data => authDispatch({ type: SET_LANGUAGE_STATUS, payload: data }))
+      .catch(err => authDispatch({ type: SET_LANGUAGE_STATUS, payload: 'vi' }));
   };
 
   useEffect(() => {
