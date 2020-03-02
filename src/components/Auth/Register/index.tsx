@@ -1,20 +1,19 @@
-import React, { FC, useContext, useState, useRef } from 'react';
-import { StyleSheet, View, Text, SafeAreaView, Keyboard } from 'react-native';
-import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import { hp, wp, COLOR_BUTTON_DEFAULT } from 'utils/responsive';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import * as Yup from 'yup';
+import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { Formik, FormikHelpers } from 'formik';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { axios, TOKEN } from 'utils/api';
-import Toast from 'react-native-root-toast';
-import storage from 'utils/storage';
-import { AuthContext, getProfile } from 'store/context/auth';
+import React, { FC, useContext, useRef, useState } from 'react';
+import { Keyboard, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { Input } from 'react-native-elements';
-import { inputContainerStyleGlobal } from 'utils/mixins';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {useTranslation} from 'react-i18next';
+import Toast from 'react-native-root-toast';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { AuthContext, getProfile } from 'store/context/auth';
+import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
+import { axios, TOKEN } from 'utils/api';
+import { inputContainerStyleGlobal } from 'utils/mixins';
+import { COLOR_BUTTON_DEFAULT, hp, wp } from 'utils/responsive';
+import storage from 'utils/storage';
+import * as Yup from 'yup';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -37,23 +36,21 @@ const Register: FC<IProps> = (props) => {
   const { dispatch, state } = useContext(AuthContext);
   const { languageStatus } = state;
   const [loading, setLoading] = useState(false);
-  const { t } = useTranslation();
-
   const FormValidationSchema = Yup.object().shape({
     email: Yup.string()
-      .required(t('auth:login:emailRequired'))
-      .email(t('auth:login:invalidEmail'))
-      .min(6, t('auth:login:min6Character'))
-      .max(255, t('auth:login:max255Character')),
+      .required('Vui lòng nhập email')
+      .email('Địa chỉ email không hợp lệ')
+      .min(6, 'Tối thiểu 6 ký tự')
+      .max(255, 'Tối đa 255 ký tự'),
     password: Yup.string()
-      .required(t('auth:login:passwordRequired'))
-      .min(6, t('auth:login:min6Character'))
-      .max(255, t('auth:login:max255Character')),
+      .required('Vui lòng nhập mật khẩu')
+      .min(6, 'Tối thiếu 6 ký tự')
+      .max(255, 'Tối đa 255 ký tự'),
     passwordConfirm: Yup.string()
-      .required(t('auth:register:passwordConf'))
-      .min(6, t('auth:register:min6Character'))
-      .max(255, t('auth:register:max255Character'))
-      .oneOf([Yup.ref('password')], t('auth:register:invalidPassConf')),
+      .required('Nhập lại mật khẩu')
+      .min(6, 'Tối thiếu 6 ký tự')
+      .max(255, 'Tối đa 255 ký tự')
+      .oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
   });
   const handleClickSubmit = async (
     values: RegisterValues,
@@ -80,7 +77,7 @@ const Register: FC<IProps> = (props) => {
           data: data.access_token,
           expires: data.expires_in,
         });
-        Toast.show(t('auth:register:signUpSuccess'), {
+        Toast.show('Đăng ký thành công !', {
           duration: Toast.durations.LONG,
           position: -60,
           shadow: true,
@@ -124,12 +121,13 @@ const Register: FC<IProps> = (props) => {
               enableOnAndroid
               extraHeight={50}
               showsVerticalScrollIndicator={false}>
-                <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-                <Text style={styles.titleText}>{t('auth:register:name')}</Text>
+              <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
+              <Text style={styles.titleText}>Sign up</Text>
               <View style={styles.boxWrapper} collapsable={false}>
                 <Input
                   ref={emailRef}
-                  placeholder={t('auth:login:labelEmail')}
+                  placeholderTextColor={`${COLOR_TEXT_SUBTITLE}7d`}
+                  placeholder="Your Email"
                   keyboardType="email-address"
                   returnKeyType="next"
                   value={values.email}
@@ -138,13 +136,15 @@ const Register: FC<IProps> = (props) => {
                   errorMessage={errors.email}
                   onSubmitEditing={() => passwordRef.current.focus()}
                   autoCorrect={false}
+                  inputStyle={{ fontSize: SIZE_TEXT_SUBTITLE, color: COLOR_TEXT_TITLE }}
                   inputContainerStyle={styles.inputContainerStyle}
                   containerStyle={styles.containerStyle}
                   errorStyle={{ color: 'red' }}
                 />
                 <Input
                   ref={passwordRef}
-                  placeholder={t('auth:register:password')}
+                  placeholderTextColor={`${COLOR_TEXT_SUBTITLE}7d`}
+                  placeholder="Password"
                   keyboardType="default"
                   returnKeyType="next"
                   secureTextEntry={true}
@@ -154,12 +154,14 @@ const Register: FC<IProps> = (props) => {
                   errorMessage={errors.password}
                   onSubmitEditing={() => rePasswordRef.current.focus()}
                   errorStyle={{ color: 'red' }}
+                  inputStyle={{ fontSize: SIZE_TEXT_SUBTITLE, color: COLOR_TEXT_TITLE }}
                   inputContainerStyle={styles.inputContainerStyle}
                   containerStyle={styles.containerStyle}
                 />
                 <Input
                   ref={rePasswordRef}
-                  placeholder={t('auth:register:passwordConf')}
+                  placeholderTextColor={`${COLOR_TEXT_SUBTITLE}7d`}
+                  placeholder="Confirm Password"
                   keyboardType="default"
                   returnKeyType="done"
                   secureTextEntry={true}
@@ -168,29 +170,31 @@ const Register: FC<IProps> = (props) => {
                   onBlur={handleBlur('passwordConfirm')}
                   errorMessage={errors.passwordConfirm}
                   errorStyle={{ color: 'red' }}
+                  inputStyle={{ fontSize: SIZE_TEXT_SUBTITLE, color: COLOR_TEXT_TITLE }}
                   inputContainerStyle={styles.inputContainerStyle}
                   containerStyle={styles.containerStyle}
                 />
                 <ButtonOriginal
-                  title={t('auth:register:name')}
+                  title="Sign up"
+                  customTitleStyle={{ fontSize: 16 }}
                   customStyle={styles.signup}
                   handlePress={handleSubmit}
                   loading={loading}
                 />
                 <View style={styles.policy}>
-                  <Text style={styles.text}>{t('auth:register:bySigningUp')}</Text>
+                  <Text style={styles.text}>By signing up, you agreed with our</Text>
                   <Text
                     style={styles.termConditions}
                     onPress={() => navigation.navigate('TermsAndConditions')}>
-                    {t('account:settings:termsAndConditions')}
-                    <Text style={styles.text}> {t('auth:register:forWestay')}</Text>
+                    Terms and Conditions
+                    <Text style={styles.text}> for Westay.</Text>
                   </Text>
                 </View>
                 <View style={styles.action}>
                   <Text style={styles.titleSubText} onPress={() => navigation.navigate('Login')}>
-                    <Text>{t('auth:register:haveAccount')}</Text>
+                    <Text>Already have account? </Text>
                     <Text style={styles.textSwitch} >
-                      {t('auth:login:name')}
+                      Log in
                     </Text>{' '}
                   </Text>
                 </View>
@@ -220,11 +224,11 @@ const styles = StyleSheet.create({
   },
   titleText: {
     marginBottom: hp('6%'),
-    fontWeight: 'bold',
-    fontSize: wp('8%'),
+    fontWeight: '500',
+    fontSize: wp('7%'),
     width: wp('100%'),
     paddingHorizontal: wp('5%'),
-    color: COLOR_TEXT_DEFAULT,
+    color: COLOR_TEXT_TITLE,
   },
   titleSubText: {
     marginTop: hp('4%'),
@@ -245,21 +249,23 @@ const styles = StyleSheet.create({
   },
   policy: {
     marginTop: hp('4%'),
-    marginBottom: hp('5%'),
+    // marginBottom: hp('5%'),
   },
   termConditions: {
-    fontSize: wp('4%'),
+    fontSize: SIZE_TEXT_SUBTITLE,
     color: '#0BBCF2',
     textAlign: 'center',
   },
   text: {
-    fontSize: wp('4%'),
+    fontSize: SIZE_TEXT_SUBTITLE,
     width: wp('100%'),
     textAlign: 'center',
     color: '#8A8A8F',
   },
   signup: {
-    marginTop: hp('3%'),
+    padding: 0,
+    height: 42,
+    marginTop: hp('3%')
   },
   inputContainerStyle: inputContainerStyleGlobal,
   containerStyle: {

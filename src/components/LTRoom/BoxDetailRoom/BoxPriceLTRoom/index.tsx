@@ -35,7 +35,7 @@ const BoxPriceLTRoom: FC<IProps> = (props) => {
         visible={collapsedPrice}>
         <HeaderWithBackTitle
           handlePress={() => setCollapsedPrice(false)}
-          containerStyle={{ paddingTop: hp('3%') }}
+          containerStyle={{ marginTop: hp('5%') }}
         />
         <ScrollView>
           <Text style={styles.textHeader}>Price by lease term</Text>

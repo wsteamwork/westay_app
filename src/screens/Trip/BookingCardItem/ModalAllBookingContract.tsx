@@ -1,11 +1,10 @@
-import React, { FC, Dispatch, SetStateAction } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { Text, Button, Divider } from 'react-native-elements';
-import { hp, wp } from 'utils/responsive';
+import React, { Dispatch, FC, SetStateAction } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Button, Divider, Text } from 'react-native-elements';
 import Modal from 'react-native-modal';
-import { elevationShadowStyle } from 'utils/mixins';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
-import { LTBookingContracts, LTBookingIndexRes } from 'types/Booking/BookingResponses';
+import { elevationShadowStyle } from 'utils/mixins';
+import { hp, wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -31,32 +30,32 @@ const ModalAllBookingContract: FC<IProps> = (props) => {
       coverScreen={true}
       style={{ margin: 0 }}>
       <View style={styles.container}>
-        <ScrollView>
-          <View style={styles.boxWrapper}>
+        <ScrollView stickyHeaderIndices={[0]}>
+          <View style={[styles.boxWrapper, { marginTop: 42 }]}>
             <Text style={styles.headerText}>Tất cả hợp đồng</Text>
           </View>
           {booking.contracts.data.map((con: any, i: number) => (
             <View key={i} style={[styles.containerItem, elevationShadowStyle(10)]}>
               <View style={styles.boxWrapper}>
                 <Text style={styles.titleHeader}>Hợp đồng số</Text>
-                <Text style={styles.itemLeft}>{i + 1}</Text>
+                <Text style={styles.itemRight}>{i + 1}</Text>
               </View>
               <Divider style={styles.divider} />
               <View style={styles.boxWrapper}>
                 <Text style={styles.title}>Mã hợp đồng</Text>
-                <Text style={styles.itemLeft}>#{con.uuid}</Text>
+                <Text style={styles.itemRight}>#{con.uuid}</Text>
               </View>
               <View style={styles.boxWrapper}>
                 <Text style={styles.title}>Ngày chuyến đến</Text>
-                <Text style={styles.itemLeft}>{con.move_in.replace(/-/g, '/')}</Text>
+                <Text style={styles.itemRight}>{con.move_in.replace(/-/g, '/')}</Text>
               </View>
               <View style={styles.boxWrapper}>
                 <Text style={styles.title}>Ngày chuyến đi</Text>
-                <Text style={styles.itemLeft}>{con.move_out.replace(/-/g, '/')}</Text>
+                <Text style={styles.itemRight}>{con.move_out.replace(/-/g, '/')}</Text>
               </View>
               <View style={styles.boxWrapper}>
                 <Text style={styles.title}>Trạng thái</Text>
-                <Text style={styles.itemLeft}>{con.status_txt}</Text>
+                <Text style={styles.itemRight}>{con.status_txt}</Text>
               </View>
             </View>
           ))}
@@ -107,12 +106,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#adadad',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '500',
   },
-  itemLeft: {
-    fontSize: 16,
-    fontWeight: 'bold',
+  itemRight: {
+    fontSize: 14,
+    fontWeight: '500',
   },
   headerText: {
     fontWeight: 'bold',
@@ -144,7 +143,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     borderRadius: 5,
     width: wp('90%'),
-    height: hp('6%'),
+    height: hp('5%'),
     backgroundColor: '#cc0066',
   },
 });

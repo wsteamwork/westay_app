@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { wp, hp } from 'utils/responsive';
 import MapView, { Circle } from 'react-native-maps';
-import { ReducersList } from 'store/redux/reducers';
 import { useSelector } from 'react-redux';
+import { ReducersList } from 'store/redux/reducers';
+import { wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>

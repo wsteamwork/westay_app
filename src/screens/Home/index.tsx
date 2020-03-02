@@ -1,4 +1,3 @@
-import ContactButton from 'components/ContactButton';
 import CollectionsRectangleCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsRectangleCard';
 import DestinationCard from 'components/GlobalComponents/Cards/DestinationCard';
 import ValuableCard from 'components/GlobalComponents/Cards/ValuableCard';
@@ -22,7 +21,6 @@ import { NumberRoomCity } from 'types/Rooms/RoomResponses';
 import { axios } from 'utils/api';
 import { __currentPlatform } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
-import {useTranslation} from 'react-i18next';
 
 const Home: FC = (props) => {
   const { state } = useContext(AuthContext);
@@ -35,7 +33,6 @@ const Home: FC = (props) => {
   const [forFamily, setForFamily] = useState<IDataCollections>({ data: [], meta: 0 });
   const [goodPrice, setGoodPrice] = useState<[]>([]);
   const [dataTypeHouse, setDataTypeHouse] = useState<[]>([]);
-  const {t} = useTranslation();
 
   const getDataTypeHouse = async () => {
     const response = await axios.get('rooms/room-type-homepage', { headers: { 'Accept-Language': languageStatus } });
@@ -55,19 +52,19 @@ const Home: FC = (props) => {
   }, [languageStatus]);
 
   useEffect(() => {
-    getHomePageCollection('editor_choice', 8).then((res) => {
+    getHomePageCollection('editor_choice', 8, languageStatus).then((res) => {
       setEditorChoice({
         data: res.data.data,
         meta: res.data!.meta!.pagination!.total
       })
     });
-    getHomePageCollection('for_family', 8).then((res) => {
+    getHomePageCollection('for_family', 8, languageStatus).then((res) => {
       setForFamily({
         data: res.data.data,
         meta: res.data!.meta!.pagination!.total
       })
     });
-    getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res.data.data));
+    getHomePageCollection('good_price', 8, languageStatus).then((res) => setGoodPrice(res.data.data));
   }, []);
 
 
@@ -108,6 +105,7 @@ const Home: FC = (props) => {
           roomName={room.about_room.name}
           roomType={room.accommodation_type_txt}
           roomImage={imgRoomSM}
+          numberRoom={room.bedrooms.number_bedroom}
           avg_rating={room.avg_rating} />
       </View>
     );
@@ -131,28 +129,28 @@ const Home: FC = (props) => {
         </View>
 
         <View style={styles.mrTop}>
-          <ListDestinations data={roomsCity} title={t('home:topDestination')} _renderItem={_renderDestination} />
+          <ListDestinations data={roomsCity} title='Top Destinations' _renderItem={_renderDestination} />
         </View>
 
         <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
-          <ListCollections data={editorChoice.data} typeData='editor_choice' total={editorChoice.meta} title={t('home:editorChoice')} _renderItem={_renderEditorChoice} />
+          <ListCollections data={editorChoice.data} typeData='editor_choice' total={editorChoice.meta} title='Editor Choice' _renderItem={_renderEditorChoice} />
         </View>
 
         <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
-          <ListCollections data={forFamily.data} typeData='for_family' total={forFamily.meta} title={t('home:forFamily')} _renderItem={_renderForFamily} />
+          <ListCollections data={forFamily.data} typeData='for_family' total={forFamily.meta} title='For Family' _renderItem={_renderForFamily} />
         </View>
 
         <View style={[styles.pdLeft, { marginTop: hp('1%') }]}>
-          <ListCollectionsSquare title={t('home:studioForRent')} typeData='studio_for_rent' />
+          <ListCollectionsSquare title='Studio For Rent' typeData='studio_for_rent' />
         </View>
 
         <View style={styles.mrTop}>
-          <ListDestinations data={goodPrice} title={t('home:valuableRoom')} _renderItem={_renderValuableRoom} />
+          <ListDestinations data={goodPrice} title='Valuable Room' _renderItem={_renderValuableRoom} itemWidth={wp('90%')} />
         </View>
         <View style={styles.boxEmpty} />
       </ScrollView>
 
-      <ContactButton />
+      {/* <ContactButton /> */}
     </Animatable.View>
   );
 };

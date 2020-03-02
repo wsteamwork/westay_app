@@ -167,11 +167,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   send: {
-    marginTop: hp('3%'),
+    marginTop: hp('3%')
   },
   inputContainerStyle: inputContainerStyleGlobal,
   containerStyle: {
-    marginBottom: hp('3%'),
+    marginBottom: hp('3%')
   },
 });
 ForgotPassword.defaultProps = {};

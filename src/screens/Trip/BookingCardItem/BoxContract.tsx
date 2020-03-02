@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { wp, COLOR_BUTTON_DEFAULT } from 'utils/responsive';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import IconFoundation from 'react-native-vector-icons/Foundation';
-import Entypo from 'react-native-vector-icons/Entypo';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
+import IconFoundation from 'react-native-vector-icons/Foundation';
+import { COLOR_BUTTON_DEFAULT, wp } from 'utils/responsive';
+import ModalAllBookingContract from './ModalAllBookingContract';
 import ModalCurrentContract from './ModalCurrentContract';
 import ModalPaymentPeriod from './ModalPaymentPeriod';
-import ModalAllBookingContract from './ModalAllBookingContract';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -23,7 +23,7 @@ const BoxContract: FC<IProps> = (props) => {
   const [modalPaymentPeriod, setModalPaymentPeriod] = useState<boolean>(false);
   const [modalAllBookingContract, setModalAllBookingContract] = useState<boolean>(false);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.boxRow}>
         <View style={styles.boxItem}>
           <IconAntDesign name="copy1" size={wp('7%')} color={'#adadad'} style={styles.icon} />
@@ -128,7 +128,7 @@ const BoxContract: FC<IProps> = (props) => {
         setClose={setModalAllBookingContract}
         booking={booking}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
