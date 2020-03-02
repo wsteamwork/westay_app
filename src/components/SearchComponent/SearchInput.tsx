@@ -7,6 +7,7 @@ import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { COLOR_TEXT_DEFAULT, NORMAL, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
 import { elevationShadowStyle } from 'utils/mixins';
 import { wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 interface IProps extends NavigationInjectedProps {
   returnKeyType?: "none" | "default" | "done" | "go" | "next" | "search" | "send" | "previous" | "google" | "join" | "route" | "yahoo" | "emergency-call" | undefined;
@@ -21,7 +22,7 @@ interface IProps extends NavigationInjectedProps {
 
 const GlobalSearchInput: FC<IProps> = (props) => {
   const { returnKeyType, height, returnKeyLabel, value, _onChangeText, _onKeyPress, autoFocus, navigation, _onClear } = props;
-
+  const { t } = useTranslation();
   return (
     <View style={[styles.viewInput, elevationShadowStyle(4)]}>
       <SearchBar
@@ -31,7 +32,7 @@ const GlobalSearchInput: FC<IProps> = (props) => {
         onSubmitEditing={(e) => _onKeyPress(e)}
         underlineColorAndroid="transparent"
         placeholderTextColor={'#7676769d'}
-        placeholder={'Search Anything'}
+        placeholder={t('filter:filterActions:searchAnything')}
         clearButtonMode={'always'}
         showCancel
         cancelButtonTitle={'Cancel'}

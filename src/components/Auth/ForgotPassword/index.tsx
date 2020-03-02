@@ -13,6 +13,7 @@ import { COLOR_BUTTON_DEFAULT, hp, wp } from 'utils/responsive';
 import * as Yup from 'yup';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import Toast from 'react-native-root-toast';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -31,12 +32,14 @@ const ForgotPassword: FC<IProps> = (props) => {
   const { navigation } = props;
   const { state } = useContext(AuthContext);
   const { languageStatus } = state;
+  const { t } = useTranslation();
+
   const FormValidationSchema = Yup.object().shape({
     email: Yup.string()
-      .required('Vui lòng nhập email')
-      .email('Địa chỉ email không hợp lệ')
-      .min(6, 'Tối thiểu 6 ký tự')
-      .max(255, 'Tối đa 255 ký tự'),
+      .required(t('auth:login:emailRequired'))
+      .email(t('auth:login:invalidEmail'))
+      .min(6, t('auth:login:min6Character'))
+      .max(255, t('auth:login:max255Character')),
   });
   const handleClickSubmit = (values: LoginValues, actions: FormikHelpers<LoginValues>) => {
     Keyboard.dismiss();
@@ -52,7 +55,7 @@ const ForgotPassword: FC<IProps> = (props) => {
       .then((res) => {
         const data = res.data;
         if (data) {
-          Toast.show('An email has been sent to your e-mail address', {
+          Toast.show( t('auth:forgetPassword:success'), {
             duration: Toast.durations.LONG,
             position: -60,
             shadow: true,
@@ -94,14 +97,13 @@ const ForgotPassword: FC<IProps> = (props) => {
               showsVerticalScrollIndicator={false}>
               <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
               <View style={styles.container} collapsable={false}>
-                <Text style={styles.titleText}>Forgot Password</Text>
+                <Text style={styles.titleText}>{t('auth:forgetPassword:name')}</Text>
                 <Text style={styles.titleSubText}>
-                  Enter the email address registered with your account and we will send you a
-                  password change link.
+                  {t('auth:forgetPassword:desc')}
                 </Text>
                 <Input
                   ref={emailRef}
-                  placeholder="Your Email"
+                  placeholder={t('auth:login:labelEmail')}
                   keyboardType="email-address"
                   returnKeyType="done"
                   value={values.email}
@@ -114,7 +116,7 @@ const ForgotPassword: FC<IProps> = (props) => {
                   errorStyle={{ color: 'red' }}
                 />
                 <ButtonOriginal
-                  title="Send"
+                  title={t('auth:forgetPassword:submit')}
                   handlePress={handleSubmit}
                   loading={loading}
                   customStyle={styles.send}

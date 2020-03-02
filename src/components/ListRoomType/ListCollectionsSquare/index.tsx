@@ -46,7 +46,7 @@ const ListCollectionsSquare: FC<IProps> = (props) => {
 
       <TouchableWithScale _onPress={() => navigation.navigate('CollectionScreen', { typeDataCollection: typeData, titleCollection: title })}>
         <Text style={styles.txtAll}>
-          Show all {`(${dataRooms.meta}+)`} &#10095;
+          {t('shared:showAll')} {`(${dataRooms.meta}+)`} &#10095;
         </Text>
       </TouchableWithScale>
     </View>

@@ -22,6 +22,7 @@ import { NumberRoomCity } from 'types/Rooms/RoomResponses';
 import { axios } from 'utils/api';
 import { __currentPlatform } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 const Home: FC = (props) => {
   const { state } = useContext(AuthContext);
@@ -34,6 +35,7 @@ const Home: FC = (props) => {
   const [forFamily, setForFamily] = useState<IDataCollections>({ data: [], meta: 0 });
   const [goodPrice, setGoodPrice] = useState<[]>([]);
   const [dataTypeHouse, setDataTypeHouse] = useState<[]>([]);
+  const {t} = useTranslation();
 
   const getDataTypeHouse = async () => {
     const response = await axios.get('rooms/room-type-homepage', { headers: { 'Accept-Language': languageStatus } });
@@ -129,23 +131,23 @@ const Home: FC = (props) => {
         </View>
 
         <View style={styles.mrTop}>
-          <ListDestinations data={roomsCity} title='Top Destinations' _renderItem={_renderDestination} />
+          <ListDestinations data={roomsCity} title={t('home:topDestination')} _renderItem={_renderDestination} />
         </View>
 
         <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
-          <ListCollections data={editorChoice.data} typeData='editor_choice' total={editorChoice.meta} title='Editor Choice' _renderItem={_renderEditorChoice} />
+          <ListCollections data={editorChoice.data} typeData='editor_choice' total={editorChoice.meta} title={t('home:editorChoice')} _renderItem={_renderEditorChoice} />
         </View>
 
         <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>
-          <ListCollections data={forFamily.data} typeData='for_family' total={forFamily.meta} title='For Family' _renderItem={_renderForFamily} />
+          <ListCollections data={forFamily.data} typeData='for_family' total={forFamily.meta} title={t('home:forFamily')} _renderItem={_renderForFamily} />
         </View>
 
         <View style={[styles.pdLeft, { marginTop: hp('1%') }]}>
-          <ListCollectionsSquare title='Studio For Rent' typeData='studio_for_rent' />
+          <ListCollectionsSquare title={t('home:studioForRent')} typeData='studio_for_rent' />
         </View>
 
         <View style={styles.mrTop}>
-          <ListDestinations data={goodPrice} title='Valuable Room' _renderItem={_renderValuableRoom} />
+          <ListDestinations data={goodPrice} title={t('home:valuableRoom')} _renderItem={_renderValuableRoom} />
         </View>
         <View style={styles.boxEmpty} />
       </ScrollView>

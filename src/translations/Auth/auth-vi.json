@@ -10,6 +10,7 @@
         "submit": "Gửi đường dẫn đổi mật khẩu"
     },
     "login": {
+        "name": "Đăng nhập",
         "emailRequired": "Vui lòng nhập email",
         "invalidEmail": "Địa chỉ email không hợp lệ",
         "min6Character": "Tối thiểu 6 ký tự",
@@ -37,13 +38,15 @@
         "phone": "Số điện thoại",
         "search": "Tìm kiếm",
         "password": "Mật khẩu",
-        "passworfConf": "Nhập lại mật khẩu",
+        "passwordConf": "Nhập lại mật khẩu",
         "agree": "Tôi đồng ý với",
         "termsAndConditions": "điều khoản sử dụng",
+        "bySigningUp": "Bằng cách đăng ký, bạn đã đồng ý với chúng tôi",
         "privacyPolicy": "Chính sách quyền riêng tư",
         "forWestay": "của Westay",
         "haveAccount": "Bạn đã là thành viên Westay?",
         "signin": "Đăng nhập",
-        "name": "Đăng ký"
+        "name": "Đăng ký",
+        "signUpSuccess": "Đăng ký thành công"
     }
-} 
+}

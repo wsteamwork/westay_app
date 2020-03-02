@@ -7,6 +7,7 @@ import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { compose } from 'recompose';
 import { COLOR_INFO, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
 import { hp, stylesGlobal, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 interface IProps extends NavigationInjectedProps {
   title: string,
@@ -18,7 +19,7 @@ interface IProps extends NavigationInjectedProps {
 
 const ListCollections: FC<IProps> = (props) => {
   const { title, data, _renderItem, total, typeData, navigation } = props;
-
+  const { t } = useTranslation();
   return (
     <View>
       <Text style={[stylesGlobal.titleGlobal, {
@@ -41,7 +42,7 @@ const ListCollections: FC<IProps> = (props) => {
 
       <TouchableWithScale _onPress={() => navigation.navigate('CollectionScreen', { typeDataCollection: typeData, titleCollection: title })}>
         <Text style={[styles.txtAll]}>
-          Show all {`(${total}+)`} &#10095;
+          {t('shared:showAll')} {`(${total}+)`} &#10095;
         </Text>
       </TouchableWithScale>
     </View>

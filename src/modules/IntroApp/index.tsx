@@ -4,26 +4,29 @@ import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 import {wp, hp} from 'utils/responsive';
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
 import PaginationIntro from 'modules/IntroApp/PaginationIntro';
+import {useTranslation} from 'react-i18next';
 
 interface IProps {
   onDone: ()=> void;
 }
 
+const {t} = useTranslation();
+
 const slides = [
   {
-    title: `Chào mừng đến với Westay!\nNơi trải nghiệm dịch vụ homestay với phong cách du lịch bản địa, hạng sang`,
+    title: `${t('shared:welcomeToWestay')}\n${t('shared:toExperienceHomestay')}`,
     des: '',
     image: require('assets/images/intro/Intro_1.jpeg'),
     colors: ['#fff', '#fff'],
   },
   {
-    title: 'Cung cấp trải nghiệm, giải pháp tối ưu cho thuê nhà dài dạn',
+    title: t('shared:solutionForLong-termRental'),
     des: '',
     image: require('assets/images/intro/Intro_2.jpg'),
     colors: ['#A3A1FF', '#3A3897'],
   },
   {
-    title: 'Hãy cùng Westay tận hưởng khoảnh khắc vui vẻ bên nhau!',
+    title: t('shared:enjoyTheFunTogether'),
     des: '',
     image: require('assets/images/intro/Intro_3.jpg'),
     colors: ['#29ABE2', '#4F00BC'],
@@ -91,7 +94,7 @@ const IntroApp: FC<IProps> = (props) => {
       <View style={styles.boxAction}>
         <PaginationIntro dotsLength={slides.length} activeDotIndex={indexSlider}/>
         <TouchableWithScale _onPress={indexSlider !== 2 ? goForward : onDone} style={styles.btnStart}>
-          <Text>{indexSlider === 2 ? 'Bắt đầu' : 'Tiếp theo'}</Text>
+          <Text>{indexSlider === 2 ? t('shared:start') : t('shared:next')}</Text>
         </TouchableWithScale>
 
       </View>
