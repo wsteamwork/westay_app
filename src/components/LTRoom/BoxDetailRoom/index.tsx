@@ -101,7 +101,7 @@ const BoxDetailRoom: FC<IProps> = (props) => {
           <Divider style={{ backgroundColor: '#8AA9896d' }} />
         </View>
 
-        <View>
+        <View style={{marginBottom: 20}}>
           <BoxCircleMapRoom />
         </View>
       </ScrollView>

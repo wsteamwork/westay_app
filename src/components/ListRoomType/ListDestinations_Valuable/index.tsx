@@ -2,15 +2,17 @@ import DefaultSwiper from 'components/GlobalComponents/SnapCarouselRenderer/Defa
 import React, { FC, ReactElement } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { stylesGlobal, wp } from 'utils/responsive';
+import { itemWidth } from 'components/GlobalComponents/SnapCarouselRenderer/styles/SliderEntry.style';
 
 interface IProps {
   data: any[],
   title: string,
   _renderItem: (item?: any, index?: any) => ReactElement;
+  itemWidth?: number;
 }
 
 const ListDestinations: FC<IProps> = (props) => {
-  const { data, title, _renderItem } = props;
+  const { data, title, _renderItem, itemWidth } = props;
 
   return (
     <View>
@@ -26,12 +28,15 @@ const ListDestinations: FC<IProps> = (props) => {
           isParallax
           infinite={true}
           firstItemIndex={0}
-          itemWidth={wp('87%')}
+          itemWidth={itemWidth}
           _renderItem={(item, index) => _renderItem(item, index)}
           dataSwiper={data} />
       </View>
     </View>
   );
+};
+ListDestinations.defaultProps = {
+  itemWidth: wp('87%')
 };
 
 const styles = StyleSheet.create({

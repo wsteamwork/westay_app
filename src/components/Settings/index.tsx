@@ -1,23 +1,16 @@
-import React, { FC, useContext, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import _ from 'lodash';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import { COLOR_TEXT_DEFAULT, COLOR_BUTTON_DEFAULT, COLOR_TITLE_HEADER } from 'styles/global.style';
-import { Text, Divider } from 'react-native-elements';
-import { wp, hp } from 'utils/responsive';
-import {AuthContext, SET_TOKEN, SET_LANGUAGE_STATUS} from 'store/context/auth';
+import React, { FC, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import storage from 'utils/storage';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Divider, Text } from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import {TOKEN} from 'utils/api';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { AuthContext, SET_LANGUAGE_STATUS, SET_TOKEN } from 'store/context/auth';
+import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_DEFAULT, COLOR_TITLE_HEADER } from 'styles/global.style';
+import { TOKEN } from 'utils/api';
+import { hp, wp } from 'utils/responsive';
+import storage from 'utils/storage';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -48,7 +41,7 @@ const Settings: FC<IProps> = (props) => {
     navigation.goBack();
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <HeaderWithBackTitle title={t('account:settings:name')} textHeaderStyle={{ color: COLOR_TEXT_DEFAULT }} />
       <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
@@ -145,12 +138,13 @@ const Settings: FC<IProps> = (props) => {
           </View>
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'white',
     flex: 1,
     flexDirection: 'column',
   },

@@ -1,16 +1,15 @@
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import React, {FC, useContext, Fragment} from 'react';
-import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
-import { Image, Rating } from 'react-native-elements';
-import { COLOR_TITLE_HEADER, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
+import React, { FC, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { Image } from 'react-native-elements';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { AuthContext } from 'store/context/auth';
+import { SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE_MEDIUM, SIZE_TEXT_SUBTITLE, COLOR_TEXT_TITLE } from 'styles/global.style';
+import { cleanAccents, formatPrice } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
-import {cleanAccents, formatPrice} from 'utils/mixins';
-import {AuthContext} from 'store/context/auth';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
-import {useTranslation} from 'react-i18next';
-import IconEntypo from 'react-native-vector-icons/Entypo';
 
-interface IProps extends  NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   city: string;
   district: string;
   roomID: number;
@@ -24,7 +23,7 @@ interface IProps extends  NavigationInjectedProps{
 
 const ValuableCard: FC<IProps> = (props) => {
   const { roomID, roomName, city, district, roomImage, roomType, avg_rating, priceDisplay, numberRoom, navigation } = props;
-  const { state : {languageStatus}} = useContext(AuthContext);
+  const { state: { languageStatus } } = useContext(AuthContext);
   const { t } = useTranslation();
 
   const handleClick = () => {
@@ -116,7 +115,8 @@ const styles = StyleSheet.create({
   },
   txtRoomName: {
     fontWeight: SEMI_BOLD,
-    fontSize: SIZE_TEXT_TITLE_MEDIUM
+    fontSize: SIZE_TEXT_SUBTITLE,
+    color: COLOR_TEXT_TITLE
   },
   txtAddress: {
     // fontSize: wp('3%'),

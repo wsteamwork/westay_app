@@ -1,21 +1,18 @@
-import React, { FC, useEffect, Dispatch, useMemo } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { wp } from 'utils/responsive';
-import { Text } from 'react-native-elements';
 import { hp } from 'components/Utils/responsive.style';
+import React, { Dispatch, FC, useEffect, useMemo } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  LTBookingAction,
-  getLTCalculatedBookingPrice,
-} from 'store/redux/reducers/LTBooking/ltbooking';
+import { getLTCalculatedBookingPrice, LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
 import { formatMoney } from 'utils/mixins';
+import { wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
 
- 
+
 interface IProps {
   initialProps?: any;
 }

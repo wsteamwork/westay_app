@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
-import { wp } from 'utils/responsive';
-import { Text } from 'react-native-elements';
 import { hp } from 'components/Utils/responsive.style';
+import React, { FC } from 'react';
+import { Image, StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import { wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>

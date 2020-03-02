@@ -1,20 +1,20 @@
+import { hp } from 'components/Utils/responsive.style';
 import React, { FC, useContext } from 'react';
-import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
-import { wp } from 'utils/responsive';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { hp } from 'components/Utils/responsive.style';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { useSelector } from 'react-redux';
+import { AuthContext } from 'store/context/auth';
 import { ReducersList } from 'store/redux/reducers';
 import { formatDateBooking } from 'utils/mixins';
-import { AuthContext } from 'store/context/auth';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
 
-interface IProps extends NavigationInjectedProps{
+interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
 
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 16,
-    paddingVertical: hp('4%')
+    // paddingVertical: 4
   },
   showDate: {
     flexDirection: 'row',

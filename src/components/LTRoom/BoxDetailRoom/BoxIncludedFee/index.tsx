@@ -35,7 +35,7 @@ const BoxIncludedFee: FC<IProps> = (props) => {
         visible={collapsedServices}>
         <HeaderWithBackTitle
           handlePress={() => setCollapsedServices(false)}
-          containerStyle={{ paddingTop: hp('3%') }}
+          containerStyle={{ marginTop: hp('5%') }}
         />
         <ScrollView>
           <Text style={styles.textHeader}>Service fees</Text>

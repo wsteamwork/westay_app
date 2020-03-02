@@ -1,4 +1,3 @@
-import ContactButton from 'components/ContactButton';
 import CollectionsRectangleCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsRectangleCard';
 import DestinationCard from 'components/GlobalComponents/Cards/DestinationCard';
 import ValuableCard from 'components/GlobalComponents/Cards/ValuableCard';
@@ -53,19 +52,19 @@ const Home: FC = (props) => {
   }, [languageStatus]);
 
   useEffect(() => {
-    getHomePageCollection('editor_choice', 8).then((res) => {
+    getHomePageCollection('editor_choice', 8, languageStatus).then((res) => {
       setEditorChoice({
         data: res.data.data,
         meta: res.data!.meta!.pagination!.total
       })
     });
-    getHomePageCollection('for_family', 8).then((res) => {
+    getHomePageCollection('for_family', 8, languageStatus).then((res) => {
       setForFamily({
         data: res.data.data,
         meta: res.data!.meta!.pagination!.total
       })
     });
-    getHomePageCollection('good_price', 8).then((res) => setGoodPrice(res.data.data));
+    getHomePageCollection('good_price', 8, languageStatus).then((res) => setGoodPrice(res.data.data));
   }, []);
 
 
@@ -106,6 +105,7 @@ const Home: FC = (props) => {
           roomName={room.about_room.name}
           roomType={room.accommodation_type_txt}
           roomImage={imgRoomSM}
+          numberRoom={room.bedrooms.number_bedroom}
           avg_rating={room.avg_rating} />
       </View>
     );
@@ -145,12 +145,12 @@ const Home: FC = (props) => {
         </View>
 
         <View style={styles.mrTop}>
-          <ListDestinations data={goodPrice} title='Valuable Room' _renderItem={_renderValuableRoom} />
+          <ListDestinations data={goodPrice} title='Valuable Room' _renderItem={_renderValuableRoom} itemWidth={wp('90%')} />
         </View>
         <View style={styles.boxEmpty} />
       </ScrollView>
 
-      <ContactButton />
+      {/* <ContactButton /> */}
     </Animatable.View>
   );
 };

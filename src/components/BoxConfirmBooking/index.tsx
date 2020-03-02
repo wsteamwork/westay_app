@@ -1,18 +1,18 @@
-import React, { FC, Dispatch, useState, useEffect } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
 import ChooseGuest from 'components/ChooseGuest';
+import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
+import ButtonOriginal from 'components/Utils/ButtonOriginal';
+import React, { Dispatch, FC, useEffect, useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { Divider } from 'react-native-elements';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducersList } from 'store/redux/reducers';
+import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
+import { IMAGE_STORAGE_LG } from 'types/globalTypes';
 import { hp, wp } from 'utils/responsive';
 import ShowCheckinCheckout from './ShowCheckinCheckout';
-import ShowPriceCalculator from './ShowPriceCalculator';
-import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import ShowInfoBasicRoom from './ShowInfoBasicRoom';
-import { useDispatch, useSelector } from 'react-redux';
-import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
-import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { ReducersList } from 'store/redux/reducers';
-import { IMAGE_STORAGE_LG } from 'types/globalTypes';
+import ShowPriceCalculator from './ShowPriceCalculator';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -31,8 +31,8 @@ const BoxConfirmBooking: FC<IProps> = (props) => {
   }, [people]);
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   return (
-    <View style={styles.container}>
-      <ScrollView>
+    <SafeAreaView style={styles.container}>
+      <ScrollView stickyHeaderIndices={[0]}>
         <HeaderWithBackTitle handlePress={() => navigation.goBack()} title="Confirm Booking" />
         <ShowInfoBasicRoom
           roomName={listing.about_room.name}
@@ -54,7 +54,7 @@ const BoxConfirmBooking: FC<IProps> = (props) => {
           customStyle={styles.buttonStyle}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
