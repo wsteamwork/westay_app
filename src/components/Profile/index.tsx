@@ -1,19 +1,12 @@
 import React, { FC, useContext } from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import _ from 'lodash';
-import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import { Text, Divider } from 'react-native-elements';
-import { wp, hp } from 'utils/responsive';
-import { AuthContext } from 'store/context/auth';
 import { useTranslation } from 'react-i18next';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { SafeAreaView, ScrollView, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { Divider, Text } from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { AuthContext } from 'store/context/auth';
+import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { hp, wp } from 'utils/responsive';
 interface IProps extends NavigationInjectedProps {
   initialProps?: any;
 }
@@ -25,7 +18,7 @@ const Profile: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>Phạm Đức Nhất</Text>
       <ScrollView style={styles.scrollView}>
         <Divider style={{ backgroundColor: '#bcbcbc' }} />
@@ -44,7 +37,7 @@ const Profile: FC<IProps> = (props) => {
         </TouchableWithoutFeedback>
         <Divider style={{ backgroundColor: '#bcbcbc' }} />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

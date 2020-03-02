@@ -1,16 +1,16 @@
+// import Account from 'components/Account';
+import Profile from 'components/Profile';
+import IconTabCustom from 'components/Shared/IconTabCustom';
+import { withAuth } from 'hocs/withAuth';
+import { withInternet } from 'hocs/withInternet';
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import Home from '../screens/Home';
-import Trip from '../screens/Trip';
-// import Account from 'components/Account';
-import Profile from 'components/Profile';
-import { COLOR_TITLE_HEADER } from 'styles/global.style';
-import IconTabCustom from 'components/Shared/IconTabCustom';
-import {withInternet} from 'hocs/withInternet';
-import {withAuth} from 'hocs/withAuth';
 // @ts-ignore
 import { compose } from 'recompose';
+import { COLOR_TITLE_HEADER } from 'styles/global.style';
+import Home from '../screens/Home';
+import Trip from '../screens/Trip';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>

@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -7,7 +7,7 @@ import { AuthContext } from 'store/context/auth';
 import { getLongTermBookingList, LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { CURRENT, FINISHED, UPCOMING } from 'utils/mixins';
-import { hp, wp } from 'utils/responsive';
+import { wp } from 'utils/responsive';
 import BookingListLT from './BookingListLT';
 
 /**
@@ -91,8 +91,8 @@ const Trip: FC<IProps> = (props) => {
   }, [index]);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titleText}>Đặt phòng của tôi</Text>
+    <SafeAreaView style={styles.container}>
+      {/* <Text style={styles.titleText}>Đặt phòng của tôi</Text> */}
       <TabView
         lazy={true}
         renderLazyPlaceholder={_renderLazyPlaceholder}
@@ -102,7 +102,7 @@ const Trip: FC<IProps> = (props) => {
         renderTabBar={renderTabBar}
         initialLayout={initialLayout}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

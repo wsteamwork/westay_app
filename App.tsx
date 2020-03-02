@@ -17,7 +17,7 @@ import i18n from './src/translations';
 
 const customTextProps = {
   style: {
-    fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Montserrat-Regular',
+    // fontFamily: Platform.OS === 'android' ?? 'HelveticaNeue',
   },
 };
 const theme = {

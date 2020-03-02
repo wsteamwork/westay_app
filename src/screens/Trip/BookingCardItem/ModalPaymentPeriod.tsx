@@ -1,13 +1,13 @@
-import React, { FC, Dispatch, SetStateAction, useContext } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { Text, Button, Divider } from 'react-native-elements';
-import { hp, wp } from 'utils/responsive';
-import Modal from 'react-native-modal';
-import { elevationShadowStyle } from 'utils/mixins';
-import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import moment from 'moment';
-import { AuthContext } from 'store/context/auth';
 import numeral from 'numeral';
+import React, { Dispatch, FC, SetStateAction, useContext } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Button, Divider, Text } from 'react-native-elements';
+import Modal from 'react-native-modal';
+import { AuthContext } from 'store/context/auth';
+import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
+import { elevationShadowStyle } from 'utils/mixins';
+import { hp, wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -36,32 +36,32 @@ const ModalPaymentPeriod: FC<IProps> = (props) => {
       coverScreen={true}
       style={{ margin: 0 }}>
       <View style={styles.container}>
-        <ScrollView>
-          <View style={styles.boxWrapper}>
+        <ScrollView stickyHeaderIndices={[0]}>
+          <View style={[styles.boxWrapper, { marginTop: 42 }]}>
             <Text style={styles.headerText}>Thông tin kỳ thanh toán</Text>
           </View>
           {currentContract.payment.payment_period.map((row: any, i: number) => (
             <View key={i} style={[styles.containerItem, elevationShadowStyle(10)]}>
               <View style={styles.boxWrapper}>
                 <Text style={styles.titleHeader}>Kỳ thanh toán số</Text>
-                <Text style={styles.itemLeft}>{i + 1}</Text>
+                <Text style={styles.itemRight}>{i + 1}</Text>
               </View>
               <Divider style={styles.divider} />
               <View style={styles.boxWrapper}>
                 <Text style={styles.title}>Hạn thanh toán</Text>
-                <Text style={styles.itemLeft}>
+                <Text style={styles.itemRight}>
                   {moment(row.payment_due_date).format('DD/MM/YYYY')}
                 </Text>
               </View>
               <View style={styles.boxWrapper}>
                 <Text style={styles.title}>Cần thanh toán</Text>
-                <Text style={styles.itemLeft}>
+                <Text style={styles.itemRight}>
                   {languageStatus === 'en' ? '$' : 'đ'} {numeral(row.payment_amount).format('0,0')}
                 </Text>
               </View>
               <View style={styles.boxWrapper}>
                 <Text style={styles.title}>Trạng thái</Text>
-                <Text style={styles.itemLeft}>{row.payment_status_txt}</Text>
+                <Text style={styles.itemRight}>{row.payment_status_txt}</Text>
               </View>
             </View>
           ))}
@@ -108,12 +108,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#adadad',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '500',
   },
-  itemLeft: {
-    fontSize: 16,
-    fontWeight: 'bold',
+  itemRight: {
+    fontSize: 14,
+    fontWeight: '500',
   },
   headerText: {
     fontWeight: 'bold',
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     borderRadius: 5,
     width: wp('90%'),
-    height: hp('6%'),
+    height: hp('5%'),
     backgroundColor: '#cc0066',
   },
   divider: {

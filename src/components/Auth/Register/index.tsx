@@ -1,19 +1,19 @@
-import React, { FC, useContext, useState, useRef } from 'react';
-import { StyleSheet, View, Text, SafeAreaView, Keyboard } from 'react-native';
-import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import { hp, wp, COLOR_BUTTON_DEFAULT } from 'utils/responsive';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import * as Yup from 'yup';
+import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { Formik, FormikHelpers } from 'formik';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { axios, TOKEN } from 'utils/api';
-import Toast from 'react-native-root-toast';
-import storage from 'utils/storage';
-import { AuthContext, getProfile } from 'store/context/auth';
+import React, { FC, useContext, useRef, useState } from 'react';
+import { Keyboard, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { Input } from 'react-native-elements';
-import { inputContainerStyleGlobal } from 'utils/mixins';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Toast from 'react-native-root-toast';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { AuthContext, getProfile } from 'store/context/auth';
+import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
+import { axios, TOKEN } from 'utils/api';
+import { inputContainerStyleGlobal } from 'utils/mixins';
+import { COLOR_BUTTON_DEFAULT, hp, wp } from 'utils/responsive';
+import storage from 'utils/storage';
+import * as Yup from 'yup';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -121,11 +121,12 @@ const Register: FC<IProps> = (props) => {
               enableOnAndroid
               extraHeight={50}
               showsVerticalScrollIndicator={false}>
-                <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-                <Text style={styles.titleText}>Sign up</Text>
+              <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
+              <Text style={styles.titleText}>Sign up</Text>
               <View style={styles.boxWrapper} collapsable={false}>
                 <Input
                   ref={emailRef}
+                  placeholderTextColor={`${COLOR_TEXT_SUBTITLE}7d`}
                   placeholder="Your Email"
                   keyboardType="email-address"
                   returnKeyType="next"
@@ -135,12 +136,14 @@ const Register: FC<IProps> = (props) => {
                   errorMessage={errors.email}
                   onSubmitEditing={() => passwordRef.current.focus()}
                   autoCorrect={false}
+                  inputStyle={{ fontSize: SIZE_TEXT_SUBTITLE, color: COLOR_TEXT_TITLE }}
                   inputContainerStyle={styles.inputContainerStyle}
                   containerStyle={styles.containerStyle}
                   errorStyle={{ color: 'red' }}
                 />
                 <Input
                   ref={passwordRef}
+                  placeholderTextColor={`${COLOR_TEXT_SUBTITLE}7d`}
                   placeholder="Password"
                   keyboardType="default"
                   returnKeyType="next"
@@ -151,11 +154,13 @@ const Register: FC<IProps> = (props) => {
                   errorMessage={errors.password}
                   onSubmitEditing={() => rePasswordRef.current.focus()}
                   errorStyle={{ color: 'red' }}
+                  inputStyle={{ fontSize: SIZE_TEXT_SUBTITLE, color: COLOR_TEXT_TITLE }}
                   inputContainerStyle={styles.inputContainerStyle}
                   containerStyle={styles.containerStyle}
                 />
                 <Input
                   ref={rePasswordRef}
+                  placeholderTextColor={`${COLOR_TEXT_SUBTITLE}7d`}
                   placeholder="Confirm Password"
                   keyboardType="default"
                   returnKeyType="done"
@@ -165,11 +170,13 @@ const Register: FC<IProps> = (props) => {
                   onBlur={handleBlur('passwordConfirm')}
                   errorMessage={errors.passwordConfirm}
                   errorStyle={{ color: 'red' }}
+                  inputStyle={{ fontSize: SIZE_TEXT_SUBTITLE, color: COLOR_TEXT_TITLE }}
                   inputContainerStyle={styles.inputContainerStyle}
                   containerStyle={styles.containerStyle}
                 />
                 <ButtonOriginal
                   title="Sign up"
+                  customTitleStyle={{ fontSize: 16 }}
                   customStyle={styles.signup}
                   handlePress={handleSubmit}
                   loading={loading}
@@ -217,11 +224,11 @@ const styles = StyleSheet.create({
   },
   titleText: {
     marginBottom: hp('6%'),
-    fontWeight: 'bold',
-    fontSize: wp('8%'),
+    fontWeight: '500',
+    fontSize: wp('7%'),
     width: wp('100%'),
     paddingHorizontal: wp('5%'),
-    color: COLOR_TEXT_DEFAULT,
+    color: COLOR_TEXT_TITLE,
   },
   titleSubText: {
     marginTop: hp('4%'),
@@ -242,21 +249,23 @@ const styles = StyleSheet.create({
   },
   policy: {
     marginTop: hp('4%'),
-    marginBottom: hp('5%'),
+    // marginBottom: hp('5%'),
   },
   termConditions: {
-    fontSize: wp('4%'),
+    fontSize: SIZE_TEXT_SUBTITLE,
     color: '#0BBCF2',
     textAlign: 'center',
   },
   text: {
-    fontSize: wp('4%'),
+    fontSize: SIZE_TEXT_SUBTITLE,
     width: wp('100%'),
     textAlign: 'center',
     color: '#8A8A8F',
   },
   signup: {
-    marginTop: hp('3%'),
+    padding: 0,
+    height: 42,
+    marginTop: hp('3%')
   },
   inputContainerStyle: inputContainerStyleGlobal,
   containerStyle: {

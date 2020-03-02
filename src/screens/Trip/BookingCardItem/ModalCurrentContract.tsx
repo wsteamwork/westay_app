@@ -1,11 +1,11 @@
-import React, { FC, Dispatch, SetStateAction, useContext } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { Text, Divider, Button } from 'react-native-elements';
-import { hp, wp } from 'utils/responsive';
+import moment from 'moment';
+import numeral from 'numeral';
+import React, { Dispatch, FC, SetStateAction, useContext } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Button, Divider, Text } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import { AuthContext } from 'store/context/auth';
-import numeral from 'numeral';
-import moment from 'moment';
+import { hp, wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -34,18 +34,18 @@ const ModalCurrentContract: FC<IProps> = (props) => {
       coverScreen={true}
       style={{ margin: 0 }}>
       <View style={styles.container}>
-        <ScrollView>
-          <View style={styles.boxWrapper}>
+        <ScrollView stickyHeaderIndices={[0]}>
+          <View style={[styles.boxWrapper, { marginTop: 42 }]}>
             <Text style={styles.headerText}>Thông tin hợp đồng hiện tại</Text>
           </View>
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Mã hợp đồng</Text>
-            <Text style={styles.itemLeft}>#{currentContract.uuid}</Text>
+            <Text style={styles.itemRight}>#{currentContract.uuid}</Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Giá thanh toán</Text>
-            <Text style={styles.itemLeft}>
+            <Text style={styles.itemRight}>
               {languageStatus === 'en' ? '$' : 'đ'}{' '}
               {numeral(currentContract.price_original).format('0,0')}
             </Text>
@@ -53,7 +53,7 @@ const ModalCurrentContract: FC<IProps> = (props) => {
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Đặt cọc (1tháng)</Text>
-            <Text style={styles.itemLeft}>
+            <Text style={styles.itemRight}>
               {languageStatus === 'en' ? '$' : 'đ'}{' '}
               {numeral(currentContract.price_with_fee - currentContract.price_original).format(
                 '0,0',
@@ -63,7 +63,7 @@ const ModalCurrentContract: FC<IProps> = (props) => {
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Tổng cộng</Text>
-            <Text style={styles.itemLeft}>
+            <Text style={styles.itemRight}>
               {languageStatus === 'en' ? '$' : 'đ'}{' '}
               {numeral(currentContract.price_with_fee).format('0,0')}
             </Text>
@@ -71,24 +71,24 @@ const ModalCurrentContract: FC<IProps> = (props) => {
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Số ngày</Text>
-            <Text style={styles.itemLeft}>
+            <Text style={styles.itemRight}>
               {currentContract.range_stay} {languageStatus === 'en' ? 'days' : 'ngày'}
             </Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Ngày chuyển đến</Text>
-            <Text style={styles.itemLeft}>{currentContract.move_in.replace(/-/g, '/')}</Text>
+            <Text style={styles.itemRight}>{currentContract.move_in.replace(/-/g, '/')}</Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Ngày chuyển đi</Text>
-            <Text style={styles.itemLeft}>{currentContract.move_out.replace(/-/g, '/')}</Text>
+            <Text style={styles.itemRight}>{currentContract.move_out.replace(/-/g, '/')}</Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
             <Text style={styles.title}>Ngày đặt phòng</Text>
-            <Text style={styles.itemLeft}>
+            <Text style={styles.itemRight}>
               {currentContract.created_at.substring(11, 16)} -{' '}
               {moment(currentContract.created_at).format('DD/MM/YYYY')}
             </Text>
@@ -122,12 +122,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#adadad',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '500',
   },
-  itemLeft: {
-    fontSize: 16,
-    fontWeight: '700',
+  itemRight: {
+    fontSize: 14,
+    fontWeight: '500',
   },
   headerText: {
     fontWeight: 'bold',
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     borderRadius: 5,
     width: wp('90%'),
-    height: hp('6%'),
+    height: hp('5%'),
     backgroundColor: '#cc0066',
   },
 });

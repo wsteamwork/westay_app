@@ -1,27 +1,18 @@
-import React, { FC, useRef, useContext, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
-import ButtonOriginal from 'components/Utils/ButtonOriginal';
-import { hp, wp, COLOR_BUTTON_DEFAULT } from 'utils/responsive';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import * as Yup from 'yup';
+import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { Formik, FormikHelpers } from 'formik';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { axios, TOKEN } from 'utils/api';
-import storage from 'utils/storage';
-import { AuthContext, getProfile } from 'store/context/auth';
+import React, { FC, useContext, useRef, useState } from 'react';
+import { Keyboard, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { Input } from 'react-native-elements';
-import { inputContainerStyleGlobal } from 'utils/mixins';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Toast from 'react-native-root-toast';
-import {asyncLogin} from 'store/actions/asyncLogin';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import { asyncLogin } from 'store/actions/asyncLogin';
+import { AuthContext } from 'store/context/auth';
+import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE } from 'styles/global.style';
+import { inputContainerStyleGlobal } from 'utils/mixins';
+import { COLOR_BUTTON_DEFAULT, hp, wp } from 'utils/responsive';
+import * as Yup from 'yup';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -104,6 +95,7 @@ const Login: FC<IProps> = (props) => {
               <View style={styles.boxWrapper} collapsable={false}>
                 <Input
                   ref={emailRef}
+                  placeholderTextColor={`${COLOR_TEXT_SUBTITLE}7d`}
                   placeholder="Your Email"
                   keyboardType="email-address"
                   returnKeyType="next"
@@ -113,12 +105,14 @@ const Login: FC<IProps> = (props) => {
                   errorMessage={errors.email}
                   onSubmitEditing={() => passwordRef.current.focus()}
                   autoCorrect={false}
+                  inputStyle={{ fontSize: 14, color: COLOR_TEXT_TITLE }}
                   inputContainerStyle={styles.inputContainerStyle}
                   containerStyle={styles.containerStyle}
                   errorStyle={{ color: 'red' }}
                 />
                 <Input
                   ref={passwordRef}
+                  placeholderTextColor={`${COLOR_TEXT_SUBTITLE}7d`}
                   placeholder="Password"
                   keyboardType="default"
                   returnKeyType="done"
@@ -128,9 +122,16 @@ const Login: FC<IProps> = (props) => {
                   onBlur={handleBlur('password')}
                   errorMessage={errors.password}
                   errorStyle={{ color: 'red' }}
+                  inputStyle={{ fontSize: 14, color: COLOR_TEXT_TITLE }}
                   inputContainerStyle={styles.inputContainerStyle}
                   containerStyle={styles.containerStyle}
                 />
+                <ButtonOriginal customStyle={{
+                  padding: 0,
+                  height: 42,
+                  marginTop: hp('3%')
+                }} title="Log in" handlePress={handleSubmit} loading={loading} />
+
                 <View style={styles.forgotPassword}>
                   <Text
                     style={{ fontSize: wp('4%'), color: '#8A8A8F' }}
@@ -138,7 +139,6 @@ const Login: FC<IProps> = (props) => {
                     Forgot Password
                   </Text>
                 </View>
-                <ButtonOriginal title="Log in" handlePress={handleSubmit} loading={loading} />
                 <View style={styles.action}>
                   <Text style={styles.titleSubText}>
                     <Text>Don’t have an account? </Text>
@@ -173,11 +173,11 @@ const styles = StyleSheet.create({
   },
   titleText: {
     marginBottom: hp('6%'),
-    fontWeight: 'bold',
-    fontSize: wp('8%'),
+    fontWeight: '500',
+    fontSize: wp('7%'),
     width: wp('100%'),
     paddingHorizontal: wp('5%'),
-    color: COLOR_TEXT_DEFAULT,
+    color: COLOR_TEXT_TITLE,
   },
   titleSubText: {
     marginTop: hp('4%'),
@@ -193,11 +193,11 @@ const styles = StyleSheet.create({
   textSwitch: {
     fontSize: wp('4%'),
     color: COLOR_BUTTON_DEFAULT,
-    paddingLeft: wp('14%'),
+    // paddingLeft: wp('14%'),
     fontWeight: 'bold',
   },
   forgotPassword: {
-    marginBottom: hp('3%'),
+    marginTop: hp('3%'),
   },
   inputContainerStyle: inputContainerStyleGlobal,
   containerStyle: {

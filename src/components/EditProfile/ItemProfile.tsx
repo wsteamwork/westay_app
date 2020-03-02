@@ -1,8 +1,8 @@
-import React, { useRef, FC } from 'react';
-import { View, Text, TextInput, StyleSheet, KeyboardTypeOptions, NativeSyntheticEvent, TextInputFocusEventData } from 'react-native';
+import React, { FC, useRef } from 'react';
+import { KeyboardTypeOptions, NativeSyntheticEvent, StyleSheet, Text, TextInput, TextInputFocusEventData, View, Platform } from 'react-native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import { wp, hp } from 'utils/responsive';
 import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_DEFAULT } from 'styles/global.style';
+import { hp, wp } from 'utils/responsive';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -16,9 +16,9 @@ interface IProps {
   value?: string;
   onChangeText?: (text: string) => void;
   keyboardType?: KeyboardTypeOptions;
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void; 
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 }
-const ItemProfile : FC<IProps> = (props) => {
+const ItemProfile: FC<IProps> = (props) => {
   const {
     value,
     placeholder,
@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     marginTop: hp('3%'),
     backgroundColor: 'white',
     shadowColor: '#000',
-    borderRadius:4,
-    padding:8,
+    borderRadius: 4,
+    padding: 8,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: COLOR_TEXT_DEFAULT,
     paddingLeft: 0,
-    fontFamily: 'Montserrat-Regular',
+    // fontFamily: Platform.OS === 'android' ?? 'Montserrat-Regular',
   },
   description: { fontSize: wp('3%'), color: '#8A8A8A' },
 });

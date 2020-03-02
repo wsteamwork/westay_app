@@ -295,20 +295,20 @@ export const handleShareSocial = (status: string, link: string, t: any) => {
 };
 
 export const inputContainerStyleGlobal = {
-  height: hp('7%'),
+  height: 44,
   backgroundColor: 'white',
   borderWidth: 1,
-  borderRadius: 25,
-  paddingLeft: 16,
-  elevation: 10,
+  borderRadius: 360,
+  paddingHorizontal: 16,
+  // elevation: 10,
   borderColor: 'white',
   shadowColor: '#000',
   shadowOffset: {
     width: 0,
-    height: 2,
+    height: 1,
   },
-  shadowOpacity: 0.25,
-  shadowRadius: 3.84,
+  shadowOpacity: 0.15,
+  shadowRadius: 1.34,
 };
 
 export const formatDateBooking = (date: string, lang: string, showYear?: boolean) => {

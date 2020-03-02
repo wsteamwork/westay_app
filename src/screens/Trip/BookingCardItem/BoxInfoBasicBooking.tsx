@@ -24,8 +24,10 @@ const BoxInfoBasicBooking: FC<IProps> = (props) => {
     <View style={styles.container}>
       <View style={styles.boxImageRoom}>
         <Avatar
-          width={100}
-          height={100}
+          // avatarStyle={{ width: 90, height: 90 }}
+          containerStyle={{ width: 90, height: 90 }}
+          // height={90}
+          // width={90}
           rounded
           size="large"
           source={{
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     // width: wp('25%'),
-    flex: 2,
+    // flex: 2,
     // marginTop: 8,
   },
   boxInfoBooking: {

@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
-import { StyleSheet, FlatList, View, Dimensions, ActivityIndicator } from 'react-native';
-import BookingCardItem from './BookingCardItem';
+import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, Dimensions, FlatList, StyleSheet, View } from 'react-native';
+import { Image, Text } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
-import { Text, Image } from 'react-native-elements';
-import { wp, hp } from 'utils/responsive';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import { useTranslation } from 'react-i18next';
 import { IMAGE_STORAGE_SM } from 'types/globalTypes';
+import { hp, wp } from 'utils/responsive';
+import BookingCardItem from './BookingCardItem';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -50,7 +50,7 @@ const BookingListLT: FC<IProps> = (props) => {
         renderItem={({ item, index }) => _renderItem(item, index)}
         extraData={bookings}
         keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={{ paddingHorizontal: wp('2%'), paddingBottom: hp('5%'),}}
+        contentContainerStyle={{ paddingHorizontal: wp('2%'), paddingBottom: hp('5%'), }}
         ListEmptyComponent={listEmptyView}
       />
     </View>
