@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { hp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -11,16 +12,18 @@ interface IProps {
 }
 
 const BoxFinishedBooking: FC<IProps> = (props) => {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
       <View style={styles.boxFinished}>
         <Text style={styles.title}>
-          Cảm ơn bạn đã đặt phòng, chúng tôi hy vọng bạn đã có khoảng thời gian vui vẻ tại căn hộ !
+          {t('booking:thankYouForBooking')}
         </Text>
       </View>
 
       <View>
-        <Text style={styles.titleFinished}>Đã kết thúc</Text>
+        <Text style={styles.titleFinished}>{t('booking:finish')}</Text>
       </View>
     </View>
   );

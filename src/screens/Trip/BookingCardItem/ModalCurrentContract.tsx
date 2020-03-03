@@ -6,6 +6,7 @@ import { Button, Divider, Text } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import { AuthContext } from 'store/context/auth';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -22,6 +23,8 @@ const ModalCurrentContract: FC<IProps> = (props) => {
   const { state } = useContext(AuthContext);
   const { languageStatus } = state;
   const currentContract = booking.contracts.data[booking.contracts.data.length - 1];
+  const { t } = useTranslation();
+
   return (
     <Modal
       isVisible={open}
@@ -36,15 +39,15 @@ const ModalCurrentContract: FC<IProps> = (props) => {
       <View style={styles.container}>
         <ScrollView stickyHeaderIndices={[0]}>
           <View style={[styles.boxWrapper, { marginTop: 42 }]}>
-            <Text style={styles.headerText}>Thông tin hợp đồng hiện tại</Text>
+            <Text style={styles.headerText}>{t('booking:currentContractInformation')}</Text>
           </View>
           <View style={styles.boxWrapper}>
-            <Text style={styles.title}>Mã hợp đồng</Text>
+            <Text style={styles.title}>{t('booking:bookingDetail:contractCode')}</Text>
             <Text style={styles.itemRight}>#{currentContract.uuid}</Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
-            <Text style={styles.title}>Giá thanh toán</Text>
+            <Text style={styles.title}>{t('booking:bookingDetail:paymentPrice')}</Text>
             <Text style={styles.itemRight}>
               {languageStatus === 'en' ? '$' : 'đ'}{' '}
               {numeral(currentContract.price_original).format('0,0')}
@@ -52,7 +55,7 @@ const ModalCurrentContract: FC<IProps> = (props) => {
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
-            <Text style={styles.title}>Đặt cọc (1tháng)</Text>
+            <Text style={styles.title}>{t('booking:deposit')} (1 {t('shared:cardRoom:month')})</Text>
             <Text style={styles.itemRight}>
               {languageStatus === 'en' ? '$' : 'đ'}{' '}
               {numeral(currentContract.price_with_fee - currentContract.price_original).format(
@@ -62,7 +65,7 @@ const ModalCurrentContract: FC<IProps> = (props) => {
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
-            <Text style={styles.title}>Tổng cộng</Text>
+            <Text style={styles.title}>{t('booking:total')}</Text>
             <Text style={styles.itemRight}>
               {languageStatus === 'en' ? '$' : 'đ'}{' '}
               {numeral(currentContract.price_with_fee).format('0,0')}
@@ -70,24 +73,24 @@ const ModalCurrentContract: FC<IProps> = (props) => {
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
-            <Text style={styles.title}>Số ngày</Text>
+            <Text style={styles.title}>{t('booking:bookingDetail:numberOfDay')}</Text>
             <Text style={styles.itemRight}>
               {currentContract.range_stay} {languageStatus === 'en' ? 'days' : 'ngày'}
             </Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
-            <Text style={styles.title}>Ngày chuyển đến</Text>
+            <Text style={styles.title}>{t('booking:bookingDetail:checkin')}</Text>
             <Text style={styles.itemRight}>{currentContract.move_in.replace(/-/g, '/')}</Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
-            <Text style={styles.title}>Ngày chuyển đi</Text>
+            <Text style={styles.title}>{t('booking:bookingDetail:checkout')}</Text>
             <Text style={styles.itemRight}>{currentContract.move_out.replace(/-/g, '/')}</Text>
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
-            <Text style={styles.title}>Ngày đặt phòng</Text>
+            <Text style={styles.title}>{t('booking:bookingDetail:dateOfBooking')}</Text>
             <Text style={styles.itemRight}>
               {currentContract.created_at.substring(11, 16)} -{' '}
               {moment(currentContract.created_at).format('DD/MM/YYYY')}
@@ -97,7 +100,7 @@ const ModalCurrentContract: FC<IProps> = (props) => {
         </ScrollView>
         <View style={styles.BoxConfirm}>
           <Button
-            title="Màn hình chính"
+            title={t('booking:bookingReview:back')}
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.titleStyle}
             onPress={() => setClose(false)}

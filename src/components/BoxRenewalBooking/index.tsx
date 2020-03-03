@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { hp } from 'utils/responsive';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import {useTranslation} from 'react-i18next';
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
@@ -14,16 +15,17 @@ interface IProps extends NavigationInjectedProps {
 
 const BoxRenewalBooking: FC<IProps> = (props) => {
   const { navigation, move_in_new, uuid } = props;
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <View style={styles.boxRenewal}>
         <Text style={styles.title}>
-          Sắp đến ngày trả phòng, bạn có muốn tiếp tục gia hạn thêm ngày.
+          {t('booking:extendTheDate')}
         </Text>
       </View>
       <View>
         <Button
-          title="Gia hạn"
+          title={t('booking:extensionOfContract')}
           buttonStyle={styles.buttonRenewStyle}
           onPress={() => navigation.navigate('ReNewalBooking', { move_in_new: move_in_new, uuid: uuid })}
           titleStyle={styles.titleStyle}

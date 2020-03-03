@@ -8,6 +8,7 @@ import { COLOR_BUTTON_DEFAULT, wp } from 'utils/responsive';
 import ModalAllBookingContract from './ModalAllBookingContract';
 import ModalCurrentContract from './ModalCurrentContract';
 import ModalPaymentPeriod from './ModalPaymentPeriod';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -22,6 +23,8 @@ const BoxContract: FC<IProps> = (props) => {
   const [modalCurrentContract, setModalCurrentContract] = useState<boolean>(false);
   const [modalPaymentPeriod, setModalPaymentPeriod] = useState<boolean>(false);
   const [modalAllBookingContract, setModalAllBookingContract] = useState<boolean>(false);
+  const { t } = useTranslation();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.boxRow}>
@@ -29,12 +32,12 @@ const BoxContract: FC<IProps> = (props) => {
           <IconAntDesign name="copy1" size={wp('7%')} color={'#adadad'} style={styles.icon} />
           <View style={styles.boxDetail}>
             <Text numberOfLines={1} style={styles.title}>
-              Tất cả hợp đồng
+              {t('booking:allContracts')}
             </Text>
             <Button
               titleStyle={styles.titleStyle}
               containerStyle={styles.buttonStyle}
-              title="Xem chi tiết"
+              title={t('shared:seeMore')}
               type="clear"
               iconRight
               buttonStyle={styles.buttonStyle}
@@ -47,12 +50,12 @@ const BoxContract: FC<IProps> = (props) => {
           <IconAntDesign name="filetext1" size={wp('7%')} color={'#adadad'} style={styles.icon} />
           <View style={styles.boxDetail}>
             <Text numberOfLines={1} style={styles.title}>
-              Hợp đồng hiện tại
+              {t('booking:currentContract')}
             </Text>
             <Button
               titleStyle={styles.titleStyle}
               containerStyle={styles.buttonStyle}
-              title="Xem chi tiết"
+              title={t('shared:seeMore')}
               type="clear"
               iconRight
               buttonStyle={styles.buttonStyle}
@@ -67,13 +70,13 @@ const BoxContract: FC<IProps> = (props) => {
           <IconAntDesign name="creditcard" size={wp('7%')} color={'#adadad'} style={styles.icon} />
           <View style={styles.boxDetail}>
             <Text numberOfLines={1} style={styles.title}>
-              Kỳ thanh toán
+              {t('booking:paymentPeriod')}
             </Text>
             <Button
               onPress={() => setModalPaymentPeriod(!modalPaymentPeriod)}
               titleStyle={styles.titleStyle}
               containerStyle={styles.buttonStyle}
-              title="Xem chi tiết"
+              title={t('shared:seeMore')}
               type="clear"
               iconRight
               buttonStyle={styles.buttonStyle}
@@ -100,7 +103,7 @@ const BoxContract: FC<IProps> = (props) => {
           )}
           <View style={styles.boxDetail}>
             <Text numberOfLines={1} style={styles.title}>
-              Trạng thái
+              {t('booking:state')}
             </Text>
             <Button
               titleStyle={styles.titleStatus}

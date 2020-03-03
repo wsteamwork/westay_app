@@ -5,6 +5,7 @@ import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import { hp } from 'components/Utils/responsive.style';
 import { AuthContext } from 'store/context/auth';
 import ModalChoosePaymentMethod from './ModalChoosePaymentMethod';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -21,19 +22,20 @@ const BoxPaymentPeriod: FC<IProps> = (props) => {
   const { datePayment, pricePayment, paymentStatus, bookingId } = props;
   const { state } = useContext(AuthContext);
   const { languageStatus } = state;
+  const { t } = useTranslation();
   const [modalChoosePayment, setModalChoosePayment] = useState<boolean>(false);
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.title}>Thông tin thanh toán</Text>
-        <Text style={styles.date}>Hạn cuối: <Text style={{color: '#cc0066', fontWeight: '400'}}>{datePayment}</Text></Text>
-        <Text style={styles.date}>Giá trị: <Text style={{color: '#cc0066', fontWeight: '400'}}>{languageStatus === 'vi' ? 'đ' : '$'}{pricePayment}</Text></Text>
+        <Text style={styles.title}>{t('booking:billingInformation')}</Text>
+        <Text style={styles.date}>{t('booking:bookingDetail:expirationDate')}: <Text style={{color: '#cc0066', fontWeight: '400'}}>{datePayment}</Text></Text>
+        <Text style={styles.date}>{t('booking:bookingDetail:contractValue')}: <Text style={{color: '#cc0066', fontWeight: '400'}}>{languageStatus === 'vi' ? 'đ' : '$'}{pricePayment}</Text></Text>
       </View>
 
       {paymentStatus === 0 ? (
         <View style={{justifyContent: 'center'}}>
           <Button
-            title="Thanh toán"
+            title={t('booking:bookingDetail:pay')}
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.titleStyle}
             onPress={() => setModalChoosePayment(!modalChoosePayment)}
@@ -42,7 +44,7 @@ const BoxPaymentPeriod: FC<IProps> = (props) => {
       ) : (
         <View>
           <Text style={styles.titlePayment}>
-            Đã thanh toán
+            {t('booking:bookingDetail:paid')}
           </Text>
         </View>
       )}

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -13,16 +14,17 @@ interface IProps extends NavigationInjectedProps {
 
 const BoxInspector: FC<IProps> = (props) => {
   const { navigation, booking } = props;
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <View style={styles.boxText}>
         <Text style={styles.title}>
-          Vui lòng cập nhật tình trạng căn hộ
+          {t('inspectorBooking:updateTheStatusOfTheApartment')}
         </Text>
       </View>
       <View style={{ flex: 1 }}>
         <Button
-          title="Bắt đầu"
+          title={t('shared:start')}
           buttonStyle={styles.buttonStyle}
           titleStyle={styles.titleStyle}
           onPress={() => {

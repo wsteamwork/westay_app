@@ -8,6 +8,7 @@ import { AuthContext } from 'store/context/auth';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import { elevationShadowStyle } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -24,6 +25,8 @@ const ModalPaymentPeriod: FC<IProps> = (props) => {
   const { state } = useContext(AuthContext);
   const { languageStatus } = state;
   const currentContract = booking.contracts.data[booking.contracts.data.length - 1];
+  const { t } = useTranslation();
+
   return (
     <Modal
       isVisible={open}
@@ -38,29 +41,29 @@ const ModalPaymentPeriod: FC<IProps> = (props) => {
       <View style={styles.container}>
         <ScrollView stickyHeaderIndices={[0]}>
           <View style={[styles.boxWrapper, { marginTop: 42 }]}>
-            <Text style={styles.headerText}>Thông tin kỳ thanh toán</Text>
+            <Text style={styles.headerText}>{t('booking:paymentPeriodInformation')}</Text>
           </View>
           {currentContract.payment.payment_period.map((row: any, i: number) => (
             <View key={i} style={[styles.containerItem, elevationShadowStyle(10)]}>
               <View style={styles.boxWrapper}>
-                <Text style={styles.titleHeader}>Kỳ thanh toán số</Text>
+                <Text style={styles.titleHeader}>{t('booking:paymentPeriodNumber')}</Text>
                 <Text style={styles.itemRight}>{i + 1}</Text>
               </View>
               <Divider style={styles.divider} />
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Hạn thanh toán</Text>
+                <Text style={styles.title}>{t('booking:paymentDueDate')}</Text>
                 <Text style={styles.itemRight}>
                   {moment(row.payment_due_date).format('DD/MM/YYYY')}
                 </Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Cần thanh toán</Text>
+                <Text style={styles.title}>{t('booking:amountNeedToPay')}</Text>
                 <Text style={styles.itemRight}>
                   {languageStatus === 'en' ? '$' : 'đ'} {numeral(row.payment_amount).format('0,0')}
                 </Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Trạng thái</Text>
+                <Text style={styles.title}>{t('booking:paymentStatus')}</Text>
                 <Text style={styles.itemRight}>{row.payment_status_txt}</Text>
               </View>
             </View>
@@ -68,7 +71,7 @@ const ModalPaymentPeriod: FC<IProps> = (props) => {
         </ScrollView>
         <View style={styles.BoxConfirm}>
           <Button
-            title="Màn hình chính"
+            title={t('booking:bookingReview:back')}
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.titleStyle}
             onPress={() => setClose(false)}

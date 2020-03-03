@@ -11,6 +11,7 @@ import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { AuthContext } from 'store/context/auth';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -26,6 +27,7 @@ const ModalChoosePaymentMethod: FC<IProps> = (props) => {
   const { open, setClose, bookingId, navigation } = props;
   const { state } = useContext(AuthContext);
   const { token, languageStatus } = state;
+  const { t } = useTranslation();
   const dispatch = useDispatch<Dispatch<LTBookingAction>>();
   const [data, setData] = useState<any>([
     {
@@ -70,12 +72,12 @@ const ModalChoosePaymentMethod: FC<IProps> = (props) => {
       height={200}
       width={'93%'}>
       <View style={styles.container}>
-        <Text style={styles.titlePayment}>Chọn một phương thức thanh toán</Text>
+        <Text style={styles.titlePayment}>{t('booking:chooseAPaymentMethod')}</Text>
         <View style={styles.radioGroup}>
           <RadioGroup radioButtons={data} onPress={onChoosePayment} />
         </View>
         <View>
-          <Button title="Tiếp tục" buttonStyle={styles.buttonStyle} onPress={handleChooseMethod} />
+          <Button title={t('shared:next')} buttonStyle={styles.buttonStyle} onPress={handleChooseMethod} />
         </View>
       </View>
     </Overlay>
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   boxButton: {
-    
+
   },
   buttonStyle: {
     borderRadius: 5,

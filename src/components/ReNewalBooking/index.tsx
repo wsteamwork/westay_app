@@ -184,7 +184,7 @@ const ReNewalBooking: FC<IProps> = (props) => {
               <Text
                 onPress={handleReset}
                 style={{ fontSize: 16, fontWeight: '700', color: '#666' }}>
-                Đặt lại
+                {t('booking:bookingDetail:reBooking')}
               </Text>
             ) : (
               <Text></Text>

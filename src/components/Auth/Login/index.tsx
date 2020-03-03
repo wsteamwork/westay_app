@@ -128,12 +128,6 @@ const Login: FC<IProps> = (props) => {
                   inputContainerStyle={styles.inputContainerStyle}
                   containerStyle={styles.containerStyle}
                 />
-                <ButtonOriginal customStyle={{
-                  padding: 0,
-                  height: 42,
-                  marginTop: hp('3%')
-                }} title="Log in" handlePress={handleSubmit} loading={loading} />
-
                 <View style={styles.forgotPassword}>
                   <Text
                     style={{ fontSize: wp('4%'), color: '#8A8A8F' }}
@@ -141,7 +135,10 @@ const Login: FC<IProps> = (props) => {
                     {t('auth:forgetPassword:name')}
                   </Text>
                 </View>
-                <ButtonOriginal title={t('auth:login:name')} handlePress={handleSubmit} loading={loading} />
+                <ButtonOriginal customStyle={{
+                  padding: 0,
+                  height: 42,
+                  marginTop: hp('3%')}} title={t('auth:login:name')} handlePress={handleSubmit} loading={loading} />
                 <View style={styles.action}>
                   <Text style={styles.titleSubText}>
                     <Text>{t('auth:login:notAccount')} </Text>

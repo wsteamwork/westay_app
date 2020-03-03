@@ -200,7 +200,7 @@ const ChooseDayBookingLT: FC<IProps> = (props) => {
                 <Text
                   onPress={handleReset}
                   style={{ fontSize: SIZE_TEXT_TITLE_MEDIUM, fontWeight: '500', color: COLOR_TEXT_TITLE }}>
-                  Đặt lại
+                  {t('booking:bookingDetail:reBooking')}
               </Text>
               ) : (
                   <Text></Text>

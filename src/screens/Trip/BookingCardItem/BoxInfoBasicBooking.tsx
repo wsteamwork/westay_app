@@ -5,6 +5,7 @@ import { Avatar } from 'react-native-elements';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import { wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -20,6 +21,7 @@ interface IProps {
 
 const BoxInfoBasicBooking: FC<IProps> = (props) => {
   const { avatar, code, checkin, checkout, roomName } = props;
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <View style={styles.boxImageRoom}>
@@ -37,20 +39,20 @@ const BoxInfoBasicBooking: FC<IProps> = (props) => {
       </View>
       <View style={styles.boxInfoBooking}>
         <Text style={styles.rowTitle}>
-          <Text style={styles.label}>Mã code: </Text>
+          <Text style={styles.label}>{t('booking:bookingDetail:bookingCode')}: </Text>
           <Text style={styles.title}>#{code} </Text>
           <IconAntDesign name="checkcircle" size={wp('3.3%')} color={COLOR_BUTTON_DEFAULT} />
         </Text>
         <Text style={styles.rowTitle}>
-          <Text style={styles.label}>Ngày đến: </Text>
+          <Text style={styles.label}>{t('booking:bookingDetail:checkin')}: </Text>
           <Text style={styles.title}>{checkin}</Text>
         </Text>
         <Text style={styles.rowTitle}>
-          <Text style={styles.label}>Ngày đi: </Text>
+          <Text style={styles.label}>{t('booking:bookingDetail:checkout')}: </Text>
           <Text style={styles.title}>{checkout}</Text>
         </Text>
         <Text style={styles.rowTitle} numberOfLines={1}>
-          <Text style={styles.label}>Căn hộ: </Text>
+          <Text style={styles.label}>{t('booking:bookingDetail:accommodation')}: </Text>
           <Text style={styles.title}>{roomName}</Text>
         </Text>
       </View>

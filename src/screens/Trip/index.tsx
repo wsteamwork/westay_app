@@ -9,6 +9,7 @@ import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { CURRENT, FINISHED, UPCOMING } from 'utils/mixins';
 import { wp } from 'utils/responsive';
 import BookingListLT from './BookingListLT';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -28,6 +29,7 @@ interface IProps {
 
 const Trip: FC<IProps> = (props) => {
   const [index, setIndex] = useState(0);
+  const { t } = useTranslation();
   const _renderLazyPlaceholder = () => <LazyPlaceholder />;
   const FirstRoute = () => (
     <View style={[styles.scene]}>
@@ -67,9 +69,9 @@ const Trip: FC<IProps> = (props) => {
   const renderTabBar = (props: any) => <TabBar pressColor={'red'} activeColor={'#2a7886'} inactiveColor={'#7676764d'} indicatorStyle={{ backgroundColor: '#8AA989' }} tabStyle={{ backgroundColor: 'white' }} {...props} />;
 
   const [routes] = useState([
-    { key: 'first', title: 'Sắp đến' },
-    { key: 'second', title: 'Hiện tại' },
-    { key: 'three', title: 'Kết thúc' },
+    { key: 'first', title: t('booking:forthcoming') },
+    { key: 'second', title: t('booking:currently') },
+    { key: 'three', title: t('booking:finish') },
   ]);
   const renderScene = SceneMap({
     first: FirstRoute,

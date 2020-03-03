@@ -3,8 +3,28 @@
     "listBookings": "Danh sách đặt phòng",
     "waitConf": "Chờ xác nhận",
     "forthcoming": "Sắp tới",
-    "finish": "Đã hoàn thành",
+    "finish": "Kết thúc",
     "cancelled": "Đã hủy",
+    "currently": "Hiện tại",
+    "billingInformation": "Thông tin thanh toán",
+    "chooseAPaymentMethod": "Chọn một phương thức thanh toán",
+    "extendTheDate": "Sắp đến ngày trả phòng, bạn có muốn tiếp tục gia hạn thêm ngày.",
+    "extensionOfContract": "Gia hạn hợp đồng",
+    "thankYouForBooking": "Cảm ơn bạn đã đặt phòng, chúng tôi hy vọng bạn đã có khoảng thời gian vui vẻ tại căn hộ !",
+    "allContracts": "Tất cả hợp đồng",
+    "contract": "Hợp đồng",
+    "currentContract": "Hợp đồng hiện tại",
+    "paymentPeriod": "Kỳ thanh toán",
+    "state": "Trạng thái",
+    "currentContractInformation": "Thông tin hợp đồng hiện tại",
+    "deposit" : "Đặt cọc",
+    "total" : "Tổng cộng",
+    "paymentPeriodInformation" : "Thông tin kỳ thanh toán",
+    "paymentPeriodNumber" : "Kỳ thanh toán số",
+    "paymentDueDate" : "Hạn thanh toán",
+    "amountNeedToPay" : "Cần thanh toán",
+    "paymentStatus" : "Trạng thái",
+
     "bookingDetail": {
         "roomRate": "Giá phòng",
         "service_fee": "Phí dịch vụ",
@@ -17,12 +37,24 @@
         "reviewRoom": "Xem lại phòng",
         "otherInfo": "Thông tin khác",
         "bookingCode": "Mã đặt phòng",
+        "contractCode": "Mã hợp đồng",
         "descOtherInfo": "Để có thể hỗ trợ bạn tốt hơn, vui lòng liên hệ với chúng tôi và cung cấp mã đặt phòng của bạn",
         "contact": "Liên hệ",
         "reBooking": "Đặt lại",
         "cancelBooking": "Hủy đặt phòng",
         "created": "Ngày tạo",
-        "priceDetail": "Chi tiết giá"
+        "priceDetail": "Chi tiết giá",
+        "checkin": "Ngày đến",
+        "checkout": "Ngày đi",
+        "accommodation": "Căn hộ",
+        "expirationDate": "Ngày hết hạn",
+        "contractValue": "Giá trị hợp đồng",
+        "pay": "Thanh toán",
+        "paid": "Đã thanh toán",
+        "paymentPrice" : "Giá thanh toán",
+        "numberOfDay" : "Số ngày",
+        "dateOfArrival" : "Ngày chuyển đến",
+        "dateOfBooking" : "Ngày đặt phòng"
     },
     "bookingReview": {
         "success": "Đánh giá thành công. Xin cảm ơn.",
@@ -62,6 +94,8 @@
     "flatListBooking": {
         "dayAgo": "ngày qua",
         "noBooking": "Không tìm thấy booking nào ở mục này!"
+    },
+    "inspectorBooking": {
+        "updateTheStatusOfTheApartment" : "Vui lòng cập nhật tình trạng căn hộ"
     }
-
 }

@@ -5,6 +5,26 @@
     "forthcoming": "Up coming",
     "finish": "Completed",
     "cancelled": "Cancelled",
+    "currently": "Currently",
+    "billingInformation": "Billing Information",
+    "chooseAPaymentMethod": "Choose a payment method",
+    "extendTheDate": "Your check-out date is about to be extended, would you like to continue to extend the date.",
+    "extensionOfContract": "Extension of contract",
+    "thankYouForBooking": "Thank you for booking, we hope you had a fun time at the apartment!",
+    "allContracts": "All contracts",
+    "contract": "Contract",
+    "currentContract": "Current contract",
+    "paymentPeriod": "Payment period",
+    "state": "State",
+    "currentContractInformation": "Current contract information",
+    "deposit" : "Deposit",
+    "total" : "Total",
+    "paymentPeriodInformation" : "Payment period information",
+    "paymentPeriodNumber" : "Payment period number",
+    "paymentDueDate" : "Payment due date",
+    "amountNeedToPay" : "Amount need to pay",
+    "paymentStatus" : "Payment status",
+
     "bookingDetail": {
         "roomRate": "Room fee",
         "service_fee": "Service fee",
@@ -17,12 +37,24 @@
         "reviewRoom": "Review the room",
         "otherInfo": "Other information",
         "bookingCode": "Booking code",
+        "contractCode": "Contract Code",
         "descOtherInfo": "In order to better assist you, please contact us and provide your booking code",
         "contact": "Contact",
         "reBooking": "Reset",
         "cancelBooking": "Cancel booking",
         "created": "Date created",
-        "priceDetail": "Price details"
+        "priceDetail": "Price details",
+        "checkin": "Check in",
+        "checkout": "Check out",
+        "accommodation": "Accommodation",
+        "expirationDate": "Expiration date",
+        "contractValue": "Contract value",
+        "pay": "Pay",
+        "paid": "Paid",
+        "paymentPrice" : "Payment price",
+        "numberOfDay" : "Number of Day",
+        "dateOfArrival" : "Date of arrival",
+        "dateOfBooking" : "Date of booking"
     },
     "bookingReview": {
         "success": "Evaluation of success. Thank you.",
@@ -62,6 +94,9 @@
     "flatListBooking": {
         "dayAgo": "day ago",
         "noBooking": "No booking found in this category!"
+    },
+    "inspectorBooking": {
+        "updateTheStatusOfTheApartment" : "Please update the status of the apartment"
     }
 
 }

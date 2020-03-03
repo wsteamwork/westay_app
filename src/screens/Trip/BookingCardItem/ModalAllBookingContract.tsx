@@ -5,6 +5,7 @@ import Modal from 'react-native-modal';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import { elevationShadowStyle } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -18,6 +19,7 @@ interface IProps {
 
 const ModalAllBookingContract: FC<IProps> = (props) => {
   const { open, setClose, booking } = props;
+  const { t } = useTranslation();
   return (
     <Modal
       isVisible={open}
@@ -32,29 +34,29 @@ const ModalAllBookingContract: FC<IProps> = (props) => {
       <View style={styles.container}>
         <ScrollView stickyHeaderIndices={[0]}>
           <View style={[styles.boxWrapper, { marginTop: 42 }]}>
-            <Text style={styles.headerText}>Tất cả hợp đồng</Text>
+            <Text style={styles.headerText}>{t('booking:allContracts')}</Text>
           </View>
           {booking.contracts.data.map((con: any, i: number) => (
             <View key={i} style={[styles.containerItem, elevationShadowStyle(10)]}>
               <View style={styles.boxWrapper}>
-                <Text style={styles.titleHeader}>Hợp đồng số</Text>
+                <Text style={styles.titleHeader}>{t('booking:Contract')}</Text>
                 <Text style={styles.itemRight}>{i + 1}</Text>
               </View>
               <Divider style={styles.divider} />
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Mã hợp đồng</Text>
+                <Text style={styles.title}>{t('booking:bookingDetail:contractCode')}</Text>
                 <Text style={styles.itemRight}>#{con.uuid}</Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Ngày chuyến đến</Text>
+                <Text style={styles.title}>{t('booking:bookingDetail:checkin')}</Text>
                 <Text style={styles.itemRight}>{con.move_in.replace(/-/g, '/')}</Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Ngày chuyến đi</Text>
+                <Text style={styles.title}>{t('booking:bookingDetail:checkout')}</Text>
                 <Text style={styles.itemRight}>{con.move_out.replace(/-/g, '/')}</Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Trạng thái</Text>
+                <Text style={styles.title}>{t('booking:state')}</Text>
                 <Text style={styles.itemRight}>{con.status_txt}</Text>
               </View>
             </View>
@@ -62,7 +64,7 @@ const ModalAllBookingContract: FC<IProps> = (props) => {
         </ScrollView>
         <View style={styles.BoxConfirm}>
           <Button
-            title="Màn hình chính"
+            title={t('booking:bookingReview:back')}
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.titleStyle}
             onPress={() => setClose(false)}
