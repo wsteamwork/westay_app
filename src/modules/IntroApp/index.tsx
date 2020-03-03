@@ -10,33 +10,34 @@ interface IProps {
   onDone: ()=> void;
 }
 
-const {t} = useTranslation();
-
-const slides = [
-  {
-    title: `${t('shared:welcomeToWestay')}\n${t('shared:toExperienceHomestay')}`,
-    des: '',
-    image: require('assets/images/intro/Intro_1.jpeg'),
-    colors: ['#fff', '#fff'],
-  },
-  {
-    title: t('shared:solutionForLong-termRental'),
-    des: '',
-    image: require('assets/images/intro/Intro_2.jpg'),
-    colors: ['#A3A1FF', '#3A3897'],
-  },
-  {
-    title: t('shared:enjoyTheFunTogether'),
-    des: '',
-    image: require('assets/images/intro/Intro_3.jpg'),
-    colors: ['#29ABE2', '#4F00BC'],
-  },
-];
 
 const IntroApp: FC<IProps> = (props) => {
   const { onDone } = props;
   const [indexSlider, setIndexSlider] = useState(0);
   const carouselRef = useRef(null);
+
+  const {t} = useTranslation();
+
+  const slides = [
+    {
+      title: `${t('shared:welcomeToWestay')}\n${t('shared:toExperienceHomestay')}`,
+      des: '',
+      image: require('assets/images/intro/Intro_1.jpeg'),
+      colors: ['#fff', '#fff'],
+    },
+    {
+      title: t('shared:solutionForLong-termRental'),
+      des: '',
+      image: require('assets/images/intro/Intro_2.jpg'),
+      colors: ['#A3A1FF', '#3A3897'],
+    },
+    {
+      title: t('shared:enjoyTheFunTogether'),
+      des: '',
+      image: require('assets/images/intro/Intro_3.jpg'),
+      colors: ['#29ABE2', '#4F00BC'],
+    },
+  ];
 
   const goForward = () => {
     // @ts-ignore
