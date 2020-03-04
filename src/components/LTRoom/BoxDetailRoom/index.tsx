@@ -95,6 +95,7 @@ const BoxDetailRoom: FC<IProps> = (props) => {
           <BoxAmenitiesRoom />
         </View>
         <View>
+          <Divider style={{ backgroundColor: '#8AA9896d' }} />
           <BoxPriceLTRoom />
           <Divider style={{ backgroundColor: '#8AA9896d' }} />
           <BoxIncludedFee />

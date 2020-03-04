@@ -52,7 +52,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
     <View style={styles.boxImage}>
       {useMemo(
         () => (
-          <Swiper autoplay={false} showsPagination={true} paginationStyle={{ bottom: 4 }} activeDotColor={COLOR_BUTTON_DEFAULT}>
+          <Swiper autoplay={false} showsPagination={false} paginationStyle={{ bottom: 4 }} activeDotColor={COLOR_BUTTON_DEFAULT}>
             {arrImages.map((o: any, i: number) => (
               <TouchableWithoutFeedback
                 key={i}

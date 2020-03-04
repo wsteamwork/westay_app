@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-
     elevation: 3,
   },
   title: {
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: wp('4.5%'),
-    fontWeight: '600',
+    fontWeight: '700',
     color: COLOR_TEXT_DEFAULT,
   },
   actions: {
@@ -100,7 +99,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: COLOR_TEXT_DEFAULT,
     paddingLeft: 0,
-    // fontFamily: Platform.OS === 'android' ?? 'Montserrat-Regular',
   },
   description: { fontSize: wp('3%'), color: '#8A8A8A' },
 });

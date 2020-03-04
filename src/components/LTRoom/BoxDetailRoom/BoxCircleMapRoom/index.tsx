@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
   boxMap: {
     width: wp('100%'),
     height: 250,
-    marginTop: 16,
     overflow: 'hidden',
     position: 'relative',
   },
