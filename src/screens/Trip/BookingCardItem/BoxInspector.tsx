@@ -19,7 +19,7 @@ const BoxInspector: FC<IProps> = (props) => {
     <View style={styles.container}>
       <View style={styles.boxText}>
         <Text style={styles.title}>
-          {t('inspectorBooking:updateTheStatusOfTheApartment')}
+          {t('booking:inspectorBooking:updateTheStatusOfTheApartment')}
         </Text>
       </View>
       <View style={{ flex: 1 }}>

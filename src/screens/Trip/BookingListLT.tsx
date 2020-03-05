@@ -50,7 +50,7 @@ const BookingListLT: FC<IProps> = (props) => {
         renderItem={({ item, index }) => _renderItem(item, index)}
         extraData={bookings}
         keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={{ paddingHorizontal: wp('2%'), paddingBottom: hp('5%'), }}
+        contentContainerStyle={{ paddingHorizontal: wp('2%'), paddingBottom: hp('5%') }}
         ListEmptyComponent={listEmptyView}
       />
     </View>
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
   },
   textEmpty: {
     marginVertical: hp('2%'),

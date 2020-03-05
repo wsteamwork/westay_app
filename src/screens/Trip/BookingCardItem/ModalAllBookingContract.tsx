@@ -39,7 +39,7 @@ const ModalAllBookingContract: FC<IProps> = (props) => {
           {booking.contracts.data.map((con: any, i: number) => (
             <View key={i} style={[styles.containerItem, elevationShadowStyle(10)]}>
               <View style={styles.boxWrapper}>
-                <Text style={styles.titleHeader}>{t('booking:Contract')}</Text>
+                <Text style={styles.titleHeader}>{t('booking:contract')}</Text>
                 <Text style={styles.itemRight}>{i + 1}</Text>
               </View>
               <Divider style={styles.divider} />
