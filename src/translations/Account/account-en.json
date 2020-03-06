@@ -55,6 +55,7 @@
         "information": "Personal information",
         "fullName": "Full name",
         "descriptionInfo": "Complete profile details make the booking faster and more convenient",
+        "descriptionName": "This name is user identifier when booking on the system",
         "descriptionEmail": "Email will be used to login, receive notifications and reset your password",
         "phone": "Phone number",
         "descriptionPhone": "This is the phone number for the guest (landlord) and Westay will use it to contact you",
