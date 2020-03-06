@@ -4,6 +4,7 @@
         "password": "Đổi mật khẩu",
         "currency": "Tiền tệ",
         "standForCurrency": "VND",
+        "characterCurrency": "đ",
         "language": "Ngôn ngữ",
         "vietnamese": "Tiếng việt",
         "english": "Tiếng anh",
@@ -52,7 +53,7 @@
         "updateSuccess": "Cập nhật thành công",
         "updateError": "Opps có lỗi. Thử lại.",
         "information": "Thông tin cá nhân",
-        "fullName": "Full name",
+        "fullName": "Tên đầy đủ",
         "descriptionInfo": "Hoàn thành chi tiết hồ sơ khiến cho việc booking được nhanh và thuận tiện hơn",
         "descriptionEmail": "Email sẽ được dùng để đăng nhập, nhận thông báo và đặt lại mật khẩu",
         "phone": "Số điện thoại",
@@ -69,7 +70,8 @@
         "mr": "Ông",
         "mrs": "Bà",
         "unknown": "Không xác định",
-        "other": "Khác"
+        "other": "Khác",
+        "sex": "Danh xưng"
     },
     "changePassword": {
         "name": "Đổi mật khẩu",

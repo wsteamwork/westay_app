@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
@@ -20,6 +21,7 @@ interface IProps extends NavigationInjectedProps {
 
 const InspectorDetail: FC<IProps> = (props) => {
   const { navigation } = props;
+  const { t } = useTranslation();
   const [completed, setCompleted] = useState<boolean>(false);
   const [comfort1, setComfort1] = useState<number>(0);
   const [comfort2, setComfort2] = useState<number>(0);
@@ -38,6 +40,9 @@ const InspectorDetail: FC<IProps> = (props) => {
   const handleCompletedInspector = () => {
     navigation.goBack();
   };
+
+  const levelReview = [t('booking:bookingReview:bad'), t('booking:bookingReview:ok'), t('booking:bookingReview:good')];
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -46,7 +51,7 @@ const InspectorDetail: FC<IProps> = (props) => {
           <View style={styles.boxContainer}>
             <View style={styles.boxLeft}>
               <View style={styles.boxTitle}>
-                <Text style={styles.title}>Điều hòa</Text>
+                <Text style={styles.title}>{t('details:airConditioning')}</Text>
               </View>
               <View style={styles.boxCamera}>
                 <EvilIcons name="camera" size={42} color="#008489" style={styles.iconRight} />
@@ -56,7 +61,7 @@ const InspectorDetail: FC<IProps> = (props) => {
             <View style={styles.boxRight}>
               <AirbnbRating
                 count={3}
-                reviews={['Bad', 'OK', 'Good']}
+                reviews={levelReview}
                 defaultRating={comfort1}
                 size={24}
                 onFinishRating={(rating: number) => setComfort1(rating)}
@@ -69,7 +74,7 @@ const InspectorDetail: FC<IProps> = (props) => {
           <View style={styles.boxContainer}>
             <View style={styles.boxLeft}>
               <View style={styles.boxTitle}>
-                <Text style={styles.title}>Tivi</Text>
+                <Text style={styles.title}>{t('details:television')}</Text>
               </View>
               <View style={styles.boxCamera}>
                 <EvilIcons name="camera" size={42} color="#008489" style={styles.iconRight} />
@@ -79,7 +84,7 @@ const InspectorDetail: FC<IProps> = (props) => {
             <View style={styles.boxRight}>
               <AirbnbRating
                 count={3}
-                reviews={['Bad', 'OK', 'Good']}
+                reviews={levelReview}
                 defaultRating={comfort2}
                 size={24}
                 onFinishRating={(rating: number) => setComfort2(rating)}
@@ -92,7 +97,7 @@ const InspectorDetail: FC<IProps> = (props) => {
           <View style={styles.boxContainer}>
             <View style={styles.boxLeft}>
               <View style={styles.boxTitle}>
-                <Text style={styles.title}>Sàn nhà</Text>
+                <Text style={styles.title}>{t('details:floor')}</Text>
               </View>
               <View style={styles.boxCamera}>
                 <EvilIcons name="camera" size={42} color="#008489" style={styles.iconRight} />
@@ -102,7 +107,7 @@ const InspectorDetail: FC<IProps> = (props) => {
             <View style={styles.boxRight}>
               <AirbnbRating
                 count={3}
-                reviews={['Bad', 'OK', 'Good']}
+                reviews={levelReview}
                 defaultRating={comfort3}
                 size={24}
                 onFinishRating={(rating: number) => setComfort3(rating)}
@@ -115,7 +120,7 @@ const InspectorDetail: FC<IProps> = (props) => {
           <View style={styles.boxContainer}>
             <View style={styles.boxLeft}>
               <View style={styles.boxTitle}>
-                <Text style={styles.title}>Máy giặt</Text>
+                <Text style={styles.title}>{t('details:washingMachine')}</Text>
               </View>
               <View style={styles.boxCamera}>
                 <EvilIcons name="camera" size={42} color="#008489" style={styles.iconRight} />
@@ -125,7 +130,7 @@ const InspectorDetail: FC<IProps> = (props) => {
             <View style={styles.boxRight}>
               <AirbnbRating
                 count={3}
-                reviews={['Bad', 'OK', 'Good']}
+                reviews={levelReview}
                 defaultRating={comfort4}
                 size={24}
                 onFinishRating={(rating: number) => setComfort4(rating)}
@@ -138,7 +143,7 @@ const InspectorDetail: FC<IProps> = (props) => {
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <ButtonOriginal
           height={42}
-          title="Gửi"
+          title={t('booking:bookingReview:submit')}
           handlePress={handleCompletedInspector}
           customStyle={styles.buttonStyle}
           disabled={!completed}

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { COLOR_TEXT_TITLE, SIZE_TEXT_CONTENT, SIZE_TEXT_TITLE } from 'styles/global.style';
 import { hp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -18,13 +19,14 @@ interface IProps {
 const BoxDescriptionRoom: FC<IProps> = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
+  const { t } = useTranslation();
   const toggle = () => {
     setIsOpen(!isOpen);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.txtTitle}>Description</Text>
+      <Text style={styles.txtTitle}>{t('details:description')}</Text>
       <Text style={styles.txtDescription}>{listing.about_room.description}</Text>
       {isOpen ? (
         <Text>
@@ -46,7 +48,7 @@ const BoxDescriptionRoom: FC<IProps> = (props) => {
       <View style={styles.actionReadLess}>
         <Text style={styles.readMoreText} onPress={toggle}>
           {' '}
-          {isOpen ? 'Read less' : 'Read more'}
+          {isOpen ? t('shared:readLess') : t('shared:readMore')}
         </Text>
       </View>
     </View>

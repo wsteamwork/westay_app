@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE, SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE } from 'styles/global.style';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -16,10 +17,11 @@ interface IProps {
 
 const BoxInfoRoom: FC<IProps> = (props) => {
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <Text style={styles.roomName} numberOfLines={2} lineBreakMode={'tail'}>{listing.about_room.name}</Text>
-      <Text style={styles.roomNo}>Room No. {listing.room_id}</Text>
+      <Text style={styles.roomNo}>{t('details:roomNo')} {listing.room_id}</Text>
       <Text style={styles.boxLocation}>
         <Icon name="location" size={16} />{' '}
         <Text style={{ fontSize: SIZE_TEXT_SUBTITLE, color: COLOR_TEXT_TITLE }}>

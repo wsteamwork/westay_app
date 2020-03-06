@@ -5,6 +5,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -17,6 +18,7 @@ interface IProps extends NavigationInjectedProps {
 
 const InspectorItem: FC<IProps> = (props) => {
   const { navigation, title, isCompleted } = props;
+  const { t } = useTranslation();
   return (
     <View>
       <TouchableWithoutFeedback
@@ -26,12 +28,12 @@ const InspectorItem: FC<IProps> = (props) => {
           <Text style={styles.title}>{title}</Text>
           {!isCompleted ? (
             <View style={styles.showDate}>
-              <Text style={styles.notCompleted}>Bắt đầu</Text>
+              <Text style={styles.notCompleted}>{t('shared:start')}</Text>
               <Entypo name="chevron-right" size={20} color="#484848" />
             </View>
           ) : (
               <View style={styles.showDate}>
-                <Text style={styles.completed}>Đã hoàn thành</Text>
+                <Text style={styles.completed}>{t('booking:completed')}</Text>
                 <Entypo name="chevron-right" size={20} color={COLOR_BUTTON_DEFAULT} />
               </View>
             )}

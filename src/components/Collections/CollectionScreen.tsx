@@ -1,4 +1,4 @@
-import React, { FC, memo, useState, useEffect } from 'react';
+import React, {FC, memo, useState, useEffect, useContext} from 'react';
 import {
   StyleSheet,
   View,
@@ -21,6 +21,7 @@ import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import { IDataCollections } from 'types/Rooms/RoomRequests';
 import { getHomePageCollection } from 'store/Hooks/CardRoomHooks';
 import CollectionsSquareCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsSquareCard';
+import {AuthContext} from 'store/context/auth';
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
@@ -42,12 +43,13 @@ interface IProps extends NavigationInjectedProps {}
 const CollectionScreen: FC<IProps> = (props) => {
   const { navigation } = props;
   const [dataRooms, setDataRooms] = useState<IDataCollections>({ data: [], meta: 0 });
-
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
   const typeData = navigation.getParam('typeDataCollection');
   const title = navigation.getParam('titleCollection');
 
   useEffect(() => {
-    getHomePageCollection(typeData, 30).then((res) =>
+    getHomePageCollection(typeData, 30, languageStatus).then((res) =>
       setDataRooms({ data: res.data.data, meta: res.data.meta!.pagination.total }),
     );
   }, []);

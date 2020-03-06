@@ -90,7 +90,7 @@ const EditProfile: FC<IProps> = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderWithBackTitle title={'Edit Profile'} textHeaderStyle={{ color: COLOR_TEXT_DEFAULT }} />
+      <HeaderWithBackTitle title={t('account:profile:name')} textHeaderStyle={{ color: COLOR_TEXT_DEFAULT }} />
       <ScrollView style={styles.scrollView}>
         {profile && (
           <Formik
@@ -144,19 +144,15 @@ const EditProfile: FC<IProps> = (props) => {
                               <View style={styles.headerBarContainer}>
                                 <TouchableWithoutFeedback onPress={() => setOpenDrawer(false)} style={styles.modalButton}>
                                   <View>
-                                    <Text
-                                      style={styles.buttonText}
-                                    >Cancel</Text>
+                                    <Text style={styles.buttonText} >{t('shared:cancel')}</Text>
                                   </View>
                                 </TouchableWithoutFeedback>
                                 <View style={styles.titleContainer}>
-                                  <Text style={styles.titleText}>Danh xưng</Text>
+                                  <Text style={styles.titleText}>{t('account:profile:sex')}</Text>
                                 </View>
                                 <TouchableWithoutFeedback onPress={() => chooseQuantity()} style={styles.modalButton}>
                                   <View>
-                                    <Text
-                                      style={styles.buttonText}
-                                    >Save</Text>
+                                    <Text style={styles.buttonText}>{t('account:profile:save')}</Text>
                                   </View>
                                 </TouchableWithoutFeedback>
                               </View>

@@ -116,7 +116,7 @@ const ListRooms: FC<IProps> = (props) => {
       ) : (
           <View style={{ flex: 1, backgroundColor: 'white' }}>
             <SafeAreaView>
-              <HeaderWithBackTitle title={'Result'} textHeaderStyle={{ marginLeft: wp('-5%') }} />
+              <HeaderWithBackTitle title={t('filter:result')} textHeaderStyle={{ marginLeft: wp('-5%') }} />
               <View style={{ paddingHorizontal: wp('5%'), backgroundColor: 'white' }}>
                 <InputSearchFake />
               </View>

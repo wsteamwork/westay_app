@@ -2,12 +2,10 @@
     "cardBooking": {
         "detail": "Detail"
     },
-    "cardRoom": {
-        "bedroom": "Bedroom",
-        "night": "night",
-        "hours": "hours",
-        "month": "month"
-    },
+    "bedroom": "Bedroom",
+    "night": "night",
+    "hours": "hours",
+    "month": "month",
     "searchResults": "Search results",
     "signInandUp": "Signin/Signup",
     "startBooking": "Start booking",
@@ -21,10 +19,20 @@
     "messages": "Messages",
     "startChatWith": "Start chatting with",
     "showAll" : "Show all",
+    "viewAll" : "View all",
     "welcomeToWestay" : "Welcome to Westay",
     "toExperienceHomestay" : "A place to experience homestay services with luxurious, indigenous travel styles",
     "solutionForLong-termRental" : "Provide experience, the optimal solution for long-term rental",
     "enjoyTheFunTogether!" : "Let's Westay enjoy the fun together!",
     "start" : "Start",
-    "next" : "Next"
+    "next" : "Next",
+    "cancel" : "Cancel",
+    "or" : "or",
+    "contactThePhoneNumber" : "Any questions please contact the phone number",
+    "sorry" : "Sorry!",
+    "max" : "Max",
+    "bookNow" : "Book now",
+    "readLess" : "Read less",
+    "readMore" : "Read more",
+    "photos" : "photos"
 }

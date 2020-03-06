@@ -7,6 +7,7 @@ import { COLOR_TEXT_SUBTITLE, NORMAL, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEXT_SU
 import { IMAGE_STORAGE_XS } from 'types/globalTypes';
 import { cleanAccents, formatPrice } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 interface IProps extends NavigationInjectedProps {
   room: any,
@@ -16,6 +17,7 @@ interface IProps extends NavigationInjectedProps {
 const CollectionsSquareCard: FC<IProps> = (props) => {
   const { room, showNumberRoom, navigation } = props;
   const { state: { languageStatus } } = useContext(AuthContext);
+  const { t } = useTranslation();
 
   const handleClick = () => {
     navigation.navigate('DetailScreen', { idRoom: room.id });
@@ -48,7 +50,7 @@ const CollectionsSquareCard: FC<IProps> = (props) => {
       <Text style={styles.txtArea}>
         {room.total_area ? `${room.total_area} m2` : (null)}
         <Text style={{ fontWeight: '500' }}> &#8231; </Text>
-        {room.bedrooms.number_bedroom} bedrooms
+        {room.bedrooms.number_bedroom} {t('shared:bedroom')}
       </Text>
 
       {/* <Text numberOfLines={1} style={styles.priceText}>

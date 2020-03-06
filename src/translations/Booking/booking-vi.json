@@ -24,6 +24,34 @@
     "paymentDueDate" : "Hạn thanh toán",
     "amountNeedToPay" : "Cần thanh toán",
     "paymentStatus" : "Trạng thái",
+    "completed" : "Đã hoàn thành",
+    "reserve" : "Đặt trước",
+    "date" : "Ngày",
+    "bankingTransfer" : "Chuyển khoản ngân hàng",
+    "paymentThroughBaoKim" : "Thanh toán qua Bảo Kim",
+    "totalRevenue" : "Tổng doanh thu",
+    "bankingAccountInformation" : "Thông tin tài khoản ngân hàng",
+    "accountNumber" : "Số tài khoản",
+    "bank" : "Ngân hàng",
+    "branch" : "Chi nhánh",
+    "accountHolder" : "Chủ tài khoản",
+    "manageBooking" : "Quàn lý đơn đặt phòng",
+    "thisReservationHasBeenCreated" : "Đơn đặt phòng này đã được tạo trên cổng thanh toán Bảo Kim",
+    "paymentMethod" : "Phương thức thanh toán",
+    "thePaymentWillBeMadeViaBaoKim" : "Việc thanh toán sẽ được tiến hành thông qua cổng thanh toán điện tử Bảo Kim.",
+    "paymentViaDomesticATMCard" : "Thanh toán qua thẻ ATM nội địa",
+    "payViaInternationalCards" : "Thanh toán qua thẻ quốc tế Visa, Mastercard",
+    "confirmationAndPayment" : "Xác nhận và thanh toán",
+    "selectAFormOfPayment" : "Vui lòng chọn hình thức thanh toán",
+    "renewal" : "Gia hạn",
+
+    "customerInformation": {
+        "name": "Thông tin khách hàng",
+        "enterYourName" : "Vui lòng nhập tên bạn",
+        "customerName" : "Tên khách hàng",
+        "email": "Email",
+        "otherRequirements": "Những yêu cầu khác"
+    },
 
     "bookingDetail": {
         "roomRate": "Giá phòng",
@@ -54,7 +82,8 @@
         "paymentPrice" : "Giá thanh toán",
         "numberOfDay" : "Số ngày",
         "dateOfArrival" : "Ngày chuyển đến",
-        "dateOfBooking" : "Ngày đặt phòng"
+        "dateOfBooking" : "Ngày đặt phòng",
+        "confirmBooking" : "Xác nhận đơn đặt phòng"
     },
     "bookingReview": {
         "success": "Đánh giá thành công. Xin cảm ơn.",
@@ -74,7 +103,10 @@
         "yes": "Có",
         "no": "Không",
         "back": "Quay lại",
-        "submit": "Gửi đánh giá"
+        "submit": "Gửi đánh giá",
+        "ok": "Ok",
+        "bad": "Bad",
+        "good": "Good"
     },
     "cancelBooking": {
         "success": "Hủy thành công",
@@ -96,6 +128,7 @@
         "noBooking": "Không tìm thấy booking nào ở mục này!"
     },
     "inspectorBooking": {
-        "updateTheStatusOfTheApartment" : "Vui lòng cập nhật tình trạng căn hộ"
+        "updateTheStatusOfTheApartment" : "Vui lòng cập nhật tình trạng căn hộ",
+        "review": "Đánh giá phòng"
     }
 }

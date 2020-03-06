@@ -71,4 +71,8 @@ export const IMAGE_STORAGE_XS = IMAGE_URL + 'xs/';
 export const IMAGE_NOT_FOUND = 'https://via.placeholder.com/320x320.png?text=Westay.vn';
 
 export const NUMBER_HOTLINE = '0916374057';
+export const NUMBER_HOTLINE_2 = '0917041849';
+export const ACCOUNT_NUMBER = '19033679869996';
+export const BANK_NAME = 'Teckcombank';
+export const ACCOUNT_HOLDER = 'Luu Thi Linh Trang';
 export const LINK_Messenger = 'http://m.me/westay.vn';

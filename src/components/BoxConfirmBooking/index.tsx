@@ -13,6 +13,7 @@ import { hp, wp } from 'utils/responsive';
 import ShowCheckinCheckout from './ShowCheckinCheckout';
 import ShowInfoBasicRoom from './ShowInfoBasicRoom';
 import ShowPriceCalculator from './ShowPriceCalculator';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -26,6 +27,7 @@ const BoxConfirmBooking: FC<IProps> = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch<Dispatch<LTBookingAction>>();
   const [people, setPeople] = useState<number>(1);
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch({ type: 'setNumberOfGuests', payload: people });
   }, [people]);
@@ -33,7 +35,7 @@ const BoxConfirmBooking: FC<IProps> = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView stickyHeaderIndices={[0]}>
-        <HeaderWithBackTitle handlePress={() => navigation.goBack()} title="Confirm Booking" />
+        <HeaderWithBackTitle handlePress={() => navigation.goBack()} title={t("booking:bookingDetail:confirmBooking")} />
         <ShowInfoBasicRoom
           roomName={listing.about_room.name}
           district={listing.district.data.name}
@@ -49,7 +51,7 @@ const BoxConfirmBooking: FC<IProps> = (props) => {
       </ScrollView>
       <View style={styles.BoxConfirm}>
         <ButtonOriginal
-          title="Reserve"
+          title={t("booking:reserve")}
           handlePress={() => navigation.navigate('BoxCustomerInformation')}
           customStyle={styles.buttonStyle}
         />

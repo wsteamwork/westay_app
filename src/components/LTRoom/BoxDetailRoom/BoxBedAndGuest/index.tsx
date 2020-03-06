@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE } from 'styles/global.style';
 import { wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -19,6 +20,7 @@ interface IProps {
 
 const BoxBedAndGuest: FC<IProps> = (props) => {
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
+  const { t } = useTranslation();
 
   return (
     <View style={styles.container}>
@@ -42,7 +44,7 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             width: wp('30%'),
           }}>
           <FontAwesomeIcon5 name="door-open" size={22} color="#666666" />
-          <Text style={styles.txtTitle}>{listing.bedrooms.number_bedroom} bedrooms</Text>
+          <Text style={styles.txtTitle}>{listing.bedrooms.number_bedroom} {t('details:bedRoom')}</Text>
         </View>
         <View
           style={{
@@ -64,7 +66,7 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             width: wp('30%'),
           }}>
           <FontAwesomeIcon name="bath" size={22} color="#666666" />
-          <Text style={styles.txtTitle}>{listing.bathrooms.number_bathroom} bathrooms</Text>
+          <Text style={styles.txtTitle}>{listing.bathrooms.number_bathroom} {t('details:bathroom')}</Text>
         </View>
         <View
           style={{
@@ -74,7 +76,7 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             width: wp('30%'),
           }}>
           <FontAwesomeIcon name="wifi" size={22} color="#666666" />
-          <Text style={styles.txtTitle}>{listing.total_comforts} amenities</Text>
+          <Text style={styles.txtTitle}>{listing.total_comforts} {t('details:amenities')}</Text>
         </View>
         <View
           style={{
@@ -84,8 +86,8 @@ const BoxBedAndGuest: FC<IProps> = (props) => {
             width: wp('30%'),
           }}>
           <FontAwesomeIcon5 name="users" size={22} color="#666666" />
-          <Text style={styles.txtTitle}>{listing.guests.recommendation} guests</Text>
-          <Text style={styles.txtMaxGuest}>(Max {listing.guests.max_additional_guest + listing.guests.recommendation} guests)</Text>
+          <Text style={styles.txtTitle}>{listing.guests.recommendation} {t('details:guests')}</Text>
+          <Text style={styles.txtMaxGuest}>({t('shared:max')} {listing.guests.max_additional_guest + listing.guests.recommendation} {t('details:guests')})</Text>
         </View>
       </View>
     </View>

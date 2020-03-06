@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { SIZE_TEXT_TITLE } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -22,16 +23,18 @@ const BoxIntroRoom: FC<IProps> = (props) => {
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   const NavigateToDetail = () => {
     navigation.navigate('BoxDetailRoom')
-  }
+  };
+  const { t } = useTranslation();
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <PricingCard
           color="rgb(84, 211, 194)"
           title={listing.about_room.name.length > 45 ? `${listing.about_room.name.substr(0, 45)}...` : listing.about_room.name}
-          price={`$${listing.price_display}`}
-          info={[`1 Month`, `${listing.district.data.name}, ${listing.city.data.name}`]}
-          button={{ title: 'Check Availability', icon: '', buttonStyle: styles.buttonStyle, titleStyle: styles.buttonTitleStyle }}
+          price={`${t('account:settings:characterCurrency')}${listing.price_display}`}
+          info={[`1 ${t('shared:month')}`, `${listing.district.data.name}, ${listing.city.data.name}`]}
+          button={{ title: t('details:checkAvailability'), icon: '', buttonStyle: styles.buttonStyle, titleStyle: styles.buttonTitleStyle }}
           containerStyle={styles.containerStyle}
           titleStyle={styles.titleStyle}
           pricingStyle={styles.pricingStyle}
@@ -39,7 +42,7 @@ const BoxIntroRoom: FC<IProps> = (props) => {
         />
         <ButtonOriginal
           customStyle={{ height: 44 }}
-          title="More Detail"
+          title={t('details:moreDetail')}
           iconRight={true}
           customTitleStyle={{ fontSize: 15, flex: 1, position: 'absolute' }}
           // titleStyle={{}}

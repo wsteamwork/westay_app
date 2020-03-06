@@ -24,6 +24,34 @@
     "paymentDueDate" : "Payment due date",
     "amountNeedToPay" : "Amount need to pay",
     "paymentStatus" : "Payment status",
+    "completed" : "Completed",
+    "reserve" : "Reserve",
+    "date" : "Date",
+    "bankingTransfer" : "Banking Transfer",
+    "paymentThroughBaoKim" : "Payment through Bao Kim",
+    "totalRevenue" : "Total revenue",
+    "bankingAccountInformation" : "Banking account information",
+    "accountNumber" : "Account number",
+    "bank" : "Bank",
+    "branch" : "Branch",
+    "accountHolder" : "Account holder",
+    "manageBooking" : "Manage booking",
+    "thisReservationHasBeenCreated" : "This reservation has been created on Bao Kim payment gateway",
+    "paymentMethod" : "Payment Method",
+    "thePaymentWillBeMadeViaBaoKim" : "The payment will be made via Bao Kim electronic payment gateway.",
+    "paymentViaDomesticATMCard" : "Payment via domestic ATM card",
+    "payViaInternationalCards" : "Pay via international cards Visa, Mastercard",
+    "confirmationAndPayment" : "Confirmation and payment",
+    "selectAFormOfPayment" : "Please select a form of payment",
+    "renewal" : "Renewal",
+
+    "customerInformation": {
+        "name": "Customer Information",
+        "enterYourName" : "Please enter your name",
+        "customerName" : "Customer name",
+        "email": "Email",
+        "otherRequirements": "Other requirements"
+    },
 
     "bookingDetail": {
         "roomRate": "Room fee",
@@ -54,7 +82,8 @@
         "paymentPrice" : "Payment price",
         "numberOfDay" : "Number of Day",
         "dateOfArrival" : "Date of arrival",
-        "dateOfBooking" : "Date of booking"
+        "dateOfBooking" : "Date of booking",
+        "confirmBooking" : "Confirm booking"
     },
     "bookingReview": {
         "success": "Evaluation of success. Thank you.",
@@ -74,7 +103,10 @@
         "yes": "Yes",
         "no": "No",
         "back": "Back",
-        "submit": "Submit review"
+        "submit": "Submit review",
+        "ok": "Tốt",
+        "bad": "Rất tệ",
+        "good": "Rất tốt"
     },
     "cancelBooking": {
         "success": "Cancel successfully",
@@ -96,7 +128,8 @@
         "noBooking": "No booking found in this category!"
     },
     "inspectorBooking": {
-        "updateTheStatusOfTheApartment" : "Please update the status of the apartment"
+        "updateTheStatusOfTheApartment" : "Please update the status of the apartment",
+        "review": "Review room"
     }
 
 }

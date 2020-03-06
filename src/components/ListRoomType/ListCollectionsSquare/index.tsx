@@ -1,7 +1,7 @@
 // import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
 import CollectionsSquareCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsSquareCard';
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import React, { FC, Fragment, memo, useEffect, useState } from 'react';
+import React, {FC, Fragment, memo, useEffect, useState, useContext} from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
@@ -11,6 +11,7 @@ import { getHomePageCollection } from 'store/Hooks/CardRoomHooks';
 import { COLOR_INFO, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
 import { IDataCollections } from 'types/Rooms/RoomRequests';
 import { stylesGlobal, wp } from 'utils/responsive';
+import {AuthContext} from 'store/context/auth';
 
 interface IProps extends NavigationInjectedProps {
   typeData: string,
@@ -21,9 +22,11 @@ const ListCollectionsSquare: FC<IProps> = (props) => {
   const { typeData, title, navigation } = props;
   const [dataRooms, setDataRooms] = useState<IDataCollections>({ data: [], meta: 0 });
   const { t } = useTranslation();
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
 
   useEffect(() => {
-    getHomePageCollection(typeData, 10).then((res) => setDataRooms({ data: res.data.data, meta: res.data.meta!.pagination.total }));
+    getHomePageCollection(typeData, 10, languageStatus).then((res) => setDataRooms({ data: res.data.data, meta: res.data.meta!.pagination.total }));
   }, []);
 
   return (

@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { SIZE_TEXT_TITLE } from 'styles/global.style';
 import { wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -19,6 +20,7 @@ interface IProps extends NavigationInjectedProps {
 const BoxBookingRoom: FC<IProps> = (props) => {
   const { navigation } = props;
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
+  const { t } = useTranslation();
   return (
     <View style={styles.boxPrice}>
       <View
@@ -34,14 +36,14 @@ const BoxBookingRoom: FC<IProps> = (props) => {
         }}>
         <Text style={styles.txtPrice}>
           ${listing.price_display}
-          <Text style={{ fontSize: 11 }}> /month</Text>
+          <Text style={{ fontSize: 11 }}> /{t('shared:month')}</Text>
         </Text>
       </View>
       <View style={{ marginBottom: 0 }}>
         <TouchableOpacity
           style={styles.buttonStyle}
           onPress={() => navigation.navigate('ChooseDayBookingLT')}>
-          <Text style={styles.titleStyle}>Book Now</Text>
+          <Text style={styles.titleStyle}>{t('shared:bookNow')}</Text>
         </TouchableOpacity>
       </View>
     </View>

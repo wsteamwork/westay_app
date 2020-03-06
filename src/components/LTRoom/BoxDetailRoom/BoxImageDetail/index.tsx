@@ -7,6 +7,7 @@ import ImageViewer from 'react-native-image-zoom-viewer';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_TITLE, SIZE_TEXT_TITLE } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -21,6 +22,8 @@ const BoxImageDetail: FC<IProps> = (props) => {
   const { arrImages } = props;
   const [isImageViewVisible, setIsImageViewVisible] = useState(false);
   const [indexImage, setIndexImage] = useState<number>(0);
+  const { t } = useTranslation();
+
   const _renderItem = (item: any, index: number) => {
     return (
       <View style={{ paddingHorizontal: wp('1.2%') }} key={index}>
@@ -55,7 +58,7 @@ const BoxImageDetail: FC<IProps> = (props) => {
             color: '#ffffff',
             marginBottom: hp('5%')
           }}>
-          Ảnh phòng tắm
+          {t('details:bathroomPhoto')}
         </Text>
         <EvilIcons onPress={closeModal} name="close-o" color="#ffffff" size={40} />
       </View>
@@ -68,9 +71,9 @@ const BoxImageDetail: FC<IProps> = (props) => {
   return (
     <View style={styles.boxImage}>
       <View style={styles.boxTitle}>
-        <Text style={styles.txtTitle}>Take a tour</Text>
+        <Text style={styles.txtTitle}>{t('details:takeATour')}</Text>
         <Text style={styles.explore} onPress={() => setIsImageViewVisible(true)}>
-          View all {arrImages.length} photos
+          {t('shared:viewAll')} {arrImages.length} {t('shared:photos')}
         </Text>
       </View>
       <View style={[styles.pdLeft, { marginTop: hp('1%'), marginLeft: -wp('5%') }]}>

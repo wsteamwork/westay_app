@@ -6,6 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { COLOR_BLUR_TEXT, COLOR_TEXT_SUBTITLE, NORMAL, SEMI_BOLD } from 'styles/global.style';
+import {useTranslation} from 'react-i18next';
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
@@ -16,6 +17,7 @@ interface IProps {
 
 const BoxInfoHost: FC<IProps> = (props) => {
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
+  const { t } = useTranslation();
   return (
     <View style={{ backgroundColor: 'white' }}>
       <View style={styles.container}>
@@ -31,7 +33,7 @@ const BoxInfoHost: FC<IProps> = (props) => {
             subtitle={
               <View style={{ display: 'flex', alignItems: 'flex-start', backgroundColor: 'white', paddingTop: 4 }}>
                 <View>
-                  <Text style={styles.subtitleShopInfoText}>Listing: {listing.merchant.data.number_room}</Text>
+                  <Text style={styles.subtitleShopInfoText}>{t('details:listing')}: {listing.merchant.data.number_room}</Text>
                 </View>
                 {listing.merchant.data.city ? (
 
@@ -44,7 +46,7 @@ const BoxInfoHost: FC<IProps> = (props) => {
             }
             rightInfo={
               <View style={{ borderWidth: 0.5, height: 28, paddingHorizontal: 8, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', borderRadius: 360, borderColor: COLOR_TEXT_SUBTITLE }}>
-                <Text>View Profile</Text>
+                <Text>{t('details:viewProfile')}</Text>
               </View>
             }
           />

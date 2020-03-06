@@ -59,10 +59,10 @@ const BoxPaymentBaoKim: FC<IProps> = (props) => {
         })
         .catch((err) => {
           setPaymentPending(false);
-          Alert.alert('Rất tiếc !', 'Đơn đặt phòng này đã được tạo trên cổng thanh toán Bảo Kim');
+          Alert.alert(t('shared:sorry'), t('booking:thisReservationHasBeenCreated'));
         });
     } else {
-      Alert.alert('Vui lòng chọn một hình thức thanh toán');
+      Alert.alert(t('booking:chooseAPaymentMethod'));
     }
   };
   return useMemo(
@@ -71,7 +71,7 @@ const BoxPaymentBaoKim: FC<IProps> = (props) => {
         <View style={styles.container}>
           <View>
             <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-            <Text style={styles.titleText}>Payment Method</Text>
+            <Text style={styles.titleText}>{t('booking:paymentMethod')}</Text>
           </View>
           <ScrollView>
             <View style={styles.background}>
@@ -82,9 +82,9 @@ const BoxPaymentBaoKim: FC<IProps> = (props) => {
                   fontWeight: '500',
                   color: '#4b4b4b',
                 }}>
-                Việc thanh toán sẽ được tiến hành thông qua cổng thanh toán điện tử Bảo Kim.
+                {t('booking:thePaymentWillBeMadeViaBaoKim')}
               </Text>
-              <Text style={styles.title}>Thanh toán qua thẻ ATM nội địa </Text>
+              <Text style={styles.title}>{t('booking:paymentViaDomesticATMCard')} </Text>
               <View style={styles.boxInfo}>
                 {bankList[0].banks.map((o: any, i: number) => (
                   <TouchableOpacity
@@ -100,7 +100,7 @@ const BoxPaymentBaoKim: FC<IProps> = (props) => {
                   </TouchableOpacity>
                 ))}
               </View>
-              <Text style={styles.title}>Thanh toán qua thẻ quốc tế Visa, Mastercard </Text>
+              <Text style={styles.title}>{t('booking:payViaInternationalCards')} </Text>
               <View style={styles.boxInfo}>
                 {bankList[1].banks.map((o: any, i: number) => (
                   <TouchableOpacity
@@ -120,7 +120,7 @@ const BoxPaymentBaoKim: FC<IProps> = (props) => {
           </ScrollView>
           <View style={styles.boxButton}>
             <ButtonOriginal
-              title={idBank ? 'Xác nhận và thanh toán' : 'Vui lòng chọn hình thức thanh toán'}
+              title={idBank ? t('booking:confirmationAndPayment') : t('booking:selectAFormOfPayment')}
               disabled={!idBank || paymentPending}
               handlePress={triggerPayment}
               customStyle={styles.buttonStyle}

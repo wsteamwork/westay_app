@@ -9,6 +9,7 @@ import { ReducersList } from 'store/redux/reducers';
 import { IMAGE_STORAGE_LG } from 'types/globalTypes';
 import { hp } from 'utils/responsive';
 import InspectorItem from './InspectorItem';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -22,10 +23,11 @@ const BoxChooseInspectorType: FC<IProps> = (props) => {
   const { navigation } = props;
   const { completedInspector } = useSelector<ReducersList, any>((state) => state.ltbooking);
   const booking = navigation.getParam('bookingInfo', 0);
+  const { t } = useTranslation();
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <HeaderWithBackTitle handlePress={() => navigation.goBack()} title="Đánh giá phòng" />
+        <HeaderWithBackTitle handlePress={() => navigation.goBack()} title={t('booking:inspectorBooking:review')} />
         <ShowInfoBasicRoom
           roomName={booking.longTermRoom.data.about_room.name}
           district={booking.district.data.name}
@@ -33,13 +35,13 @@ const BoxChooseInspectorType: FC<IProps> = (props) => {
           image_url={`${IMAGE_STORAGE_LG + booking.longTermRoom.data.avatar.images[0].name}`}
         />
         <Divider style={styles.divider} />
-        <InspectorItem title={'Phòng khách'} isCompleted={true} />
+        <InspectorItem title={t('details:livingRoom')} isCompleted={true} />
         <Divider style={styles.divider} />
-        <InspectorItem title={'Phòng ngủ'} isCompleted={completedInspector} />
+        <InspectorItem title={t('details:bedroom')} isCompleted={completedInspector} />
         <Divider style={styles.divider} />
-        <InspectorItem title={'Phòng tắm'} />
+        <InspectorItem title={t('details:bathroom')} />
         <Divider style={styles.divider} />
-        <InspectorItem title={'Phòng bếp'} />
+        <InspectorItem title={t('details:kitchen')} />
         <Divider style={styles.divider} />
       </ScrollView>
     </SafeAreaView>

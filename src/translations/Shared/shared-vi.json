@@ -2,12 +2,10 @@
     "cardBooking": {
         "detail": "Chi tiết"
     },
-    "cardRoom": {
-        "bedroom": "phòng ngủ",
-        "night": "đêm",
-        "hours": "giờ",
-        "month" : "tháng"
-    },
+    "bedroom": "phòng ngủ",
+    "night": "đêm",
+    "hours": "giờ",
+    "month" : "tháng",
     "searchResults": "Kết quả tìm kiếm",
     "signInandUp": "Đăng nhập/Đăng ký",
     "startBooking": "Bắt đầu đặt phòng",
@@ -21,10 +19,20 @@
     "messages": "Tin nhắn",
     "startChatWith": "Hãy gửi tin nhắn đến",
     "showAll" : "Xem thêm",
+    "viewAll" : "Xem tất cả",
     "welcomeToWestay" : "Chào mừng đến với Westay",
     "toExperienceHomestay" : "Nơi trải nghiệm dịch vụ homestay với phong cách du lịch bản địa, hạng sang",
     "solutionForLong-termRental" : "Cung cấp trải nghiệm, giải pháp tối ưu cho thuê nhà dài dạn",
     "enjoyTheFunTogether" : "Hãy cùng Westay tận hưởng khoảnh khắc vui vẻ bên nhau!",
     "start" : "Bắt đầu",
-    "next" : "Tiếp theo"
+    "next" : "Tiếp theo",
+    "cancel" : "Hủy bỏ",
+    "or" : "hoặc",
+    "contactThePhoneNumber" : "Mọi thắc mắc xin liên hệ số điện thoại",
+    "sorry" : "Rất tiếc!",
+    "max" : "Tối đa",
+    "bookNow" : "Đặt phòng ngay",
+    "readLess" : "Thu gọn",
+    "readMore" : "Đọc thêm",
+    "photos" : "ảnh"
 }

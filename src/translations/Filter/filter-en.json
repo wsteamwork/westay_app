@@ -12,5 +12,6 @@
     },
     "name": "Filter",
     "chooseDate": "Choose Date",
-    "numberOfRooms": "Number of Rooms"
+    "numberOfRooms": "Number of Rooms",
+    "result": "Result"
 }

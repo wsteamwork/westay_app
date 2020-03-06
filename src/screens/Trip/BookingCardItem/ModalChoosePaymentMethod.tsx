@@ -31,13 +31,13 @@ const ModalChoosePaymentMethod: FC<IProps> = (props) => {
   const dispatch = useDispatch<Dispatch<LTBookingAction>>();
   const [data, setData] = useState<any>([
     {
-      label: 'Chuyển khoản trực tiếp',
+      label: t('booking:directDeposit'),
       color: COLOR_TITLE_HEADER,
       selected: true,
       value: 1,
     },
     {
-      label: 'Thanh toán qua Bảo Kim',
+      label: t('booking:paymentThroughBaoKim'),
       color: COLOR_TITLE_HEADER,
       selected: false,
       value: 2,

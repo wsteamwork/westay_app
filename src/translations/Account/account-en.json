@@ -4,6 +4,7 @@
         "password": "Password",
         "currency": "Currency",
         "standForCurrency": "USD",
+        "characterCurrency": "$",
         "language": "Language",
         "vietnamese": "Vietnamese",
         "english": "English",
@@ -69,7 +70,8 @@
         "mr": "Mr",
         "mrs": "Mrs",
         "unknown": "Unknown",
-        "other": "Other"
+        "other": "Other",
+        "sex": "Sex"
     },
     "changePassword": {
         "name": "Change Password",

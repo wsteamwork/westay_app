@@ -28,6 +28,8 @@
         "invalidEmail": "Địa chỉ email không hợp lệ",
         "min6Character": "Tối thiểu 6 ký tự",
         "max255Character": "Tối đa 255 ký tự",
+        "min9Character": "Tối thiểu 9 ký tự",
+        "max12Character": "Tối đa 12 ký tự",
         "passwordRequired": "Vui lòng nhập mật khẩu",
         "invalidPassConf": "Mật khẩu không trùng khớp",
         "phoneRequired": "Vui lòng nhập số điện thoại",

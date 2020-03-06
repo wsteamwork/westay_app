@@ -5,6 +5,7 @@ import {Button} from 'react-native-elements';
 import {wp, hp} from 'utils/responsive';
 import {COLOR_LINEAR_DEFAULT} from 'styles/global.style';
 import * as Animatable from 'react-native-animatable';
+import {useTranslation} from 'react-i18next';
 
 interface IProps {
   loading:boolean;
@@ -13,6 +14,7 @@ interface IProps {
 
 const FindAroundHere: FC<IProps> = (props) => {
   const { loading, handleFindAround } = props;
+  const { t } = useTranslation();
 
   return (
     <Animatable.View
@@ -24,7 +26,7 @@ const FindAroundHere: FC<IProps> = (props) => {
       <Button
         loading={loading}
         onPress={handleFindAround}
-        title="Tìm kiếm quanh đây!"
+        title={t('map:searchAroundHere')}
         ViewComponent={LinearGradient}
         linearGradientProps={{
           colors: COLOR_LINEAR_DEFAULT,

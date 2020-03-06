@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_TITLE, SIZE_TEXT_TITLE } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -19,9 +20,11 @@ interface IProps {
 const BoxAmenitiesRoom: FC<IProps> = (props) => {
   const [collapsedComfort, setCollapsedComfort] = useState(false);
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.txtTitle}>Amenities</Text>
+      <Text style={styles.txtTitle}>{t('details:amenities')}</Text>
       <View
         style={{
           flexDirection: 'row',
@@ -77,7 +80,7 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                         fontSize: 20,
                         fontWeight: '700',
                       }}>
-                      Facilities
+                      {t('details:facilities')}
                     </Text>
                     {listing.comforts.facilities.map((o: any, i: number) => (
                       <View
@@ -115,7 +118,7 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                           fontSize: 20,
                           fontWeight: '700',
                         }}>
-                        Livingrooms
+                        {t('details:livingRoom')}
                     </Text>
                       {listing.comforts.livingrooms.map((o: any, i: number) => (
                         <View
@@ -152,7 +155,7 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                         fontSize: 20,
                         fontWeight: '700',
                       }}>
-                      Bedrooms
+                      {t('details:bedRoom')}
                     </Text>
                     {listing.comforts.bedrooms.map((o: any, i: number) => (
                       <View
@@ -189,7 +192,7 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                         fontSize: 20,
                         fontWeight: '700',
                       }}>
-                      Bathrooms
+                      {t('details:bathroom')}
                     </Text>
                     {listing.comforts.bathrooms.map((o: any, i: number) => (
                       <View
@@ -226,7 +229,7 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                         fontSize: 20,
                         fontWeight: '700',
                       }}>
-                      Kitchens
+                      {t('details:kitchen')}
                     </Text>
                     {listing.comforts.kitchens.map((o: any, i: number) => (
                       <View
@@ -264,7 +267,7 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                           fontSize: 20,
                           fontWeight: '700',
                         }}>
-                        Entertainment
+                        {t('details:entertainment')}
                     </Text>
                       {listing.comforts.entertainment.map((o: any, i: number) => (
                         <View
@@ -301,7 +304,7 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                         fontSize: 20,
                         fontWeight: '700',
                       }}>
-                      Common
+                      {t('details:common')}
                     </Text>
                     {listing.comforts.common.map((o: any, i: number) => (
                       <View
@@ -338,7 +341,7 @@ const BoxAmenitiesRoom: FC<IProps> = (props) => {
                         fontSize: 20,
                         fontWeight: '700',
                       }}>
-                      Others
+                      {t('details:others')}
                     </Text>
                     {listing.comforts.others.map((o: any, i: number) => (
                       <View

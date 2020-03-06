@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -24,6 +25,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
   const { navigation, arrImages } = props;
   const [isImageViewVisible, setIsImageViewVisible] = useState(false);
   const [indexImage, setIndexImage] = useState<number>(0);
+  const { t } = useTranslation();
   const footer = () => {
     return (
       <View
@@ -38,7 +40,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
             color: '#ffffff',
             marginBottom: hp('5%'),
           }}>
-          Ảnh phòng tắm
+          {t('details:bathroomPhoto')}
         </Text>
         <EvilIcons onPress={closeModal} name="close-o" color="#ffffff" size={40} />
       </View>

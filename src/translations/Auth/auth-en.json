@@ -28,6 +28,8 @@
         "invalidEmail": "Email address is not valid",
         "min6Character": "At least 6 characters",
         "max255Character": "Up to 255 characters",
+        "min9Character": "At least 9 characters",
+        "max12Character": "Up to 12 characters",
         "passwordRequired": "Please enter a password",
         "invalidPassConf": "Password does not match",
         "phoneRequired": "Please enter the phone number",

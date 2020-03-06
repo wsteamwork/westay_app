@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { COLOR_TEXT_TITLE, SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
 import { wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -20,11 +21,12 @@ interface IProps {
 const BoxIncludedFee: FC<IProps> = (props) => {
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   const [collapsedServices, setCollapsedServices] = useState(false);
+  const { t } = useTranslation();
   return (
     <View>
       <TouchableWithoutFeedback style={styles.touchable} onPress={() => setCollapsedServices(true)}>
         <View style={styles.container}>
-          <Text style={styles.title}>Service fees</Text>
+          <Text style={styles.title}>{t('details:serviceFees')}</Text>
           <Entypo name="chevron-right" size={25} color="#adadad" />
         </View>
       </TouchableWithoutFeedback>
@@ -38,14 +40,14 @@ const BoxIncludedFee: FC<IProps> = (props) => {
           containerStyle={{ marginTop: hp('5%') }}
         />
         <ScrollView>
-          <Text style={styles.textHeader}>Service fees</Text>
+          <Text style={styles.textHeader}>{t('details:serviceFees')}</Text>
           {listing.prices.included_fee && listing.prices.included_fee.length ? (
             listing.prices.included_fee.map((o: any, i: number) =>
               o.included == 1 ? (
                 <View style={styles.boxContainer} key={i}>
                   <View key={i} style={styles.boxPrice}>
                     <Text style={styles.txtTerm}>{o.name}</Text>
-                    <Text style={styles.price}>Fee included in rent price</Text>
+                    <Text style={styles.price}>{t('details:feeIncludedInRentPrice')}</Text>
                   </View>
                   <Divider style={styles.divider} />
                 </View>
@@ -56,7 +58,7 @@ const BoxIncludedFee: FC<IProps> = (props) => {
                       <Text style={styles.price}>
                         {o.calculate_function == 3 || o.calculate_function == 6
                           ? `${o.calculate_function_txt}`
-                          : `$${o.value} ${o.calculate_function_txt}`}
+                          : `${t('account:settings:characterCurrency')}${o.value} ${o.calculate_function_txt}`}
                       </Text>
                     </View>
                     <Divider style={styles.divider} />

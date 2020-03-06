@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { WEBSITE_SRC } from 'types/globalTypes';
 import { createLTBooking } from 'store/redux/reducers/LTBooking/ltbooking';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -34,6 +35,7 @@ interface CustomerValues {
 
 const BoxCustomerInformation: FC<IProps> = (props) => {
   const { navigation } = props;
+  const { t } = useTranslation();
   const nameRef = useRef<any>(null);
   const emailRef = useRef<any>(null);
   const phoneRef = useRef<any>(null);
@@ -48,13 +50,13 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
   }, []);
   const [data, setData] = useState<any>([
     {
-      label: 'Chuyển khoản trực tiếp',
+      label: t('booking:directDeposit'),
       color: COLOR_TITLE_HEADER,
       selected: true,
       value: 1,
     },
     {
-      label: 'Thanh toán qua Bảo Kim',
+      label: t('booking:paymentThroughBaoKim'),
       color: COLOR_TITLE_HEADER,
       selected: false,
       value: 2,
@@ -106,16 +108,16 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
   }, [profile]);
 
   const FormValidationSchema = Yup.object().shape({
-    name: Yup.string().required('Vui lòng nhập tên bạn'),
+    name: Yup.string().required(t('booking:customerInformation:enterYourName')),
     email: Yup.string()
-      .required('Vui lòng nhập email')
-      .email('Địa chỉ email không hợp lệ')
-      .min(6, 'Tối thiểu 6 ký tự')
-      .max(255, 'Tối đa 255 ký tự'),
+      .required(t('auth:login:emailRequired'))
+      .email(t('auth:login:invalidEmail'))
+      .min(6, t('auth:login:min6Character'))
+      .max(255, t('auth:login:max255Character')),
     phone: Yup.string()
-      .required('Vui lòng nhập số điện thoại')
-      .min(9, 'Tối thiểu 9 ký tự')
-      .max(12, 'Tối đa 12 ký tự'),
+      .required(t('auth:register:phoneRequired'))
+      .min(9, t('auth:register:min9Character'))
+      .max(12, t('auth:register:min12Character')),
   });
 
   return useMemo(
@@ -137,10 +139,10 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
                     showsVerticalScrollIndicator={false}>
                     <View collapsable={false}>
                       <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-                      <Text style={styles.titleText}>Customer Information</Text>
+                      <Text style={styles.titleText}>{t('booking:customerInformation:name')}</Text>
                       <Input
                         ref={nameRef}
-                        placeholder="Customer name"
+                        placeholder={t('booking:customerInformation:customerName')}
                         returnKeyType="next"
                         value={values.name}
                         onChangeText={handleChange('name')}
@@ -154,7 +156,7 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
                       />
                       <Input
                         ref={emailRef}
-                        placeholder="Email"
+                        placeholder={t('booking:customerInformation:email')}
                         keyboardType="email-address"
                         returnKeyType="next"
                         value={values.email}
@@ -169,7 +171,7 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
                       />
                       <Input
                         ref={phoneRef}
-                        placeholder="Phone"
+                        placeholder={t('auth:register:phone')}
                         keyboardType="phone-pad"
                         returnKeyType="next"
                         value={values.phone}
@@ -186,7 +188,7 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
                         ref={othersRef}
                         multiline={true}
                         numberOfLines={1}
-                        placeholder="Other requirements"
+                        placeholder={t('booking:customerInformation:otherRequirements')}
                         returnKeyType="done"
                         value={values.others}
                         onChangeText={handleChange('others')}
@@ -197,7 +199,7 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
                         containerStyle={styles.containerStyle}
                         errorStyle={{ color: 'red' }}
                       />
-                      <Text style={styles.titlePayment}>Choose one payment method</Text>
+                      <Text style={styles.titlePayment}>{t('booking:chooseAPaymentMethod')}</Text>
                       <View style={styles.radioGroup}>
                         <RadioGroup radioButtons={data} onPress={onChoosePayment} />
                       </View>
@@ -208,7 +210,7 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
 
               <View style={styles.boxButton}>
                 <ButtonOriginal
-                  title="Pay now"
+                  title={t('booking:bookingDetail:pay')}
                   handlePress={handleSubmit}
                   customStyle={styles.buttonStyle}
                 />

@@ -11,6 +11,7 @@ import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import { COLOR_TEXT_DEFAULT, COLOR_BUTTON_DEFAULT } from 'styles/global.style';
 import { formatMoney } from 'utils/mixins';
+import {NUMBER_HOTLINE, NUMBER_HOTLINE_2, ACCOUNT_NUMBER, BANK_NAME, ACCOUNT_HOLDER} from 'types/globalTypes';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -28,59 +29,59 @@ const BoxDirectTransfer: FC<IProps> = (props) => {
     <View style={styles.container}>
       <View>
         <HeaderWithBackTitle handlePress={() => navigation.goBack()} />
-        <Text style={styles.titleText}>Banking Transfer</Text>
+        <Text style={styles.titleText}>{t('booking:bankingTransfer')}</Text>
       </View>
       <View style={styles.boxContent}>
         {dataBooking && (
           <ScrollView>
             <View style={{ borderRadius: 25 }}>
               <View style={styles.boxWrapper}>
-                <Text style={styles.totalText}>Price details</Text>
+                <Text style={styles.totalText}>{t('booking:bookingDetail:priceDetail')}</Text>
               </View>
               <View style={styles.boxWrapper}>
                 <Text style={styles.title}>
-                  Room rate {dataBooking.current_contract.range_stay} night
+                  {t('booking:bookingDetail:roomRate')} {dataBooking.current_contract.range_stay} {t('shared:night')}
                 </Text>
-                <Text style={styles.itemLeft}>đ {formatMoney(dataBooking.current_contract.price_original)}</Text>
+                <Text style={styles.itemLeft}>{t('account:settings:standForCurrency')} {formatMoney(dataBooking.current_contract.price_original)}</Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Deposit</Text>
-                <Text style={styles.itemLeft}>đ {formatMoney(dataBooking.deposit)}</Text>
+                <Text style={styles.title}>{t('booking:bookingDetail:roomRate')}</Text>
+                <Text style={styles.itemLeft}>{t('account:settings:standForCurrency')} {formatMoney(dataBooking.deposit)}</Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.titleTotal}>Total revenue</Text>
+                <Text style={styles.titleTotal}>{t('booking:totalRevenue')}</Text>
                 <Text style={styles.itemLeftTotal}>
-                  đ {formatMoney(dataBooking.current_contract.price_with_fee)}
+                  {t('account:settings:standForCurrency')} {formatMoney(dataBooking.current_contract.price_with_fee)}
                 </Text>
               </View>
             </View>
             <Divider style={styles.divider} />
             <View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.totalText}>Banking account information</Text>
+                <Text style={styles.totalText}>{t('booking:bankingAccountInformation')}</Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Account number</Text>
-                <Text style={styles.itemLeft}>19033679869996</Text>
+                <Text style={styles.title}>{t('booking:accountNumber')}</Text>
+                <Text style={styles.itemLeft}>{ACCOUNT_NUMBER}</Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Bank</Text>
-                <Text style={styles.itemLeft}>Teckcombank</Text>
+                <Text style={styles.title}>{t('booking:bank')}</Text>
+                <Text style={styles.itemLeft}>{BANK_NAME}</Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Branch</Text>
+                <Text style={styles.title}>{t('booking:branch')}</Text>
                 <Text style={styles.itemLeft}>Hà Nội</Text>
               </View>
               <View style={styles.boxWrapper}>
-                <Text style={styles.title}>Account holder</Text>
-                <Text style={styles.itemLeft}>Luu Thi Linh Trang</Text>
+                <Text style={styles.title}>{t('booking:accountHolder')}</Text>
+                <Text style={styles.itemLeft}>{ACCOUNT_HOLDER}</Text>
               </View>
             </View>
             <Divider style={styles.divider} />
             <View>
               <View style={styles.boxQuestion}>
                 <Text style={styles.textQuestion}>
-                  Any questions please contact the phone number: 0916374057 or 0917041849
+                  {t('shared:contactThePhoneNumber')}: {NUMBER_HOTLINE} {t('shared:or')} {NUMBER_HOTLINE_2}
                 </Text>
               </View>
             </View>
@@ -89,7 +90,7 @@ const BoxDirectTransfer: FC<IProps> = (props) => {
       </View>
       <View style={styles.boxButton}>
         <ButtonOriginal
-          title="Manage Booking"
+          title={t('booking:manageBooking')}
           handlePress={() => navigation.navigate('BoxManageBooking')}
           customStyle={styles.buttonStyle}
         />

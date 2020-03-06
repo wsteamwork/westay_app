@@ -4,5 +4,6 @@
     "hours": "hours",
     "day": "day",
     "book": "Book",
-    "noResult": "No results found around here!"
+    "noResult": "No results found around here!",
+    "searchAroundHere": "Search around here"
 }

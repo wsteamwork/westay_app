@@ -12,5 +12,6 @@
     },
     "name": "Bộ lọc",
     "chooseDate": "Số ngày",
-    "numberOfRooms": "Số khách"
+    "numberOfRooms": "Số khách",
+    "result": "Kết quả"
 }

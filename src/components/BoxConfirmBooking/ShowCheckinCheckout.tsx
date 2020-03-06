@@ -9,6 +9,7 @@ import { AuthContext } from 'store/context/auth';
 import { ReducersList } from 'store/redux/reducers';
 import { formatDateBooking } from 'utils/mixins';
 import { wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -23,11 +24,12 @@ const ShowCheckinCheckout: FC<IProps> = (props) => {
   const { state } = useContext(AuthContext);
   const { languageStatus } = state;
   const { movein, moveout } = useSelector<ReducersList, any>((state) => state.ltbooking);
+  const { t } = useTranslation();
   return (
     <View>
       <TouchableWithoutFeedback style={styles.touchable} onPress={() => navigation.navigate('ChooseDayBookingLT')}>
         <View style={styles.container}>
-          <Text style={styles.title}>Date</Text>
+          <Text style={styles.title}>{t("booking:date")}</Text>
           <View style={styles.showDate}>
             <Text style={styles.date}>
               {formatDateBooking(movein, languageStatus)} - {formatDateBooking(moveout, languageStatus)}

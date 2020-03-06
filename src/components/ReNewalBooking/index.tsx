@@ -265,7 +265,7 @@ const ReNewalBooking: FC<IProps> = (props) => {
 
         <ButtonOriginal
           width={wp('25%')}
-          title={'Gia hạn'}
+          title={t('booking:renewal')}
           customStyle={{ backgroundColor: '#008489' }}
           handlePress={handleShowConfirmBooking}
           disabled={!fromDate || !toDate}

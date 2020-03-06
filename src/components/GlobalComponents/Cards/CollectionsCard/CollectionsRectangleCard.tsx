@@ -7,6 +7,7 @@ import { COLOR_TEXT_TITLE, LIGHT, NORMAL, SEMI_BOLD, SIZE_TEXT_CONTENT, SIZE_TEX
 import { IMAGE_STORAGE_XS } from 'types/globalTypes';
 import { cleanAccents, formatPrice } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 interface IProps extends NavigationInjectedProps {
   room: any,
@@ -20,6 +21,7 @@ const CollectionsRectangleCard: FC<IProps> = (props) => {
   const handleClick = () => {
     navigation.navigate('DetailScreen', { idRoom: room.id });
   };
+  const { t } = useTranslation();
 
   return (
     <TouchableOpacity
@@ -51,12 +53,12 @@ const CollectionsRectangleCard: FC<IProps> = (props) => {
           {/* <Text style={{ fontWeight: '500' }}> &#8231; </Text> */}
           {/* {room.bathrooms.number_bathroom} bathrooms */}
           <Text style={{ fontWeight: '500' }}> &#8231; </Text>
-          {room.bedrooms.number_bedroom} bedrooms
+          {room.bedrooms.number_bedroom} {t('shared:bedroom')}
         </Text>
       )}
 
       <Text numberOfLines={1} style={styles.priceText}>
-        {formatPrice(room.price_display)} /month
+        {formatPrice(room.price_display)} /{t('shared:month')}
       </Text>
     </TouchableOpacity>
   );

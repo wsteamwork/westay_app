@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from 'store/redux/reducers';
 import { COLOR_TEXT_TITLE, SIZE_TEXT_TITLE, SIZE_TEXT_SUBTITLE, SIZE_TEXT_TITLE_MEDIUM } from 'styles/global.style';
 import { wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -20,11 +21,12 @@ interface IProps {
 const BoxPriceLTRoom: FC<IProps> = (props) => {
   const listing = useSelector<ReducersList, any>((state) => state.ltRoomDetails.room);
   const [collapsedPrice, setCollapsedPrice] = useState(false);
+  const { t } = useTranslation();
   return (
     <View>
       <TouchableWithoutFeedback style={styles.touchable} onPress={() => setCollapsedPrice(true)}>
         <View style={styles.container}>
-          <Text style={styles.title}>Price by lease term</Text>
+          <Text style={styles.title}>{t('details:priceByLeaseTerm')}</Text>
           <Entypo name="chevron-right" size={25} color="#adadad" />
         </View>
       </TouchableWithoutFeedback>
@@ -38,7 +40,7 @@ const BoxPriceLTRoom: FC<IProps> = (props) => {
           containerStyle={{ marginTop: hp('5%') }}
         />
         <ScrollView>
-          <Text style={styles.textHeader}>Price by lease term</Text>
+          <Text style={styles.textHeader}>{t('details:priceByLeaseTerm')}</Text>
           {listing.prices && listing.prices.prices.length
             ? listing.prices.prices.map((o: any, i: number) => (
               <View key={i} style={styles.boxContainer}>

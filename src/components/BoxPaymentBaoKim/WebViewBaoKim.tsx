@@ -2,6 +2,8 @@
 import React, { FC } from 'react';
 import { WebView } from 'react-native-webview';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
+import {View} from 'react-native';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -14,7 +16,12 @@ const WebViewBaoKim: FC<IProps> = (props) => {
   const { navigation } = props;
   const urlToBaoKim = navigation.getParam('urlToBaoKim', '');
 
-  return <WebView source={{ uri: urlToBaoKim }} style={{ marginTop: 20 }} />;
+  return (
+    <View style={{ flex: 1 }}>
+      <HeaderWithBackTitle />
+      <WebView source={{ uri: urlToBaoKim }} style={{ marginTop: 20 }} />
+    </View>
+  );
 };
 
 export default withNavigation(WebViewBaoKim);

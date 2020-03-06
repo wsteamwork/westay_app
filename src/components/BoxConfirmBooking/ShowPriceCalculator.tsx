@@ -7,6 +7,7 @@ import { ReducersList } from 'store/redux/reducers';
 import { getLTCalculatedBookingPrice, LTBookingAction } from 'store/redux/reducers/LTBooking/ltbooking';
 import { formatMoney } from 'utils/mixins';
 import { wp } from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -22,6 +23,7 @@ const ShowPriceCalculator: FC<IProps> = (props) => {
     (state) => state.ltbooking,
   );
   const dispatch = useDispatch<Dispatch<LTBookingAction>>();
+  const { t } = useTranslation();
   useEffect(() => {
     getLTCalculatedBookingPrice({
       long_term_room_id: roomId,
@@ -39,15 +41,15 @@ const ShowPriceCalculator: FC<IProps> = (props) => {
       LTBookingPriceCalculate && (
         <View>
           <View style={styles.container}>
-            <Text style={styles.title}>Giá thanh toán</Text>
+            <Text style={styles.title}>{t('booking:bookingDetail:paymentPrice')}</Text>
             <Text style={styles.date}>đ {formatMoney(LTBookingPriceCalculate.price_original)}</Text>
           </View>
           <View style={styles.container}>
-            <Text style={styles.title}>Đặt cọc (1 tháng)</Text>
+            <Text style={styles.title}>{t('booking:deposit')} (1 {t('shared:cardRoom:month')})</Text>
             <Text style={styles.date}>đ {formatMoney(LTBookingPriceCalculate.deposit)}</Text>
           </View>
           <View style={styles.container}>
-            <Text style={styles.totalText}>Tổng cộng</Text>
+            <Text style={styles.totalText}>{t('booking:total')}</Text>
             <Text style={styles.totalText}>
               đ {formatMoney(LTBookingPriceCalculate.price_with_fee)}
             </Text>
