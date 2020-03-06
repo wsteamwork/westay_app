@@ -110,7 +110,7 @@ const RoomCard: FC<IProps> = (props) => {
           </Text>
 
           <Text>
-            /{t('shared:cardRoom:month')}
+            /{t('shared:month')}
           </Text>
         </View>
 

@@ -45,7 +45,7 @@ const ShowPriceCalculator: FC<IProps> = (props) => {
             <Text style={styles.date}>đ {formatMoney(LTBookingPriceCalculate.price_original)}</Text>
           </View>
           <View style={styles.container}>
-            <Text style={styles.title}>{t('booking:deposit')} (1 {t('shared:cardRoom:month')})</Text>
+            <Text style={styles.title}>{t('booking:deposit')} (1 {t('shared:month')})</Text>
             <Text style={styles.date}>đ {formatMoney(LTBookingPriceCalculate.deposit)}</Text>
           </View>
           <View style={styles.container}>

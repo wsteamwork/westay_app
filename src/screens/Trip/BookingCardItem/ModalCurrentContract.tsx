@@ -55,7 +55,7 @@ const ModalCurrentContract: FC<IProps> = (props) => {
           </View>
           <Divider style={styles.divider} />
           <View style={styles.boxWrapper}>
-            <Text style={styles.title}>{t('booking:deposit')} (1 {t('shared:cardRoom:month')})</Text>
+            <Text style={styles.title}>{t('booking:deposit')} (1 {t('shared:month')})</Text>
             <Text style={styles.itemRight}>
               {languageStatus === 'en' ? '$' : 'đ'}{' '}
               {numeral(currentContract.price_with_fee - currentContract.price_original).format(

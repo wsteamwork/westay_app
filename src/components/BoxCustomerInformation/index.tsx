@@ -50,7 +50,7 @@ const BoxCustomerInformation: FC<IProps> = (props) => {
   }, []);
   const [data, setData] = useState<any>([
     {
-      label: t('booking:directDeposit'),
+      label: t('booking:bankingTransfer'),
       color: COLOR_TITLE_HEADER,
       selected: true,
       value: 1,
