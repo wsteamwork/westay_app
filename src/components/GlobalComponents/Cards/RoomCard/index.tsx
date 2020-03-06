@@ -83,7 +83,7 @@ const RoomCard: FC<IProps> = (props) => {
                 <IconEntypo name="dot-single" size={wp('2%')} />
 
                 <Text style={styles.text_room_type}>
-                  {room.number_room} {t('shared:cardRoom:bedroom')}
+                  {room.number_room} {t('shared:bedroom')}
                 </Text>
               </Fragment>
             )}

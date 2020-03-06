@@ -69,7 +69,7 @@ const ValuableCard: FC<IProps> = (props) => {
               <Text style={{ fontWeight: '700' }}> &#8231; </Text>
             </Text>
             <Text style={{ textAlign: 'right', fontSize: SIZE_TEXT_CONTENT }}>
-              {numberRoom} {t('shared:cardRoom:bedroom')}
+              {numberRoom} {t('shared:bedroom')}
             </Text>
           </View>
           <View style={{ flex: 1, justifyContent: 'flex-end' }}>
