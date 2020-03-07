@@ -1,10 +1,10 @@
-import React, { FC, useContext } from 'react';
+import React, {FC, useContext, useEffect} from 'react';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView, ScrollView, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { Divider, Text } from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
-import { AuthContext } from 'store/context/auth';
+import {AuthContext, getProfile} from 'store/context/auth';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
 interface IProps extends NavigationInjectedProps {
@@ -13,13 +13,17 @@ interface IProps extends NavigationInjectedProps {
 
 const Profile: FC<IProps> = (props) => {
   const { state, dispatch } = useContext(AuthContext);
-  const { languageStatus, token, fcmToken } = state;
+  const { languageStatus, token, fcmToken, profile } = state;
   const { navigation } = props;
   const { t } = useTranslation();
 
+  useEffect(() => {
+    getProfile(token, dispatch, languageStatus);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.titleText}>Phạm Đức Nhất</Text>
+      <Text style={styles.titleText}>{profile ? profile.name : '...'}</Text>
       <ScrollView style={styles.scrollView}>
         <Divider style={{ backgroundColor: '#bcbcbc' }} />
         <TouchableWithoutFeedback onPress={() => navigation.navigate('EditProfile')}>

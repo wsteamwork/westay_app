@@ -63,10 +63,6 @@ const EditProfile: FC<IProps> = (props) => {
   const [selected, setSelected] = useState(1);
 
   useEffect(() => {
-    getProfile(token, dispatch, languageStatus);
-  }, []);
-
-  useEffect(() => {
     if (profile) {
       setSelected(profile.gender);
     }
