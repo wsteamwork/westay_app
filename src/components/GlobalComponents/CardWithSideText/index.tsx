@@ -4,6 +4,7 @@ import { COLOR_TEXT_SUBTITLE, COLOR_TEXT_TITLE, LIGHT, SEMI_BOLD, SIZE_TEXT_CONT
 import { wp } from 'utils/responsive';
 import Shield from '../../../static/shield.svg';
 import AvatarWithBadge from '../AvatarWithBadge';
+import {IMAGE_NOT_FOUND} from 'types/globalTypes';
 // import TouchableWithScaleAnimation from '../TouchableWithScaleAnimation';
 interface IProps {
   imageSource?: string;
@@ -130,7 +131,7 @@ const CardWithSideText: FC<IProps> = (props) => {
 };
 
 CardWithSideText.defaultProps = {
-  imageSource: 'https://cdn.pixabay.com/photo/2017/04/05/01/16/food-2203732_1280.jpg',
+  imageSource: IMAGE_NOT_FOUND,
   rounded: false,
   imagePosition: 'Left',
   hasImage: true

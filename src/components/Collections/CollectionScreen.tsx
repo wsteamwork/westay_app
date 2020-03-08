@@ -9,71 +9,83 @@ import {
   FlatList,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { hp, wp } from 'utils/responsive';
-import { elevationShadowStyle } from 'utils/mixins';
-import { SIZE_TEXT_TITLE } from 'styles/global.style';
+import {hp, wp} from 'utils/responsive';
+import {elevationShadowStyle} from 'utils/mixins';
+import {SIZE_TEXT_TITLE} from 'styles/global.style';
 import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/TouchableWithScale';
-import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 // @ts-ignore
-import { compose } from 'recompose';
+import {compose} from 'recompose';
 // @ts-ignore
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
-import { IDataCollections } from 'types/Rooms/RoomRequests';
-import { getHomePageCollection } from 'store/Hooks/CardRoomHooks';
+import {IDataCollections} from 'types/Rooms/RoomRequests';
+import {getHomePageCollection} from 'store/Hooks/CardRoomHooks';
 import CollectionsSquareCard from 'components/GlobalComponents/Cards/CollectionsCard/CollectionsSquareCard';
 import {AuthContext} from 'store/context/auth';
+import {LTRoomIndexRes} from 'types/LTR/LTRoom/LTRoom';
+
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
  */
 
-const { StatusBarManager } = NativeModules;
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const {StatusBarManager}      = NativeModules;
+const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 
-const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
+const IS_IPHONE_X       = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : StatusBarManager.HEIGHT;
-const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
-const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
+const HEADER_HEIGHT     = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
+const NAV_BAR_HEIGHT    = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
 
 const images = {
   background: require('../../assets/images/images_web/background_sea.jpg'), // Put your own image here
 };
 
-interface IProps extends NavigationInjectedProps {}
+interface IProps extends NavigationInjectedProps {
+}
 
 const CollectionScreen: FC<IProps> = (props) => {
-  const { navigation } = props;
-  const [dataRooms, setDataRooms] = useState<IDataCollections>({ data: [], meta: 0 });
-  const { state } = useContext(AuthContext);
-  const { languageStatus } = state;
-  const typeData = navigation.getParam('typeDataCollection');
-  const title = navigation.getParam('titleCollection');
+  const {navigation}              = props;
+  const [dataRooms, setDataRooms] = useState<IDataCollections>({data: [], meta: 0});
+  const {state}                   = useContext(AuthContext);
+  const {languageStatus}          = state;
+  const typeData                  = navigation.getParam('typeDataCollection');
+  const title                     = navigation.getParam('titleCollection');
 
   useEffect(() => {
     getHomePageCollection(typeData, 30, languageStatus).then((res) =>
-      setDataRooms({ data: res.data.data, meta: res.data.meta!.pagination.total }),
+      setDataRooms({data: res.data.data, meta: res.data.meta!.pagination.total}),
     );
   }, []);
 
   const _renderItem = (item: any, index: number) => {
     return (
-      <View style={{ flex: 1 }} key={index}>
-        <CollectionsSquareCard room={item} />
+      <View style = {{flex: 1}} key = {index}>
+        <CollectionsSquareCard
+          avatar = {item.avatar.images[0].name}
+          district = {item.district}
+          city = {item.city}
+          name = {item.about_room.name}
+          idRoom = {item.id}
+          number_bedroom = {item.bedrooms.number_bedroom}
+          total_area = {item.total_area}
+          price_display = {item.price_display}
+        />
       </View>
     );
   };
 
   const renderNavBar = () => (
-    <View style={[styles.navContainer, elevationShadowStyle(6)]}>
+    <View style = {[styles.navContainer, elevationShadowStyle(6)]}>
       <StatusBar
-        translucent={true}
-        barStyle={'dark-content'}
-        backgroundColor="#fff"
-        animated={true}
+        translucent = {true}
+        barStyle = {'dark-content'}
+        backgroundColor = '#fff'
+        animated = {true}
       />
-      <View style={styles.statusBar} />
-      <View style={[styles.navBar]}>
-        <TouchableWithScale _onPress={() => navigation.goBack()}>
-          <Icon name="arrow-back" size={25} color="#000" />
+      <View style = {styles.statusBar} />
+      <View style = {[styles.navBar]}>
+        <TouchableWithScale _onPress = {() => navigation.goBack()}>
+          <Icon name = 'arrow-back' size = {25} color = '#000' />
         </TouchableWithScale>
       </View>
     </View>
@@ -81,43 +93,35 @@ const CollectionScreen: FC<IProps> = (props) => {
 
   const renderContent = () => (
     <FlatList
-      showsHorizontalScrollIndicator={false}
-      data={dataRooms.data}
-      renderItem={({ item, index }) => _renderItem(item, index)}
-      extraData={dataRooms.data}
-      keyExtractor={(item, index) => index.toString()}
-      contentContainerStyle={styles.bodyContainer}
+      showsHorizontalScrollIndicator = {false}
+      data = {dataRooms.data}
+      renderItem = {({item, index}) => _renderItem(item, index)}
+      extraData = {dataRooms.data}
+      keyExtractor = {(item, index) => index.toString()}
+      contentContainerStyle = {styles.bodyContainer}
     />
-
-    // <ScrollView style={styles.bodyContainer}>
-    //   {dataRooms.data.map((room, i) => (
-    //     <View key={i} style={{backgroundColor: 'blue', marginVertical: 10, width: '100%'}}>
-    //       <CollectionsSquareCard room={room} />
-    //     </View>
-    //   ))}
-    // </ScrollView>
   );
 
   return (
-    <View style={styles.container}>
+    <View style = {styles.container}>
       <ReactNativeParallaxHeader
-        headerMinHeight={HEADER_HEIGHT + STATUS_BAR_HEIGHT}
-        headerMaxHeight={hp('25%')}
-        extraScrollHeight={20}
-        navbarColor="#fff"
-        statusBarColor="transparent"
-        title={title}
-        titleStyle={styles.titleStyle}
-        backgroundImage={images.background}
-        backgroundImageScale={1.2}
+        headerMinHeight = {HEADER_HEIGHT + STATUS_BAR_HEIGHT}
+        headerMaxHeight = {hp('25%')}
+        extraScrollHeight = {20}
+        navbarColor = '#fff'
+        statusBarColor = 'transparent'
+        title = {title}
+        titleStyle = {styles.titleStyle}
+        backgroundImage = {images.background}
+        backgroundImageScale = {1.2}
         // alwaysShowNavBar={false}
         // alwaysShowTitle={false}
-        renderNavBar={renderNavBar}
-        renderContent={renderContent}
-        containerStyle={styles.container}
+        renderNavBar = {renderNavBar}
+        renderContent = {renderContent}
+        containerStyle = {styles.container}
         // contentContainerStyle={styles.contentContainer}
-        innerContainerStyle={styles.container}
-        scrollViewProps={{
+        innerContainerStyle = {styles.container}
+        scrollViewProps = {{
           showsVerticalScrollIndicator: false,
         }}
       />

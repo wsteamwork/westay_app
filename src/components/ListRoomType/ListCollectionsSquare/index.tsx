@@ -12,6 +12,7 @@ import { COLOR_INFO, SIZE_TEXT_SUBTITLE } from 'styles/global.style';
 import { IDataCollections } from 'types/Rooms/RoomRequests';
 import { stylesGlobal, wp } from 'utils/responsive';
 import {AuthContext} from 'store/context/auth';
+import {LTRoomIndexRes} from 'types/LTR/LTRoom/LTRoom';
 
 interface IProps extends NavigationInjectedProps {
   typeData: string,
@@ -37,10 +38,17 @@ const ListCollectionsSquare: FC<IProps> = (props) => {
 
       {/*{dataRooms.length ? (*/}
       <View style={styles.container}>
-        {dataRooms.data.map((room, i) => (
+        {dataRooms.data.map((room:any, i) => (
           i < 4 ? (
             <Fragment key={i} >
-              <CollectionsSquareCard room={room} />
+              <CollectionsSquareCard avatar = {room.avatar.images[0].name}
+                                     district = {room.district}
+                                     city = {room.city}
+                                     name = {room.about_room.name}
+                                     idRoom = {room.id}
+                                     number_bedroom = {room.bedrooms.number_bedroom}
+                                     total_area = {room.total_area}
+                                     price_display = {room.price_display} />
             </Fragment>
           ) : null
         ))}

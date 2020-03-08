@@ -66,6 +66,7 @@ export interface LTRoomIndexRes {
   city: TransformerInclude<CityRes>;
   district: TransformerInclude<DistrictRes>;
   merchant: TransformerInclude<Merchant>;
+  avatar_image:string
 }
 
 export type LTRoomScheduleRes = {

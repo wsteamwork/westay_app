@@ -5,6 +5,7 @@ import { LTRoomReducerState, LTRoomReducerAction, ltroomReducer } from './LTRoom
 import {RoomHomepageAction, RoomHomepageState, roomHomepageReducer} from 'store/redux/reducers/Home/roomHomepage';
 import asyncStorageReducer, {AsyncStorageState, AsyncStorageAction} from 'store/redux/reducers/asyncStorage';
 import { LTBookingReducerState, LTBookingAction, ltBookingReducer } from './LTBooking/ltbooking';
+import {UserProfileActions, UserProfileState, userProfileReducer} from 'store/redux/reducers/Profile/userProfile';
 
 export type ReducersType = {
   searchField: Reducer<SearchFilterState, SearchFilterAction>;
@@ -13,6 +14,7 @@ export type ReducersType = {
   ltbooking: Reducer<LTBookingReducerState, LTBookingAction>;
   roomHomepage: Reducer<RoomHomepageState, RoomHomepageAction>;
   asyncData: Reducer<AsyncStorageState, AsyncStorageAction>;
+  userProfile: Reducer<UserProfileState, UserProfileActions>;
 }
 
 export type ReducersList = {
@@ -22,6 +24,7 @@ export type ReducersList = {
   ltbooking: LTBookingReducerState;
   roomHomepage: RoomHomepageState;
   asyncData: AsyncStorageState;
+  userProfile: UserProfileState;
 };
 
 export type ReducersActions =
@@ -31,6 +34,7 @@ export type ReducersActions =
   | RoomHomepageAction
   | LTBookingAction
   | AsyncStorageAction
+  | UserProfileActions
 
 const reducers: ReducersType = {
   searchField: searchFieldReducer,
@@ -39,6 +43,7 @@ const reducers: ReducersType = {
   ltbooking: ltBookingReducer,
   roomHomepage: roomHomepageReducer,
   asyncData: asyncStorageReducer,
+  userProfile: userProfileReducer,
 };
 
 const rootReducer = combineReducers(reducers);

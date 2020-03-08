@@ -38,12 +38,13 @@
     "InfoMerchant": {
         "age": "Tuổi",
         "review": "Đánh giá",
-        "information": "Thông tin cá nhân",
+        "information": "Thông tin chủ nhà",
         "description": "Chưa có thông tin.",
         "language": "Ngôn ngữ",
         "listRooms": "Danh sách phòng",
         "noComment": "Chưa có nhận xét",
-        "nameLess": "Vô danh"
+        "nameLess": "Vô danh",
+        "joinFrom": "Tham gia từ năm"
     },
     "profile": {
         "name": "Trang cá nhân",

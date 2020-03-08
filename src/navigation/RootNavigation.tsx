@@ -29,6 +29,7 @@ import MyMapView from 'modules/MapView';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import BottomNavigation from './BottomNavigation';
+import MerchantInfo from 'components/Profile/Merchant';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -67,6 +68,7 @@ const stackNavigator = createStackNavigator(
     BoxChooseInspectorType: { screen: BoxChooseInspectorType },
     InspectorDetail: { screen: InspectorDetail },
     InspectorItem: { screen: InspectorItem },
+    MerchantInfo: { screen:  MerchantInfo},
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

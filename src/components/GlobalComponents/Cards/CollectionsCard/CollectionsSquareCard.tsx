@@ -10,17 +10,25 @@ import { hp, wp } from 'utils/responsive';
 import {useTranslation} from 'react-i18next';
 
 interface IProps extends NavigationInjectedProps {
-  room: any,
   showNumberRoom?: boolean
+  avatar: string
+  district: string
+  city: string
+  name: string
+  total_area: number | null
+  number_bedroom: string | number
+  price_display?: number | null
+  accommodation_type_txt?: string | number
+  idRoom: number
 }
 
 const CollectionsSquareCard: FC<IProps> = (props) => {
-  const { room, showNumberRoom, navigation } = props;
+  const { showNumberRoom, avatar, name, accommodation_type_txt, city , district, price_display, number_bedroom, total_area, idRoom, navigation } = props;
   const { state: { languageStatus } } = useContext(AuthContext);
   const { t } = useTranslation();
 
   const handleClick = () => {
-    navigation.navigate('DetailScreen', { idRoom: room.id });
+    navigation.navigate('DetailScreen', { idRoom: idRoom });
   };
 
   return (
@@ -31,34 +39,34 @@ const CollectionsSquareCard: FC<IProps> = (props) => {
     >
       <Image
         borderRadius={8}
-        source={{ uri: IMAGE_STORAGE_XS + room.avatar.images[0].name }}
+        source={{ uri: IMAGE_STORAGE_XS + avatar }}
         style={styles.image}
         resizeMode="cover"
         progressiveRenderingEnabled
         PlaceholderContent={<ActivityIndicator />}
       />
       <Text numberOfLines={1} style={styles.txtAddress}>
-        {languageStatus === 'en' ? cleanAccents(room.district) : room.district}
+        {languageStatus === 'en' ? cleanAccents(district) : district}
         <Text style={{ fontWeight: '500' }}> &#8231; </Text>
-        {languageStatus === 'en' ? cleanAccents(room.city) : room.city}
+        {languageStatus === 'en' ? cleanAccents(city) : city}
       </Text>
 
       <Text numberOfLines={1} style={styles.txtRoomName}>
-        {room.about_room.name}
+        {name}
       </Text>
 
       <Text style={styles.txtArea}>
-        {room.total_area ? `${room.total_area} m2` : (null)}
+        {total_area ? `${total_area} m2` : (null)}
         <Text style={{ fontWeight: '500' }}> &#8231; </Text>
-        {room.bedrooms.number_bedroom} {t('shared:bedroom')}
+        {number_bedroom} {t('shared:bedroom')}
       </Text>
 
       {/* <Text numberOfLines={1} style={styles.priceText}>
-        {formatPrice(room.price_display)} /month
+        {formatPrice(price_display)} /month
       </Text> */}
 
       {/* <Text numberOfLines={1} style={styles.txtRoomType}>
-        {room.accommodation_type_txt}
+        {accommodation_type_txt}
       </Text> */}
     </TouchableOpacity>
   );
@@ -78,10 +86,8 @@ const styles = StyleSheet.create({
     fontWeight: LIGHT,
     color: COLOR_TEXT_TITLE,
     paddingTop: 4,
-    // backgroundColor: 'red'
   },
   txtRoomName: {
-    // backgroundColor: 'blue',
     fontWeight: NORMAL,
     fontSize: SIZE_TEXT_SUBTITLE,
     paddingTop: 4

@@ -38,12 +38,13 @@
     "InfoMerchant": {
         "age": "Age",
         "review": "Reviews",
-        "information": "Personal information",
+        "information": "Host information",
         "description": "No information.",
         "language": "Language",
         "listRooms": "List of rooms",
         "noComment": "No comments yet",
-        "nameLess": "Nameless"
+        "nameLess": "Nameless",
+        "joinFrom": "Join from"
     },
     "profile": {
         "name": "Profile",

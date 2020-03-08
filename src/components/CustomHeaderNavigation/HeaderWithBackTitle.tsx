@@ -31,7 +31,7 @@ const HeaderWithBackTitle: FC<IProps> = (props) => {
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <View style={{ width: wp('10%') }}>
+      <View style={{ width:'12%' }}>
         {showBack && (
           <IonIcons
             name={checkISO ? 'ios-arrow-back' : 'md-arrow-back'}
@@ -62,17 +62,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     // marginTop: 32,
-    marginBottom: 10,
-    paddingHorizontal: wp('5%'),
+    // marginBottom: 10,
+    paddingHorizontal: wp('6%'),
     height: 40,
-    backgroundColor: '#fff'
+    backgroundColor: 'white'
   },
   textHeader: {
     flex: 1,
     fontWeight: '400',
     fontSize: SIZE_TEXT_TITLE,
     color: COLOR_TEXT_TITLE,
-    textAlign: 'center',
+    // textAlign: 'center',
   },
 });
 

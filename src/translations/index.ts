@@ -63,7 +63,7 @@ i18n
         listRooms: listRooms_en,
         map: map_en,
         saved: saved_en,
-        detail:details_en
+        details:details_en
       },
       vi: {
         auth: auth_vi,
@@ -75,7 +75,7 @@ i18n
         listRooms: listRooms_vi,
         map: map_vi,
         saved: saved_vi,
-        detail:details_vi
+        details:details_vi
       },
     },
     // have a common namespace used around the full app
