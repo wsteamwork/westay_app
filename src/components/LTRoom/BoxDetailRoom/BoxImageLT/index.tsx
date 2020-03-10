@@ -1,7 +1,14 @@
-import React, { FC, Fragment, useEffect, useMemo, useState } from 'react';
+import React, { FC, Fragment, useEffect, useMemo, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import Loadable from 'react-loadable';
-import { Alert, ImageBackground, StatusBar, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  ImageBackground,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +20,7 @@ import { LTRoomIndexRes } from 'types/LTR/LTRoom/LTRoom';
 import { handleShareSocial } from 'utils/mixins';
 import { hp, wp } from 'utils/responsive';
 import BoxIntroRoom from './BoxIntroRoom';
+import { AuthContext } from 'store/context/auth';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -23,10 +31,12 @@ const Loading = Loadable({
   loading: () => null,
 });
 
-interface IProps extends NavigationInjectedProps { }
+interface IProps extends NavigationInjectedProps {}
 
 const BoxImageLT: FC<IProps> = (props) => {
   const { navigation } = props;
+  const { state } = useContext(AuthContext);
+  const { languageStatus } = state;
   const dispatch = useDispatch<Dispatch<LTRoomReducerAction>>();
   const listing = useSelector<ReducersList, LTRoomIndexRes | null>(
     (state) => state.ltRoomDetails.room,
@@ -37,8 +47,7 @@ const BoxImageLT: FC<IProps> = (props) => {
 
   const getResponse = async () => {
     setLoading(true);
-
-    await getDataLTRoom(idRoom, dispatch)
+    await getDataLTRoom(idRoom, dispatch, languageStatus)
       .then(() => {
         setLoading(false);
       })

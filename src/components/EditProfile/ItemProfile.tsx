@@ -1,8 +1,18 @@
 import React, { FC, useRef } from 'react';
-import { KeyboardTypeOptions, NativeSyntheticEvent, StyleSheet, Text, TextInput, TextInputFocusEventData, View, Platform } from 'react-native';
+import {
+  KeyboardTypeOptions,
+  NativeSyntheticEvent,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputFocusEventData,
+  View,
+  Platform,
+} from 'react-native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
+import { elevationShadowStyle } from 'utils/mixins';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -19,20 +29,12 @@ interface IProps {
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 }
 const ItemProfile: FC<IProps> = (props) => {
-  const {
-    value,
-    placeholder,
-    keyboardType,
-    description,
-    title,
-    onChangeText,
-    onBlur,
-  } = props;
+  const { value, placeholder, keyboardType, description, title, onChangeText, onBlur } = props;
 
   const inputRef = useRef<any>(null);
 
   return (
-    <View style={styles.item}>
+    <View style={[styles.item, styles.customItem]}>
       <View style={styles.title}>
         <Text style={styles.textTitle}>{title}</Text>
         <IconAntDesign
@@ -64,16 +66,19 @@ const styles = StyleSheet.create({
   item: {
     marginTop: hp('3%'),
     backgroundColor: 'white',
-    shadowColor: '#000',
+  },
+  customItem: {
+    borderWidth: 0.5,
     borderRadius: 4,
-    padding: 8,
+    borderColor: '#ddd',
+    shadowColor: '#ddd',
     shadowOffset: {
       width: 0,
       height: 1,
     },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
+    shadowOpacity: 0.15,
+    shadowRadius: 1.1,
+    elevation: 2,
   },
   title: {
     height: hp('5%'),

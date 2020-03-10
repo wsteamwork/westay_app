@@ -94,7 +94,7 @@ const Trip: FC<IProps> = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Text style={styles.titleText}>Đặt phòng của tôi</Text> */}
+      <Text style={styles.titleText}>Đặt phòng của tôi</Text>
       <TabView
         lazy={true}
         renderLazyPlaceholder={_renderLazyPlaceholder}
@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleText: {
-    // backgroundColor: 'red',
     marginBottom: 10,
     fontWeight: 'bold',
     fontSize: wp('6%'),

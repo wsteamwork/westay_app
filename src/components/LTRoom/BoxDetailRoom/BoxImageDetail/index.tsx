@@ -44,7 +44,7 @@ const BoxImageDetail: FC<IProps> = (props) => {
     );
   };
 
-  const footer = () => {
+  const footer = (currentIdx: number) => {
     return (
       <View
         style={{
@@ -58,7 +58,7 @@ const BoxImageDetail: FC<IProps> = (props) => {
             color: '#ffffff',
             marginBottom: hp('5%')
           }}>
-          {t('details:bathroomPhoto')}
+          {arrImages[currentIdx].type}
         </Text>
         <EvilIcons onPress={closeModal} name="close-o" color="#ffffff" size={40} />
       </View>

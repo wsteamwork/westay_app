@@ -1,37 +1,21 @@
 import HeaderWithBackTitle from 'components/CustomHeaderNavigation/HeaderWithBackTitle';
 import ButtonOriginal from 'components/Utils/ButtonOriginal';
 import { Formik, FormikHelpers } from 'formik';
-import React, { FC, useContext, useEffect, useRef, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Keyboard,
   Picker,
-  Platform,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { Text } from 'react-native-elements';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Modal from 'react-native-modal';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { AuthContext, getProfile } from 'store/context/auth';
-import {
-  COLOR_BLUR_TEXT,
-  COLOR_BUTTON_DEFAULT,
-  COLOR_TEXT_DEFAULT,
-  COLOR_TEXT_SUBTITLE,
-  COLOR_TEXT_TITLE,
-  COLOR_URL_TEXT,
-  LIGHT,
-  SEMI_BOLD,
-  SIZE_TEXT_SUBTITLE,
-} from 'styles/global.style';
+import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { axios } from 'utils/api';
 import { hp, wp } from 'utils/responsive';
 import ItemProfile from './ItemProfile';
@@ -56,7 +40,6 @@ interface ProfileValues {
 const EditProfile: FC<IProps> = (props) => {
   const { navigation } = props;
   const { t } = useTranslation();
-  const inputNameRef = useRef<any>(null);
   const { state, dispatch } = useContext(AuthContext);
   const { token, profile, languageStatus } = state;
   const [loadingSubmit, setLoadingSubmit] = useState(false);
@@ -140,28 +123,29 @@ const EditProfile: FC<IProps> = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderWithBackTitle title={t('account:profile:name')} textHeaderStyle={{ color: COLOR_TEXT_DEFAULT, fontWeight: '700' }} />
-      <ScrollView style={styles.scrollView}>
-        {profile && (
-          <Formik
-            initialValues={{
-              name: profile.name ? profile.name : '',
-              email: profile.email ? profile.email : '',
-              phone: profile.phone ? profile.phone : '',
-              description: profile.description ? profile.description : '',
-              job: profile.job ? profile.job : '',
-              emergency_contact: profile.emergency_contact ? profile.emergency_contact : '',
-            }}
-            validateOnChange={false}
-            onSubmit={handleClickSubmit}>
-            {({ handleChange, values, handleBlur, handleSubmit }) => (
-              <KeyboardAwareScrollView
-                style={styles.scrollView}
-                showsVerticalScrollIndicator={false}>
-                <TouchableOpacity
-                  style={{ flex: 1, paddingHorizontal: wp('5%') }}
-                  activeOpacity={1}
-                  onPress={Keyboard.dismiss}>
+      <HeaderWithBackTitle
+        title={t('account:profile:name')}
+        textHeaderStyle={{ color: COLOR_TEXT_DEFAULT, fontWeight: '700', fontSize: 24 }}
+      />
+      {profile && (
+        <Formik
+          initialValues={{
+            name: profile.name ? profile.name : '',
+            email: profile.email ? profile.email : '',
+            phone: profile.phone ? profile.phone : '',
+            description: profile.description ? profile.description : '',
+            job: profile.job ? profile.job : '',
+            emergency_contact: profile.emergency_contact ? profile.emergency_contact : '',
+          }}
+          validateOnChange={false}
+          onSubmit={handleClickSubmit}>
+          {({ handleChange, values, handleBlur, handleSubmit }) => (
+            <View style={styles.scroll}>
+              <TouchableOpacity
+                style={{ flex: 1, paddingBottom: hp('10%') }}
+                activeOpacity={1}
+                onPress={Keyboard.dismiss}>
+                <KeyboardAwareScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
                   <View style={styles.viewItem}>
                     <Text style={styles.title}>{t('account:profile:information')}</Text>
                     <Text style={styles.description}>{t('account:profile:descriptionInfo')}</Text>
@@ -242,34 +226,36 @@ const EditProfile: FC<IProps> = (props) => {
                     value={values.emergency_contact}
                     onBlur={handleBlur('emergency_contact')}
                   />
+                </KeyboardAwareScrollView>
 
-                  <View style={styles.viewButton}>
-                    <ButtonOriginal
-                      title={t('account:profile:save')}
-                      width={wp('85%')}
-                      loading={loadingSubmit}
-                      handlePress={handleSubmit}
-                    />
-                  </View>
-                </TouchableOpacity>
-              </KeyboardAwareScrollView>
-            )}
-          </Formik>
-        )}
-      </ScrollView>
+                <View style={styles.boxButton}>
+                  <ButtonOriginal
+                    title={t('account:profile:save')}
+                    handlePress={handleSubmit}
+                    loading={loadingSubmit}
+                    customStyle={styles.buttonStyle}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+        </Formik>
+      )}
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: 'white',
+  },
+  scroll: {
+    flex: 1,
   },
   scrollView: {
-    flex: 1,
-    backgroundColor: '#fff',
+    paddingHorizontal: wp('5%')
   },
   item: {
     marginTop: hp('3%'),
@@ -282,7 +268,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.15,
     shadowRadius: 1.1,
-
     elevation: 2,
   },
   viewItem: {
@@ -312,17 +297,38 @@ const styles = StyleSheet.create({
   picker: {
     height: 42,
     borderWidth: 0.5,
-    borderColor: COLOR_BLUR_TEXT,
+    borderColor: '#ddd',
     width: wp('40%'),
-    shadowColor: '#000',
+    shadowColor: '#ddd',
     shadowOffset: {
       width: 0,
       height: 1,
     },
     shadowOpacity: 0.15,
     shadowRadius: 1.1,
-
     elevation: 2,
+  },
+  boxButton: {
+    position: 'absolute',
+    bottom: 0,
+    width: wp('100%'),
+    height: hp('8%'),
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.39,
+    shadowRadius: 8.3,
+    elevation: 10,
+  },
+  buttonStyle: {
+    borderRadius: 5,
+    elevation: 3,
   },
 });
 EditProfile.defaultProps = {};
