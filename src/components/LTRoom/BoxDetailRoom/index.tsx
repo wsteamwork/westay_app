@@ -66,12 +66,13 @@ const BoxDetailRoom: FC<IProps> = (props) => {
     }
     let images = arrayImg
       ? _.map(arrayImg, (o, i) => {
-        return {
-          url: `${IMAGE_STORAGE_LG + arrayImg[i].name}`,
-          width: wp('100%'),
-          height: hp('50%'),
-        };
-      })
+          return {
+            url: `${IMAGE_STORAGE_LG + arrayImg[i].name}`,
+            type: arrayImg[i].type_txt,
+            width: wp('100%'),
+            height: hp('50%'),
+          };
+        })
       : [];
     setMediaToTal(images);
   }, []);
@@ -102,7 +103,7 @@ const BoxDetailRoom: FC<IProps> = (props) => {
           <Divider style={{ backgroundColor: '#8AA9896d' }} />
         </View>
 
-        <View style={{marginBottom: 20}}>
+        <View style={{ marginBottom: 20 }}>
           <BoxCircleMapRoom />
         </View>
       </ScrollView>

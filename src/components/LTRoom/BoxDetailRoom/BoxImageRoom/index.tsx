@@ -1,5 +1,12 @@
 import React, { FC, useMemo, useState } from 'react';
-import { Image, Modal, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Image,
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { Button, Text } from 'react-native-elements';
 // @ts-ignore
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -10,7 +17,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { COLOR_BUTTON_DEFAULT, COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { hp, wp } from 'utils/responsive';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -26,7 +33,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
   const [isImageViewVisible, setIsImageViewVisible] = useState(false);
   const [indexImage, setIndexImage] = useState<number>(0);
   const { t } = useTranslation();
-  const footer = () => {
+  const footer = (currentIdx: number) => {
     return (
       <View
         style={{
@@ -40,7 +47,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
             color: '#ffffff',
             marginBottom: hp('5%'),
           }}>
-          {t('details:bathroomPhoto')}
+          {arrImages[currentIdx].type}
         </Text>
         <EvilIcons onPress={closeModal} name="close-o" color="#ffffff" size={40} />
       </View>
@@ -54,7 +61,11 @@ const BoxImageRoom: FC<IProps> = (props) => {
     <View style={styles.boxImage}>
       {useMemo(
         () => (
-          <Swiper autoplay={false} showsPagination={false} paginationStyle={{ bottom: 4 }} activeDotColor={COLOR_BUTTON_DEFAULT}>
+          <Swiper
+            autoplay={false}
+            showsPagination={false}
+            paginationStyle={{ bottom: 4 }}
+            activeDotColor={COLOR_BUTTON_DEFAULT}>
             {arrImages.map((o: any, i: number) => (
               <TouchableWithoutFeedback
                 key={i}
@@ -98,8 +109,7 @@ const BoxImageRoom: FC<IProps> = (props) => {
         ),
         [],
       )}
-      {/* {useMemo(
-        () => ( */}
+
       <Modal visible={isImageViewVisible} transparent={true}>
         <ImageViewer
           imageUrls={arrImages}
@@ -110,9 +120,6 @@ const BoxImageRoom: FC<IProps> = (props) => {
           renderFooter={footer}
         />
       </Modal>
-      {/* ),
-        [indexImage, isImageViewVisible, arrImages],
-      )} */}
     </View>
   );
 };
