@@ -63,7 +63,7 @@ const CreateListingLayout: FC<IProps> = (props) => {
             containerStyle={styles.containerStyleRight}
             title={'Tiếp tục'}
             buttonStyle={styles.buttonStyleRight}
-            titleStyle={styles.titleStyle}
+            titleStyle={styles.titleStyleRight}
             iconRight
             onPress={handlePressNext}
             icon={<Icon name="chevron-thin-right" size={16} color="white" />}
@@ -110,11 +110,15 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     marginBottom: 3,
+  },
+  titleStyleRight: {
+    marginBottom: 3,
     marginRight: 6,
   },
   buttonStyle: {
     width: wp('30%'),
     borderWidth: 2,
+    backgroundColor: '#fff'
   },
   containerStyleRight: {
     flexDirection: 'row',
