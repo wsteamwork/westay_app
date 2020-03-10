@@ -1,4 +1,3 @@
-// import Account from 'components/Account';
 import Profile from 'components/Profile';
 import IconTabCustom from 'components/Shared/IconTabCustom';
 import { withAuth } from 'hocs/withAuth';
@@ -11,6 +10,7 @@ import { compose } from 'recompose';
 import { COLOR_TITLE_HEADER } from 'styles/global.style';
 import Home from '../screens/Home';
 import Trip from '../screens/Trip';
+import Host from '../screens/Host';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -68,6 +68,13 @@ const BottomNavigation = createBottomTabNavigator(
           withInternet,
         )(Trip), 'Trip', 'book'),
     },
+    Host: {
+      screen: Stack(
+        compose(
+          withAuth,
+          withInternet,
+        )(Host), 'Host', 'sync'),
+    },
     Profile: {
       screen: Stack(
         compose(
@@ -79,9 +86,6 @@ const BottomNavigation = createBottomTabNavigator(
   {
     defaultNavigationOptions: {},
     backBehavior: 'history',
-    // tabBarComponent: () => (
-    //   <TabBarComponent />
-    // ),
     tabBarOptions: {
       keyboardHidesTabBar: true,
     },
