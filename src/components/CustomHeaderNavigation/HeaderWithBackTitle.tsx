@@ -1,11 +1,10 @@
-import { wp } from 'components/Utils/responsive.style';
 import React, { FC } from 'react';
-import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
-import IonIcons from 'react-native-vector-icons/Ionicons';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 import { COLOR_TEXT_DEFAULT, COLOR_TEXT_TITLE, SIZE_TEXT_TITLE } from 'styles/global.style';
+import {wp} from 'utils/responsive';
 
-const checkISO = Platform.OS === 'ios';
 interface IProps extends NavigationInjectedProps {
   title?: string;
   showBack?: boolean;
@@ -31,10 +30,10 @@ const HeaderWithBackTitle: FC<IProps> = (props) => {
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <View style={{ width:'12%' }}>
+      <View style={{ width:'15%' }}>
         {showBack && (
-          <IonIcons
-            name={checkISO ? 'ios-arrow-back' : 'md-arrow-back'}
+          <AntDesign
+            name={'left'}
             size={wp('6%')}
             onPress={handleClick}
             color={COLOR_TEXT_DEFAULT}

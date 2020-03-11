@@ -1,7 +1,10 @@
 /* eslint-disable linebreak-style */
-import axiosBase from 'axios';
+import axiosBase, {AxiosInstance} from 'axios';
 
-const DOMAIN = 'https://dev.westay.vn/customer-api/'; //API URL
+export type AxiosRequestType = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+const DOMAIN = 'https://dev.westay.vn/customer-api/'; //API URL Customer
+const MERCHANT_URL = 'https://dev.westay.vn/merchant-api/'; //API URL Merchant
 // const DOMAIN = 'http://ws_api.lc/customer-api/'; //API URL
 
 export const TOKEN = 'token'; // For authorize
@@ -18,4 +21,11 @@ const instance = axiosBase.create({
   headers,
 });
 
+const instance_merchant: AxiosInstance = axiosBase.create({
+  baseURL: MERCHANT_URL,
+  withCredentials: true,
+  headers,
+});
+
 export const axios = instance;
+export const axios_merchant = instance_merchant;

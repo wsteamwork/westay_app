@@ -22,6 +22,16 @@ import saved_vi from './Saved/saved-vi.json';
 import saved_en from './Saved/saved-en.json';
 import details_en from './Detail/details-en.json';
 import details_vi from './Detail/details-vi.json';
+import host_vi from './Merchant/host/host-vi.json';
+import host_en from './Merchant/host/host-en.json';
+import create_basic_en from './Merchant/listing/basic/basic-en.json';
+import create_basic_vi from './Merchant/listing/basic/basic-vi.json';
+import create_details_en from './Merchant/listing/details/details-en.json';
+import create_details_vi from './Merchant/listing/details/details-vi.json';
+import create_price_en from './Merchant/listing/price/price-en.json';
+import create_price_vi from './Merchant/listing/price/price-vi.json';
+import roomList_en from './Merchant/listing/roomlist/roomlist-en.json';
+import roomList_vi from './Merchant/listing/roomlist/roomlist-vi.json';
 
 const STORAGE_KEY = '@APP:languageCode';
 
@@ -63,7 +73,12 @@ i18n
         listRooms: listRooms_en,
         map: map_en,
         saved: saved_en,
-        details:details_en
+        details:details_en,
+        host:host_en,
+        create_basic: create_basic_en,
+        create_details: create_details_en,
+        create_price: create_price_en,
+        host_listing: roomList_en,
       },
       vi: {
         auth: auth_vi,
@@ -75,7 +90,12 @@ i18n
         listRooms: listRooms_vi,
         map: map_vi,
         saved: saved_vi,
-        details:details_vi
+        details:details_vi,
+        host:host_vi,
+        create_basic: create_basic_vi,
+        create_details: create_details_vi,
+        create_price: create_price_vi,
+        host_listing: roomList_vi,
       },
     },
     // have a common namespace used around the full app

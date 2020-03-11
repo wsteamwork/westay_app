@@ -19,6 +19,7 @@ export const COLOR_BACKGROUND_WHITEBLUE = '#F7F9FF';
 export const COLOR_ICON_DEFAULT = '#08C299';
 
 export const COLOR_LINEAR_DEFAULT = ['#08C299', '#41C9BC'];
+
 export const dividerGrey = {
   backgroundColor: '#F0F0F0',
   width: wp('90%'),
@@ -41,4 +42,11 @@ export const stylesGlobal = StyleSheet.create({
     width: wp('90%'),
     height: 1,
   },
+  bigTitle:{
+    marginBottom: 36,
+    marginTop: 18,
+    fontWeight: 'bold',
+    fontSize: wp('7%'),
+    color: COLOR_TEXT_DEFAULT,
+  }
 });
