@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     color: COLOR_TEXT_DEFAULT,
   },
   boxAction1: {
-    zIndex: 10,
     width: wp('100%'),
     paddingHorizontal: wp('6%'),
     position: 'absolute',
@@ -100,7 +99,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   boxAction2: {
-    zIndex: 10,
     width: wp('100%'),
     paddingHorizontal: wp('6%'),
     position: 'absolute',
@@ -130,7 +128,7 @@ const styles = StyleSheet.create({
   },
 });
 CreateListingLayout.defaultProps = {
-  showBtnBack: true,
+  showBtnBack: false,
   showBtnNext: true,
 };
 export default withNavigation(CreateListingLayout);
