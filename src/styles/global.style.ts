@@ -58,7 +58,7 @@ export const COLOR_BUTTON_DEFAULT = '#41C9BC';
 
 // export const COLOR_BACKGROUND_WHITEBLUE = '#F7F9FF';
 
-// export const COLOR_ICON_DEFAULT = '#08C299';
+export const COLOR_ICON_DEFAULT = '#08C299';
 
 // export const COLOR_LINEAR_DEFAULT = ['#08C299', '#41C9BC'];
 

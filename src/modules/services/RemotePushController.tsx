@@ -70,13 +70,13 @@ const RemotePushController = () => {
 
     PushNotification.configure({
       // @ts-ignore
-      onRegister: function (token) {
-        console.log('TOKEN:', token);
-      },
+      // onRegister: function (token) {
+      //   console.log('TOKEN:', token);
+      // },
 
       // @ts-ignore
       onNotification: function (notification) {
-        console.log('REMOTE NOTIFICATION ==>', notification);
+        // console.log('REMOTE NOTIFICATION ==>', notification);
       },
 
       senderID: '53949270433',

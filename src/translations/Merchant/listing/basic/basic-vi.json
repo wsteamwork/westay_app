@@ -38,16 +38,6 @@
     "tab2": "Tiện nghi",
     "tab3": "Đăng ảnh",
     "tab4": "Mô tả ảnh",
-    "amenities": {
-        "titleAmenities": "Dưới đây hãy chọn những tiện nghi, thiết bị trong căn hộ mà bạn cung cấp khi khách đặt phòng.",
-        "subTitleAmenities": "(Vui lòng chọn tối thiểu 10 tiện nghi trước khi tiếp tục)",
-        "subLabelFacilities": "Những tiện nghi thiết yếu thường được du khách chú trọng khi đặt phòng",
-        "subLabelBathrooms": "Những thiện nghi phòng tắm, khu vệ sinh cũng là những thứ du khách sử dụng nhiều",
-        "subLabelKitchens": "Những thiết bị và tiện nghi cho phép du khách thoải mái nấu ăn",
-        "subLabelEntertainments": "Những tiện nghi vui chơi, nơi thư giãn trong căn hộ hoặc khu vực xung quanh",
-        "subLabelOutdoors": "Những tiện nghi, dịch vụ cung cấp bên ngoài căn hộ",
-        "subLabelOtherAmen": "Những tiện nghi bổ sung trong căn hộ"
-    },
     "fieldRequierd": "Giá trị là bắt buộc",
     "buildingList": "Danh sách tòa nhà",
     "editBuilding": "Chỉnh sửa tòa nhà",

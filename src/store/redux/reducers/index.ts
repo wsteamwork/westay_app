@@ -6,6 +6,10 @@ import {RoomHomepageAction, RoomHomepageState, roomHomepageReducer} from 'store/
 import asyncStorageReducer, {AsyncStorageState, AsyncStorageAction} from 'store/redux/reducers/asyncStorage';
 import { LTBookingReducerState, LTBookingAction, ltBookingReducer } from './LTBooking/ltbooking';
 import {UserProfileActions, UserProfileState, userProfileReducer} from 'store/redux/reducers/Profile/userProfile';
+import {
+  AmenitiesReducerState,
+  AmenitiesReducerAction, amenitiesReducer,
+} from 'store/redux/reducers/Merchant/CreateListing/Step2/amenities';
 
 export type ReducersType = {
   searchField: Reducer<SearchFilterState, SearchFilterAction>;
@@ -15,6 +19,7 @@ export type ReducersType = {
   roomHomepage: Reducer<RoomHomepageState, RoomHomepageAction>;
   asyncData: Reducer<AsyncStorageState, AsyncStorageAction>;
   userProfile: Reducer<UserProfileState, UserProfileActions>;
+  amenities: Reducer<AmenitiesReducerState, AmenitiesReducerAction>;
 }
 
 export type ReducersList = {
@@ -25,6 +30,7 @@ export type ReducersList = {
   roomHomepage: RoomHomepageState;
   asyncData: AsyncStorageState;
   userProfile: UserProfileState;
+  amenities: AmenitiesReducerState;
 };
 
 export type ReducersActions =
@@ -35,6 +41,7 @@ export type ReducersActions =
   | LTBookingAction
   | AsyncStorageAction
   | UserProfileActions
+  | AmenitiesReducerAction
 
 const reducers: ReducersType = {
   searchField: searchFieldReducer,
@@ -44,6 +51,7 @@ const reducers: ReducersType = {
   roomHomepage: roomHomepageReducer,
   asyncData: asyncStorageReducer,
   userProfile: userProfileReducer,
+  amenities: amenitiesReducer,
 };
 
 const rootReducer = combineReducers(reducers);

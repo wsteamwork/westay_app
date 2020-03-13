@@ -1,11 +1,9 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, SafeAreaView } from 'react-native';
-import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
-import { wp } from 'utils/responsive';
-import { useTranslation } from 'react-i18next';
-import CreateListingLayout from 'components/Host/CreateListingLayout';
-import Tab1_Description from 'components/Host/CreateListing/Step2/Tab1_Description';
-import Tab1_Comfort from 'components/Host/CreateListing/Step2/Tab1_Comfort';
+import React, {FC} from 'react';
+import {StyleSheet, SafeAreaView} from 'react-native';
+import {COLOR_TEXT_DEFAULT} from 'styles/global.style';
+import {wp} from 'utils/responsive';
+import {useTranslation} from 'react-i18next';
+import Tab2_Comfort from 'components/Host/CreateListing/Step2/Tab2_Comfort';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -19,7 +17,7 @@ const Host: FC<IProps> = (props) => {
   const { t } = useTranslation();
   return (
     <SafeAreaView style={styles.container}>
-      <Tab1_Comfort/> {/*cai nay cua Duy*/}
+      <Tab2_Comfort/>
     </SafeAreaView>
   );
 };

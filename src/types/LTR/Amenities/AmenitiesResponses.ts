@@ -1,9 +1,9 @@
-import { TransformerInclude } from '../../ResponseTemplate';
+
 export interface AmenitiesIndexRes {
   id: number;
   icon: string;
   icon_name: string;
-  comfort_trans: TransformerInclude<AmenitiesTranslatesRes[]>;
+  comfort_trans: AmenitiesTranslatesRes[];
   type: number;
   type_txt: string;
 }
