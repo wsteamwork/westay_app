@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef } from 'react';
 import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
 import { COLOR_TEXT_DEFAULT } from 'styles/global.style';
 import { wp } from 'utils/responsive';
@@ -9,6 +9,11 @@ import TouchableWithScale from 'components/GlobalComponents/TouchableComponent/T
 import { hp } from 'components/Utils/responsive.style';
 import ChooseRoomType from 'components/Host/CreateListingLayout/ChooseRoomType';
 import ChooseRentType from 'components/Host/CreateListingLayout/ChooseRentType';
+import InputMerchant from 'components/InputMerchant';
+import StayWithCustomer from 'components/Host/CreateListingLayout/StayWithCustomer';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+// @ts-ignore
+import KeyboardListener from 'react-native-keyboard-listener';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -21,22 +26,47 @@ interface IProps {
 const Host: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const [modalRoomType, setModalRoomType] = useState<boolean>(false);
+  const [showAction, setShowAction] = useState<boolean>(true);
   return (
     <SafeAreaView style={styles.container}>
-      <CreateListingLayout titleHeader={'Step 1'} titleMain={'Tell us about your place'}>
+      <CreateListingLayout
+        titleHeader={'Bước 1 - Thông tin cơ bản'}
+        titleMain={'Thông tin cơ bản căn hộ'}
+        showBtnBack={true}
+        showAction={showAction}>
+        <View style={styles.boxChooseRoomType}>
+          <Text style={styles.labelChooseRentType}>Chọn hình thức cho thuê</Text>
+          <ChooseRentType />
+        </View>
         <TouchableWithScale
           style={styles.touchable}
           _onPress={() => setModalRoomType(!modalRoomType)}>
           <View style={styles.boxChooseRoomType}>
-            <Text style={styles.labelChooseType}>First, choose lease type</Text>
-            <ChooseRentType />
-          </View>
-          <View style={styles.boxChooseRoomType}>
-            <Text style={styles.labelChooseType}>Second, choose a property type</Text>
+            <Text style={styles.labelChooseType}>Loại căn hộ</Text>
             <ChooseRoomType />
             <Divider style={styles.divider} />
           </View>
         </TouchableWithScale>
+        <View style={styles.boxChooseRoomType}>
+          <InputMerchant
+            label={'Tổng diện tích'}
+            inputAdornedEnd={'m2'}
+            onFocus={() => setShowAction(false)}
+            onSubmitEditing={() => setShowAction(true)}
+            onBlur={() => setShowAction(true)}
+          />
+        </View>
+        <View style={styles.boxChooseRoomType}>
+          <InputMerchant
+            label={'Số phòng có thông tin tương tự'}
+            onFocus={() => setShowAction(false)}
+            onSubmitEditing={() => setShowAction(true)}
+            onBlur={() => setShowAction(true)}
+          />
+        </View>
+        <View style={styles.boxChooseRoomType}>
+          <StayWithCustomer />
+        </View>
       </CreateListingLayout>
     </SafeAreaView>
   );
@@ -66,6 +96,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: wp('4.5%'),
     marginBottom: 3,
+  },
+  labelChooseRentType: {
+    color: COLOR_TEXT_DEFAULT,
+    fontWeight: '700',
+    fontSize: wp('4.5%'),
+    marginBottom: 12,
   },
   divider: {
     height: 1.3,

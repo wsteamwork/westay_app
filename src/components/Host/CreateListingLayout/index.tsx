@@ -17,6 +17,7 @@ interface IProps extends NavigationInjectedProps {
   titleMain?: string;
   rightComponentHeader?: any;
   children?: ReactNode;
+  showAction?: boolean;
   showBtnBack?: boolean;
   showBtnNext?: boolean;
   handlePressBack?: any;
@@ -30,6 +31,7 @@ const CreateListingLayout: FC<IProps> = (props) => {
     titleMain,
     rightComponentHeader,
     children,
+    showAction,
     showBtnBack,
     showBtnNext,
     handlePressBack,
@@ -48,28 +50,30 @@ const CreateListingLayout: FC<IProps> = (props) => {
         {titleMain && <Text style={styles.mainText}>{titleMain}</Text>}
         {children}
       </ScrollView>
-      <View style={showBtnBack ? styles.boxAction1 : styles.boxAction2}>
-        {showBtnBack && (
-          <Button
-            title={'Quay lại'}
-            titleStyle={styles.titleStyle}
-            type={'outline'}
-            buttonStyle={styles.buttonStyle}
-            onPress={handlePressBack}
-          />
-        )}
-        {showBtnNext && (
-          <Button
-            containerStyle={styles.containerStyleRight}
-            title={'Tiếp tục'}
-            buttonStyle={styles.buttonStyleRight}
-            titleStyle={styles.titleStyleRight}
-            iconRight
-            onPress={handlePressNext}
-            icon={<Icon name="chevron-thin-right" size={16} color="white" />}
-          />
-        )}
-      </View>
+      {showAction && (
+        <View style={showBtnBack ? styles.boxAction1 : styles.boxAction2}>
+          {showBtnBack && (
+            <Button
+              title={'Quay lại'}
+              titleStyle={styles.titleStyle}
+              type={'outline'}
+              buttonStyle={styles.buttonStyle}
+              onPress={handlePressBack}
+            />
+          )}
+          {showBtnNext && (
+            <Button
+              containerStyle={styles.containerStyleRight}
+              title={'Tiếp tục'}
+              buttonStyle={styles.buttonStyleRight}
+              titleStyle={styles.titleStyleRight}
+              iconRight
+              onPress={handlePressNext}
+              icon={<Icon name="chevron-thin-right" size={16} color="white" />}
+            />
+          )}
+        </View>
+      )}
     </SafeAreaView>
   );
 };
@@ -94,9 +98,12 @@ const styles = StyleSheet.create({
     width: wp('100%'),
     paddingHorizontal: wp('6%'),
     position: 'absolute',
-    bottom: 30,
+    bottom: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    backgroundColor: '#fff',
+    paddingTop: 10,
+    paddingBottom: 20,
   },
   boxAction2: {
     width: wp('100%'),
@@ -116,7 +123,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     width: wp('30%'),
     borderWidth: 2,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   containerStyleRight: {
     flexDirection: 'row',
@@ -128,6 +135,7 @@ const styles = StyleSheet.create({
   },
 });
 CreateListingLayout.defaultProps = {
+  showAction: true,
   showBtnBack: false,
   showBtnNext: true,
 };

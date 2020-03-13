@@ -28,12 +28,12 @@ const ChooseRoomType: FC<IProps> = (props) => {
     <View>
       <PickerSelect
         onValueChange={(value) => setValue(value)}
-        placeholder={{ label: 'Select property type', value: 0, key: 0, color: '#aaa' }}
+        placeholder={{ label: 'Chọn loại căn hộ', value: 0, key: 0, color: '#aaa' }}
         value={value}
         items={items}>
         <View>
           {value === 0 ? (
-            <Text style={styles.placeholderChooseType}>Select property type</Text>
+            <Text style={styles.placeholderChooseType}>Chọn loại căn hộ</Text>
           ) : (
             <Text style={styles.chooseTypeValue}>{items[value - 1].label}</Text>
           )}
@@ -48,13 +48,13 @@ const styles = StyleSheet.create({
     paddingTop: hp('1%'),
     paddingBottom: hp('2%'),
     color: '#aaa',
-    fontSize: wp('5%'),
+    fontSize: wp('4%'),
   },
   chooseTypeValue: {
     paddingTop: hp('1%'),
     paddingBottom: hp('2%'),
     color: '#484848',
-    fontSize: wp('5%'),
+    fontSize: wp('4%'),
   },
 });
 
