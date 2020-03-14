@@ -46,7 +46,7 @@ const CreateListingLayout: FC<IProps> = (props) => {
         title={titleHeader}
         rightComponent={rightComponentHeader}
       />
-      <ScrollView contentContainerStyle={{ paddingBottom: hp('10%') }} style={styles.boxWrapper}>
+      <ScrollView contentContainerStyle={{ paddingBottom: hp('15%') }} style={styles.boxWrapper}>
         {titleMain && <Text style={styles.mainText}>{titleMain}</Text>}
         {children}
       </ScrollView>
