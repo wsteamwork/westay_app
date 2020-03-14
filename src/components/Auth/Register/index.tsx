@@ -249,7 +249,6 @@ const styles = StyleSheet.create({
   },
   policy: {
     marginTop: hp('4%'),
-    // marginBottom: hp('5%'),
   },
   termConditions: {
     fontSize: SIZE_TEXT_SUBTITLE,
