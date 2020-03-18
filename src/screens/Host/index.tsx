@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import KindOfBeds from './Step1/KindOfBeds';
+import Tab1_Description from 'components/Host/CreateListing/Step2/Tab1_Description';
 
 /**
  * @author DucNhatDMJ<phamducnhat1977@gmail.com>
@@ -13,7 +14,7 @@ interface IProps {
 
 const Host: FC<IProps> = (props) => {
   const { t } = useTranslation();
-  return <KindOfBeds />;
+  return <Tab1_Description />;
 };
 
 const styles = StyleSheet.create({});

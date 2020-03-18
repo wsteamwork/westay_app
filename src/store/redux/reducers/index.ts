@@ -10,6 +10,10 @@ import {
   AmenitiesReducerState,
   AmenitiesReducerAction, amenitiesReducer,
 } from 'store/redux/reducers/Merchant/CreateListing/Step2/amenities';
+import {
+  DescriptionReducerState,
+  DescriptionReducerAction, descriptionReducer,
+} from 'store/redux/reducers/Merchant/CreateListing/Step2/description';
 
 export type ReducersType = {
   searchField: Reducer<SearchFilterState, SearchFilterAction>;
@@ -20,6 +24,7 @@ export type ReducersType = {
   asyncData: Reducer<AsyncStorageState, AsyncStorageAction>;
   userProfile: Reducer<UserProfileState, UserProfileActions>;
   amenities: Reducer<AmenitiesReducerState, AmenitiesReducerAction>;
+  description: Reducer<DescriptionReducerState, DescriptionReducerAction>;
 }
 
 export type ReducersList = {
@@ -31,6 +36,7 @@ export type ReducersList = {
   asyncData: AsyncStorageState;
   userProfile: UserProfileState;
   amenities: AmenitiesReducerState;
+  description: DescriptionReducerState;
 };
 
 export type ReducersActions =
@@ -42,6 +48,7 @@ export type ReducersActions =
   | AsyncStorageAction
   | UserProfileActions
   | AmenitiesReducerAction
+  | DescriptionReducerAction
 
 const reducers: ReducersType = {
   searchField: searchFieldReducer,
@@ -52,6 +59,7 @@ const reducers: ReducersType = {
   asyncData: asyncStorageReducer,
   userProfile: userProfileReducer,
   amenities: amenitiesReducer,
+  description: descriptionReducer,
 };
 
 const rootReducer = combineReducers(reducers);

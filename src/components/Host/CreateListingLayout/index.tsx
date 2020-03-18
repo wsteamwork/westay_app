@@ -44,15 +44,9 @@ const CreateListingLayout: FC<IProps> = (props) => {
         title={titleHeader}
         rightComponent={rightComponentHeader}
       />
-<<<<<<< HEAD
       <ScrollView contentContainerStyle={{ paddingBottom: hp('10%') }} style={styles.boxWrapper}>
         {titleMain && <Text style={stylesGlobal.bigTitle}>{titleMain}</Text>}
         {props.children}
-=======
-      <ScrollView contentContainerStyle={{ paddingBottom: hp('15%') }} style={styles.boxWrapper}>
-        {titleMain && <Text style={styles.mainText}>{titleMain}</Text>}
-        {children}
->>>>>>> nhat_create_listing_step1
       </ScrollView>
       {showAction && (
         <View style={showBtnBack ? styles.boxAction1 : styles.boxAction2}>
